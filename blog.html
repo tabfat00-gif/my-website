@@ -550,34 +550,27 @@
     </a>
     <!-- ====== Back To Top End ====== -->
 
-    <!-- ====== All Javascript Files ====== -->
+ <!-- ====== All Javascript Files ====== -->
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/main.js"></script>
 
-
 <script>
-alert("Search script loaded");
-
-function searchArticles() {
-  const search = document.getElementById("articleSearch").value.toLowerCase();
+document.addEventListener("DOMContentLoaded", function () {
+  const searchBox = document.getElementById("articleSearch");
   const articles = document.querySelectorAll(".article-card");
 
-  articles.forEach(function(article) {
-    const text = article.textContent.toLowerCase();
+  searchBox.addEventListener("input", function () {
+    const search = this.value.toLowerCase().trim();
 
-    if (text.includes(search)) {
-      article.style.display = "";
-    } else {
-      article.style.display = "none";
-    }
+    articles.forEach(function (article) {
+      const text = article.textContent.toLowerCase();
+
+      article.style.display = text.includes(search) ? "" : "none";
+    });
   });
-}
-
-document.getElementById("articleSearch").addEventListener("keyup", searchArticles);
+});
 </script>
+
 </body>
 </html>
-
-
-    
