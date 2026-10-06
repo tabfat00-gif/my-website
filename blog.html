@@ -555,7 +555,10 @@
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/main.js"></script>
 
+
 <script>
+alert("Search script loaded");
+
 function searchArticles() {
   const search = document.getElementById("articleSearch").value.toLowerCase();
   const articles = document.querySelectorAll(".article-card");
@@ -571,10 +574,8 @@ function searchArticles() {
   });
 }
 
-
 document.getElementById("articleSearch").addEventListener("keyup", searchArticles);
 </script>
-
 </body>
 </html>
 
