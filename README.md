@@ -1,4 +1,4 @@
-.# KaliMoh - Discover • Learn • Explore
+# KaliMoh - Discover • Learn • Explore
 
 KaliMoh is a general-purpose website created to share useful information, ideas, guides, technology, entertainment, and interesting topics.
 
@@ -30,13 +30,11 @@ KaliMoh is published using GitHub Pages.
 
 ## 📃 License
 
-This project uses the original Play Bootstrap template, which is open-source and free to use for personal or commercial projects according to its license.
+This project includes the original license and copyright notice required by the template's open-source license.
 
-The original template was created by the UIdeck team.
-
-Original project:
-https://github.com/uideck/play-bootstrap
+See the `LICENCE` file for the complete license text.
 
 ## 💙 KaliMoh
 
 Discover • Learn • Explore
+
