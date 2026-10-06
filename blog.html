@@ -120,8 +120,8 @@
 
     <div class="row">
 
-          <!-- Article 1 -->
-          <div class="col-lg-4 col-md-6">
+         <!-- Article 1 -->
+<div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -147,7 +147,7 @@
           </div>
 
           <!-- Article 2 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -173,7 +173,7 @@
           </div>
 
           <!-- Article 3 -->
-          <div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -199,7 +199,7 @@
           </div>
 
           <!-- Article 4 -->
-          <div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -225,7 +225,7 @@
           </div>
 
           <!-- Article 5 -->
-          <div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -249,9 +249,9 @@
               </div>
             </div>
           </div>
-
-          <!-- Article 6 -->
-          <div class="col-lg-4 col-md-6">
+   
+        <!-- Article 6 -->
+<div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -277,7 +277,7 @@
           </div>
 
           <!-- Article 7 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -303,7 +303,7 @@
           </div>
 
           <!-- Article 8 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -329,7 +329,7 @@
           </div>
 
           <!-- Article 9 -->
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
               <div class="ud-blog-image">
                 <a href="blog-details.html">
@@ -551,8 +551,32 @@
     <!-- ====== Back To Top End ====== -->
 
     <!-- ====== All Javascript Files ====== -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+function searchArticles() {
+  const search = document.getElementById("articleSearch").value.toLowerCase();
+  const articles = document.querySelectorAll(".article-card");
+
+  articles.forEach(function(article) {
+    const text = article.textContent.toLowerCase();
+
+    if (text.includes(search)) {
+      article.style.display = "";
+    } else {
+      article.style.display = "none";
+    }
+  });
+}
+
+
+document.getElementById("articleSearch").addEventListener("keyup", searchArticles);
+</script>
+
+</body>
 </html>
+
+
+    
