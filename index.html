@@ -1351,6 +1351,22 @@
       window.addEventListener("scroll", onScroll);
 
     </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchBox = document.querySelector('input[placeholder="Search..."]');
 
+  if (!searchBox) return;
+
+  searchBox.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      const search = searchBox.value.trim();
+
+      if (search !== "") {
+        window.location.href = "blog.html?search=" + encodeURIComponent(search);
+      }
+    }
+  });
+});
+</script>
   </body>
 </html>
