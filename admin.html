@@ -142,7 +142,9 @@
         ]);
 
       if (error) {
-        console.error(error);
+        console.error(error.message);
+console.error(error.details);
+console.error(error.hint);
         message.textContent = "Error: " + error.message;
         return;
       }
