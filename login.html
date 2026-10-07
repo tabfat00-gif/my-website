@@ -1,24 +1,34 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>KaliMoh | Login</title>
+```
+<title>KaliMoh | Login</title>
 
-    <!--====== Favicon Icon ======-->
-    <link
-      rel="shortcut icon"
-      href="assets/images/favicon.svg"
-      type="image/svg"
-    />
+<link
+  rel="shortcut icon"
+  href="assets/images/favicon.svg"
+  type="image/svg"
+/>
 
-    <!-- ===== All CSS files ===== -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/lineicons.css" />
-    <link rel="stylesheet" href="assets/css/ud-styles.css" />
+<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/css/animate.css" />
+<link rel="stylesheet" href="assets/css/lineicons.css" />
+<link rel="stylesheet" href="assets/css/ud-styles.css" />
+
+<style>
+  #login-message {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+</style>
+```
+
   </head>
 
   <body>
@@ -29,352 +39,414 @@
           <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg">
 
-              <a class="navbar-brand" href="index.html">
-                <span style="font-size: 26px; font-weight: 700; color: #fff;">
-                  KaliMoh
-                </span>
-              </a>
+```
+          <a class="navbar-brand" href="index.html">
+            <span style="font-size: 26px; font-weight: 700; color: #fff;">
+              KaliMoh
+            </span>
+          </a>
 
-              <button class="navbar-toggler">
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
+          <button class="navbar-toggler">
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse">
+            <ul id="nav" class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a href="index.html">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="index.html#features">Features</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="about.html">About</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="blog.html">Articles</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="index.html#faq">FAQ</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="contact.html">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar-btn d-none d-sm-inline-block">
+            <a
+              class="ud-main-btn ud-white-btn"
+              href="blog.html"
+            >
+              Explore KaliMoh
+            </a>
+          </div>
+
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ====== Header End ====== -->
+
+
+<!-- ====== Banner Start ====== -->
+<section class="ud-page-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ud-banner-content">
+          <h1>KaliMoh</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ====== Banner End ====== -->
+
+
+<!-- ====== Login Start ====== -->
+<section class="ud-login">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="ud-login-wrapper">
+
+          <div class="ud-login-logo">
+            <a href="index.html">
+              <span style="font-size: 32px; font-weight: 700;">
+                KaliMoh
+              </span>
+            </a>
+          </div>
+
+          <h3 style="text-align: center; margin-bottom: 10px;">
+            Welcome to KaliMoh
+          </h3>
+
+          <p style="text-align: center; margin-bottom: 30px;">
+            Discover • Learn • Explore
+          </p>
+
+          <form id="login-form" class="ud-login-form">
+
+            <div class="ud-form-group">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email address"
+                required
+              />
+            </div>
+
+            <div class="ud-form-group">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <div id="login-message"></div>
+
+            <div class="ud-form-group">
+              <button
+                type="submit"
+                id="login-button"
+                class="ud-main-btn w-100"
+              >
+                Login
               </button>
+            </div>
 
-              <div class="navbar-collapse">
-                <ul id="nav" class="navbar-nav mx-auto">
-                  <li class="nav-item">
-                    <a href="index.html">Home</a>
-                  </li>
+          </form>
 
-                  <li class="nav-item">
-                    <a href="index.html#features">Features</a>
-                  </li>
+          <div class="ud-socials-connect">
+            <p>Connect With KaliMoh</p>
 
-                  <li class="nav-item">
-                    <a href="about.html">About</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="blog.html">Articles</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="index.html#faq">FAQ</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="contact.html">Contact</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="navbar-btn d-none d-sm-inline-block">
-                <a
-                  class="ud-main-btn ud-white-btn"
-                  href="blog.html"
-                >
-                  Explore KaliMoh
+            <ul>
+              <li>
+                <a href="javascript:void(0)" class="facebook">
+                  <i class="lni lni-facebook-filled"></i>
                 </a>
-              </div>
+              </li>
 
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- ====== Header End ====== -->
-
-
-    <!-- ====== Banner Start ====== -->
-    <section class="ud-page-banner">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ud-banner-content">
-              <h1>KaliMoh</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ====== Banner End ====== -->
-
-
-    <!-- ====== Login Start ====== -->
-    <section class="ud-login">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-
-            <div class="ud-login-wrapper">
-
-              <div class="ud-login-logo">
-                <a href="index.html">
-                  <span style="font-size: 32px; font-weight: 700;">
-                    KaliMoh
-                  </span>
+              <li>
+                <a href="javascript:void(0)" class="twitter">
+                  <i class="lni lni-twitter-filled"></i>
                 </a>
-              </div>
+              </li>
 
-              <h3 style="text-align: center; margin-bottom: 10px;">
-                Welcome to KaliMoh
-              </h3>
-
-              <p style="text-align: center; margin-bottom: 30px;">
-                Discover • Learn • Explore
-              </p>
-
-              <form class="ud-login-form" onsubmit="return false;">
-
-                <div class="ud-form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email address"
-                  />
-                </div>
-
-                <div class="ud-form-group">
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                  />
-                </div>
-
-                <div class="ud-form-group">
-                  <button
-                    type="submit"
-                    class="ud-main-btn w-100"
-                  >
-                    Login
-                  </button>
-                </div>
-
-              </form>
-
-              <div class="ud-socials-connect">
-                <p>Connect With KaliMoh</p>
-
-                <ul>
-                  <li>
-                    <a href="javascript:void(0)" class="facebook">
-                      <i class="lni lni-facebook-filled"></i>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)" class="twitter">
-                      <i class="lni lni-twitter-filled"></i>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)" class="google">
-                      <i class="lni lni-google"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <a class="forget-pass" href="javascript:void(0)">
-                Forgot Password?
-              </a>
-
-              <p class="signup-option">
-                New to KaliMoh?
-                <a href="javascript:void(0)">Sign Up</a>
-              </p>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ====== Login End ====== -->
-
-
-    <!-- ====== Footer Start ====== -->
-    <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
-
-      <div class="shape shape-1">
-        <img src="assets/images/footer/shape-1.svg" alt="shape" />
-      </div>
-
-      <div class="shape shape-2">
-        <img src="assets/images/footer/shape-2.svg" alt="shape" />
-      </div>
-
-      <div class="shape shape-3">
-        <img src="assets/images/footer/shape-3.svg" alt="shape" />
-      </div>
-
-      <div class="ud-footer-widgets">
-        <div class="container">
-          <div class="row">
-
-            <div class="col-xl-4 col-lg-4 col-md-6">
-              <div class="ud-widget">
-
-                <a href="index.html" class="ud-footer-logo">
-                  <span style="font-size: 26px; font-weight: 700; color: #fff;">
-                    KaliMoh
-                  </span>
+              <li>
+                <a href="javascript:void(0)" class="google">
+                  <i class="lni lni-google"></i>
                 </a>
+              </li>
+            </ul>
+          </div>
 
-                <p class="ud-widget-desc">
-                  A place to discover useful information, learn new things,
-                  explore ideas, technology, guides, entertainment, and more.
-                </p>
+          <a class="forget-pass" href="javascript:void(0)">
+            Forgot Password?
+          </a>
 
-                <ul class="ud-widget-socials">
-                  <li>
-                    <a href="javascript:void(0)">
-                      <i class="lni lni-facebook-filled"></i>
-                    </a>
-                  </li>
+          <p class="signup-option">
+            New to KaliMoh?
+            <a href="javascript:void(0)">Sign Up</a>
+          </p>
 
-                  <li>
-                    <a href="javascript:void(0)">
-                      <i class="lni lni-twitter-filled"></i>
-                    </a>
-                  </li>
+        </div>
 
-                  <li>
-                    <a href="javascript:void(0)">
-                      <i class="lni lni-instagram-filled"></i>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)">
-                      <i class="lni lni-linkedin-original"></i>
-                    </a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ====== Login End ====== -->
 
 
-            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-              <div class="ud-widget">
+<!-- ====== Footer Start ====== -->
+<footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
 
-                <h5 class="ud-widget-title">KaliMoh</h5>
+  <div class="shape shape-1">
+    <img src="assets/images/footer/shape-1.svg" alt="shape" />
+  </div>
 
-                <ul class="ud-widget-links">
-                  <li>
-                    <a href="index.html">Home</a>
-                  </li>
+  <div class="shape shape-2">
+    <img src="assets/images/footer/shape-2.svg" alt="shape" />
+  </div>
 
-                  <li>
-                    <a href="about.html">About</a>
-                  </li>
+  <div class="shape shape-3">
+    <img src="assets/images/footer/shape-3.svg" alt="shape" />
+  </div>
 
-                  <li>
-                    <a href="blog.html">Articles</a>
-                  </li>
+  <div class="ud-footer-widgets">
+    <div class="container">
+      <div class="row">
 
-                  <li>
-                    <a href="contact.html">Contact</a>
-                  </li>
-                </ul>
+        <div class="col-xl-4 col-lg-4 col-md-6">
+          <div class="ud-widget">
 
-              </div>
-            </div>
+            <a href="index.html" class="ud-footer-logo">
+              <span style="font-size: 26px; font-weight: 700; color: #fff;">
+                KaliMoh
+              </span>
+            </a>
 
+            <p class="ud-widget-desc">
+              A place to discover useful information, learn new things,
+              explore ideas, technology, guides, entertainment, and more.
+            </p>
 
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-              <div class="ud-widget">
+            <ul class="ud-widget-socials">
+              <li>
+                <a href="javascript:void(0)">
+                  <i class="lni lni-facebook-filled"></i>
+                </a>
+              </li>
 
-                <h5 class="ud-widget-title">Explore</h5>
+              <li>
+                <a href="javascript:void(0)">
+                  <i class="lni lni-twitter-filled"></i>
+                </a>
+              </li>
 
-                <ul class="ud-widget-links">
-                  <li>
-                    <a href="index.html#features">Features</a>
-                  </li>
+              <li>
+                <a href="javascript:void(0)">
+                  <i class="lni lni-instagram-filled"></i>
+                </a>
+              </li>
 
-                  <li>
-                    <a href="index.html#categories">Categories</a>
-                  </li>
-
-                  <li>
-                    <a href="index.html#faq">FAQ</a>
-                  </li>
-
-                  <li>
-                    <a href="contact.html">Suggest a Topic</a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-
-
-            <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10">
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">Discover • Learn • Explore</h5>
-
-                <p class="ud-widget-desc">
-                  Stay curious and discover something new with KaliMoh.
-                </p>
-
-              </div>
-            </div>
+              <li>
+                <a href="javascript:void(0)">
+                  <i class="lni lni-linkedin-original"></i>
+                </a>
+              </li>
+            </ul>
 
           </div>
         </div>
-      </div>
 
 
-      <div class="ud-footer-bottom">
-        <div class="container">
-          <div class="row">
+        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+          <div class="ud-widget">
 
-            <div class="col-md-8">
-              <ul class="ud-footer-bottom-left">
-                <li>
-                  <a href="javascript:void(0)">Privacy Policy</a>
-                </li>
+            <h5 class="ud-widget-title">KaliMoh</h5>
 
-                <li>
-                  <a href="javascript:void(0)">Terms of Service</a>
-                </li>
+            <ul class="ud-widget-links">
+              <li>
+                <a href="index.html">Home</a>
+              </li>
 
-                <li>
-                  <a href="contact.html">Support</a>
-                </li>
-              </ul>
-            </div>
+              <li>
+                <a href="about.html">About</a>
+              </li>
 
-            <div class="col-md-4">
-              <p class="ud-footer-bottom-right">
-                © 2026 KaliMoh. All rights reserved.
-              </p>
-            </div>
+              <li>
+                <a href="blog.html">Articles</a>
+              </li>
+
+              <li>
+                <a href="contact.html">Contact</a>
+              </li>
+            </ul>
 
           </div>
         </div>
+
+
+        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+          <div class="ud-widget">
+
+            <h5 class="ud-widget-title">Explore</h5>
+
+            <ul class="ud-widget-links">
+              <li>
+                <a href="index.html#features">Features</a>
+              </li>
+
+              <li>
+                <a href="index.html#categories">Categories</a>
+              </li>
+
+              <li>
+                <a href="index.html#faq">FAQ</a>
+              </li>
+
+              <li>
+                <a href="contact.html">Suggest a Topic</a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+
+        <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10">
+          <div class="ud-widget">
+
+            <h5 class="ud-widget-title">Discover • Learn • Explore</h5>
+
+            <p class="ud-widget-desc">
+              Stay curious and discover something new with KaliMoh.
+            </p>
+
+          </div>
+        </div>
+
       </div>
-
-    </footer>
-    <!-- ====== Footer End ====== -->
-
-
-    <!-- ====== Back To Top Start ====== -->
-    <a href="javascript:void(0)" class="back-to-top">
-      <i class="lni lni-chevron-up"></i>
-    </a>
-    <!-- ====== Back To Top End ====== -->
+    </div>
+  </div>
 
 
-    <!-- ====== All Javascript Files ====== -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/main.js"></script>
+  <div class="ud-footer-bottom">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-8">
+          <ul class="ud-footer-bottom-left">
+            <li>
+              <a href="javascript:void(0)">Privacy Policy</a>
+            </li>
+
+            <li>
+              <a href="javascript:void(0)">Terms of Service</a>
+            </li>
+
+            <li>
+              <a href="contact.html">Support</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <p class="ud-footer-bottom-right">
+            © 2026 KaliMoh. All rights reserved.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</footer>
+<!-- ====== Footer End ====== -->
+
+
+<a href="javascript:void(0)" class="back-to-top">
+  <i class="lni lni-chevron-up"></i>
+</a>
+
+
+<!-- ====== All Javascript Files ====== -->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- ====== Supabase ====== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL =
+    "https://ulxreyrjtavflppahqlp.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const loginForm = document.getElementById("login-form");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const loginButton = document.getElementById("login-button");
+  const loginMessage = document.getElementById("login-message");
+
+  loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    loginMessage.textContent = "";
+    loginButton.disabled = true;
+    loginButton.textContent = "Logging in...";
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    if (error) {
+      loginMessage.style.color = "#d32f2f";
+      loginMessage.textContent = error.message;
+
+      loginButton.disabled = false;
+      loginButton.textContent = "Login";
+      return;
+    }
+
+    loginMessage.style.color = "#2e7d32";
+    loginMessage.textContent = "Login successful!";
+
+    setTimeout(function () {
+      window.location.href = "software.html";
+    }, 500);
+  });
+</script>
+```
 
   </body>
 </html>
