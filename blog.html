@@ -116,33 +116,27 @@
     <!-- ====== Blog Start ====== -->
 
     <!-- ====== Article Search ====== -->
-    <div style="width: 100%; padding: 30px 20px; text-align: center;">
-      <input
-        type="text"
-        id="articleSearch"
-        placeholder="Search articles..."
-        style="
-          display: block;
-          width: 80%;
-          max-width: 700px;
-          height: 55px;
-          margin: 0 auto;
-          padding: 0 20px;
-          font-size: 18px;
-          border: 2px solid #ddd;
-          border-radius: 8px;
-          background: #fff;
-          color: #333;
-          box-sizing: border-box;
-        "
-      />
-    </div>
+<div style="width: 100%; padding: 30px 20px; text-align: center;">
+  <div style="position: relative; width: 80%; max-width: 700px; margin: 0 auto;">
 
+    <input
+      id="articleSearch"
+      type="text"
+      placeholder="Search articles..."
+      style="width: 100%; height: 55px; padding: 0 55px 0 20px; font-size: 18px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box;"
+    />
 
-    <section class="ud-blog-grids">
-      <div class="container">
+    <button
+      type="button"
+      onclick="filterArticles()"
+      style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; font-size: 20px; cursor: pointer;"
+      aria-label="Search"
+    >
+      <i class="lni lni-search-alt"></i>
+    </button>
 
-        <div class="row">
+  </div>
+</div>
 
           <!-- Article 1 -->
           <div class="col-lg-4 col-md-6 article-card">
@@ -684,42 +678,35 @@
     <script src="assets/js/main.js"></script>
 
     <!-- ====== Article Search ====== -->
-  <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
   const searchBox = document.getElementById("articleSearch");
-  const articles = document.querySelectorAll(".article-card");
 
-  if (!searchBox) {
-    return;
-  }
+  if (!searchBox) return;
 
-  const params = new URLSearchParams(window.location.search);
-  const urlSearch = params.get("search");
+  window.filterArticles = function () {
 
-  if (urlSearch) {
-    searchBox.value = urlSearch;
-  }
-
-  function filterArticles() {
     const search = searchBox.value.toLowerCase().trim();
+    const articles = document.querySelectorAll(".article-card");
 
     articles.forEach(function (article) {
+
       const text = article.textContent.toLowerCase();
 
-      if (text.includes(search)) {
-        article.style.display = "";
-      } else {
-        article.style.display = "none";
-      }
+      article.style.display =
+        text.includes(search) ? "" : "none";
+
     });
-  }
+  };
 
   searchBox.addEventListener("input", filterArticles);
 
-  if (urlSearch) {
-    filterArticles();
-  }
+  searchBox.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      filterArticles();
+    }
+  });
 
 });
 </script>
