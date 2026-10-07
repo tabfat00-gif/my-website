@@ -399,59 +399,36 @@ async function loadSoftware() {
 
 }
 
-
+<script>
 form.addEventListener(
   "submit",
   async (event) => {
 
     event.preventDefault();
 
-
     const softwareData = {
-
-      title:
-        titleInput.value.trim(),
-
-      description:
-        descriptionInput.value.trim(),
-
-      download_url:
-        downloadInput.value.trim(),
-
-      category:
-        categoryInput.value.trim(),
-
-      image_url:
-        imageInput.value.trim()
+      title: titleInput.value.trim(),
+      description: descriptionInput.value.trim(),
+      download_url: downloadInput.value.trim(),
+      category: categoryInput.value.trim(),
+      image_url: imageInput.value.trim()
     };
-
 
     let result;
 
-
     if (editingId === null) {
 
-      result =
-        await supabaseClient
-          .from("software")
-          .insert([
-            softwareData
-          ]);
+      result = await supabaseClient
+        .from("software")
+        .insert([softwareData]);
 
     } else {
 
-      result =
-        await supabaseClient
-          .from("software")
-          .update(
-            softwareData
-          )
-          .eq(
-            "id",
-            editingId
-          );
+      result = await supabaseClient
+        .from("software")
+        .update(softwareData)
+        .eq("id", editingId);
     }
-
 
     if (result.error) {
 
@@ -465,18 +442,15 @@ form.addEventListener(
       return;
     }
 
-
     showMessage(
       editingId === null
         ? "Software added successfully."
         : "Software updated successfully."
     );
 
-
     clearForm();
 
     loadSoftware();
-
   }
 );
 
@@ -487,8 +461,25 @@ cancelBtn.addEventListener(
 );
 
 
-loadSoftware();
+async function checkAuth() {
 
+  const {
+    data: { session }
+  } = await supabaseClient.auth.getSession();
+
+  if (!session) {
+
+    window.location.href =
+      "admin-login.html";
+
+    return;
+  }
+
+  loadSoftware();
+}
+
+
+checkAuth();
 </script>
 
 </body>
