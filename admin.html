@@ -158,7 +158,6 @@
     <div id="message"></div>
   </div>
 
-
   <div class="box">
     <h2>Software List</h2>
 
@@ -169,9 +168,7 @@
 
 </div>
 
-
 <script>
-
 const SUPABASE_URL =
   "https://ulxreyrjtavflppahqlp.supabase.co";
 
@@ -183,9 +180,7 @@ const supabaseClient = supabase.createClient(
   SUPABASE_KEY
 );
 
-
 let editingId = null;
-
 
 const form = document.getElementById("software-form");
 const titleInput = document.getElementById("title");
@@ -201,130 +196,70 @@ const formTitle = document.getElementById("form-title");
 const softwareList = document.getElementById("software-list");
 const message = document.getElementById("message");
 
-
 function showMessage(text, success = true) {
-
   message.textContent = text;
-
-  message.style.color = success
-    ? "green"
-    : "red";
+  message.style.color = success ? "green" : "red";
 }
 
-
 function clearForm() {
-
   form.reset();
 
   editingId = null;
 
   formTitle.textContent = "Add Software";
-
   saveBtn.textContent = "Add Software";
-
   cancelBtn.style.display = "none";
 }
 
-
 async function loadSoftware() {
-
   const { data, error } = await supabaseClient
     .from("software")
     .select("*")
     .order("created_at", { ascending: false });
 
-
   if (error) {
-
     console.error(error);
-
-    softwareList.textContent =
-      "Error loading software.";
-
+    softwareList.textContent = "Error loading software.";
     return;
   }
-
 
   softwareList.innerHTML = "";
 
-
   if (!data || data.length === 0) {
-
-    softwareList.textContent =
-      "No software added yet.";
-
+    softwareList.textContent = "No software added yet.";
     return;
   }
 
-
   data.forEach((software) => {
+    const item = document.createElement("div");
+    item.className = "software-item";
 
-    const item =
-      document.createElement("div");
+    const title = document.createElement("h3");
+    title.textContent = software.title || "";
 
-    item.className =
-      "software-item";
-
-
-    const title =
-      document.createElement("h3");
-
-    title.textContent =
-      software.title || "";
-
-
-    const category =
-      document.createElement("div");
-
+    const category = document.createElement("div");
     category.className = "category";
+    category.textContent = software.category || "Software";
 
-    category.textContent =
-      software.category || "Software";
+    const description = document.createElement("p");
+    description.textContent = software.description || "";
 
-
-    const description =
-      document.createElement("p");
-
-    description.textContent =
-      software.description || "";
-
-
-    const editButton =
-      document.createElement("button");
-
-    editButton.textContent =
-      "Edit";
-
-    editButton.className =
-      "edit-btn";
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.className = "edit-btn";
 
     editButton.onclick = () => {
-
       editingId = software.id;
 
-      titleInput.value =
-        software.title || "";
+      titleInput.value = software.title || "";
+      descriptionInput.value = software.description || "";
+      downloadInput.value = software.download_url || "";
+      categoryInput.value = software.category || "";
+      imageInput.value = software.image_url || "";
 
-      descriptionInput.value =
-        software.description || "";
-
-      downloadInput.value =
-        software.download_url || "";
-
-      categoryInput.value =
-        software.category || "";
-
-      imageInput.value =
-        software.image_url || "";
-
-      formTitle.textContent =
-        "Edit Software";
-
-      saveBtn.textContent =
-        "Update Software";
-
-      cancelBtn.style.display =
-        "inline-block";
+      formTitle.textContent = "Edit Software";
+      saveBtn.textContent = "Update Software";
+      cancelBtn.style.display = "inline-block";
 
       window.scrollTo({
         top: 0,
@@ -332,152 +267,107 @@ async function loadSoftware() {
       });
     };
 
-
-    const deleteButton =
-      document.createElement("button");
-
-    deleteButton.textContent =
-      "Delete";
-
-    deleteButton.className =
-      "delete-btn";
-
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete-btn";
 
     deleteButton.onclick = async () => {
-
-      const confirmed =
-        confirm(
-          "Delete " +
-          (software.title || "this software") +
-          "?"
-        );
+      const confirmed = confirm(
+        "Delete " +
+        (software.title || "this software") +
+        "?"
+      );
 
       if (!confirmed) return;
 
-
-      const { error } =
-        await supabaseClient
-          .from("software")
-          .delete()
-          .eq("id", software.id);
-
+      const { error } = await supabaseClient
+        .from("software")
+        .delete()
+        .eq("id", software.id);
 
       if (error) {
-
         console.error(error);
-
-        showMessage(
-          "Delete failed.",
-          false
-        );
-
+        showMessage("Delete failed.", false);
         return;
       }
 
-
-      showMessage(
-        "Software deleted."
-      );
-
+      showMessage("Software deleted.");
       loadSoftware();
     };
 
-
     item.appendChild(title);
-
     item.appendChild(category);
-
     item.appendChild(description);
-
     item.appendChild(editButton);
-
     item.appendChild(deleteButton);
 
     softwareList.appendChild(item);
-
   });
-
 }
 
-<script>
-form.addEventListener(
-  "submit",
-  async (event) => {
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-    event.preventDefault();
+  const softwareData = {
+    title: titleInput.value.trim(),
+    description: descriptionInput.value.trim(),
+    download_url: downloadInput.value.trim(),
+    category: categoryInput.value.trim(),
+    image_url: imageInput.value.trim()
+  };
 
-    const softwareData = {
-      title: titleInput.value.trim(),
-      description: descriptionInput.value.trim(),
-      download_url: downloadInput.value.trim(),
-      category: categoryInput.value.trim(),
-      image_url: imageInput.value.trim()
-    };
+  let result;
 
-    let result;
+  if (editingId === null) {
+    result = await supabaseClient
+      .from("software")
+      .insert([softwareData]);
+  } else {
+    result = await supabaseClient
+      .from("software")
+      .update(softwareData)
+      .eq("id", editingId);
+  }
 
-    if (editingId === null) {
-
-      result = await supabaseClient
-        .from("software")
-        .insert([softwareData]);
-
-    } else {
-
-      result = await supabaseClient
-        .from("software")
-        .update(softwareData)
-        .eq("id", editingId);
-    }
-
-    if (result.error) {
-
-      console.error(result.error);
-
-      showMessage(
-        result.error.message,
-        false
-      );
-
-      return;
-    }
+  if (result.error) {
+    console.error(result.error);
 
     showMessage(
-      editingId === null
-        ? "Software added successfully."
-        : "Software updated successfully."
+      result.error.message,
+      false
     );
 
-    clearForm();
-
-    loadSoftware();
+    return;
   }
-);
 
+  showMessage(
+    editingId === null
+      ? "Software added successfully."
+      : "Software updated successfully."
+  );
+
+  clearForm();
+
+  loadSoftware();
+});
 
 cancelBtn.addEventListener(
   "click",
   clearForm
 );
 
-
 async function checkAuth() {
-
   const {
     data: { session }
   } = await supabaseClient.auth.getSession();
 
   if (!session) {
-
-    window.location.href =
-      "admin-login.html";
-
+    window.location.href = "admin-login.html";
     return;
   }
 
   loadSoftware();
 }
-
 
 checkAuth();
 </script>
