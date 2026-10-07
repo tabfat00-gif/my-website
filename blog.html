@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>KaliMoh | Articles</title>
+
     <meta
       name="description"
       content="KaliMoh - Discover useful information, guides, technology, ideas and interesting topics."
@@ -112,21 +113,37 @@
     <!-- ====== Banner End ====== -->
 
 
-<!-- ====== Blog Start ====== -->
+    <!-- ====== Blog Start ====== -->
 
-<div style="width: 100%; padding: 40px 20px; text-align: center;">
-  <input
-    type="text"
-    id="articleSearch"
-    placeholder="Search articles..."
-    style="width: 80%; max-width: 700px; height: 55px; padding: 0 20px; font-size: 18px; border: 2px solid #ddd; border-radius: 8px; background: #fff;"
-  />
-</div>
+    <!-- ====== Article Search ====== -->
+    <div style="width: 100%; padding: 30px 20px; text-align: center;">
+      <input
+        type="text"
+        id="articleSearch"
+        placeholder="Search articles..."
+        style="
+          display: block;
+          width: 80%;
+          max-width: 700px;
+          height: 55px;
+          margin: 0 auto;
+          padding: 0 20px;
+          font-size: 18px;
+          border: 2px solid #ddd;
+          border-radius: 8px;
+          background: #fff;
+          color: #333;
+          box-sizing: border-box;
+        "
+      />
+    </div>
 
-<section class="ud-blog-grids">
-  <div class="container">
 
-    <div class="row">
+    <section class="ud-blog-grids">
+      <div class="container">
+
+        <div class="row">
+
           <!-- Article 1 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
@@ -425,8 +442,8 @@
 
         </div>
       </div>
-
     </section>
+
     <!-- ====== Blog End ====== -->
 
 
@@ -672,6 +689,10 @@
 
         const searchBox = document.getElementById("articleSearch");
         const articles = document.querySelectorAll(".article-card");
+
+        if (!searchBox) {
+          return;
+        }
 
         searchBox.addEventListener("input", function () {
 
