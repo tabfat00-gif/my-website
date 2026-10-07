@@ -684,36 +684,42 @@
     <script src="assets/js/main.js"></script>
 
     <!-- ====== Article Search ====== -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-        const searchBox = document.getElementById("articleSearch");
-        const articles = document.querySelectorAll(".article-card");
+  const searchBox = document.getElementById("articleSearch");
+  const articles = document.querySelectorAll(".article-card");
 
-        if (!searchBox) {
-          return;
-        }
+  if (!searchBox) {
+    return;
+  }
 
-        searchBox.addEventListener("input", function () {
+  const params = new URLSearchParams(window.location.search);
+  const urlSearch = params.get("search");
 
-          const search = this.value.toLowerCase().trim();
+  if (urlSearch) {
+    searchBox.value = urlSearch;
+  }
 
-          articles.forEach(function (article) {
+  function filterArticles() {
+    const search = searchBox.value.toLowerCase().trim();
 
-            const text = article.textContent.toLowerCase();
+    articles.forEach(function (article) {
+      const text = article.textContent.toLowerCase();
 
-            if (text.includes(search)) {
-              article.style.display = "";
-            } else {
-              article.style.display = "none";
-            }
+      if (text.includes(search)) {
+        article.style.display = "";
+      } else {
+        article.style.display = "none";
+      }
+    });
+  }
 
-          });
+  searchBox.addEventListener("input", filterArticles);
 
-        });
+  if (urlSearch) {
+    filterArticles();
+  }
 
-      });
-    </script>
-
-  </body>
-</html>
+});
+</script>
