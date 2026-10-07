@@ -1,156 +1,495 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KaliMoh Admin</title>
 
-  <title>Admin - KaliMoh</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/ud-styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+    }
+
+    .box {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      border: 0;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    .save-btn {
+      background: #111;
+      color: white;
+    }
+
+    .cancel-btn {
+      background: #ddd;
+    }
+
+    .edit-btn {
+      background: #2d7ff9;
+      color: white;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+    }
+
+    .software-item {
+      border: 1px solid #ddd;
+      padding: 18px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      background: white;
+    }
+
+    .software-item h3 {
+      margin-top: 0;
+    }
+
+    .category {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-  <section class="ud-page-banner">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="ud-banner-content">
-            <h1>KaliMoh Admin</h1>
-            <p>Add new software</p>
-          </div>
-        </div>
-      </div>
+<div class="container">
+
+  <h1>KaliMoh Admin Panel</h1>
+
+  <div class="box">
+    <h2 id="form-title">Add Software</h2>
+
+    <form id="software-form">
+
+      <input
+        type="text"
+        id="title"
+        placeholder="Software title"
+        required
+      >
+
+      <textarea
+        id="description"
+        placeholder="Description"
+      ></textarea>
+
+      <input
+        type="url"
+        id="download_url"
+        placeholder="Download URL"
+      >
+
+      <input
+        type="text"
+        id="category"
+        placeholder="Category"
+      >
+
+      <input
+        type="url"
+        id="image_url"
+        placeholder="Image URL"
+      >
+
+      <button type="submit" class="save-btn" id="save-btn">
+        Add Software
+      </button>
+
+      <button
+        type="button"
+        class="cancel-btn"
+        id="cancel-btn"
+        style="display:none;"
+      >
+        Cancel Edit
+      </button>
+
+    </form>
+
+    <div id="message"></div>
+  </div>
+
+
+  <div class="box">
+    <h2>Software List</h2>
+
+    <div id="software-list">
+      Loading...
     </div>
-  </section>
+  </div>
 
-  <section class="ud-blog-grids">
-    <div class="container">
+</div>
 
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
 
-          <div class="ud-single-blog">
-            <div class="ud-blog-content">
+<script>
 
-              <h3 class="ud-blog-title">
-                Add Software
-              </h3>
+const SUPABASE_URL =
+  "https://ulxreyrjtavflppahqlp.supabase.co";
 
-              <form id="software-form">
+const SUPABASE_KEY =
+  "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-                <div class="mb-3">
-                  <label>Title</label>
-                  <input
-                    type="text"
-                    id="title"
-                    class="form-control"
-                    required>
-                </div>
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-                <div class="mb-3">
-                  <label>Description</label>
-                  <textarea
-                    id="description"
-                    class="form-control"
-                    rows="4"
-                    required></textarea>
-                </div>
 
-                <div class="mb-3">
-                  <label>Download URL</label>
-                  <input
-                    type="url"
-                    id="download_url"
-                    class="form-control"
-                    required>
-                </div>
+let editingId = null;
 
-                <div class="mb-3">
-                  <label>Category</label>
-                  <input
-                    type="text"
-                    id="category"
-                    class="form-control"
-                    placeholder="Windows, Linux, Tools..."
-                    required>
-                </div>
 
-                <div class="mb-3">
-                  <label>Image URL</label>
-                  <input
-                    type="url"
-                    id="image_url"
-                    class="form-control">
-                </div>
+const form = document.getElementById("software-form");
+const titleInput = document.getElementById("title");
+const descriptionInput = document.getElementById("description");
+const downloadInput = document.getElementById("download_url");
+const categoryInput = document.getElementById("category");
+const imageInput = document.getElementById("image_url");
 
-                <button
-                  type="submit"
-                  class="ud-main-btn">
-                  Add Software
-                </button>
+const saveBtn = document.getElementById("save-btn");
+const cancelBtn = document.getElementById("cancel-btn");
+const formTitle = document.getElementById("form-title");
 
-              </form>
+const softwareList = document.getElementById("software-list");
+const message = document.getElementById("message");
 
-              <p id="message" style="margin-top: 20px;"></p>
 
-            </div>
-          </div>
+function showMessage(text, success = true) {
 
-        </div>
-      </div>
+  message.textContent = text;
 
-    </div>
-  </section>
+  message.style.color = success
+    ? "green"
+    : "red";
+}
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
-    const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+function clearForm() {
 
-    const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+  form.reset();
 
-    const supabaseClient = supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+  editingId = null;
 
-    const form = document.getElementById("software-form");
-    const message = document.getElementById("message");
+  formTitle.textContent = "Add Software";
 
-    form.addEventListener("submit", async function(event) {
+  saveBtn.textContent = "Add Software";
 
-      event.preventDefault();
+  cancelBtn.style.display = "none";
+}
 
-      const title = document.getElementById("title").value;
-      const description = document.getElementById("description").value;
-      const download_url = document.getElementById("download_url").value;
-      const category = document.getElementById("category").value;
-      const image_url = document.getElementById("image_url").value;
+
+async function loadSoftware() {
 
   const { data, error } = await supabaseClient
-  .from("software")
-  .insert([{
-    title: title,
-    description: description,
-    download_url: downloadUrl,
-    category: category,
-    image_url: imageUrl
-  }])
-  .select();    if (error) {
-        console.error(error.message);
-console.error(error.details);
-console.error(error.hint);
-        message.textContent = "Error: " + error.message;
+    .from("software")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+
+  if (error) {
+
+    console.error(error);
+
+    softwareList.textContent =
+      "Error loading software.";
+
+    return;
+  }
+
+
+  softwareList.innerHTML = "";
+
+
+  if (!data || data.length === 0) {
+
+    softwareList.textContent =
+      "No software added yet.";
+
+    return;
+  }
+
+
+  data.forEach((software) => {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "software-item";
+
+
+    const title =
+      document.createElement("h3");
+
+    title.textContent =
+      software.title || "";
+
+
+    const category =
+      document.createElement("div");
+
+    category.className = "category";
+
+    category.textContent =
+      software.category || "Software";
+
+
+    const description =
+      document.createElement("p");
+
+    description.textContent =
+      software.description || "";
+
+
+    const editButton =
+      document.createElement("button");
+
+    editButton.textContent =
+      "Edit";
+
+    editButton.className =
+      "edit-btn";
+
+    editButton.onclick = () => {
+
+      editingId = software.id;
+
+      titleInput.value =
+        software.title || "";
+
+      descriptionInput.value =
+        software.description || "";
+
+      downloadInput.value =
+        software.download_url || "";
+
+      categoryInput.value =
+        software.category || "";
+
+      imageInput.value =
+        software.image_url || "";
+
+      formTitle.textContent =
+        "Edit Software";
+
+      saveBtn.textContent =
+        "Update Software";
+
+      cancelBtn.style.display =
+        "inline-block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    };
+
+
+    const deleteButton =
+      document.createElement("button");
+
+    deleteButton.textContent =
+      "Delete";
+
+    deleteButton.className =
+      "delete-btn";
+
+
+    deleteButton.onclick = async () => {
+
+      const confirmed =
+        confirm(
+          "Delete " +
+          (software.title || "this software") +
+          "?"
+        );
+
+      if (!confirmed) return;
+
+
+      const { error } =
+        await supabaseClient
+          .from("software")
+          .delete()
+          .eq("id", software.id);
+
+
+      if (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Delete failed.",
+          false
+        );
+
         return;
       }
 
-      message.textContent = "Software added successfully!";
 
-      form.reset();
-    });
-  </script>
+      showMessage(
+        "Software deleted."
+      );
+
+      loadSoftware();
+    };
+
+
+    item.appendChild(title);
+
+    item.appendChild(category);
+
+    item.appendChild(description);
+
+    item.appendChild(editButton);
+
+    item.appendChild(deleteButton);
+
+    softwareList.appendChild(item);
+
+  });
+
+}
+
+
+form.addEventListener(
+  "submit",
+  async (event) => {
+
+    event.preventDefault();
+
+
+    const softwareData = {
+
+      title:
+        titleInput.value.trim(),
+
+      description:
+        descriptionInput.value.trim(),
+
+      download_url:
+        downloadInput.value.trim(),
+
+      category:
+        categoryInput.value.trim(),
+
+      image_url:
+        imageInput.value.trim()
+    };
+
+
+    let result;
+
+
+    if (editingId === null) {
+
+      result =
+        await supabaseClient
+          .from("software")
+          .insert([
+            softwareData
+          ]);
+
+    } else {
+
+      result =
+        await supabaseClient
+          .from("software")
+          .update(
+            softwareData
+          )
+          .eq(
+            "id",
+            editingId
+          );
+    }
+
+
+    if (result.error) {
+
+      console.error(result.error);
+
+      showMessage(
+        result.error.message,
+        false
+      );
+
+      return;
+    }
+
+
+    showMessage(
+      editingId === null
+        ? "Software added successfully."
+        : "Software updated successfully."
+    );
+
+
+    clearForm();
+
+    loadSoftware();
+
+  }
+);
+
+
+cancelBtn.addEventListener(
+  "click",
+  clearForm
+);
+
+
+loadSoftware();
+
+</script>
 
 </body>
 </html>
