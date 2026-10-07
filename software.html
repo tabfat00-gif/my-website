@@ -182,6 +182,27 @@
   <!-- ====== Footer End ====== -->
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+async function loadSoftware() {
+  const { data, error } = await supabaseClient
+    .from("software")
+    .select("*");
+
+  console.log(data);
+  console.log(error);
+}
+
+loadSoftware();
+</script>
 </body>
 </html>
