@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,6 +93,39 @@
       margin-bottom: 8px;
     }
 
+    .premium-badge {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .free-badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .premium-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .premium-option input {
+      width: auto;
+      margin: 0;
+    }
+
     #message {
       margin-top: 10px;
       font-weight: bold;
@@ -139,6 +173,14 @@
         id="image_url"
         placeholder="Image URL"
       >
+
+      <label class="premium-option">
+        <input
+          type="checkbox"
+          id="is_premium"
+        >
+        Premium Software 🔒
+      </label>
 
       <button type="submit" class="save-btn" id="save-btn">
         Add Software
@@ -188,6 +230,7 @@ const descriptionInput = document.getElementById("description");
 const downloadInput = document.getElementById("download_url");
 const categoryInput = document.getElementById("category");
 const imageInput = document.getElementById("image_url");
+const premiumInput = document.getElementById("is_premium");
 
 const saveBtn = document.getElementById("save-btn");
 const cancelBtn = document.getElementById("cancel-btn");
@@ -244,6 +287,16 @@ async function loadSoftware() {
     const description = document.createElement("p");
     description.textContent = software.description || "";
 
+    const badge = document.createElement("div");
+
+    if (software.is_premium) {
+      badge.className = "premium-badge";
+      badge.textContent = "🔒 Premium";
+    } else {
+      badge.className = "free-badge";
+      badge.textContent = "🟢 Free";
+    }
+
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
     editButton.className = "edit-btn";
@@ -256,6 +309,7 @@ async function loadSoftware() {
       downloadInput.value = software.download_url || "";
       categoryInput.value = software.category || "";
       imageInput.value = software.image_url || "";
+      premiumInput.checked = software.is_premium === true;
 
       formTitle.textContent = "Edit Software";
       saveBtn.textContent = "Update Software";
@@ -297,6 +351,7 @@ async function loadSoftware() {
 
     item.appendChild(title);
     item.appendChild(category);
+    item.appendChild(badge);
     item.appendChild(description);
     item.appendChild(editButton);
     item.appendChild(deleteButton);
@@ -313,7 +368,8 @@ form.addEventListener("submit", async (event) => {
     description: descriptionInput.value.trim(),
     download_url: downloadInput.value.trim(),
     category: categoryInput.value.trim(),
-    image_url: imageInput.value.trim()
+    image_url: imageInput.value.trim(),
+    is_premium: premiumInput.checked
   };
 
   let result;
@@ -374,3 +430,4 @@ checkAuth();
 
 </body>
 </html>
+```
