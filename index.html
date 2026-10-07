@@ -183,7 +183,7 @@
     
 <button
   type="button"
-  onclick="document.getElementById('siteSearch').focus()"
+  onclick="if(document.getElementById('siteSearch').value.trim()!==''){window.location.href='blog.html?search='+encodeURIComponent(document.getElementById('siteSearch').value.trim());}"
   style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; font-size: 20px; cursor: pointer;"
 >
   <i class="lni lni-search-alt"></i>
