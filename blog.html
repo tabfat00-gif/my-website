@@ -679,6 +679,8 @@
 
 <!-- ====== Article Search ====== -->
 <script>
+let filterArticles;
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const searchBox = document.getElementById("articleSearch");
@@ -686,10 +688,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!searchBox) return;
 
-  function filterArticles() {
+  filterArticles = function () {
+
     const search = searchBox.value.toLowerCase().trim();
 
     articles.forEach(function (article) {
+
       const text = article.textContent.toLowerCase();
 
       if (text.includes(search)) {
@@ -697,20 +701,22 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         article.style.display = "none";
       }
+
     });
-  }
+  };
 
   searchBox.addEventListener("input", filterArticles);
 
   searchBox.addEventListener("keydown", function (e) {
+
     if (e.key === "Enter") {
       e.preventDefault();
       filterArticles();
     }
+
   });
 
 });
 </script>
-
 </body>
 </html>
