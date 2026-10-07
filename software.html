@@ -103,58 +103,11 @@
 
   <section class="ud-blog-grids">
     <div class="container">
-      <div class="row">
+      <div class="row" id="software-list">
 
 ```
-    <!-- Windows 7 -->
-    <div class="col-lg-6 col-md-6">
-      <div class="ud-single-blog">
-        <div class="ud-blog-content">
-          <span class="ud-blog-date">Windows</span>
-
-          <h3 class="ud-blog-title">
-            Windows 7 Ultimate SP1 SuperLite x64
-          </h3>
-
-          <p class="ud-blog-desc">
-            Windows 7 Ultimate SP1 SuperLite x64.
-            File size: approximately 0.98 GB.
-          </p>
-
-          <a
-            href="https://archive.org/details/win-7-ult-sp-1-super-lite-x-64"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="ud-main-btn ud-white-btn">
-            Download
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Kali Linux -->
-    <div class="col-lg-6 col-md-6">
-      <div class="ud-single-blog">
-        <div class="ud-blog-content">
-          <span class="ud-blog-date">Linux</span>
-
-          <h3 class="ud-blog-title">
-            Kali Linux
-          </h3>
-
-          <p class="ud-blog-desc">
-            Kali Linux tools and official downloads will be added here.
-          </p>
-
-          <a
-            href="https://www.kali.org/get-kali/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="ud-main-btn ud-white-btn">
-            Official Download
-          </a>
-        </div>
-      </div>
+    <div class="col-lg-12 text-center">
+      <p>Loading software...</p>
     </div>
 
   </div>
@@ -182,27 +135,91 @@
   <!-- ====== Footer End ====== -->
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
-const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+  <script>
+    const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-async function loadSoftware() {
-  const { data, error } = await supabaseClient
-    .from("software")
-    .select("*");
+    async function loadSoftware() {
+      const softwareList = document.getElementById("software-list");
 
-  console.log(data);
-  console.log(error);
-}
+      const { data, error } = await supabaseClient
+        .from("software")
+        .select("*")
+        .order("title", { ascending: true });
 
-loadSoftware();
-</script>
+      if (error) {
+        console.error("Supabase error:", error);
+        softwareList.innerHTML = `
+          <div class="col-lg-12 text-center">
+            <p>Unable to load software.</p>
+          </div>
+        `;
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        softwareList.innerHTML = `
+          <div class="col-lg-12 text-center">
+            <p>No software available yet.</p>
+          </div>
+        `;
+        return;
+      }
+
+      softwareList.innerHTML = "";
+
+      data.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "col-lg-6 col-md-6";
+
+        card.innerHTML = `
+          <div class="ud-single-blog">
+            <div class="ud-blog-content">
+
+              <span class="ud-blog-date">
+                ${item.category || "Software"}
+              </span>
+
+              <h3 class="ud-blog-title">
+                ${item.title || ""}
+              </h3>
+
+              <p class="ud-blog-desc">
+                ${item.description || ""}
+              </p>
+
+              ${
+                item.download_url
+                  ? `
+                    <a
+                      href="${item.download_url}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="ud-main-btn ud-white-btn">
+                      Download
+                    </a>
+                  `
+                  : ""
+              }
+
+            </div>
+          </div>
+        `;
+
+        softwareList.appendChild(card);
+      });
+    }
+
+    loadSoftware();
+  </script>
+
 </body>
 </html>
