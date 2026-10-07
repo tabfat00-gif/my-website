@@ -195,7 +195,7 @@ const supabaseClient = supabase.createClient(
 
 async function loadSoftware() {
   const { data, error } = await supabaseClient
-    .from("public.software")
+    .from("software")
 .select("*");
 
   console.log(data);
