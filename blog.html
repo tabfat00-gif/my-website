@@ -696,17 +696,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const text = article.textContent.toLowerCase();
 
-      if (text.includes(search)) {
-        article.style.display = "";
-      } else {
-        article.style.display = "none";
-      }
+      article.style.display = text.includes(search) ? "" : "none";
 
     });
   };
 
+  // البحث أثناء الكتابة
   searchBox.addEventListener("input", filterArticles);
 
+  // البحث عند الضغط على Enter
   searchBox.addEventListener("keydown", function (e) {
 
     if (e.key === "Enter") {
@@ -715,6 +713,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   });
+
+  // استقبال البحث القادم من الصفحة الرئيسية
+  const params = new URLSearchParams(window.location.search);
+  const urlSearch = params.get("search");
+
+  if (urlSearch) {
+    searchBox.value = urlSearch;
+    filterArticles();
+  }
 
 });
 </script>
