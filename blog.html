@@ -125,19 +125,14 @@
       placeholder="Search articles..."
       style="width: 100%; height: 55px; padding: 0 55px 0 20px; font-size: 18px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box;"
     />
-
-    <button
-      type="button"
-      onclick="filterArticles()"
-      style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; font-size: 20px; cursor: pointer;"
-      aria-label="Search"
-    >
-      <i class="lni lni-search-alt"></i>
-    </button>
-
-  </div>
-</div>
-
+<button
+  type="button"
+  style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; font-size: 20px; cursor: pointer;"
+  aria-label="Search"
+>
+  <i class="lni lni-search-alt"></i>
+</button>
+  
           <!-- Article 1 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
@@ -679,16 +674,15 @@
 
 <!-- ====== Article Search ====== -->
 <script>
-let filterArticles;
-
 document.addEventListener("DOMContentLoaded", function () {
 
   const searchBox = document.getElementById("articleSearch");
+  const searchButton = document.querySelector('[aria-label="Search"]');
   const articles = document.querySelectorAll(".article-card");
 
   if (!searchBox) return;
 
-  filterArticles = function () {
+  function filterArticles() {
 
     const search = searchBox.value.toLowerCase().trim();
 
@@ -696,15 +690,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const text = article.textContent.toLowerCase();
 
-      article.style.display = text.includes(search) ? "" : "none";
+      if (text.includes(search)) {
+        article.style.display = "";
+      } else {
+        article.style.display = "none";
+      }
 
     });
-  };
+  }
 
-  // البحث أثناء الكتابة
   searchBox.addEventListener("input", filterArticles);
 
-  // البحث عند الضغط على Enter
   searchBox.addEventListener("keydown", function (e) {
 
     if (e.key === "Enter") {
@@ -714,7 +710,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   });
 
-  // استقبال البحث القادم من الصفحة الرئيسية
+  if (searchButton) {
+    searchButton.addEventListener("click", filterArticles);
+  }
+
   const params = new URLSearchParams(window.location.search);
   const urlSearch = params.get("search");
 
