@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin - KaliMoh</title>
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/ud-styles.css" />
+</head>
+
+<body>
+
+  <section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>KaliMoh Admin</h1>
+            <p>Add new software</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ud-blog-grids">
+    <div class="container">
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="ud-single-blog">
+            <div class="ud-blog-content">
+
+              <h3 class="ud-blog-title">
+                Add Software
+              </h3>
+
+              <form id="software-form">
+
+                <div class="mb-3">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    id="title"
+                    class="form-control"
+                    required>
+                </div>
+
+                <div class="mb-3">
+                  <label>Description</label>
+                  <textarea
+                    id="description"
+                    class="form-control"
+                    rows="4"
+                    required></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label>Download URL</label>
+                  <input
+                    type="url"
+                    id="download_url"
+                    class="form-control"
+                    required>
+                </div>
+
+                <div class="mb-3">
+                  <label>Category</label>
+                  <input
+                    type="text"
+                    id="category"
+                    class="form-control"
+                    placeholder="Windows, Linux, Tools..."
+                    required>
+                </div>
+
+                <div class="mb-3">
+                  <label>Image URL</label>
+                  <input
+                    type="url"
+                    id="image_url"
+                    class="form-control">
+                </div>
+
+                <button
+                  type="submit"
+                  class="ud-main-btn">
+                  Add Software
+                </button>
+
+              </form>
+
+              <p id="message" style="margin-top: 20px;"></p>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+
+    const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const form = document.getElementById("software-form");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const download_url = document.getElementById("download_url").value;
+      const category = document.getElementById("category").value;
+      const image_url = document.getElementById("image_url").value;
+
+      const { data, error } = await supabaseClient
+        .from("software")
+        .insert([
+          {
+            title: title,
+            description: description,
+            download_url: download_url,
+            category: category,
+            image_url: image_url
+          }
+        ]);
+
+      if (error) {
+        console.error(error);
+        message.textContent = "Error: " + error.message;
+        return;
+      }
+
+      message.textContent = "Software added successfully!";
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
