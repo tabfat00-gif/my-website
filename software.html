@@ -180,9 +180,7 @@
   </footer>
 
   <!-- ====== Footer End ====== -->
-
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
@@ -196,14 +194,73 @@ const supabaseClient = supabase.createClient(
 async function loadSoftware() {
   const { data, error } = await supabaseClient
     .from("software")
-.select("*");
+    .select("*")
+    .order("created_at", { ascending: false });
 
-  console.log(data);
-  console.log(error);
+  if (error) {
+    console.error("Error:", error);
+    return;
+  }
+
+  const list = document.getElementById("software-list");
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  data.forEach((software) => {
+    const card = document.createElement("div");
+    card.className = "col-xl-4 col-lg-4 col-md-6";
+
+    card.innerHTML = `
+      <div class="ud-single-blog">
+        ${
+          software.image_url
+            ? `
+              <div class="ud-blog-image">
+                <img
+                  src="${software.image_url}"
+                  alt="${software.title}"
+                  style="width:100%; height:220px; object-fit:cover;"
+                >
+              </div>
+            `
+            : ""
+        }
+
+        <div class="ud-blog-content">
+          <span class="ud-blog-category">${software.category || "Software"}</span>
+
+          <h3 class="ud-blog-title">
+            ${software.title || ""}
+          </h3>
+
+          <p class="ud-blog-desc">
+            ${software.description || ""}
+          </p>
+
+          ${
+            software.download_url
+              ? `
+                <a
+                  href="${software.download_url}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ud-main-btn"
+                >
+                  Download
+                </a>
+              `
+              : ""
+          }
+        </div>
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
 }
 
 loadSoftware();
 </script>
-
-</body>
-</html>
+ 
