@@ -573,27 +573,31 @@
 
     <!-- ====== Article Search ====== -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-
+      function searchArticles() {
         const box = document.getElementById("articleSearch");
-        const button = document.getElementById("articleSearchButton");
         const cards = document.querySelectorAll(".article-card");
 
         if (!box) return;
 
-        function searchArticles() {
-          const word = box.value.trim().toLowerCase();
+        const word = box.value.trim().toLowerCase();
 
-          cards.forEach(function (card) {
-            const content = card.textContent.toLowerCase();
+        cards.forEach(function (card) {
+          const content = card.textContent.toLowerCase();
 
-            if (word === "" || content.includes(word)) {
-              card.style.display = "";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        }
+          if (word === "" || content.includes(word)) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+        const box = document.getElementById("articleSearch");
+        const button = document.getElementById("articleSearchButton");
+
+        if (!box) return;
 
         box.addEventListener("input", searchArticles);
 
@@ -609,10 +613,10 @@
         }
 
         const params = new URLSearchParams(window.location.search);
-        const wordFromHome = params.get("search");
+        const searchFromHome = params.get("search");
 
-        if (wordFromHome) {
-          box.value = wordFromHome;
+        if (searchFromHome) {
+          box.value = searchFromHome;
           searchArticles();
         }
 
