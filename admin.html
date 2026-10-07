@@ -129,19 +129,16 @@
       const category = document.getElementById("category").value;
       const image_url = document.getElementById("image_url").value;
 
-      const { data, error } = await supabaseClient
-        .from("software")
-        .insert([
-          {
-            title: title,
-            description: description,
-            download_url: download_url,
-            category: category,
-            image_url: image_url
-          }
-        ]);
-
-      if (error) {
+  const { data, error } = await supabaseClient
+  .from("software")
+  .insert([{
+    title: title,
+    description: description,
+    download_url: downloadUrl,
+    category: category,
+    image_url: imageUrl
+  }])
+  .select();    if (error) {
         console.error(error.message);
 console.error(error.details);
 console.error(error.hint);
