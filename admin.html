@@ -87,6 +87,10 @@
       resize: vertical;
     }
 
+    #article-content {
+      min-height: 220px;
+    }
+
     button {
       border: 0;
       padding: 10px 16px;
@@ -119,7 +123,8 @@
       color: white;
     }
 
-    .software-item {
+    .software-item,
+    .article-item {
       border: 1px solid #ddd;
       padding: 18px;
       border-radius: 10px;
@@ -127,7 +132,8 @@
       background: white;
     }
 
-    .software-item h3 {
+    .software-item h3,
+    .article-item h3 {
       margin-top: 0;
       margin-bottom: 8px;
     }
@@ -139,7 +145,9 @@
     }
 
     .premium-badge,
-    .free-badge {
+    .free-badge,
+    .published-badge,
+    .draft-badge {
       display: inline-block;
       padding: 4px 8px;
       border-radius: 5px;
@@ -157,7 +165,18 @@
       color: #2e7d32;
     }
 
-    .premium-option {
+    .published-badge {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .draft-badge {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .premium-option,
+    .published-option {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -165,12 +184,14 @@
       font-weight: bold;
     }
 
-    .premium-option input {
+    .premium-option input,
+    .published-option input {
       width: auto;
       margin: 0;
     }
 
-    #message {
+    #software-message,
+    #article-message {
       margin-top: 10px;
       font-weight: bold;
       min-height: 20px;
@@ -179,6 +200,14 @@
     #auth-status {
       color: #666;
       font-size: 14px;
+    }
+
+    .article-preview {
+      color: #555;
+      white-space: pre-line;
+      max-height: 120px;
+      overflow: hidden;
+      margin-bottom: 12px;
     }
 
     @media (max-width: 600px) {
@@ -209,14 +238,22 @@
 
     <div>
       <a href="index.html" class="home-btn">View Site</a>
-      <button type="button" class="logout-btn" id="logout-btn">
+
+      <button
+        type="button"
+        class="logout-btn"
+        id="logout-btn"
+      >
         Logout
       </button>
     </div>
   </div>
 
 
+  <!-- SOFTWARE -->
+
   <div class="box">
+
     <h2 id="form-title">Add Software</h2>
 
     <form id="software-form">
@@ -278,27 +315,119 @@
 
     </form>
 
-    <div id="message"></div>
+    <div id="software-message"></div>
+
   </div>
 
 
   <div class="box">
+
     <h2>Software List</h2>
 
     <div id="software-list">
       Loading...
     </div>
+
+  </div>
+
+
+  <!-- ARTICLES -->
+
+  <div class="box">
+
+    <h2 id="article-form-title">
+      Add Article
+    </h2>
+
+    <form id="article-form">
+
+      <input
+        type="text"
+        id="article-title"
+        placeholder="Article title"
+        required
+      >
+
+      <textarea
+        id="article-description"
+        placeholder="Short description"
+      ></textarea>
+
+      <textarea
+        id="article-content"
+        placeholder="Article content"
+        required
+      ></textarea>
+
+      <input
+        type="text"
+        id="article-category"
+        placeholder="Category"
+      >
+
+      <input
+        type="url"
+        id="article-image"
+        placeholder="Image URL"
+      >
+
+      <label class="published-option">
+
+        <input
+          type="checkbox"
+          id="article-published"
+          checked
+        >
+
+        Published
+
+      </label>
+
+      <button
+        type="submit"
+        class="save-btn"
+        id="article-save-btn"
+      >
+        Add Article
+      </button>
+
+      <button
+        type="button"
+        class="cancel-btn"
+        id="article-cancel-btn"
+        style="display: none;"
+      >
+        Cancel Edit
+      </button>
+
+    </form>
+
+    <div id="article-message"></div>
+
+  </div>
+
+
+  <div class="box">
+
+    <h2>Articles List</h2>
+
+    <div id="articles-list">
+      Loading...
+    </div>
+
   </div>
 
 </div>
 
 
 <script>
+
   const SUPABASE_URL =
     "https://ulxreyrjtavflppahqlp.supabase.co";
 
   const SUPABASE_KEY =
     "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
 
   const supabaseClient =
     window.supabase.createClient(
@@ -307,10 +436,14 @@
     );
 
 
+  /* =========================
+     SOFTWARE
+  ========================= */
+
   let editingId = null;
 
 
-  const form =
+  const softwareForm =
     document.getElementById("software-form");
 
   const titleInput =
@@ -343,25 +476,26 @@
   const softwareList =
     document.getElementById("software-list");
 
-  const message =
-    document.getElementById("message");
-
-  const authStatus =
-    document.getElementById("auth-status");
-
-  const logoutBtn =
-    document.getElementById("logout-btn");
+  const softwareMessage =
+    document.getElementById("software-message");
 
 
-  function showMessage(text, success = true) {
-    message.textContent = text;
-    message.style.color =
+  function showSoftwareMessage(
+    text,
+    success = true
+  ) {
+
+    softwareMessage.textContent =
+      text;
+
+    softwareMessage.style.color =
       success ? "green" : "red";
   }
 
 
-  function clearForm() {
-    form.reset();
+  function clearSoftwareForm() {
+
+    softwareForm.reset();
 
     editingId = null;
 
@@ -380,6 +514,7 @@
 
     softwareList.textContent =
       "Loading...";
+
 
     const {
       data,
@@ -521,6 +656,7 @@
           top: 0,
           behavior: "smooth"
         });
+
       };
 
 
@@ -572,7 +708,7 @@
 
             console.error(error);
 
-            showMessage(
+            showSoftwareMessage(
               error.message ||
               "Delete failed.",
               false
@@ -588,7 +724,7 @@
           }
 
 
-          showMessage(
+          showSoftwareMessage(
             "Software deleted."
           );
 
@@ -604,11 +740,13 @@
       item.appendChild(deleteButton);
 
       softwareList.appendChild(item);
+
     });
+
   }
 
 
-  form.addEventListener(
+  softwareForm.addEventListener(
     "submit",
     async (event) => {
 
@@ -680,7 +818,7 @@
           result.error
         );
 
-        showMessage(
+        showSoftwareMessage(
           result.error.message,
           false
         );
@@ -697,27 +835,505 @@
       }
 
 
-      showMessage(
+      showSoftwareMessage(
         editingId === null
           ? "Software added successfully."
           : "Software updated successfully."
       );
 
 
-      clearForm();
+      clearSoftwareForm();
 
-      loadSoftware();
+      await loadSoftware();
 
       saveBtn.disabled =
         false;
+
     }
   );
 
 
   cancelBtn.addEventListener(
     "click",
-    clearForm
+    clearSoftwareForm
   );
+
+
+  /* =========================
+     ARTICLES
+  ========================= */
+
+  let editingArticleId = null;
+
+
+  const articleForm =
+    document.getElementById("article-form");
+
+  const articleTitleInput =
+    document.getElementById("article-title");
+
+  const articleDescriptionInput =
+    document.getElementById(
+      "article-description"
+    );
+
+  const articleContentInput =
+    document.getElementById(
+      "article-content"
+    );
+
+  const articleCategoryInput =
+    document.getElementById(
+      "article-category"
+    );
+
+  const articleImageInput =
+    document.getElementById(
+      "article-image"
+    );
+
+  const articlePublishedInput =
+    document.getElementById(
+      "article-published"
+    );
+
+  const articleSaveBtn =
+    document.getElementById(
+      "article-save-btn"
+    );
+
+  const articleCancelBtn =
+    document.getElementById(
+      "article-cancel-btn"
+    );
+
+  const articleFormTitle =
+    document.getElementById(
+      "article-form-title"
+    );
+
+  const articlesList =
+    document.getElementById(
+      "articles-list"
+    );
+
+  const articleMessage =
+    document.getElementById(
+      "article-message"
+    );
+
+
+  function showArticleMessage(
+    text,
+    success = true
+  ) {
+
+    articleMessage.textContent =
+      text;
+
+    articleMessage.style.color =
+      success ? "green" : "red";
+  }
+
+
+  function clearArticleForm() {
+
+    articleForm.reset();
+
+    articlePublishedInput.checked =
+      true;
+
+    editingArticleId = null;
+
+    articleFormTitle.textContent =
+      "Add Article";
+
+    articleSaveBtn.textContent =
+      "Add Article";
+
+    articleCancelBtn.style.display =
+      "none";
+  }
+
+
+  async function loadArticles() {
+
+    articlesList.textContent =
+      "Loading...";
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("articles")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
+
+    if (error) {
+
+      console.error(error);
+
+      articlesList.textContent =
+        "Error loading articles.";
+
+      return;
+    }
+
+
+    articlesList.innerHTML = "";
+
+
+    if (!data || data.length === 0) {
+
+      articlesList.textContent =
+        "No articles added yet.";
+
+      return;
+    }
+
+
+    data.forEach((article) => {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "article-item";
+
+
+      const title =
+        document.createElement("h3");
+
+      title.textContent =
+        article.title || "";
+
+
+      const category =
+        document.createElement("div");
+
+      category.className =
+        "category";
+
+      category.textContent =
+        article.category ||
+        "Article";
+
+
+      const badge =
+        document.createElement("div");
+
+
+      if (article.is_published) {
+
+        badge.className =
+          "published-badge";
+
+        badge.textContent =
+          "🟢 Published";
+
+      } else {
+
+        badge.className =
+          "draft-badge";
+
+        badge.textContent =
+          "📝 Draft";
+      }
+
+
+      const description =
+        document.createElement("p");
+
+      description.textContent =
+        article.description || "";
+
+
+      const preview =
+        document.createElement("div");
+
+      preview.className =
+        "article-preview";
+
+      preview.textContent =
+        article.content || "";
+
+
+      const editButton =
+        document.createElement("button");
+
+      editButton.type =
+        "button";
+
+      editButton.textContent =
+        "Edit";
+
+      editButton.className =
+        "edit-btn";
+
+
+      editButton.onclick = () => {
+
+        editingArticleId =
+          article.id;
+
+
+        articleTitleInput.value =
+          article.title || "";
+
+        articleDescriptionInput.value =
+          article.description || "";
+
+        articleContentInput.value =
+          article.content || "";
+
+        articleCategoryInput.value =
+          article.category || "";
+
+        articleImageInput.value =
+          article.image_url || "";
+
+        articlePublishedInput.checked =
+          article.is_published === true;
+
+
+        articleFormTitle.textContent =
+          "Edit Article";
+
+        articleSaveBtn.textContent =
+          "Update Article";
+
+        articleCancelBtn.style.display =
+          "inline-block";
+
+
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth"
+        });
+
+      };
+
+
+      const deleteButton =
+        document.createElement("button");
+
+      deleteButton.type =
+        "button";
+
+      deleteButton.textContent =
+        "Delete";
+
+      deleteButton.className =
+        "delete-btn";
+
+
+      deleteButton.onclick =
+        async () => {
+
+          const confirmed =
+            confirm(
+              "Delete " +
+              (article.title ||
+                "this article") +
+              "?"
+            );
+
+
+          if (!confirmed) {
+            return;
+          }
+
+
+          deleteButton.disabled =
+            true;
+
+          deleteButton.textContent =
+            "Deleting...";
+
+
+          const {
+            error
+          } = await supabaseClient
+            .from("articles")
+            .delete()
+            .eq("id", article.id);
+
+
+          if (error) {
+
+            console.error(error);
+
+            showArticleMessage(
+              error.message ||
+              "Delete failed.",
+              false
+            );
+
+            deleteButton.disabled =
+              false;
+
+            deleteButton.textContent =
+              "Delete";
+
+            return;
+          }
+
+
+          showArticleMessage(
+            "Article deleted."
+          );
+
+          loadArticles();
+
+        };
+
+
+      item.appendChild(title);
+      item.appendChild(category);
+      item.appendChild(badge);
+      item.appendChild(description);
+      item.appendChild(preview);
+      item.appendChild(editButton);
+      item.appendChild(deleteButton);
+
+
+      articlesList.appendChild(item);
+
+    });
+
+  }
+
+
+  articleForm.addEventListener(
+    "submit",
+    async (event) => {
+
+      event.preventDefault();
+
+
+      const articleData = {
+
+        title:
+          articleTitleInput.value.trim(),
+
+        description:
+          articleDescriptionInput.value.trim(),
+
+        content:
+          articleContentInput.value.trim(),
+
+        category:
+          articleCategoryInput.value.trim(),
+
+        image_url:
+          articleImageInput.value.trim(),
+
+        is_published:
+          articlePublishedInput.checked
+
+      };
+
+
+      articleSaveBtn.disabled =
+        true;
+
+      articleSaveBtn.textContent =
+        editingArticleId === null
+          ? "Adding..."
+          : "Updating...";
+
+
+      let result;
+
+
+      if (editingArticleId === null) {
+
+        result =
+          await supabaseClient
+            .from("articles")
+            .insert([
+              articleData
+            ]);
+
+      } else {
+
+        result =
+          await supabaseClient
+            .from("articles")
+            .update(
+              articleData
+            )
+            .eq(
+              "id",
+              editingArticleId
+            );
+      }
+
+
+      if (result.error) {
+
+        console.error(
+          result.error
+        );
+
+        showArticleMessage(
+          result.error.message,
+          false
+        );
+
+        articleSaveBtn.disabled =
+          false;
+
+        articleSaveBtn.textContent =
+          editingArticleId === null
+            ? "Add Article"
+            : "Update Article";
+
+        return;
+      }
+
+
+      showArticleMessage(
+        editingArticleId === null
+          ? "Article added successfully."
+          : "Article updated successfully."
+      );
+
+
+      clearArticleForm();
+
+      await loadArticles();
+
+      articleSaveBtn.disabled =
+        false;
+
+    }
+  );
+
+
+  articleCancelBtn.addEventListener(
+    "click",
+    clearArticleForm
+  );
+
+
+  /* =========================
+     LOGOUT
+  ========================= */
+
+  const authStatus =
+    document.getElementById(
+      "auth-status"
+    );
+
+  const logoutBtn =
+    document.getElementById(
+      "logout-btn"
+    );
 
 
   logoutBtn.addEventListener(
@@ -734,14 +1350,15 @@
       const {
         error
       } =
-        await supabaseClient.auth.signOut();
+        await supabaseClient
+          .auth.signOut();
 
 
       if (error) {
 
         console.error(error);
 
-        showMessage(
+        showArticleMessage(
           error.message ||
           "Logout failed.",
           false
@@ -762,6 +1379,10 @@
     }
   );
 
+
+  /* =========================
+     AUTH
+  ========================= */
 
   async function checkAuth() {
 
@@ -785,15 +1406,20 @@
 
     authStatus.textContent =
       "Logged in as " +
-      (session.user.email ||
-        "Administrator");
+      (
+        session.user.email ||
+        "Administrator"
+      );
 
 
     await loadSoftware();
+    await loadArticles();
+
   }
 
 
   checkAuth();
+
 </script>
 
 </body>
