@@ -223,6 +223,26 @@
       margin-bottom: 12px;
     }
 
+    /* USERS */
+
+    .user-item {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: white;
+    }
+
+    .user-item strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .user-date {
+      color: #666;
+      font-size: 13px;
+    }
+
     @media (max-width: 600px) {
       body {
         padding: 15px;
@@ -449,6 +469,20 @@
 <h2>Articles List</h2>
 
 <div id="articles-list">
+  Loading...
+</div>
+```
+
+  </div>
+
+  <!-- USERS -->
+
+  <div class="box">
+
+```
+<h2>👥 Users</h2>
+
+<div id="users-list">
   Loading...
 </div>
 ```
@@ -1505,6 +1539,101 @@
 
 
   /* =========================
+     USERS
+  ========================= */
+
+  const usersList =
+    document.getElementById(
+      "users-list"
+    );
+
+
+  async function loadUsers() {
+
+    usersList.textContent =
+      "Loading...";
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("profiles")
+      .select(
+        "id, email, created_at"
+      )
+      .order("created_at", {
+        ascending: false
+      });
+
+
+    if (error) {
+
+      console.error(
+        "Users loading error:",
+        error
+      );
+
+      usersList.textContent =
+        "Error loading users.";
+
+      return;
+    }
+
+
+    usersList.innerHTML = "";
+
+
+    if (!data || data.length === 0) {
+
+      usersList.textContent =
+        "No users found.";
+
+      return;
+    }
+
+
+    data.forEach((user) => {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "user-item";
+
+
+      const email =
+        document.createElement("strong");
+
+      email.textContent =
+        user.email ||
+        "Unknown";
+
+
+      const date =
+        document.createElement("div");
+
+      date.className =
+        "user-date";
+
+      date.textContent =
+        "Registered: " +
+        new Date(
+          user.created_at
+        ).toLocaleString();
+
+
+      item.appendChild(email);
+      item.appendChild(date);
+
+      usersList.appendChild(item);
+
+    });
+
+  }
+
+
+  /* =========================
      LOGOUT
   ========================= */
 
@@ -1598,6 +1727,7 @@
     await loadSoftware();
     await loadArticles();
     await loadTotalArticleViews();
+    await loadUsers();
 
   }
 
