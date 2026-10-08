@@ -131,7 +131,7 @@
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 18px;
       margin-bottom: 30px;
     }
@@ -233,7 +233,8 @@
 
     .software-item,
     .article-item,
-    .user-item {
+    .user-item,
+    .download-item {
       border: 1px solid #e5e7eb;
       padding: 18px;
       border-radius: 10px;
@@ -242,7 +243,8 @@
     }
 
     .software-item h3,
-    .article-item h3 {
+    .article-item h3,
+    .download-item h3 {
       margin-top: 0;
       margin-bottom: 8px;
     }
@@ -258,6 +260,12 @@
       font-size: 14px;
       margin-bottom: 10px;
       font-weight: bold;
+    }
+
+    .download-meta {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .premium-badge,
@@ -331,6 +339,17 @@
       font-size: 13px;
     }
 
+    .empty-message {
+      color: #6b7280;
+      padding: 10px 0;
+    }
+
+    @media (max-width: 1100px) {
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
     @media (max-width: 900px) {
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -394,7 +413,7 @@
 
   <div class="sidebar-title">Dashboard</div>
 
-<a href="#dashboard" class="nav-link">🏠 Dashboard</a> <a href="#users" class="nav-link">👥 Users</a> <a href="#software" class="nav-link">💻 Software</a> <a href="#articles" class="nav-link">📝 Articles</a> <a href="#views" class="nav-link">👁️ Views</a>
+<a href="#dashboard" class="nav-link">🏠 Dashboard</a> <a href="#users" class="nav-link">👥 Users</a> <a href="#software" class="nav-link">💻 Software</a> <a href="#articles" class="nav-link">📝 Articles</a> <a href="#views" class="nav-link">👁️ Views</a> <a href="#downloads" class="nav-link">📥 Downloads</a>
 
   <div class="sidebar-title">Website</div>
 
@@ -473,6 +492,16 @@ Logout
       </div>
 
       <div id="total-article-views" class="stats-number">
+        Loading...
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">
+        📥 Total Downloads
+      </div>
+
+      <div id="total-downloads" class="stats-number">
         Loading...
       </div>
     </div>
@@ -684,6 +713,20 @@ Logout
   </div>
 
 </section>
+
+<section id="downloads">
+
+  <div class="box">
+
+    <h2>📥 Download History</h2>
+
+    <div id="downloads-list">
+      Loading...
+    </div>
+
+  </div>
+
+</section>
 ```
 
   </div>
@@ -719,9 +762,19 @@ Logout
       "total-article-views"
     );
 
+  const totalDownloads =
+    document.getElementById(
+      "total-downloads"
+    );
+
   const viewsTotalDisplay =
     document.getElementById(
       "views-total-display"
+    );
+
+  const downloadsList =
+    document.getElementById(
+      "downloads-list"
     );
 
 
@@ -772,6 +825,32 @@ Logout
     } else {
       totalArticles.textContent =
         articlesResult.count || 0;
+    }
+
+
+    const downloadsResult =
+      await supabaseClient
+        .from("download_logs")
+        .select("id", {
+          count: "exact",
+          head: true
+        });
+
+    if (downloadsResult.error) {
+
+      console.error(
+        "Downloads count error:",
+        downloadsResult.error
+      );
+
+      totalDownloads.textContent =
+        "0";
+
+    } else {
+
+      totalDownloads.textContent =
+        downloadsResult.count || 0;
+
     }
 
   }
@@ -855,6 +934,209 @@ Logout
           ? " View"
           : " Views"
       );
+
+  }
+
+
+  async function loadDownloadHistory() {
+
+    downloadsList.textContent =
+      "Loading...";
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("download_logs")
+        .select(
+          "id, software_id, user_id, created_at"
+        )
+        .order("created_at", {
+          ascending: false
+        });
+
+
+    if (error) {
+
+      console.error(
+        "Download history error:",
+        error
+      );
+
+      downloadsList.textContent =
+        "Error loading download history.";
+
+      return;
+    }
+
+
+    downloadsList.innerHTML = "";
+
+
+    if (!data || data.length === 0) {
+
+      downloadsList.innerHTML =
+        '<div class="empty-message">No downloads recorded yet.</div>';
+
+      return;
+    }
+
+
+    const softwareIds = [
+      ...new Set(
+        data
+          .map((log) => log.software_id)
+          .filter(Boolean)
+      )
+    ];
+
+
+    const userIds = [
+      ...new Set(
+        data
+          .map((log) => log.user_id)
+          .filter(Boolean)
+      )
+    ];
+
+
+    let softwareMap = {};
+    let userMap = {};
+
+
+    if (softwareIds.length > 0) {
+
+      const {
+        data: softwareData,
+        error: softwareError
+      } =
+        await supabaseClient
+          .from("software")
+          .select("id, title")
+          .in(
+            "id",
+            softwareIds
+          );
+
+
+      if (!softwareError && softwareData) {
+
+        softwareData.forEach((software) => {
+
+          softwareMap[
+            String(software.id)
+          ] =
+            software.title ||
+            "Unknown software";
+
+        });
+
+      }
+
+    }
+
+
+    if (userIds.length > 0) {
+
+      const {
+        data: usersData,
+        error: usersError
+      } =
+        await supabaseClient
+          .from("profiles")
+          .select("id, email")
+          .in(
+            "id",
+            userIds
+          );
+
+
+      if (!usersError && usersData) {
+
+        usersData.forEach((user) => {
+
+          userMap[
+            String(user.id)
+          ] =
+            user.email ||
+            "Unknown user";
+
+        });
+
+      }
+
+    }
+
+
+    data.forEach((log) => {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "download-item";
+
+
+      const title =
+        document.createElement("h3");
+
+      title.textContent =
+        softwareMap[
+          String(log.software_id)
+        ] ||
+        "Unknown software";
+
+
+      const meta =
+        document.createElement("div");
+
+      meta.className =
+        "download-meta";
+
+
+      const userEmail =
+        userMap[
+          String(log.user_id)
+        ] ||
+        "Unknown user";
+
+
+      const downloadDate =
+        log.created_at
+          ? new Date(
+              log.created_at
+            ).toLocaleString()
+          : "Unknown date";
+
+
+      meta.innerHTML =
+        "👤 " +
+        escapeHtml(userEmail) +
+        "<br>" +
+        "🕒 " +
+        escapeHtml(downloadDate);
+
+
+      item.appendChild(title);
+      item.appendChild(meta);
+
+      downloadsList.appendChild(item);
+
+    });
+
+  }
+
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
 
   }
 
@@ -1173,6 +1455,7 @@ Logout
 
           await loadSoftware();
           await loadDashboardStats();
+          await loadDownloadHistory();
 
         };
 
@@ -1961,7 +2244,6 @@ Logout
         .auth.getSession();
 
 
-    /* No login */
     if (!session) {
 
       window.location.href =
@@ -1971,7 +2253,6 @@ Logout
     }
 
 
-    /* Check Admin role */
     const {
       data: isAdmin,
       error
@@ -1981,7 +2262,6 @@ Logout
       );
 
 
-    /* Not Admin or verification error */
     if (error || !isAdmin) {
 
       console.error(
@@ -2002,7 +2282,6 @@ Logout
     }
 
 
-    /* Admin verified */
     authStatus.textContent =
       "Logged in as " +
       (
@@ -2016,6 +2295,7 @@ Logout
     await loadArticles();
     await loadTotalArticleViews();
     await loadUsers();
+    await loadDownloadHistory();
 
   }
 
