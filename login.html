@@ -413,6 +413,7 @@
   const loginButton = document.getElementById("login-button");
   const loginMessage = document.getElementById("login-message");
   const forgotPassword = document.getElementById("forgot-password");
+
   loginForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -423,7 +424,7 @@
     loginButton.disabled = true;
     loginButton.textContent = "Logging in...";
 
-    const { data, error } =
+    const { error } =
       await supabaseClient.auth.signInWithPassword({
         email: email,
         password: password
@@ -445,8 +446,44 @@
       window.location.href = "software.html";
     }, 500);
   });
+
+  forgotPassword.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+
+    if (!email) {
+      loginMessage.style.color = "#d32f2f";
+      loginMessage.textContent =
+        "Enter your email address first.";
+      return;
+    }
+
+    loginMessage.style.color = "#333";
+    loginMessage.textContent =
+      "Sending password reset email...";
+
+    const { error } =
+      await supabaseClient.auth.resetPasswordForEmail(
+        email,
+        {
+          redirectTo:
+            "https://tabfat00-gif.github.io/my-website/login.html"
+        }
+      );
+
+    if (error) {
+      loginMessage.style.color = "#d32f2f";
+      loginMessage.textContent = error.message;
+      return;
+    }
+
+    loginMessage.style.color = "#2e7d32";
+    loginMessage.textContent =
+      "Password reset email sent. Check your email.";
+  });
 </script>
-```
+
 
   </body>
 </html>
