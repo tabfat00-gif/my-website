@@ -20,15 +20,90 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      background: #f4f6f8;
       margin: 0;
+      color: #1f2937;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 240px;
+      height: 100vh;
+      background: #111827;
+      color: white;
+      padding: 25px 18px;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 35px;
+      padding: 0 10px;
+    }
+
+    .brand span {
+      color: #60a5fa;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      margin: 20px 10px 8px;
+    }
+
+    .nav-link {
+      display: block;
+      color: #d1d5db;
+      text-decoration: none;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      background: #1f2937;
+      color: white;
+    }
+
+    .logout-side {
+      width: 100%;
+      margin-top: 20px;
+      background: #dc3545;
+      color: white;
+      border: 0;
+      padding: 11px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main {
+      margin-left: 240px;
       padding: 30px;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1250px;
       margin: auto;
     }
 
@@ -37,49 +112,97 @@
       justify-content: space-between;
       align-items: center;
       gap: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       flex-wrap: wrap;
     }
 
     h1 {
-      margin: 0;
+      margin: 0 0 6px;
+      font-size: 30px;
     }
 
-    .home-btn,
-    .logout-btn {
+    #auth-status {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .home-btn {
+      background: #111827;
+      color: white;
       border: 0;
-      padding: 10px 16px;
-      border-radius: 6px;
+      padding: 11px 17px;
+      border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
     }
 
-    .home-btn {
-      background: #111;
-      color: white;
+    /* =========================
+       DASHBOARD CARDS
+    ========================= */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
     }
 
-    .logout-btn {
-      background: #dc3545;
-      color: white;
+    .stat-card {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
     }
+
+    .stat-label {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .stats-number {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    /* =========================
+       BOXES
+    ========================= */
 
     .box {
       background: white;
       padding: 25px;
-      border-radius: 12px;
+      border-radius: 14px;
       margin-bottom: 25px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+      scroll-margin-top: 20px;
     }
+
+    .box h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       FORMS
+    ========================= */
 
     input,
     textarea {
       width: 100%;
       padding: 12px;
       margin: 8px 0 15px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #2d7ff9;
     }
 
     textarea {
@@ -94,9 +217,10 @@
     button {
       border: 0;
       padding: 10px 16px;
-      border-radius: 6px;
+      border-radius: 7px;
       cursor: pointer;
       margin-right: 6px;
+      font-family: inherit;
     }
 
     button:disabled {
@@ -105,12 +229,13 @@
     }
 
     .save-btn {
-      background: #111;
+      background: #111827;
       color: white;
     }
 
     .cancel-btn {
-      background: #ddd;
+      background: #e5e7eb;
+      color: #111827;
     }
 
     .edit-btn {
@@ -123,13 +248,18 @@
       color: white;
     }
 
+    /* =========================
+       LIST ITEMS
+    ========================= */
+
     .software-item,
-    .article-item {
-      border: 1px solid #ddd;
+    .article-item,
+    .user-item {
+      border: 1px solid #e5e7eb;
       padding: 18px;
       border-radius: 10px;
       margin-bottom: 15px;
-      background: white;
+      background: #fff;
     }
 
     .software-item h3,
@@ -139,7 +269,7 @@
     }
 
     .category {
-      color: #666;
+      color: #6b7280;
       font-size: 14px;
       margin-bottom: 8px;
     }
@@ -149,12 +279,6 @@
       font-size: 14px;
       margin-bottom: 10px;
       font-weight: bold;
-    }
-
-    .stats-number {
-      font-size: 28px;
-      font-weight: bold;
-      margin-top: 8px;
     }
 
     .premium-badge,
@@ -210,27 +334,12 @@
       min-height: 20px;
     }
 
-    #auth-status {
-      color: #666;
-      font-size: 14px;
-    }
-
     .article-preview {
       color: #555;
       white-space: pre-line;
       max-height: 120px;
       overflow: hidden;
       margin-bottom: 12px;
-    }
-
-    /* USERS */
-
-    .user-item {
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: white;
     }
 
     .user-item strong {
@@ -243,17 +352,57 @@
       font-size: 13px;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 15px;
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 18px;
+      }
+
+      .brand {
+        margin-bottom: 15px;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 18px;
+      }
+
+      .sidebar-title {
+        display: none;
+      }
+
+      .nav-link {
+        display: inline-block;
+        margin-right: 4px;
+      }
+
+      .logout-side {
+        width: auto;
+        margin-top: 5px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 25px;
       }
 
       .box {
         padding: 18px;
-      }
-
-      .top-bar {
-        align-items: flex-start;
       }
     }
   </style>
@@ -262,234 +411,346 @@
 
 <body>
 
-<div class="container">
+<!-- =========================
+     SIDEBAR
+========================= -->
 
-  <div class="top-bar">
-    <div>
-      <h1>KaliMoh Admin Panel</h1>
-      <div id="auth-status"></div>
+<aside class="sidebar">
+
+  <div class="brand">
+    Kali<span>Moh</span>
+  </div>
+
+  <div class="sidebar-title">Dashboard</div>
+
+<a href="#dashboard" class="nav-link">🏠 Dashboard</a> <a href="#users" class="nav-link">👥 Users</a> <a href="#software" class="nav-link">💻 Software</a> <a href="#articles" class="nav-link">📝 Articles</a> <a href="#views" class="nav-link">👁️ Views</a>
+
+  <div class="sidebar-title">Website</div>
+
+<a href="index.html" class="nav-link">🌐 View Site</a>
+
+<button
+type="button"
+class="logout-side"
+id="logout-btn"
+
+>
+
+```
+Logout
+```
+
+  </button>
+
+</aside>
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+  <div class="container">
+
+```
+<div class="top-bar">
+
+  <div>
+    <h1>KaliMoh Admin Panel</h1>
+    <div id="auth-status"></div>
+  </div>
+
+  <a href="index.html" class="home-btn">
+    View Site
+  </a>
+
+</div>
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section id="dashboard">
+
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-label">
+        👥 Total Users
+      </div>
+
+      <div
+        id="total-users"
+        class="stats-number"
+      >
+        Loading...
+      </div>
     </div>
 
-```
-<div>
-  <a href="index.html" class="home-btn">View Site</a>
+    <div class="stat-card">
+      <div class="stat-label">
+        💻 Software
+      </div>
 
-  <button
-    type="button"
-    class="logout-btn"
-    id="logout-btn"
-  >
-    Logout
-  </button>
-</div>
-```
+      <div
+        id="total-software"
+        class="stats-number"
+      >
+        Loading...
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">
+        📝 Articles
+      </div>
+
+      <div
+        id="total-articles"
+        class="stats-number"
+      >
+        Loading...
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">
+        👁️ Article Views
+      </div>
+
+      <div
+        id="total-article-views"
+        class="stats-number"
+      >
+        Loading...
+      </div>
+    </div>
 
   </div>
 
-  <!-- ARTICLE STATS -->
+</section>
+
+<!-- =========================
+     SOFTWARE
+========================= -->
+
+<section id="software">
 
   <div class="box">
 
-```
-<h2>Article Views</h2>
+    <h2 id="form-title">
+      Add Software
+    </h2>
 
-<div
-  id="total-article-views"
-  class="stats-number"
->
-  Loading...
-</div>
-```
+    <form id="software-form">
+
+      <input
+        type="text"
+        id="title"
+        placeholder="Software title"
+        required
+      >
+
+      <textarea
+        id="description"
+        placeholder="Description"
+      ></textarea>
+
+      <input
+        type="url"
+        id="download_url"
+        placeholder="Download URL"
+      >
+
+      <input
+        type="text"
+        id="category"
+        placeholder="Category"
+      >
+
+      <input
+        type="url"
+        id="image_url"
+        placeholder="Image URL"
+      >
+
+      <label class="premium-option">
+        <input
+          type="checkbox"
+          id="is_premium"
+        >
+        Premium Software 🔒
+      </label>
+
+      <button
+        type="submit"
+        class="save-btn"
+        id="save-btn"
+      >
+        Add Software
+      </button>
+
+      <button
+        type="button"
+        class="cancel-btn"
+        id="cancel-btn"
+        style="display: none;"
+      >
+        Cancel Edit
+      </button>
+
+    </form>
+
+    <div id="software-message"></div>
 
   </div>
 
-  <!-- SOFTWARE -->
+  <div class="box">
+
+    <h2>Software List</h2>
+
+    <div id="software-list">
+      Loading...
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     ARTICLES
+========================= -->
+
+<section id="articles">
 
   <div class="box">
 
-```
-<h2 id="form-title">Add Software</h2>
+    <h2 id="article-form-title">
+      Add Article
+    </h2>
 
-<form id="software-form">
+    <form id="article-form">
 
-  <input
-    type="text"
-    id="title"
-    placeholder="Software title"
-    required
-  >
+      <input
+        type="text"
+        id="article-title"
+        placeholder="Article title"
+        required
+      >
 
-  <textarea
-    id="description"
-    placeholder="Description"
-  ></textarea>
+      <textarea
+        id="article-description"
+        placeholder="Short description"
+      ></textarea>
 
-  <input
-    type="url"
-    id="download_url"
-    placeholder="Download URL"
-  >
+      <textarea
+        id="article-content"
+        placeholder="Article content"
+        required
+      ></textarea>
 
-  <input
-    type="text"
-    id="category"
-    placeholder="Category"
-  >
+      <input
+        type="text"
+        id="article-category"
+        placeholder="Category"
+      >
 
-  <input
-    type="url"
-    id="image_url"
-    placeholder="Image URL"
-  >
+      <input
+        type="url"
+        id="article-image"
+        placeholder="Image URL"
+      >
 
-  <label class="premium-option">
-    <input
-      type="checkbox"
-      id="is_premium"
+      <label class="published-option">
+
+        <input
+          type="checkbox"
+          id="article-published"
+          checked
+        >
+
+        Published
+
+      </label>
+
+      <button
+        type="submit"
+        class="save-btn"
+        id="article-save-btn"
+      >
+        Add Article
+      </button>
+
+      <button
+        type="button"
+        class="cancel-btn"
+        id="article-cancel-btn"
+        style="display: none;"
+      >
+        Cancel Edit
+      </button>
+
+    </form>
+
+    <div id="article-message"></div>
+
+  </div>
+
+  <div class="box">
+
+    <h2>Articles List</h2>
+
+    <div id="articles-list">
+      Loading...
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     USERS
+========================= -->
+
+<section id="users">
+
+  <div class="box">
+
+    <h2>👥 Users</h2>
+
+    <div id="users-list">
+      Loading...
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     VIEWS
+========================= -->
+
+<section id="views">
+
+  <div class="box">
+
+    <h2>👁️ Article Views</h2>
+
+    <div
+      id="views-total-display"
+      class="stats-number"
     >
-    Premium Software 🔒
-  </label>
+      Loading...
+    </div>
 
-  <button
-    type="submit"
-    class="save-btn"
-    id="save-btn"
-  >
-    Add Software
-  </button>
+  </div>
 
-  <button
-    type="button"
-    class="cancel-btn"
-    id="cancel-btn"
-    style="display: none;"
-  >
-    Cancel Edit
-  </button>
-
-</form>
-
-<div id="software-message"></div>
+</section>
 ```
 
   </div>
 
-  <div class="box">
-
-```
-<h2>Software List</h2>
-
-<div id="software-list">
-  Loading...
-</div>
-```
-
-  </div>
-
-  <!-- ARTICLES -->
-
-  <div class="box">
-
-```
-<h2 id="article-form-title">
-  Add Article
-</h2>
-
-<form id="article-form">
-
-  <input
-    type="text"
-    id="article-title"
-    placeholder="Article title"
-    required
-  >
-
-  <textarea
-    id="article-description"
-    placeholder="Short description"
-  ></textarea>
-
-  <textarea
-    id="article-content"
-    placeholder="Article content"
-    required
-  ></textarea>
-
-  <input
-    type="text"
-    id="article-category"
-    placeholder="Category"
-  >
-
-  <input
-    type="url"
-    id="article-image"
-    placeholder="Image URL"
-  >
-
-  <label class="published-option">
-
-    <input
-      type="checkbox"
-      id="article-published"
-      checked
-    >
-
-    Published
-
-  </label>
-
-  <button
-    type="submit"
-    class="save-btn"
-    id="article-save-btn"
-  >
-    Add Article
-  </button>
-
-  <button
-    type="button"
-    class="cancel-btn"
-    id="article-cancel-btn"
-    style="display: none;"
-  >
-    Cancel Edit
-  </button>
-
-</form>
-
-<div id="article-message"></div>
-```
-
-  </div>
-
-  <div class="box">
-
-```
-<h2>Articles List</h2>
-
-<div id="articles-list">
-  Loading...
-</div>
-```
-
-  </div>
-
-  <!-- USERS -->
-
-  <div class="box">
-
-```
-<h2>👥 Users</h2>
-
-<div id="users-list">
-  Loading...
-</div>
-```
-
-  </div>
-
-</div>
+</main>
 
 <script>
 
@@ -499,7 +760,6 @@
   const SUPABASE_KEY =
     "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-
   const supabaseClient =
     window.supabase.createClient(
       SUPABASE_URL,
@@ -508,14 +768,84 @@
 
 
   /* =========================
-     ARTICLE VIEW STATS
+     DASHBOARD STATS
   ========================= */
+
+  const totalUsers =
+    document.getElementById("total-users");
+
+  const totalSoftware =
+    document.getElementById("total-software");
+
+  const totalArticles =
+    document.getElementById("total-articles");
 
   const totalArticleViews =
     document.getElementById(
       "total-article-views"
     );
 
+  const viewsTotalDisplay =
+    document.getElementById(
+      "views-total-display"
+    );
+
+
+  async function loadDashboardStats() {
+
+    const usersResult =
+      await supabaseClient
+        .from("profiles")
+        .select("id", {
+          count: "exact",
+          head: true
+        });
+
+    if (usersResult.error) {
+      totalUsers.textContent = "0";
+    } else {
+      totalUsers.textContent =
+        usersResult.count || 0;
+    }
+
+
+    const softwareResult =
+      await supabaseClient
+        .from("software")
+        .select("id", {
+          count: "exact",
+          head: true
+        });
+
+    if (softwareResult.error) {
+      totalSoftware.textContent = "0";
+    } else {
+      totalSoftware.textContent =
+        softwareResult.count || 0;
+    }
+
+
+    const articlesResult =
+      await supabaseClient
+        .from("articles")
+        .select("id", {
+          count: "exact",
+          head: true
+        });
+
+    if (articlesResult.error) {
+      totalArticles.textContent = "0";
+    } else {
+      totalArticles.textContent =
+        articlesResult.count || 0;
+    }
+
+  }
+
+
+  /* =========================
+     ARTICLE VIEW STATS
+  ========================= */
 
   async function getArticleViewCount(
     articleId
@@ -531,7 +861,6 @@
       }
     );
 
-
     if (error) {
 
       console.error(
@@ -542,7 +871,6 @@
       return 0;
     }
 
-
     return Number(data || 0);
 
   }
@@ -551,6 +879,9 @@
   async function loadTotalArticleViews() {
 
     totalArticleViews.textContent =
+      "Loading...";
+
+    viewsTotalDisplay.textContent =
       "Loading...";
 
 
@@ -570,6 +901,9 @@
       console.error(error);
 
       totalArticleViews.textContent =
+        "0";
+
+      viewsTotalDisplay.textContent =
         "Unable to load views.";
 
       return;
@@ -581,6 +915,9 @@
 
 
     totalArticleViews.textContent =
+      total;
+
+    viewsTotalDisplay.textContent =
       "👁 " +
       total +
       (
@@ -597,7 +934,6 @@
   ========================= */
 
   let editingId = null;
-
 
   const softwareForm =
     document.getElementById(
@@ -909,7 +1245,9 @@
             "Software deleted."
           );
 
-          loadSoftware();
+          await loadSoftware();
+          await loadDashboardStats();
+
         };
 
 
@@ -1026,6 +1364,7 @@
       clearSoftwareForm();
 
       await loadSoftware();
+      await loadDashboardStats();
 
       saveBtn.disabled =
         false;
@@ -1045,7 +1384,6 @@
   ========================= */
 
   let editingArticleId = null;
-
 
   const articleForm =
     document.getElementById(
@@ -1387,6 +1725,7 @@
 
           await loadArticles();
           await loadTotalArticleViews();
+          await loadDashboardStats();
 
         };
 
@@ -1524,6 +1863,7 @@
 
       await loadArticles();
       await loadTotalArticleViews();
+      await loadDashboardStats();
 
       articleSaveBtn.disabled =
         false;
@@ -1724,6 +2064,7 @@
       );
 
 
+    await loadDashboardStats();
     await loadSoftware();
     await loadArticles();
     await loadTotalArticleViews();
