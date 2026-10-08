@@ -23,7 +23,7 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       color: #1f2937;
-      background: #ffffff;
+      background: #fff;
       line-height: 1.6;
     }
 
@@ -138,7 +138,7 @@
       padding: 90px 0 70px;
       background:
         radial-gradient(circle at top right, rgba(48,86,211,.13), transparent 35%),
-        linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+        linear-gradient(180deg, #f8faff 0%, #fff 100%);
     }
 
     .hero-grid {
@@ -170,7 +170,8 @@
       color: #3056d3;
     }
 
-    .hero p {
+    .hero > .container > div > p,
+    .hero-text p {
       color: #6b7280;
       font-size: 18px;
       max-width: 600px;
@@ -183,42 +184,47 @@
       flex-wrap: wrap;
     }
 
+    /* HERO VISUAL */
     .hero-visual {
-      min-height: 360px;
+      min-height: 390px;
       border-radius: 28px;
       background:
-        radial-gradient(circle at 25% 25%, rgba(255,255,255,.25), transparent 25%),
-        linear-gradient(135deg, #14245a, #3056d3 55%, #7190ff);
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.22), transparent 25%),
+        linear-gradient(135deg, #111d48, #3056d3 55%, #7190ff);
       position: relative;
       overflow: hidden;
       box-shadow: 0 25px 60px rgba(48,86,211,.22);
-    }
-
-    .hero-visual::before,
-    .hero-visual::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero-visual::before {
+      content: "";
+      position: absolute;
       width: 280px;
       height: 280px;
-      top: -90px;
-      right: -60px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2);
+      top: -100px;
+      right: -50px;
     }
 
     .hero-visual::after {
-      width: 200px;
-      height: 200px;
-      bottom: -70px;
-      left: -50px;
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      bottom: -100px;
+      left: -70px;
     }
 
     .visual-content {
-      position: absolute;
-      inset: 0;
+      width: 100%;
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -228,26 +234,98 @@
       padding: 30px;
     }
 
-    .visual-icon {
-      width: 100px;
-      height: 100px;
-      border-radius: 25px;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.25);
+    .tech-screen {
+      width: 88%;
+      max-width: 430px;
+      height: 235px;
+      background: rgba(7,16,43,.82);
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 18px;
+      padding: 15px;
+      box-shadow: 0 22px 50px rgba(0,0,0,.28);
+      backdrop-filter: blur(8px);
+      margin-bottom: 22px;
+    }
+
+    .screen-top {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+
+    .screen-top span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.65);
+    }
+
+    .screen-body {
+      padding: 8px;
+    }
+
+    .code-line {
+      height: 7px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.25);
+      margin-bottom: 11px;
+    }
+
+    .code-line.long {
+      width: 88%;
+    }
+
+    .code-line.medium {
+      width: 68%;
+    }
+
+    .code-line.short {
+      width: 48%;
+    }
+
+    .screen-card {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .mini-icon {
+      width: 43px;
+      height: 43px;
+      border-radius: 11px;
+      background: #3056d3;
       display: grid;
       place-items: center;
-      font-size: 48px;
-      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .screen-card strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .screen-card small {
+      display: block;
+      color: rgba(255,255,255,.65);
+      font-size: 11px;
+      margin-top: 2px;
     }
 
     .visual-content h2 {
       font-size: 28px;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
     }
 
-    .visual-content p {
-      color: rgba(255,255,255,.8);
-      font-size: 15px;
+    .visual-content > p {
+      color: rgba(255,255,255,.75);
+      font-size: 14px;
     }
 
     /* SEARCH */
@@ -315,7 +393,6 @@
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 18px 40px rgba(15,23,42,.08);
-      border-color: #cbd5e1;
     }
 
     .card-icon {
@@ -465,11 +542,6 @@
       font-family: inherit;
     }
 
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: #3056d3;
-    }
-
     .contact-form textarea {
       min-height: 150px;
       resize: vertical;
@@ -513,10 +585,6 @@
       color: #9ca3af;
     }
 
-    .footer-links a:hover {
-      color: white;
-    }
-
     .copyright {
       border-top: 1px solid #374151;
       padding-top: 20px;
@@ -525,7 +593,7 @@
       text-align: center;
     }
 
-    /* BACK TO TOP */
+    /* TOP */
     .top {
       position: fixed;
       right: 20px;
@@ -538,11 +606,12 @@
       display: grid;
       place-items: center;
       font-size: 20px;
-      box-shadow: 0 10px 25px rgba(48,86,211,.3);
+      z-index: 100;
     }
 
     /* MOBILE */
     @media (max-width: 900px) {
+
       .nav-links {
         display: none;
       }
@@ -563,13 +632,10 @@
       .footer-grid {
         grid-template-columns: 1fr;
       }
-
-      .hero {
-        padding-top: 60px;
-      }
     }
 
     @media (max-width: 600px) {
+
       .nav-buttons .btn-outline {
         display: none;
       }
@@ -595,7 +661,11 @@
       }
 
       .hero-visual {
-        min-height: 300px;
+        min-height: 350px;
+      }
+
+      .tech-screen {
+        width: 94%;
       }
     }
   </style>
@@ -636,10 +706,14 @@
   <main id="home">
 
     <section class="hero">
+
       <div class="container hero-grid">
 
-        <div>
-          <span class="hero-badge">Welcome to KaliMoh</span>
+        <div class="hero-text">
+
+          <span class="hero-badge">
+            Welcome to KaliMoh
+          </span>
 
           <h1>
             Discover.<br>
@@ -652,6 +726,7 @@
           </p>
 
           <div class="hero-buttons">
+
             <a href="#categories" class="btn btn-primary">
               Explore Now
             </a>
@@ -659,16 +734,50 @@
             <a href="#about" class="btn btn-outline">
               Learn More
             </a>
+
           </div>
+
         </div>
 
 
-        <!-- NO EXTERNAL IMAGE -->
+        <!-- KALIMOH HERO DESIGN -->
+
         <div class="hero-visual">
+
           <div class="visual-content">
 
-            <div class="visual-icon">
-              🚀
+            <div class="tech-screen">
+
+              <div class="screen-top">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div class="screen-body">
+
+                <div class="code-line long"></div>
+                <div class="code-line medium"></div>
+                <div class="code-line short"></div>
+
+                <div class="screen-card">
+
+                  <div class="mini-icon">
+                    K
+                  </div>
+
+                  <div>
+                    <strong>KaliMoh</strong>
+
+                    <small>
+                      Discover • Learn • Explore
+                    </small>
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
 
             <h2>KaliMoh</h2>
@@ -678,14 +787,18 @@
             </p>
 
           </div>
+
         </div>
 
       </div>
+
     </section>
 
 
     <!-- SEARCH -->
+
     <div class="container search-section">
+
       <form class="search-box" id="searchForm">
 
         <input
@@ -700,21 +813,27 @@
         </button>
 
       </form>
+
     </div>
 
 
     <!-- FEATURES -->
+
     <section id="features">
 
       <div class="container">
 
         <div class="section-heading">
-          <h2>What You Can Discover</h2>
+
+          <h2>
+            What You Can Discover
+          </h2>
 
           <p>
             Explore different types of useful content made to help
             you learn and discover something new.
           </p>
+
         </div>
 
 
@@ -722,7 +841,11 @@
 
           <div class="card">
             <div class="card-icon">📚</div>
-            <h3>Useful Information</h3>
+
+            <h3>
+              Useful Information
+            </h3>
+
             <p>
               Find simple and useful information about different topics.
             </p>
@@ -731,7 +854,11 @@
 
           <div class="card">
             <div class="card-icon">💡</div>
-            <h3>Ideas & Tips</h3>
+
+            <h3>
+              Ideas & Tips
+            </h3>
+
             <p>
               Discover ideas, tips and practical guides.
             </p>
@@ -740,7 +867,11 @@
 
           <div class="card">
             <div class="card-icon">💻</div>
-            <h3>Technology</h3>
+
+            <h3>
+              Technology
+            </h3>
+
             <p>
               Learn about technology, software and digital tools.
             </p>
@@ -749,7 +880,11 @@
 
           <div class="card">
             <div class="card-icon">🌎</div>
-            <h3>Discover More</h3>
+
+            <h3>
+              Discover More
+            </h3>
+
             <p>
               Explore new topics and discover interesting content.
             </p>
@@ -763,16 +898,21 @@
 
 
     <!-- CATEGORIES -->
+
     <section id="categories" class="categories">
 
       <div class="container">
 
         <div class="section-heading">
-          <h2>Categories</h2>
+
+          <h2>
+            Categories
+          </h2>
 
           <p>
             Choose a category and start exploring.
           </p>
+
         </div>
 
 
@@ -780,16 +920,21 @@
 
           <div class="category">
 
-            <div class="category-icon">💻</div>
+            <div class="category-icon">
+              💻
+            </div>
 
-            <h3>Technology</h3>
+            <h3>
+              Technology
+            </h3>
 
             <p>
               Technology, computers, internet and digital tools.
             </p>
 
-            <a href="blog.html?category=technology"
-               class="btn btn-primary">
+            <a
+              href="blog.html?category=technology"
+              class="btn btn-primary">
               Explore
             </a>
 
@@ -798,16 +943,21 @@
 
           <div class="category">
 
-            <div class="category-icon">🛠️</div>
+            <div class="category-icon">
+              🛠️
+            </div>
 
-            <h3>Guides & Tips</h3>
+            <h3>
+              Guides & Tips
+            </h3>
 
             <p>
               Practical guides, tutorials and useful tips.
             </p>
 
-            <a href="blog.html?category=guides"
-               class="btn btn-primary">
+            <a
+              href="blog.html?category=guides"
+              class="btn btn-primary">
               Explore
             </a>
 
@@ -816,16 +966,21 @@
 
           <div class="category">
 
-            <div class="category-icon">🎮</div>
+            <div class="category-icon">
+              🎮
+            </div>
 
-            <h3>Entertainment</h3>
+            <h3>
+              Entertainment
+            </h3>
 
             <p>
               Interesting topics, entertainment and discoveries.
             </p>
 
-            <a href="blog.html?category=entertainment"
-               class="btn btn-primary">
+            <a
+              href="blog.html?category=entertainment"
+              class="btn btn-primary">
               Explore
             </a>
 
@@ -839,6 +994,7 @@
 
 
     <!-- ABOUT -->
+
     <section id="about">
 
       <div class="container about-grid">
@@ -850,7 +1006,9 @@
 
         <div class="about-text">
 
-          <h2>About KaliMoh</h2>
+          <h2>
+            About KaliMoh
+          </h2>
 
           <p>
             KaliMoh is a simple platform created to bring useful
@@ -875,13 +1033,16 @@
 
 
     <!-- FAQ -->
+
     <section id="faq" class="faq">
 
       <div class="container">
 
         <div class="section-heading">
 
-          <h2>Frequently Asked Questions</h2>
+          <h2>
+            Frequently Asked Questions
+          </h2>
 
           <p>
             Here are some common questions about KaliMoh.
@@ -954,13 +1115,16 @@
 
 
     <!-- CONTACT -->
+
     <section id="contact">
 
       <div class="container">
 
         <div class="section-heading">
 
-          <h2>Contact Us</h2>
+          <h2>
+            Contact Us
+          </h2>
 
           <p>
             Have a question or suggestion? Send us a message.
@@ -973,25 +1137,24 @@
 
           <input
             type="text"
-            id="contactName"
             placeholder="Your name"
             required
           >
 
           <input
             type="email"
-            id="contactEmail"
             placeholder="Your email"
             required
           >
 
           <textarea
-            id="contactMessage"
             placeholder="Your message"
             required
           ></textarea>
 
-          <button type="submit" class="btn btn-primary">
+          <button
+            type="submit"
+            class="btn btn-primary">
             Send Message
           </button>
 
@@ -1005,6 +1168,7 @@
 
 
   <!-- FOOTER -->
+
   <footer>
 
     <div class="container">
@@ -1014,8 +1178,15 @@
         <div>
 
           <a href="index.html" class="logo">
-            <span class="logo-mark">K</span>
-            <span>KaliMoh</span>
+
+            <span class="logo-mark">
+              K
+            </span>
+
+            <span>
+              KaliMoh
+            </span>
+
           </a>
 
           <p>
@@ -1028,14 +1199,35 @@
 
         <div>
 
-          <h4>Quick Links</h4>
+          <h4>
+            Quick Links
+          </h4>
 
           <ul class="footer-links">
 
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="blog.html">Articles</a></li>
+            <li>
+              <a href="#home">
+                Home
+              </a>
+            </li>
+
+            <li>
+              <a href="#features">
+                Features
+              </a>
+            </li>
+
+            <li>
+              <a href="#about">
+                About
+              </a>
+            </li>
+
+            <li>
+              <a href="blog.html">
+                Articles
+              </a>
+            </li>
 
           </ul>
 
@@ -1044,14 +1236,35 @@
 
         <div>
 
-          <h4>Explore</h4>
+          <h4>
+            Explore
+          </h4>
 
           <ul class="footer-links">
 
-            <li><a href="software.html">Software</a></li>
-            <li><a href="#categories">Categories</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li>
+              <a href="software.html">
+                Software
+              </a>
+            </li>
+
+            <li>
+              <a href="#categories">
+                Categories
+              </a>
+            </li>
+
+            <li>
+              <a href="#faq">
+                FAQ
+              </a>
+            </li>
+
+            <li>
+              <a href="#contact">
+                Contact
+              </a>
+            </li>
 
           </ul>
 
@@ -1070,7 +1283,11 @@
 
 
   <!-- BACK TO TOP -->
-  <a href="#home" class="top" aria-label="Back to top">
+
+  <a
+    href="#home"
+    class="top"
+    aria-label="Back to top">
     ↑
   </a>
 
@@ -1079,57 +1296,70 @@
 
     /* SEARCH */
 
-    document.getElementById("searchForm").addEventListener("submit", function(e) {
+    document
+      .getElementById("searchForm")
+      .addEventListener("submit", function(e) {
 
-      e.preventDefault();
+        e.preventDefault();
 
-      const search = document
-        .getElementById("siteSearch")
-        .value
-        .trim();
+        const search = document
+          .getElementById("siteSearch")
+          .value
+          .trim();
 
-      if (search !== "") {
-        window.location.href =
-          "blog.html?search=" + encodeURIComponent(search);
-      }
+        if (search !== "") {
 
-    });
+          window.location.href =
+            "blog.html?search=" +
+            encodeURIComponent(search);
+
+        }
+
+      });
 
 
     /* FAQ */
 
-    document.querySelectorAll(".faq-question").forEach(function(button) {
+    document
+      .querySelectorAll(".faq-question")
+      .forEach(function(button) {
 
-      button.addEventListener("click", function() {
+        button.addEventListener("click", function() {
 
-        const item = this.parentElement;
+          const item = this.parentElement;
 
-        document.querySelectorAll(".faq-item").forEach(function(other) {
+          document
+            .querySelectorAll(".faq-item")
+            .forEach(function(other) {
 
-          if (other !== item) {
-            other.classList.remove("active");
-          }
+              if (other !== item) {
+                other.classList.remove("active");
+              }
+
+            });
+
+          item.classList.toggle("active");
 
         });
 
-        item.classList.toggle("active");
-
       });
-
-    });
 
 
     /* CONTACT */
 
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit", function(e) {
 
-      e.preventDefault();
+        e.preventDefault();
 
-      alert("Thank you! Your message has been received.");
+        alert(
+          "Thank you! Your message has been received."
+        );
 
-      this.reset();
+        this.reset();
 
-    });
+      });
 
   </script>
 
