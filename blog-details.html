@@ -1,4 +1,5 @@
-.<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -31,19 +32,29 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
+
             <nav class="navbar navbar-expand-lg">
 
               <a class="navbar-brand" href="index.html">
                 <strong style="font-size: 24px;">KaliMoh</strong>
               </a>
 
-              <button class="navbar-toggler">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
                 <span class="toggler-icon"></span>
                 <span class="toggler-icon"></span>
                 <span class="toggler-icon"></span>
               </button>
 
-              <div class="navbar-collapse">
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+
                 <ul id="nav" class="navbar-nav mx-auto">
 
                   <li class="nav-item">
@@ -63,6 +74,14 @@
                   </li>
 
                   <li class="nav-item">
+                    <a href="software.html">Software</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="pricing.html">Categories</a>
+                  </li>
+
+                  <li class="nav-item">
                     <a href="index.html#faq">FAQ</a>
                   </li>
 
@@ -71,18 +90,29 @@
                   </li>
 
                 </ul>
-              </div>
 
-              <div class="navbar-btn d-none d-sm-inline-block">
-                <a
-                  class="ud-main-btn ud-white-btn"
-                  href="index.html"
-                >
-                  Explore KaliMoh
-                </a>
+                <div class="navbar-btn d-flex align-items-center gap-2">
+
+                  <a
+                    class="ud-main-btn ud-white-btn"
+                    href="login.html"
+                  >
+                    Login
+                  </a>
+
+                  <a
+                    class="ud-main-btn ud-white-btn"
+                    href="signup.html"
+                  >
+                    Sign Up
+                  </a>
+
+                </div>
+
               </div>
 
             </nav>
+
           </div>
         </div>
       </div>
@@ -95,9 +125,11 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
+
             <div class="ud-banner-content">
               <h1>KaliMoh Article</h1>
             </div>
+
           </div>
         </div>
       </div>
@@ -234,15 +266,15 @@
                 <ul class="ud-blog-tags">
 
                   <li>
-                    <a href="javascript:void(0)">Technology</a>
+                    <a href="pricing.html">Technology</a>
                   </li>
 
                   <li>
-                    <a href="javascript:void(0)">Guides</a>
+                    <a href="pricing.html">Guides</a>
                   </li>
 
                   <li>
-                    <a href="javascript:void(0)">Discover</a>
+                    <a href="pricing.html">Discover</a>
                   </li>
 
                 </ul>
@@ -321,7 +353,7 @@
                     placeholder="Your Email address"
                   />
 
-                  <button class="ud-main-btn">
+                  <button class="ud-main-btn" type="submit">
                     Subscribe
                   </button>
 
@@ -498,12 +530,14 @@
             <div class="ud-single-blog">
 
               <div class="ud-blog-image">
+
                 <a href="blog.html">
                   <img
                     src="assets/images/blog/blog-01.jpg"
                     alt="Technology"
                   />
                 </a>
+
               </div>
 
               <div class="ud-blog-content">
@@ -535,12 +569,14 @@
             <div class="ud-single-blog">
 
               <div class="ud-blog-image">
+
                 <a href="blog.html">
                   <img
                     src="assets/images/blog/blog-02.jpg"
                     alt="Guides"
                   />
                 </a>
+
               </div>
 
               <div class="ud-blog-content">
@@ -572,12 +608,14 @@
             <div class="ud-single-blog">
 
               <div class="ud-blog-image">
+
                 <a href="blog.html">
                   <img
                     src="assets/images/blog/blog-03.jpg"
                     alt="Discover"
                   />
                 </a>
+
               </div>
 
               <div class="ud-blog-content">
@@ -685,6 +723,12 @@
                     </a>
                   </li>
 
+                  <li>
+                    <a href="software.html">
+                      Software
+                    </a>
+                  </li>
+
                 </ul>
 
               </div>
@@ -703,25 +747,25 @@
                 <ul class="ud-widget-links">
 
                   <li>
-                    <a href="blog.html">
+                    <a href="pricing.html">
                       Technology
                     </a>
                   </li>
 
                   <li>
-                    <a href="blog.html">
+                    <a href="pricing.html">
                       Guides
                     </a>
                   </li>
 
                   <li>
-                    <a href="blog.html">
+                    <a href="pricing.html">
                       Ideas
                     </a>
                   </li>
 
                   <li>
-                    <a href="blog.html">
+                    <a href="pricing.html">
                       Entertainment
                     </a>
                   </li>
@@ -744,6 +788,12 @@
                 <ul class="ud-widget-links">
 
                   <li>
+                    <a href="pricing.html">
+                      Explore Categories
+                    </a>
+                  </li>
+
+                  <li>
                     <a href="index.html#faq">
                       FAQ
                     </a>
@@ -756,8 +806,14 @@
                   </li>
 
                   <li>
-                    <a href="index.html#categories">
-                      Explore Categories
+                    <a href="login.html">
+                      Login
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="signup.html">
+                      Sign Up
                     </a>
                   </li>
 
@@ -829,3 +885,4 @@
 
   </body>
 </html>
+```
