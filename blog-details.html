@@ -121,19 +121,26 @@
   <!-- ====== Banner ====== -->
 
   <section class="ud-page-banner">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
 
 ```
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-12">
+
       <div class="ud-banner-content">
+
         <h1 id="articleTitle">
           Loading article...
         </h1>
+
       </div>
 
     </div>
+
   </div>
+
 </div>
 ```
 
@@ -206,6 +213,63 @@
         </div>
 
       </article>
+
+
+      <!-- ====== Article Navigation ====== -->
+      <div
+        id="articleNavigation"
+        style="
+          display: none;
+          margin-top: 50px;
+          padding-top: 30px;
+          border-top: 1px solid #eee;
+        "
+      >
+
+        <div class="row align-items-center">
+
+          <div class="col-md-4 mb-3 mb-md-0">
+
+            <a
+              id="previousArticle"
+              href="#"
+              class="ud-main-btn"
+              style="display: none;"
+            >
+              ← Previous Article
+            </a>
+
+          </div>
+
+
+          <div class="col-md-4 text-center mb-3 mb-md-0">
+
+            <a
+              href="blog.html"
+              class="ud-main-btn"
+            >
+              Back to Articles
+            </a>
+
+          </div>
+
+
+          <div class="col-md-4 text-md-end">
+
+            <a
+              id="nextArticle"
+              href="#"
+              class="ud-main-btn"
+              style="display: none;"
+            >
+              Next Article →
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
 
 
       <!-- ====== Similar Articles ====== -->
@@ -710,6 +774,127 @@
     }
 
 
+    async function loadArticleNavigation(
+      currentArticleId
+    ) {
+
+      const navigation =
+        document.getElementById(
+          "articleNavigation"
+        );
+
+      const previous =
+        document.getElementById(
+          "previousArticle"
+        );
+
+      const next =
+        document.getElementById(
+          "nextArticle"
+        );
+
+
+      try {
+
+        const { data, error } =
+          await supabaseClient
+            .from("articles")
+            .select("id, title, created_at")
+            .eq("is_published", true)
+            .order("created_at", {
+              ascending: false
+            });
+
+
+        if (error) {
+          throw error;
+        }
+
+        if (!data || data.length < 2) {
+          return;
+        }
+
+
+        const currentIndex =
+          data.findIndex(function (article) {
+
+            return String(article.id) ===
+              String(currentArticleId);
+
+          });
+
+
+        if (currentIndex === -1) {
+          return;
+        }
+
+
+        // Newer article
+        if (currentIndex > 0) {
+
+          const previousArticle =
+            data[currentIndex - 1];
+
+          previous.href =
+            "blog-details.html?id=" +
+            encodeURIComponent(
+              previousArticle.id
+            );
+
+          previous.textContent =
+            "← " +
+            previousArticle.title;
+
+          previous.style.display =
+            "inline-block";
+
+          previous.title =
+            "Previous Article";
+
+        }
+
+
+        // Older article
+        if (currentIndex < data.length - 1) {
+
+          const nextArticle =
+            data[currentIndex + 1];
+
+          next.href =
+            "blog-details.html?id=" +
+            encodeURIComponent(
+              nextArticle.id
+            );
+
+          next.textContent =
+            nextArticle.title +
+            " →";
+
+          next.style.display =
+            "inline-block";
+
+          next.title =
+            "Next Article";
+
+        }
+
+
+        navigation.style.display =
+          "block";
+
+
+      } catch (error) {
+
+        console.error(
+          "Article navigation error:",
+          error
+        );
+
+      }
+
+    }
+
+
     async function loadArticle() {
 
       const params =
@@ -826,11 +1011,6 @@
           );
 
 
-        /*
-          Supports simple article text.
-          Empty lines become paragraphs.
-        */
-
         body.innerHTML =
           (data.content || "")
             .split(/\n\s*\n/)
@@ -855,11 +1035,16 @@
           "block";
 
 
-        // Load related articles
         await loadSimilarArticles(
           data.id,
           data.category
         );
+
+
+        await loadArticleNavigation(
+          data.id
+        );
+
 
       } catch (error) {
 
