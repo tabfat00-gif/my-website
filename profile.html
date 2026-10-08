@@ -45,6 +45,12 @@
       margin-bottom: 25px;
     }
 
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
     .info {
       padding: 15px;
       margin-bottom: 15px;
@@ -62,6 +68,37 @@
     .value {
       font-size: 16px;
       font-weight: bold;
+    }
+
+    .password-box {
+      padding: 20px;
+      background: #f8f8f8;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .password-box input {
+      width: 100%;
+      padding: 11px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .password-btn {
+      border: 0;
+      padding: 11px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #111;
+      color: white;
+      font-weight: bold;
+    }
+
+    .password-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .logout-btn,
@@ -87,8 +124,15 @@
 
     #message {
       margin-top: 15px;
-      color: red;
       font-weight: bold;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
     }
 
     @media (max-width: 600px) {
@@ -116,22 +160,44 @@
 
 <div class="info">
   <span class="label">Email</span>
-  <span
-    class="value"
-    id="user-email"
-  >
+  <span class="value" id="user-email">
     Loading...
   </span>
 </div>
 
 <div class="info">
   <span class="label">Account Created</span>
-  <span
-    class="value"
-    id="account-created"
-  >
+  <span class="value" id="account-created">
     Loading...
   </span>
+</div>
+
+<h2>Change Password</h2>
+
+<div class="password-box">
+
+  <input
+    type="password"
+    id="new-password"
+    placeholder="New password"
+    autocomplete="new-password"
+  >
+
+  <input
+    type="password"
+    id="confirm-password"
+    placeholder="Confirm new password"
+    autocomplete="new-password"
+  >
+
+  <button
+    type="button"
+    class="password-btn"
+    id="change-password-btn"
+  >
+    Change Password
+  </button>
+
 </div>
 
 <a
@@ -173,24 +239,31 @@
 
 
   const userEmail =
-    document.getElementById(
-      "user-email"
-    );
+    document.getElementById("user-email");
 
   const accountCreated =
-    document.getElementById(
-      "account-created"
-    );
+    document.getElementById("account-created");
 
   const logoutBtn =
+    document.getElementById("logout-btn");
+
+  const changePasswordBtn =
     document.getElementById(
-      "logout-btn"
+      "change-password-btn"
+    );
+
+  const newPassword =
+    document.getElementById(
+      "new-password"
+    );
+
+  const confirmPassword =
+    document.getElementById(
+      "confirm-password"
     );
 
   const message =
-    document.getElementById(
-      "message"
-    );
+    document.getElementById("message");
 
 
   async function loadProfile() {
@@ -237,6 +310,114 @@
   }
 
 
+  changePasswordBtn.addEventListener(
+    "click",
+    async () => {
+
+      message.textContent = "";
+      message.className = "";
+
+
+      const password =
+        newPassword.value.trim();
+
+      const confirm =
+        confirmPassword.value.trim();
+
+
+      if (!password || !confirm) {
+
+        message.textContent =
+          "Please enter and confirm your new password.";
+
+        message.className =
+          "error";
+
+        return;
+      }
+
+
+      if (password.length < 6) {
+
+        message.textContent =
+          "Password must be at least 6 characters.";
+
+        message.className =
+          "error";
+
+        return;
+      }
+
+
+      if (password !== confirm) {
+
+        message.textContent =
+          "Passwords do not match.";
+
+        message.className =
+          "error";
+
+        return;
+      }
+
+
+      changePasswordBtn.disabled =
+        true;
+
+      changePasswordBtn.textContent =
+        "Updating...";
+
+
+      const {
+        error
+      } =
+        await supabaseClient.auth.updateUser({
+          password: password
+        });
+
+
+      if (error) {
+
+        console.error(error);
+
+        message.textContent =
+          error.message ||
+          "Password update failed.";
+
+        message.className =
+          "error";
+
+        changePasswordBtn.disabled =
+          false;
+
+        changePasswordBtn.textContent =
+          "Change Password";
+
+        return;
+      }
+
+
+      newPassword.value = "";
+      confirmPassword.value = "";
+
+
+      message.textContent =
+        "Password changed successfully.";
+
+      message.className =
+        "success";
+
+
+      changePasswordBtn.disabled =
+        false;
+
+      changePasswordBtn.textContent =
+        "Change Password";
+
+    }
+  );
+
+
   logoutBtn.addEventListener(
     "click",
     async () => {
@@ -261,6 +442,9 @@
         message.textContent =
           error.message ||
           "Logout failed.";
+
+        message.className =
+          "error";
 
         logoutBtn.disabled =
           false;
