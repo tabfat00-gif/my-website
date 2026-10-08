@@ -23,11 +23,38 @@
   <link rel="stylesheet" href="assets/css/animate.css" />
   <link rel="stylesheet" href="assets/css/lineicons.css" />
   <link rel="stylesheet" href="assets/css/ud-styles.css" />
+
+  <style>
+    .article-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 auto 25px;
+    }
+
+    .category-btn {
+      border: 1px solid #ddd;
+      background: #fff;
+      color: #333;
+      padding: 9px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- ====== Header Start ====== -->
+  <!-- Header -->
   <header class="ud-header">
     <div class="container">
       <div class="row">
@@ -119,10 +146,9 @@
       </div>
     </div>
   </header>
-  <!-- ====== Header End ====== -->
 
 
-  <!-- ====== Banner Start ====== -->
+  <!-- Banner -->
   <section class="ud-page-banner">
     <div class="container">
       <div class="row">
@@ -136,18 +162,17 @@
       </div>
     </div>
   </section>
-  <!-- ====== Banner End ====== -->
 
 
-  <!-- ====== Blog Start ====== -->
+  <!-- Articles -->
   <section class="ud-blog-grids">
     <div class="container">
 
-      <!-- ====== Article Search ====== -->
+      <!-- Search -->
       <div
         style="
           width: 100%;
-          padding: 30px 20px;
+          padding: 30px 20px 20px;
           text-align: center;
         "
       >
@@ -198,10 +223,24 @@
         </div>
 
       </div>
-      <!-- ====== End Article Search ====== -->
 
 
-      <!-- ====== Articles Container ====== -->
+      <!-- Dynamic Categories -->
+      <div
+        id="articleCategories"
+        class="article-categories"
+      >
+        <button
+          type="button"
+          class="category-btn active"
+          data-category="all"
+        >
+          All
+        </button>
+      </div>
+
+
+      <!-- Articles Container -->
       <div id="articlesContainer" class="row">
 
         <div class="col-12 text-center" id="articlesLoading">
@@ -209,14 +248,12 @@
         </div>
 
       </div>
-      <!-- ====== End Articles Container ====== -->
 
     </div>
   </section>
-  <!-- ====== Blog End ====== -->
 
 
-  <!-- ====== Footer Start ====== -->
+  <!-- Footer -->
   <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
 
     <div class="shape shape-1">
@@ -237,7 +274,6 @@
 
         <div class="row">
 
-          <!-- Brand -->
           <div class="col-xl-3 col-lg-4 col-md-6">
 
             <div class="ud-widget">
@@ -292,7 +328,6 @@
           </div>
 
 
-          <!-- Explore -->
           <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
 
             <div class="ud-widget">
@@ -301,29 +336,12 @@
 
               <ul class="ud-widget-links">
 
-                <li>
-                  <a href="index.html">Home</a>
-                </li>
-
-                <li>
-                  <a href="index.html#features">Features</a>
-                </li>
-
-                <li>
-                  <a href="about.html">About</a>
-                </li>
-
-                <li>
-                  <a href="blog.html">Articles</a>
-                </li>
-
-                <li>
-                  <a href="software.html">Software</a>
-                </li>
-
-                <li>
-                  <a href="pricing.html">Categories</a>
-                </li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Articles</a></li>
+                <li><a href="software.html">Software</a></li>
+                <li><a href="pricing.html">Categories</a></li>
 
               </ul>
 
@@ -332,31 +350,22 @@
           </div>
 
 
-          <!-- Categories -->
+          <!-- Dynamic category links -->
           <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
 
             <div class="ud-widget">
 
               <h5 class="ud-widget-title">Categories</h5>
 
-              <ul class="ud-widget-links">
-
+              <ul
+                id="footerCategories"
+                class="ud-widget-links"
+              >
                 <li>
-                  <a href="pricing.html">Technology</a>
+                  <a href="blog.html">
+                    All Articles
+                  </a>
                 </li>
-
-                <li>
-                  <a href="pricing.html">Guides &amp; Tips</a>
-                </li>
-
-                <li>
-                  <a href="pricing.html">Ideas</a>
-                </li>
-
-                <li>
-                  <a href="pricing.html">Entertainment</a>
-                </li>
-
               </ul>
 
             </div>
@@ -364,7 +373,6 @@
           </div>
 
 
-          <!-- KaliMoh -->
           <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
 
             <div class="ud-widget">
@@ -400,7 +408,6 @@
           </div>
 
 
-          <!-- Discover -->
           <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
 
             <div class="ud-widget">
@@ -426,7 +433,6 @@
     </div>
 
 
-    <!-- Footer Bottom -->
     <div class="ud-footer-bottom">
 
       <div class="container">
@@ -474,10 +480,8 @@
     </div>
 
   </footer>
-  <!-- ====== Footer End ====== -->
 
 
-  <!-- ====== Back To Top Start ====== -->
   <a
     href="javascript:void(0)"
     class="back-to-top"
@@ -485,15 +489,12 @@
   >
     <i class="lni lni-chevron-up"></i>
   </a>
-  <!-- ====== Back To Top End ====== -->
 
 
-  <!-- ====== Javascript Files ====== -->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/wow.min.js"></script>
   <script src="assets/js/main.js"></script>
 
-  <!-- ====== Supabase ====== -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
@@ -512,13 +513,19 @@
 
 
     let allArticles = [];
+    let currentCategory = "all";
 
 
-    // ====== Load Articles ======
+    // =========================
+    // Load Articles
+    // =========================
+
     async function loadArticles() {
 
       const container =
-        document.getElementById("articlesContainer");
+        document.getElementById(
+          "articlesContainer"
+        );
 
       try {
 
@@ -531,13 +538,23 @@
               ascending: false
             });
 
+
         if (error) {
           throw error;
         }
 
+
         allArticles = data || [];
 
-        renderArticles(allArticles);
+
+        buildCategories(
+          allArticles
+        );
+
+        renderArticles(
+          allArticles
+        );
+
 
       } catch (error) {
 
@@ -554,17 +571,268 @@
     }
 
 
-    // ====== Render Articles ======
-    function renderArticles(articles) {
+    // =========================
+    // Build Dynamic Categories
+    // =========================
+
+    function buildCategories(
+      articles
+    ) {
+
+      const categoriesContainer =
+        document.getElementById(
+          "articleCategories"
+        );
+
+      const footerCategories =
+        document.getElementById(
+          "footerCategories"
+        );
+
+
+      const categories =
+        [
+          ...new Set(
+            articles
+              .map(
+                article =>
+                  (article.category || "")
+                    .trim()
+              )
+              .filter(Boolean)
+          )
+        ].sort(
+          (a, b) =>
+            a.localeCompare(b)
+        );
+
+
+      categoriesContainer.innerHTML = "";
+
+
+      // All button
+      const allButton =
+        document.createElement(
+          "button"
+        );
+
+      allButton.type = "button";
+      allButton.className =
+        "category-btn active";
+      allButton.dataset.category =
+        "all";
+      allButton.textContent =
+        "All";
+
+      categoriesContainer.appendChild(
+        allButton
+      );
+
+
+      // Dynamic category buttons
+      categories.forEach(
+        function (category) {
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+          button.type = "button";
+
+          button.className =
+            "category-btn";
+
+          button.dataset.category =
+            category;
+
+          button.textContent =
+            category;
+
+          categoriesContainer.appendChild(
+            button
+          );
+
+        }
+      );
+
+
+      // Footer
+      footerCategories.innerHTML = `
+        <li>
+          <a href="blog.html">
+            All Articles
+          </a>
+        </li>
+      `;
+
+
+      categories.forEach(
+        function (category) {
+
+          const li =
+            document.createElement(
+              "li"
+            );
+
+          const link =
+            document.createElement(
+              "a"
+            );
+
+          link.href =
+            "blog.html?category=" +
+            encodeURIComponent(
+              category
+            );
+
+          link.textContent =
+            category;
+
+          li.appendChild(link);
+
+          footerCategories.appendChild(
+            li
+          );
+
+        }
+      );
+
+
+      // Category click
+      categoriesContainer
+        .querySelectorAll(
+          ".category-btn"
+        )
+        .forEach(
+          function (button) {
+
+            button.addEventListener(
+              "click",
+              function () {
+
+                currentCategory =
+                  button.dataset.category;
+
+                categoriesContainer
+                  .querySelectorAll(
+                    ".category-btn"
+                  )
+                  .forEach(
+                    btn =>
+                      btn.classList.remove(
+                        "active"
+                      )
+                  );
+
+                button.classList.add(
+                  "active"
+                );
+
+
+                applyFilters();
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    // =========================
+    // Apply Search + Category
+    // =========================
+
+    function applyFilters() {
+
+      const box =
+        document.getElementById(
+          "articleSearch"
+        );
+
+      const word =
+        box
+          ? box.value
+              .trim()
+              .toLowerCase()
+          : "";
+
+
+      const filtered =
+        allArticles.filter(
+          function (article) {
+
+            const matchesCategory =
+              currentCategory === "all" ||
+              (
+                article.category || ""
+              ).trim() ===
+              currentCategory;
+
+
+            const matchesSearch =
+              !word ||
+
+              (article.title || "")
+                .toLowerCase()
+                .includes(word)
+
+              ||
+
+              (article.description || "")
+                .toLowerCase()
+                .includes(word)
+
+              ||
+
+              (article.content || "")
+                .toLowerCase()
+                .includes(word)
+
+              ||
+
+              (article.category || "")
+                .toLowerCase()
+                .includes(word);
+
+
+            return (
+              matchesCategory &&
+              matchesSearch
+            );
+
+          }
+        );
+
+
+      renderArticles(
+        filtered
+      );
+
+    }
+
+
+    // =========================
+    // Render Articles
+    // =========================
+
+    function renderArticles(
+      articles
+    ) {
 
       const container =
-        document.getElementById("articlesContainer");
+        document.getElementById(
+          "articlesContainer"
+        );
+
 
       if (!articles.length) {
 
         container.innerHTML = `
           <div class="col-12 text-center">
-            <p>No articles available yet.</p>
+            <p>No articles available.</p>
           </div>
         `;
 
@@ -575,138 +843,180 @@
       container.innerHTML = "";
 
 
-      articles.forEach(function (article) {
+      articles.forEach(
+        function (article) {
 
-        const image =
-          article.image_url ||
-          "assets/images/blog/blog-01.jpg";
-
-        const category =
-          article.category ||
-          "KaliMoh";
-
-        const description =
-          article.description ||
-          "Discover useful information with KaliMoh.";
+          const image =
+            article.image_url ||
+            "assets/images/blog/blog-01.jpg";
 
 
-        const card = document.createElement("div");
-
-        card.className =
-          "col-lg-4 col-md-6 article-card";
-
-
-        card.innerHTML = `
-
-          <div class="ud-single-blog">
-
-            <div class="ud-blog-image">
-
-              <a href="blog-details.html?id=${article.id}">
-
-                <img
-                  src="${image}"
-                  alt="${article.title}"
-                />
-
-              </a>
-
-            </div>
+          const category =
+            article.category ||
+            "KaliMoh";
 
 
-            <div class="ud-blog-content">
-
-              <span class="ud-blog-date">
-                ${category}
-              </span>
+          const description =
+            article.description ||
+            "Discover useful information with KaliMoh.";
 
 
-              <h3 class="ud-blog-title">
+          const card =
+            document.createElement(
+              "div"
+            );
 
-                <a href="blog-details.html?id=${article.id}">
-                  ${article.title}
-                </a>
-
-              </h3>
-
-
-              <p class="ud-blog-desc">
-                ${description}
-              </p>
-
-            </div>
-
-          </div>
-
-        `;
+          card.className =
+            "col-lg-4 col-md-6 article-card";
 
 
-        container.appendChild(card);
+          const blog =
+            document.createElement(
+              "div"
+            );
 
-      });
-
-    }
-
-
-    // ====== Search Articles ======
-    function searchArticles() {
-
-      const box =
-        document.getElementById("articleSearch");
-
-      if (!box) {
-        return;
-      }
+          blog.className =
+            "ud-single-blog";
 
 
-      const word =
-        box.value.trim().toLowerCase();
+          const imageBox =
+            document.createElement(
+              "div"
+            );
+
+          imageBox.className =
+            "ud-blog-image";
 
 
-      const filtered =
-        allArticles.filter(function (article) {
+          const imageLink =
+            document.createElement(
+              "a"
+            );
 
-          return (
+          imageLink.href =
+            "blog-details.html?id=" +
+            encodeURIComponent(
+              article.id
+            );
 
-            (article.title || "")
-              .toLowerCase()
-              .includes(word)
 
-            ||
+          const img =
+            document.createElement(
+              "img"
+            );
 
-            (article.description || "")
-              .toLowerCase()
-              .includes(word)
+          img.src =
+            image;
 
-            ||
+          img.alt =
+            article.title || "Article";
 
-            (article.content || "")
-              .toLowerCase()
-              .includes(word)
 
-            ||
+          imageLink.appendChild(img);
+          imageBox.appendChild(imageLink);
 
-            (article.category || "")
-              .toLowerCase()
-              .includes(word)
 
+          const content =
+            document.createElement(
+              "div"
+            );
+
+          content.className =
+            "ud-blog-content";
+
+
+          const date =
+            document.createElement(
+              "span"
+            );
+
+          date.className =
+            "ud-blog-date";
+
+          date.textContent =
+            category;
+
+
+          const heading =
+            document.createElement(
+              "h3"
+            );
+
+          heading.className =
+            "ud-blog-title";
+
+
+          const titleLink =
+            document.createElement(
+              "a"
+            );
+
+          titleLink.href =
+            "blog-details.html?id=" +
+            encodeURIComponent(
+              article.id
+            );
+
+          titleLink.textContent =
+            article.title || "";
+
+
+          heading.appendChild(
+            titleLink
           );
 
-        });
+
+          const desc =
+            document.createElement(
+              "p"
+            );
+
+          desc.className =
+            "ud-blog-desc";
+
+          desc.textContent =
+            description;
 
 
-      renderArticles(filtered);
+          content.appendChild(date);
+          content.appendChild(heading);
+          content.appendChild(desc);
+
+
+          blog.appendChild(imageBox);
+          blog.appendChild(content);
+
+          card.appendChild(blog);
+
+          container.appendChild(card);
+
+        }
+      );
 
     }
 
 
-    // ====== Start ======
+    // =========================
+    // Search
+    // =========================
+
+    function searchArticles() {
+      applyFilters();
+    }
+
+
+    // =========================
+    // Start
+    // =========================
+
     document.addEventListener(
       "DOMContentLoaded",
       function () {
 
         const box =
-          document.getElementById("articleSearch");
+          document.getElementById(
+            "articleSearch"
+          );
 
         const button =
           document.getElementById(
@@ -755,11 +1065,19 @@
             window.location.search
           );
 
+
         const searchFromHome =
           params.get("search");
 
 
-        if (searchFromHome && box) {
+        const categoryFromUrl =
+          params.get("category");
+
+
+        if (
+          searchFromHome &&
+          box
+        ) {
 
           box.value =
             searchFromHome;
@@ -767,7 +1085,52 @@
         }
 
 
-        loadArticles();
+        loadArticles().then(
+          function () {
+
+            if (
+              categoryFromUrl
+            ) {
+
+              const buttons =
+                document.querySelectorAll(
+                  ".category-btn"
+                );
+
+
+              buttons.forEach(
+                function (button) {
+
+                  if (
+                    button.dataset.category ===
+                    categoryFromUrl
+                  ) {
+
+                    currentCategory =
+                      categoryFromUrl;
+
+                    buttons.forEach(
+                      btn =>
+                        btn.classList.remove(
+                          "active"
+                        )
+                    );
+
+                    button.classList.add(
+                      "active"
+                    );
+
+                    applyFilters();
+
+                  }
+
+                }
+              );
+
+            }
+
+          }
+        );
 
       }
     );
