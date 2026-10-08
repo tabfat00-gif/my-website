@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -144,6 +144,19 @@
       margin-bottom: 8px;
     }
 
+    .views {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .stats-number {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
     .premium-badge,
     .free-badge,
     .published-badge,
@@ -224,6 +237,7 @@
       }
     }
   </style>
+
 </head>
 
 <body>
@@ -236,189 +250,212 @@
       <div id="auth-status"></div>
     </div>
 
-    <div>
-      <a href="index.html" class="home-btn">View Site</a>
+```
+<div>
+  <a href="index.html" class="home-btn">View Site</a>
 
-      <button
-        type="button"
-        class="logout-btn"
-        id="logout-btn"
-      >
-        Logout
-      </button>
-    </div>
+  <button
+    type="button"
+    class="logout-btn"
+    id="logout-btn"
+  >
+    Logout
+  </button>
+</div>
+```
+
   </div>
 
+  <!-- ARTICLE STATS -->
+
+  <div class="box">
+
+```
+<h2>Article Views</h2>
+
+<div
+  id="total-article-views"
+  class="stats-number"
+>
+  Loading...
+</div>
+```
+
+  </div>
 
   <!-- SOFTWARE -->
 
   <div class="box">
 
-    <h2 id="form-title">Add Software</h2>
+```
+<h2 id="form-title">Add Software</h2>
 
-    <form id="software-form">
+<form id="software-form">
 
-      <input
-        type="text"
-        id="title"
-        placeholder="Software title"
-        required
-      >
+  <input
+    type="text"
+    id="title"
+    placeholder="Software title"
+    required
+  >
 
-      <textarea
-        id="description"
-        placeholder="Description"
-      ></textarea>
+  <textarea
+    id="description"
+    placeholder="Description"
+  ></textarea>
 
-      <input
-        type="url"
-        id="download_url"
-        placeholder="Download URL"
-      >
+  <input
+    type="url"
+    id="download_url"
+    placeholder="Download URL"
+  >
 
-      <input
-        type="text"
-        id="category"
-        placeholder="Category"
-      >
+  <input
+    type="text"
+    id="category"
+    placeholder="Category"
+  >
 
-      <input
-        type="url"
-        id="image_url"
-        placeholder="Image URL"
-      >
+  <input
+    type="url"
+    id="image_url"
+    placeholder="Image URL"
+  >
 
-      <label class="premium-option">
-        <input
-          type="checkbox"
-          id="is_premium"
-        >
-        Premium Software 🔒
-      </label>
+  <label class="premium-option">
+    <input
+      type="checkbox"
+      id="is_premium"
+    >
+    Premium Software 🔒
+  </label>
 
-      <button
-        type="submit"
-        class="save-btn"
-        id="save-btn"
-      >
-        Add Software
-      </button>
+  <button
+    type="submit"
+    class="save-btn"
+    id="save-btn"
+  >
+    Add Software
+  </button>
 
-      <button
-        type="button"
-        class="cancel-btn"
-        id="cancel-btn"
-        style="display: none;"
-      >
-        Cancel Edit
-      </button>
+  <button
+    type="button"
+    class="cancel-btn"
+    id="cancel-btn"
+    style="display: none;"
+  >
+    Cancel Edit
+  </button>
 
-    </form>
+</form>
 
-    <div id="software-message"></div>
+<div id="software-message"></div>
+```
 
   </div>
-
 
   <div class="box">
 
-    <h2>Software List</h2>
+```
+<h2>Software List</h2>
 
-    <div id="software-list">
-      Loading...
-    </div>
+<div id="software-list">
+  Loading...
+</div>
+```
 
   </div>
-
 
   <!-- ARTICLES -->
 
   <div class="box">
 
-    <h2 id="article-form-title">
-      Add Article
-    </h2>
+```
+<h2 id="article-form-title">
+  Add Article
+</h2>
 
-    <form id="article-form">
+<form id="article-form">
 
-      <input
-        type="text"
-        id="article-title"
-        placeholder="Article title"
-        required
-      >
+  <input
+    type="text"
+    id="article-title"
+    placeholder="Article title"
+    required
+  >
 
-      <textarea
-        id="article-description"
-        placeholder="Short description"
-      ></textarea>
+  <textarea
+    id="article-description"
+    placeholder="Short description"
+  ></textarea>
 
-      <textarea
-        id="article-content"
-        placeholder="Article content"
-        required
-      ></textarea>
+  <textarea
+    id="article-content"
+    placeholder="Article content"
+    required
+  ></textarea>
 
-      <input
-        type="text"
-        id="article-category"
-        placeholder="Category"
-      >
+  <input
+    type="text"
+    id="article-category"
+    placeholder="Category"
+  >
 
-      <input
-        type="url"
-        id="article-image"
-        placeholder="Image URL"
-      >
+  <input
+    type="url"
+    id="article-image"
+    placeholder="Image URL"
+  >
 
-      <label class="published-option">
+  <label class="published-option">
 
-        <input
-          type="checkbox"
-          id="article-published"
-          checked
-        >
+    <input
+      type="checkbox"
+      id="article-published"
+      checked
+    >
 
-        Published
+    Published
 
-      </label>
+  </label>
 
-      <button
-        type="submit"
-        class="save-btn"
-        id="article-save-btn"
-      >
-        Add Article
-      </button>
+  <button
+    type="submit"
+    class="save-btn"
+    id="article-save-btn"
+  >
+    Add Article
+  </button>
 
-      <button
-        type="button"
-        class="cancel-btn"
-        id="article-cancel-btn"
-        style="display: none;"
-      >
-        Cancel Edit
-      </button>
+  <button
+    type="button"
+    class="cancel-btn"
+    id="article-cancel-btn"
+    style="display: none;"
+  >
+    Cancel Edit
+  </button>
 
-    </form>
+</form>
 
-    <div id="article-message"></div>
+<div id="article-message"></div>
+```
 
   </div>
 
-
   <div class="box">
 
-    <h2>Articles List</h2>
+```
+<h2>Articles List</h2>
 
-    <div id="articles-list">
-      Loading...
-    </div>
+<div id="articles-list">
+  Loading...
+</div>
+```
 
   </div>
 
 </div>
-
 
 <script>
 
@@ -437,6 +474,91 @@
 
 
   /* =========================
+     ARTICLE VIEW STATS
+  ========================= */
+
+  const totalArticleViews =
+    document.getElementById(
+      "total-article-views"
+    );
+
+
+  async function getArticleViewCount(
+    articleId
+  ) {
+
+    const {
+      data,
+      error
+    } = await supabaseClient.rpc(
+      "get_article_view_count",
+      {
+        p_article_id: articleId
+      }
+    );
+
+
+    if (error) {
+
+      console.error(
+        "View count error:",
+        error
+      );
+
+      return 0;
+    }
+
+
+    return Number(data || 0);
+
+  }
+
+
+  async function loadTotalArticleViews() {
+
+    totalArticleViews.textContent =
+      "Loading...";
+
+
+    const {
+      count,
+      error
+    } = await supabaseClient
+      .from("article_views")
+      .select("id", {
+        count: "exact",
+        head: true
+      });
+
+
+    if (error) {
+
+      console.error(error);
+
+      totalArticleViews.textContent =
+        "Unable to load views.";
+
+      return;
+    }
+
+
+    const total =
+      Number(count || 0);
+
+
+    totalArticleViews.textContent =
+      "👁 " +
+      total +
+      (
+        total === 1
+          ? " View"
+          : " Views"
+      );
+
+  }
+
+
+  /* =========================
      SOFTWARE
   ========================= */
 
@@ -444,40 +566,62 @@
 
 
   const softwareForm =
-    document.getElementById("software-form");
+    document.getElementById(
+      "software-form"
+    );
 
   const titleInput =
     document.getElementById("title");
 
   const descriptionInput =
-    document.getElementById("description");
+    document.getElementById(
+      "description"
+    );
 
   const downloadInput =
-    document.getElementById("download_url");
+    document.getElementById(
+      "download_url"
+    );
 
   const categoryInput =
-    document.getElementById("category");
+    document.getElementById(
+      "category"
+    );
 
   const imageInput =
-    document.getElementById("image_url");
+    document.getElementById(
+      "image_url"
+    );
 
   const premiumInput =
-    document.getElementById("is_premium");
+    document.getElementById(
+      "is_premium"
+    );
 
   const saveBtn =
-    document.getElementById("save-btn");
+    document.getElementById(
+      "save-btn"
+    );
 
   const cancelBtn =
-    document.getElementById("cancel-btn");
+    document.getElementById(
+      "cancel-btn"
+    );
 
   const formTitle =
-    document.getElementById("form-title");
+    document.getElementById(
+      "form-title"
+    );
 
   const softwareList =
-    document.getElementById("software-list");
+    document.getElementById(
+      "software-list"
+    );
 
   const softwareMessage =
-    document.getElementById("software-message");
+    document.getElementById(
+      "software-message"
+    );
 
 
   function showSoftwareMessage(
@@ -701,7 +845,10 @@
           } = await supabaseClient
             .from("software")
             .delete()
-            .eq("id", software.id);
+            .eq(
+              "id",
+              software.id
+            );
 
 
           if (error) {
@@ -867,10 +1014,14 @@
 
 
   const articleForm =
-    document.getElementById("article-form");
+    document.getElementById(
+      "article-form"
+    );
 
   const articleTitleInput =
-    document.getElementById("article-title");
+    document.getElementById(
+      "article-title"
+    );
 
   const articleDescriptionInput =
     document.getElementById(
@@ -1052,6 +1203,16 @@
         article.description || "";
 
 
+      const views =
+        document.createElement("div");
+
+      views.className =
+        "views";
+
+      views.textContent =
+        "👁 Loading views...";
+
+
       const preview =
         document.createElement("div");
 
@@ -1160,7 +1321,10 @@
           } = await supabaseClient
             .from("articles")
             .delete()
-            .eq("id", article.id);
+            .eq(
+              "id",
+              article.id
+            );
 
 
           if (error) {
@@ -1187,7 +1351,8 @@
             "Article deleted."
           );
 
-          loadArticles();
+          await loadArticles();
+          await loadTotalArticleViews();
 
         };
 
@@ -1196,12 +1361,29 @@
       item.appendChild(category);
       item.appendChild(badge);
       item.appendChild(description);
+      item.appendChild(views);
       item.appendChild(preview);
       item.appendChild(editButton);
       item.appendChild(deleteButton);
 
 
       articlesList.appendChild(item);
+
+
+      getArticleViewCount(
+        article.id
+      ).then((totalViews) => {
+
+        views.textContent =
+          "👁 " +
+          totalViews +
+          (
+            totalViews === 1
+              ? " View"
+              : " Views"
+          );
+
+      });
 
     });
 
@@ -1307,6 +1489,7 @@
       clearArticleForm();
 
       await loadArticles();
+      await loadTotalArticleViews();
 
       articleSaveBtn.disabled =
         false;
@@ -1414,6 +1597,7 @@
 
     await loadSoftware();
     await loadArticles();
+    await loadTotalArticleViews();
 
   }
 
@@ -1424,4 +1608,3 @@
 
 </body>
 </html>
-```
