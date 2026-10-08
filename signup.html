@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -6,462 +7,516 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-```
-<title>KaliMoh | Sign Up</title>
+    <title>KaliMoh | Sign Up</title>
 
-<link
-  rel="shortcut icon"
-  href="assets/images/favicon.svg"
-  type="image/svg"
-/>
+    <link
+      rel="shortcut icon"
+      href="assets/images/favicon.svg"
+      type="image/svg"
+    />
 
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="assets/css/animate.css" />
-<link rel="stylesheet" href="assets/css/lineicons.css" />
-<link rel="stylesheet" href="assets/css/ud-styles.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/css/lineicons.css" />
+    <link rel="stylesheet" href="assets/css/ud-styles.css" />
 
-<style>
-  #signup-message {
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 14px;
-  }
-</style>
-```
-
+    <style>
+      #signup-message {
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 14px;
+      }
+    </style>
   </head>
 
   <body>
 
-```
-<!-- ====== Header Start ====== -->
-<header class="ud-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <nav class="navbar navbar-expand-lg">
+    <!-- ====== Header Start ====== -->
+    <header class="ud-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
 
-          <a class="navbar-brand" href="index.html">
-            <span style="font-size: 26px; font-weight: 700; color: #fff;">
-              KaliMoh
-            </span>
-          </a>
+              <a class="navbar-brand" href="index.html">
+                <span style="font-size: 26px; font-weight: 700; color: #fff;">
+                  KaliMoh
+                </span>
+              </a>
 
-          <button class="navbar-toggler">
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-          </button>
-
-          <div class="navbar-collapse">
-            <ul id="nav" class="navbar-nav mx-auto">
-
-              <li class="nav-item">
-                <a href="index.html">Home</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.html#features">Features</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="about.html">About</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="blog.html">Articles</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.html#faq">FAQ</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="contact.html">Contact</a>
-              </li>
-
-            </ul>
-          </div>
-
-          <div class="navbar-btn d-none d-sm-inline-block">
-            <a
-              class="ud-main-btn ud-white-btn"
-              href="login.html"
-            >
-              Login
-            </a>
-          </div>
-
-        </nav>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- ====== Header End ====== -->
-
-
-<!-- ====== Banner Start ====== -->
-<section class="ud-page-banner">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="ud-banner-content">
-          <h1>Join KaliMoh</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ====== Banner End ====== -->
-
-
-<!-- ====== Sign Up Start ====== -->
-<section class="ud-login">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-
-        <div class="ud-login-wrapper">
-
-          <div class="ud-login-logo">
-            <a href="index.html">
-              <span style="font-size: 32px; font-weight: 700;">
-                KaliMoh
-              </span>
-            </a>
-          </div>
-
-          <h3 style="text-align: center; margin-bottom: 10px;">
-            Create Your Account
-          </h3>
-
-          <p style="text-align: center; margin-bottom: 30px;">
-            Discover • Learn • Explore
-          </p>
-
-          <form id="signup-form" class="ud-login-form">
-
-            <div class="ud-form-group">
-              <input
-                type="email"
-                id="signup-email"
-                name="email"
-                placeholder="Email address"
-                required
-              />
-            </div>
-
-            <div class="ud-form-group">
-              <input
-                type="password"
-                id="signup-password"
-                name="password"
-                placeholder="Password"
-                minlength="6"
-                required
-              />
-            </div>
-
-            <div class="ud-form-group">
-              <input
-                type="password"
-                id="signup-password-confirm"
-                name="password-confirm"
-                placeholder="Confirm password"
-                minlength="6"
-                required
-              />
-            </div>
-
-            <div id="signup-message"></div>
-
-            <div class="ud-form-group">
               <button
-                type="submit"
-                id="signup-button"
-                class="ud-main-btn w-100"
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
               >
-                Create Account
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
               </button>
+
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul id="nav" class="navbar-nav mx-auto">
+
+                  <li class="nav-item">
+                    <a href="index.html">Home</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="index.html#features">Features</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="about.html">About</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="blog.html">Articles</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="software.html">Software</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="pricing.html">Categories</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="index.html#faq">FAQ</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="contact.html">Contact</a>
+                  </li>
+
+                </ul>
+              </div>
+
+              <div class="navbar-btn d-none d-sm-inline-block">
+                <a
+                  class="ud-main-btn ud-white-btn"
+                  href="login.html"
+                >
+                  Login
+                </a>
+              </div>
+
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ====== Header End ====== -->
+
+
+    <!-- ====== Banner Start ====== -->
+    <section class="ud-page-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ud-banner-content">
+              <h1>Join KaliMoh</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Banner End ====== -->
+
+
+    <!-- ====== Sign Up Start ====== -->
+    <section class="ud-login">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="ud-login-wrapper">
+
+              <div class="ud-login-logo">
+                <a href="index.html">
+                  <span style="font-size: 32px; font-weight: 700;">
+                    KaliMoh
+                  </span>
+                </a>
+              </div>
+
+              <h3 style="text-align: center; margin-bottom: 10px;">
+                Create Your Account
+              </h3>
+
+              <p style="text-align: center; margin-bottom: 30px;">
+                Discover • Learn • Explore
+              </p>
+
+              <form id="signup-form" class="ud-login-form">
+
+                <div class="ud-form-group">
+                  <input
+                    type="email"
+                    id="signup-email"
+                    name="email"
+                    placeholder="Email address"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+
+                <div class="ud-form-group">
+                  <input
+                    type="password"
+                    id="signup-password"
+                    name="password"
+                    placeholder="Password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                  />
+                </div>
+
+                <div class="ud-form-group">
+                  <input
+                    type="password"
+                    id="signup-password-confirm"
+                    name="password-confirm"
+                    placeholder="Confirm password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                  />
+                </div>
+
+                <div id="signup-message"></div>
+
+                <div class="ud-form-group">
+                  <button
+                    type="submit"
+                    id="signup-button"
+                    class="ud-main-btn w-100"
+                  >
+                    Create Account
+                  </button>
+                </div>
+
+              </form>
+
+              <p class="signup-option">
+                Already have an account?
+                <a href="login.html">Login</a>
+              </p>
+
             </div>
 
-          </form>
-
-          <p class="signup-option">
-            Already have an account?
-            <a href="login.html">Login</a>
-          </p>
-
+          </div>
         </div>
-
       </div>
-    </div>
-  </div>
-</section>
-<!-- ====== Sign Up End ====== -->
+    </section>
+    <!-- ====== Sign Up End ====== -->
 
 
-<!-- ====== Footer Start ====== -->
-<footer class="ud-footer">
+    <!-- ====== Footer Start ====== -->
+    <footer class="ud-footer">
 
-  <div class="shape shape-1">
-    <img src="assets/images/footer/shape-1.svg" alt="shape" />
-  </div>
-
-  <div class="shape shape-2">
-    <img src="assets/images/footer/shape-2.svg" alt="shape" />
-  </div>
-
-  <div class="shape shape-3">
-    <img src="assets/images/footer/shape-3.svg" alt="shape" />
-  </div>
-
-  <div class="ud-footer-widgets">
-
-    <div class="container">
-
-      <div class="row">
-
-        <div class="col-xl-4 col-lg-4 col-md-6">
-
-          <div class="ud-widget">
-
-            <a href="index.html" class="ud-footer-logo">
-              <span style="font-size: 26px; font-weight: 700; color: #fff;">
-                KaliMoh
-              </span>
-            </a>
-
-            <p class="ud-widget-desc">
-              A place to discover useful information, learn new things,
-              explore ideas, technology, guides, entertainment, and more.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-
-          <div class="ud-widget">
-
-            <h5 class="ud-widget-title">KaliMoh</h5>
-
-            <ul class="ud-widget-links">
-
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-
-              <li>
-                <a href="about.html">About</a>
-              </li>
-
-              <li>
-                <a href="blog.html">Articles</a>
-              </li>
-
-              <li>
-                <a href="contact.html">Contact</a>
-              </li>
-
-            </ul>
-
-          </div>
-
-        </div>
-
-        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-
-          <div class="ud-widget">
-
-            <h5 class="ud-widget-title">Explore</h5>
-
-            <ul class="ud-widget-links">
-
-              <li>
-                <a href="index.html#features">Features</a>
-              </li>
-
-              <li>
-                <a href="pricing.html">Categories</a>
-              </li>
-
-              <li>
-                <a href="index.html#faq">FAQ</a>
-              </li>
-
-              <li>
-                <a href="contact.html">Suggest a Topic</a>
-              </li>
-
-            </ul>
-
-          </div>
-
-        </div>
-
-        <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10">
-
-          <div class="ud-widget">
-
-            <h5 class="ud-widget-title">
-              Discover • Learn • Explore
-            </h5>
-
-            <p class="ud-widget-desc">
-              Stay curious and discover something new with KaliMoh.
-            </p>
-
-          </div>
-
-        </div>
-
+      <div class="shape shape-1">
+        <img src="assets/images/footer/shape-1.svg" alt="shape" />
       </div>
 
-    </div>
+      <div class="shape shape-2">
+        <img src="assets/images/footer/shape-2.svg" alt="shape" />
+      </div>
 
-  </div>
+      <div class="shape shape-3">
+        <img src="assets/images/footer/shape-3.svg" alt="shape" />
+      </div>
 
-  <div class="ud-footer-bottom">
+      <div class="ud-footer-widgets">
 
-    <div class="container">
+        <div class="container">
 
-      <div class="row">
+          <div class="row">
 
-        <div class="col-md-8">
+            <div class="col-xl-4 col-lg-4 col-md-6">
 
-          <ul class="ud-footer-bottom-left">
+              <div class="ud-widget">
 
-            <li>
-              <a href="javascript:void(0)">Privacy Policy</a>
-            </li>
+                <a href="index.html" class="ud-footer-logo">
+                  <span style="font-size: 26px; font-weight: 700; color: #fff;">
+                    KaliMoh
+                  </span>
+                </a>
 
-            <li>
-              <a href="javascript:void(0)">Terms of Service</a>
-            </li>
+                <p class="ud-widget-desc">
+                  A place to discover useful information, learn new things,
+                  explore ideas, technology, guides, entertainment, and more.
+                </p>
 
-            <li>
-              <a href="contact.html">Support</a>
-            </li>
+              </div>
 
-          </ul>
+            </div>
 
-        </div>
 
-        <div class="col-md-4">
+            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
 
-          <p class="ud-footer-bottom-right">
-            © 2026 KaliMoh. All rights reserved.
-          </p>
+              <div class="ud-widget">
+
+                <h5 class="ud-widget-title">KaliMoh</h5>
+
+                <ul class="ud-widget-links">
+
+                  <li>
+                    <a href="index.html">Home</a>
+                  </li>
+
+                  <li>
+                    <a href="about.html">About</a>
+                  </li>
+
+                  <li>
+                    <a href="blog.html">Articles</a>
+                  </li>
+
+                  <li>
+                    <a href="software.html">Software</a>
+                  </li>
+
+                  <li>
+                    <a href="contact.html">Contact</a>
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+
+              <div class="ud-widget">
+
+                <h5 class="ud-widget-title">Explore</h5>
+
+                <ul class="ud-widget-links">
+
+                  <li>
+                    <a href="index.html#features">Features</a>
+                  </li>
+
+                  <li>
+                    <a href="pricing.html">Categories</a>
+                  </li>
+
+                  <li>
+                    <a href="index.html#faq">FAQ</a>
+                  </li>
+
+                  <li>
+                    <a href="contact.html">Suggest a Topic</a>
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+
+            <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10">
+
+              <div class="ud-widget">
+
+                <h5 class="ud-widget-title">
+                  Discover • Learn • Explore
+                </h5>
+
+                <p class="ud-widget-desc">
+                  Stay curious and discover something new with KaliMoh.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
 
         </div>
 
       </div>
 
-    </div>
 
-  </div>
+      <div class="ud-footer-bottom">
 
-</footer>
-<!-- ====== Footer End ====== -->
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col-md-8">
+
+              <ul class="ud-footer-bottom-left">
+
+                <li>
+                  <a href="javascript:void(0)">
+                    Privacy Policy
+                  </a>
+                </li>
+
+                <li>
+                  <a href="javascript:void(0)">
+                    Terms of Service
+                  </a>
+                </li>
+
+                <li>
+                  <a href="contact.html">
+                    Support
+                  </a>
+                </li>
+
+              </ul>
+
+            </div>
+
+            <div class="col-md-4">
+
+              <p class="ud-footer-bottom-right">
+                © 2026 KaliMoh. All rights reserved.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </footer>
+    <!-- ====== Footer End ====== -->
 
 
-<!-- ====== Javascript ====== -->
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/main.js"></script>
+    <!-- ====== Javascript ====== -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/main.js"></script>
 
-<!-- ====== Supabase ====== -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  const SUPABASE_URL =
-    "https://ulxreyrjtavflppahqlp.supabase.co";
+    <!-- ====== Supabase ====== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  const SUPABASE_KEY =
-    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+    <script>
+      const SUPABASE_URL =
+        "https://ulxreyrjtavflppahqlp.supabase.co";
 
-  const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+      const SUPABASE_KEY =
+        "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-  const signupForm =
-    document.getElementById("signup-form");
+      const supabaseClient =
+        window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_KEY
+        );
 
-  const emailInput =
-    document.getElementById("signup-email");
 
-  const passwordInput =
-    document.getElementById("signup-password");
+      const signupForm =
+        document.getElementById("signup-form");
 
-  const confirmPasswordInput =
-    document.getElementById("signup-password-confirm");
+      const emailInput =
+        document.getElementById("signup-email");
 
-  const signupButton =
-    document.getElementById("signup-button");
+      const passwordInput =
+        document.getElementById("signup-password");
 
-  const signupMessage =
-    document.getElementById("signup-message");
+      const confirmPasswordInput =
+        document.getElementById("signup-password-confirm");
 
-  signupForm.addEventListener(
-    "submit",
-    async function (event) {
+      const signupButton =
+        document.getElementById("signup-button");
 
-      event.preventDefault();
+      const signupMessage =
+        document.getElementById("signup-message");
 
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-      const confirmPassword =
-        confirmPasswordInput.value;
 
-      signupMessage.textContent = "";
+      signupForm.addEventListener(
+        "submit",
+        async function (event) {
 
-      if (password !== confirmPassword) {
-        signupMessage.style.color = "#d32f2f";
-        signupMessage.textContent =
-          "Passwords do not match.";
+          event.preventDefault();
 
-        return;
-      }
+          const email =
+            emailInput.value.trim();
 
-      signupButton.disabled = true;
-      signupButton.textContent =
-        "Creating account...";
+          const password =
+            passwordInput.value;
 
-      const { data, error } =
-        await supabaseClient.auth.signUp({
-          email: email,
-          password: password
-        });
+          const confirmPassword =
+            confirmPasswordInput.value;
 
-      if (error) {
 
-        signupMessage.style.color = "#d32f2f";
-        signupMessage.textContent =
-          error.message;
+          signupMessage.textContent = "";
 
-        signupButton.disabled = false;
-        signupButton.textContent =
-          "Create Account";
 
-        return;
-      }
+          if (password !== confirmPassword) {
 
-      signupMessage.style.color = "#2e7d32";
+            signupMessage.style.color =
+              "#d32f2f";
 
-      signupMessage.textContent =
-        "Account created successfully. Check your email to confirm your account.";
+            signupMessage.textContent =
+              "Passwords do not match.";
 
-      signupButton.disabled = false;
-      signupButton.textContent =
-        "Create Account";
-    }
-  );
-</script>
-```
+            return;
+          }
+
+
+          signupButton.disabled = true;
+
+          signupButton.textContent =
+            "Creating account...";
+
+
+          const { error } =
+            await supabaseClient.auth.signUp({
+
+              email: email,
+              password: password
+
+            });
+
+
+          if (error) {
+
+            signupMessage.style.color =
+              "#d32f2f";
+
+            signupMessage.textContent =
+              error.message;
+
+            signupButton.disabled = false;
+
+            signupButton.textContent =
+              "Create Account";
+
+            return;
+          }
+
+
+          signupMessage.style.color =
+            "#2e7d32";
+
+          signupMessage.textContent =
+            "Account created successfully. Check your email to confirm your account.";
+
+          signupButton.disabled = false;
+
+          signupButton.textContent =
+            "Create Account";
+
+        }
+      );
+    </script>
 
   </body>
 </html>
-
+```
