@@ -1,10 +1,4 @@
-```svg
 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
   <rect width="40" height="40" rx="20" fill="#3056d3"/>
-  <text x="20" y="26" text-anchor="middle"
-        font-family="Arial, sans-serif"
-        font-size="15"
-        font-weight="700"
-        fill="#fff">KM</text>
+  <text x="20" y="26" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#fff">KM</text>
 </svg>
-```
