@@ -42,7 +42,7 @@
 
     .software-search {
       max-width: 650px;
-      margin: 0 auto 40px;
+      margin: 0 auto 20px;
     }
 
     .software-search input {
@@ -56,6 +56,35 @@
     }
 
     .software-search input:focus {
+      border-color: #111;
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .category-btn {
+      border: 1px solid #ddd;
+      background: #fff;
+      color: #333;
+      padding: 9px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .category-btn:hover {
+      background: #f5f5f5;
+    }
+
+    .category-btn.active {
+      background: #111;
+      color: #fff;
       border-color: #111;
     }
 
@@ -210,6 +239,7 @@
 
 ```
   <!-- Search -->
+
   <div class="software-search">
     <input
       type="search"
@@ -219,11 +249,67 @@
     />
   </div>
 
+  <!-- Category Filters -->
+
+  <div class="category-filters">
+
+    <button
+      type="button"
+      class="category-btn active"
+      data-category="all"
+    >
+      All
+    </button>
+
+    <button
+      type="button"
+      class="category-btn"
+      data-category="windows"
+    >
+      🪟 Windows
+    </button>
+
+    <button
+      type="button"
+      class="category-btn"
+      data-category="linux"
+    >
+      🐧 Linux
+    </button>
+
+    <button
+      type="button"
+      class="category-btn"
+      data-category="android"
+    >
+      📱 Android
+    </button>
+
+    <button
+      type="button"
+      class="category-btn"
+      data-category="tools"
+    >
+      🛠️ Tools
+    </button>
+
+    <button
+      type="button"
+      class="category-btn"
+      data-category="books"
+    >
+      📚 Books
+    </button>
+
+  </div>
+
   <div class="row" id="software-container">
 
     <!-- Windows 7 -->
+
     <div
       class="col-lg-6 col-md-6 software-card"
+      data-category="windows"
       data-search="windows windows 7 windows 7 ultimate sp1 superlite x64"
     >
 
@@ -259,8 +345,10 @@
     </div>
 
     <!-- Kali Linux -->
+
     <div
       class="col-lg-6 col-md-6 software-card"
+      data-category="linux"
       data-search="linux kali kali linux"
     >
 
@@ -297,12 +385,14 @@
   </div>
 
   <!-- Dynamic Software -->
+
   <div
     class="row"
     id="software-list"
   ></div>
 
   <!-- No Results -->
+
   <div
     class="no-results"
     id="noResults"
@@ -374,6 +464,7 @@
 
 
       // User is logged in
+
       if (session) {
 
         window.location.href = downloadUrl;
@@ -383,6 +474,7 @@
 
 
       // User is not logged in
+
       localStorage.setItem(
         "pendingDownload",
         downloadUrl
@@ -430,8 +522,11 @@
 
 
     // ==========================================
-    // Software Search
+    // Search + Category Filter
     // ==========================================
+
+    let selectedCategory = "all";
+
 
     function filterSoftware() {
 
@@ -440,15 +535,18 @@
           "softwareSearch"
         );
 
+
       const searchValue =
         searchInput.value
           .toLowerCase()
           .trim();
 
+
       const cards =
         document.querySelectorAll(
           ".software-card"
         );
+
 
       let visibleCount = 0;
 
@@ -462,10 +560,28 @@
             ""
           ).toLowerCase();
 
-        const matches =
+
+        const cardCategory =
+          (
+            card.dataset.category ||
+            ""
+          ).toLowerCase();
+
+
+        const matchesSearch =
           searchText.includes(
             searchValue
           );
+
+
+        const matchesCategory =
+          selectedCategory === "all" ||
+          cardCategory === selectedCategory;
+
+
+        const matches =
+          matchesSearch &&
+          matchesCategory;
 
 
         card.style.display =
@@ -497,13 +613,51 @@
     }
 
 
+    // ==========================================
     // Search while typing
+    // ==========================================
+
     document
       .getElementById("softwareSearch")
       .addEventListener(
         "input",
         filterSoftware
       );
+
+
+    // ==========================================
+    // Category Buttons
+    // ==========================================
+
+    document
+      .querySelectorAll(".category-btn")
+      .forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            document
+              .querySelectorAll(".category-btn")
+              .forEach((btn) => {
+                btn.classList.remove("active");
+              });
+
+
+            this.classList.add("active");
+
+
+            selectedCategory =
+              this.dataset.category ||
+              "all";
+
+
+            filterSoftware();
+
+          }
+        );
+
+      });
 
 
     // ==========================================
@@ -551,8 +705,20 @@
         const card =
           document.createElement("div");
 
+
         card.className =
           "col-xl-4 col-lg-4 col-md-6 software-card";
+
+
+        const category =
+          (
+            software.category ||
+            "Software"
+          ).toLowerCase().trim();
+
+
+        card.dataset.category =
+          category;
 
 
         card.dataset.search = `
@@ -649,16 +815,19 @@
       });
 
 
-      // Apply search after dynamic software loads
+      // Apply search + category filter
       filterSoftware();
 
     }
 
 
     // Load page
+
     loadSoftware();
 
+
     // Check if a download was waiting after login
+
     resumePendingDownload();
 
   </script>
