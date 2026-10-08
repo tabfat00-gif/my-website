@@ -1,9 +1,2 @@
-<image
-  x="0"
-  y="0"
-  width="846"
-  height="287"
-  xlink:href="data:image/jpeg;base64,...."
-/>
-
+<rect x="0" y="0" width="846" height="287" fill="#0b1220"/>
 <rect x="0" y="0" width="145" height="42" fill="#151e35"/>
