@@ -1,11 +1,21 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Software - KaliMoh</title>
 
+  <title>KaliMoh | Software</title>
+
+  <!--====== Favicon Icon ======-->
+  <link
+    rel="shortcut icon"
+    href="assets/images/favicon.svg"
+    type="image/svg"
+  />
+
+  <!-- ===== All CSS files ===== -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/animate.css" />
   <link rel="stylesheet" href="assets/css/lineicons.css" />
@@ -51,58 +61,110 @@
 
           <nav class="navbar navbar-expand-lg">
 
-            <a class="navbar-brand"
-               href="index.html"
-               style="font-size: 26px; font-weight: 700; color: #ffffff;">
-              KaliMoh
+            <a
+              class="navbar-brand"
+              href="index.html"
+            >
+              <span
+                style="
+                  font-size: 26px;
+                  font-weight: 700;
+                  color: #ffffff;
+                "
+              >
+                KaliMoh
+              </span>
             </a>
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
               <span class="toggler-icon"></span>
               <span class="toggler-icon"></span>
               <span class="toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div
+              class="collapse navbar-collapse"
+              id="navbarCollapse"
+            >
 
               <ul class="navbar-nav mx-auto">
 
                 <li class="nav-item">
-                  <a href="index.html">Home</a>
+                  <a href="index.html">
+                    Home
+                  </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="index.html#features">Features</a>
+                  <a href="index.html#features">
+                    Features
+                  </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="index.html#about">About</a>
+                  <a href="about.html">
+                    About
+                  </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="blog.html">Articles</a>
+                  <a href="blog.html">
+                    Articles
+                  </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="software.html">Software</a>
+                  <a href="software.html">
+                    Software
+                  </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="index.html#categories">Categories</a>
+                  <a href="pricing.html">
+                    Categories
+                  </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="index.html#faq">FAQ</a>
+                  <a href="index.html#faq">
+                    FAQ
+                  </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="index.html#contact">Contact</a>
+                  <a href="contact.html">
+                    Contact
+                  </a>
                 </li>
 
               </ul>
+
+              <div class="navbar-btn d-none d-sm-inline-block">
+
+                <a
+                  class="ud-main-btn ud-white-btn"
+                  href="login.html"
+                >
+                  Login
+                </a>
+
+                <a
+                  class="ud-main-btn ud-white-btn"
+                  href="signup.html"
+                  style="margin-left: 8px;"
+                >
+                  Sign Up
+                </a>
+
+              </div>
 
             </div>
 
@@ -180,7 +242,8 @@
                 href="https://archive.org/details/win-7-ult-sp-1-super-lite-x-64"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="ud-main-btn ud-white-btn">
+                class="ud-main-btn ud-white-btn"
+              >
                 Download
               </a>
 
@@ -215,7 +278,8 @@
                 href="https://www.kali.org/get-kali/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="ud-main-btn ud-white-btn">
+                class="ud-main-btn ud-white-btn"
+              >
                 Official Download
               </a>
 
@@ -230,7 +294,10 @@
 
       <!-- Dynamic Software -->
 
-      <div class="row" id="software-list"></div>
+      <div
+        class="row"
+        id="software-list"
+      ></div>
 
     </div>
 
