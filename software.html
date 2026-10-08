@@ -8,14 +8,14 @@
 
   <title>KaliMoh | Software</title>
 
-  <!--====== Favicon Icon ======-->
+  <!-- Favicon -->
   <link
     rel="shortcut icon"
     href="assets/images/favicon.svg"
     type="image/svg"
   />
 
-  <!-- ===== All CSS files ===== -->
+  <!-- CSS -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/animate.css" />
   <link rel="stylesheet" href="assets/css/lineicons.css" />
@@ -32,16 +32,6 @@
       margin-bottom: 12px;
     }
 
-    .free-badge {
-      display: inline-block;
-      background: #e8f5e9;
-      color: #2e7d32;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
-
     .premium-message {
       margin-top: 10px;
       font-size: 14px;
@@ -52,8 +42,7 @@
 
 <body>
 
-  <!-- ====== Header Start ====== -->
-
+  <!-- Header -->
   <header class="ud-header">
     <div class="container">
       <div class="row">
@@ -61,10 +50,7 @@
 
           <nav class="navbar navbar-expand-lg">
 
-            <a
-              class="navbar-brand"
-              href="index.html"
-            >
+            <a class="navbar-brand" href="index.html">
               <span
                 style="
                   font-size: 26px;
@@ -98,51 +84,35 @@
               <ul class="navbar-nav mx-auto">
 
                 <li class="nav-item">
-                  <a href="index.html">
-                    Home
-                  </a>
+                  <a href="index.html">Home</a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="index.html#features">
-                    Features
-                  </a>
+                  <a href="index.html#features">Features</a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="about.html">
-                    About
-                  </a>
+                  <a href="about.html">About</a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="blog.html">
-                    Articles
-                  </a>
+                  <a href="blog.html">Articles</a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="software.html">
-                    Software
-                  </a>
+                  <a href="software.html">Software</a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="pricing.html">
-                    Categories
-                  </a>
+                  <a href="pricing.html">Categories</a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="index.html#faq">
-                    FAQ
-                  </a>
+                  <a href="index.html#faq">FAQ</a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="contact.html">
-                    Contact
-                  </a>
+                  <a href="contact.html">Contact</a>
                 </li>
 
               </ul>
@@ -175,50 +145,32 @@
     </div>
   </header>
 
-  <!-- ====== Header End ====== -->
-
-
-  <!-- ====== Banner Start ====== -->
-
+  <!-- Banner -->
   <section class="ud-page-banner">
-
     <div class="container">
-
       <div class="row">
-
         <div class="col-lg-12">
 
           <div class="ud-banner-content">
-
             <h1>Software</h1>
 
             <p>
               Useful operating systems and software for your needs.
             </p>
-
           </div>
 
         </div>
-
       </div>
-
     </div>
-
   </section>
 
-  <!-- ====== Banner End ====== -->
-
-
-  <!-- ====== Software Start ====== -->
-
+  <!-- Software -->
   <section class="ud-blog-grids">
-
     <div class="container">
 
       <div class="row">
 
         <!-- Windows 7 -->
-
         <div class="col-lg-6 col-md-6">
 
           <div class="ud-single-blog">
@@ -240,11 +192,10 @@
 
               <a
                 href="https://archive.org/details/win-7-ult-sp-1-super-lite-x-64"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="ud-main-btn ud-white-btn"
+                class="ud-main-btn"
+                onclick="handleDownload(event, this.href)"
               >
-                Download
+                📥 Download Free
               </a>
 
             </div>
@@ -253,9 +204,7 @@
 
         </div>
 
-
         <!-- Kali Linux -->
-
         <div class="col-lg-6 col-md-6">
 
           <div class="ud-single-blog">
@@ -276,11 +225,10 @@
 
               <a
                 href="https://www.kali.org/get-kali/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="ud-main-btn ud-white-btn"
+                class="ud-main-btn"
+                onclick="handleDownload(event, this.href)"
               >
-                Official Download
+                📥 Download Free
               </a>
 
             </div>
@@ -291,29 +239,20 @@
 
       </div>
 
-
       <!-- Dynamic Software -->
-
       <div
         class="row"
         id="software-list"
       ></div>
 
     </div>
-
   </section>
 
-  <!-- ====== Software End ====== -->
-
-
-  <!-- ====== Footer Start ====== -->
-
+  <!-- Footer -->
   <footer class="ud-footer">
-
     <div class="container">
 
       <div class="row">
-
         <div class="col-lg-12">
 
           <div class="ud-footer-bottom">
@@ -325,18 +264,12 @@
           </div>
 
         </div>
-
       </div>
 
     </div>
-
   </footer>
 
-  <!-- ====== Footer End ====== -->
-
-
-  <!-- ====== Supabase ====== -->
-
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
@@ -353,6 +286,80 @@
         SUPABASE_KEY
       );
 
+
+    // ==========================================
+    // DOWNLOAD PROTECTION
+    // Login is required only for downloads
+    // ==========================================
+
+    async function handleDownload(event, downloadUrl) {
+
+      event.preventDefault();
+
+      const {
+        data: { session }
+      } = await supabaseClient.auth.getSession();
+
+
+      // User is logged in
+      if (session) {
+
+        window.location.href = downloadUrl;
+
+        return;
+      }
+
+
+      // User is not logged in
+      localStorage.setItem(
+        "pendingDownload",
+        downloadUrl
+      );
+
+      window.location.href = "login.html";
+    }
+
+
+    // ==========================================
+    // Resume pending download after login
+    // ==========================================
+
+    async function resumePendingDownload() {
+
+      const pendingDownload =
+        localStorage.getItem(
+          "pendingDownload"
+        );
+
+
+      if (!pendingDownload) {
+        return;
+      }
+
+
+      const {
+        data: { session }
+      } = await supabaseClient.auth.getSession();
+
+
+      if (!session) {
+        return;
+      }
+
+
+      localStorage.removeItem(
+        "pendingDownload"
+      );
+
+
+      window.location.href =
+        pendingDownload;
+    }
+
+
+    // ==========================================
+    // Load software from Supabase
+    // ==========================================
 
     async function loadSoftware() {
 
@@ -382,7 +389,9 @@
         );
 
 
-      if (!list) return;
+      if (!list) {
+        return;
+      }
 
 
       list.innerHTML = "";
@@ -461,11 +470,10 @@
                         ? `
                           <a
                             href="${software.download_url}"
-                            target="_blank"
-                            rel="noopener noreferrer"
                             class="ud-main-btn"
+                            onclick="handleDownload(event, this.href)"
                           >
-                            Download
+                            📥 Download Free
                           </a>
                         `
                         : ""
@@ -487,7 +495,11 @@
     }
 
 
+    // Load page
     loadSoftware();
+
+    // Check if a download was waiting after login
+    resumePendingDownload();
 
   </script>
 
