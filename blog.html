@@ -1,807 +1,779 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>KaliMoh | Articles</title>
+  <title>KaliMoh | Articles</title>
 
-    <meta
-      name="description"
-      content="KaliMoh - Discover useful information, guides, technology, ideas and interesting topics."
-    />
+  <meta
+    name="description"
+    content="KaliMoh - Discover useful information, guides, technology, ideas and interesting topics."
+  />
 
-    <link
-      rel="shortcut icon"
-      href="assets/images/favicon.svg"
-      type="image/svg"
-    />
+  <link
+    rel="shortcut icon"
+    href="assets/images/favicon.svg"
+    type="image/svg"
+  />
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/lineicons.css" />
-    <link rel="stylesheet" href="assets/css/ud-styles.css" />
-  </head>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/lineicons.css" />
+  <link rel="stylesheet" href="assets/css/ud-styles.css" />
+</head>
 
-  <body>
+<body>
 
-    <!-- ====== Header Start ====== -->
-    <header class="ud-header">
+  <!-- ====== Header Start ====== -->
+  <header class="ud-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <nav class="navbar navbar-expand-lg">
+
+            <a class="navbar-brand" href="index.html">
+              <span style="font-size: 28px; font-weight: 700; color: #fff;">
+                KaliMoh
+              </span>
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+
+              <ul id="nav" class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+                  <a href="index.html">Home</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="index.html#features">Features</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="about.html">About</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="blog.html">Articles</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="software.html">Software</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="pricing.html">Categories</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="index.html#faq">FAQ</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="index.html#contact">Contact</a>
+                </li>
+
+              </ul>
+
+              <div class="navbar-btn d-flex align-items-center gap-2">
+
+                <a
+                  class="ud-main-btn ud-white-btn"
+                  href="login.html"
+                >
+                  Login
+                </a>
+
+                <a
+                  class="ud-main-btn ud-white-btn"
+                  href="signup.html"
+                >
+                  Sign Up
+                </a>
+
+              </div>
+
+            </div>
+
+          </nav>
+
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ====== Header End ====== -->
+
+
+  <!-- ====== Banner Start ====== -->
+  <section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="ud-banner-content">
+            <h1>KaliMoh Articles</h1>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ====== Banner End ====== -->
+
+
+  <!-- ====== Blog Start ====== -->
+  <section class="ud-blog-grids">
+    <div class="container">
+
+      <!-- ====== Article Search ====== -->
+      <div
+        style="
+          width: 100%;
+          padding: 30px 20px;
+          text-align: center;
+        "
+      >
+
+        <div
+          style="
+            position: relative;
+            width: 80%;
+            max-width: 700px;
+            margin: 0 auto;
+          "
+        >
+
+          <input
+            id="articleSearch"
+            type="text"
+            placeholder="Search articles..."
+            aria-label="Search articles"
+            style="
+              width: 100%;
+              height: 55px;
+              padding: 0 55px 0 20px;
+              font-size: 18px;
+              border: 2px solid #ddd;
+              border-radius: 8px;
+              box-sizing: border-box;
+            "
+          />
+
+          <button
+            id="articleSearchButton"
+            type="button"
+            aria-label="Search"
+            style="
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              border: 0;
+              background: transparent;
+              font-size: 20px;
+              cursor: pointer;
+            "
+          >
+            <i class="lni lni-search-alt"></i>
+          </button>
+
+        </div>
+
+      </div>
+      <!-- ====== End Article Search ====== -->
+
+
+      <!-- ====== Articles Container ====== -->
+      <div id="articlesContainer" class="row">
+
+        <div class="col-12 text-center" id="articlesLoading">
+          <p>Loading articles...</p>
+        </div>
+
+      </div>
+      <!-- ====== End Articles Container ====== -->
+
+    </div>
+  </section>
+  <!-- ====== Blog End ====== -->
+
+
+  <!-- ====== Footer Start ====== -->
+  <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
+
+    <div class="shape shape-1">
+      <img src="assets/images/footer/shape-1.svg" alt="shape" />
+    </div>
+
+    <div class="shape shape-2">
+      <img src="assets/images/footer/shape-2.svg" alt="shape" />
+    </div>
+
+    <div class="shape shape-3">
+      <img src="assets/images/footer/shape-3.svg" alt="shape" />
+    </div>
+
+    <div class="ud-footer-widgets">
+
       <div class="container">
+
         <div class="row">
-          <div class="col-lg-12">
 
-            <nav class="navbar navbar-expand-lg">
+          <!-- Brand -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
 
-              <a class="navbar-brand" href="index.html">
-                <span style="font-size: 28px; font-weight: 700; color: #fff;">
+            <div class="ud-widget">
+
+              <a href="index.html" class="ud-footer-logo">
+                <span
+                  style="
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #fff;
+                  "
+                >
                   KaliMoh
                 </span>
               </a>
 
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarContent"
-                aria-controls="navbarContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-              </button>
-
-              <div
-                class="collapse navbar-collapse"
-                id="navbarContent"
-              >
-                <ul id="nav" class="navbar-nav mx-auto">
-
-                  <li class="nav-item">
-                    <a href="index.html">Home</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="index.html#features">Features</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="about.html">About</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="blog.html">Articles</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="software.html">Software</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="pricing.html">Categories</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="index.html#faq">FAQ</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="index.html#contact">Contact</a>
-                  </li>
-
-                </ul>
-
-                <div class="navbar-btn d-flex align-items-center gap-2">
-                  <a
-                    class="ud-main-btn ud-white-btn"
-                    href="login.html"
-                  >
-                    Login
-                  </a>
-
-                  <a
-                    class="ud-main-btn ud-white-btn"
-                    href="signup.html"
-                  >
-                    Sign Up
-                  </a>
-                </div>
-              </div>
-
-            </nav>
-
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- ====== Header End ====== -->
-
-
-    <!-- ====== Banner Start ====== -->
-    <section class="ud-page-banner">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-
-            <div class="ud-banner-content">
-              <h1>KaliMoh Articles</h1>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ====== Banner End ====== -->
-
-
-    <!-- ====== Blog Start ====== -->
-    <section class="ud-blog-grids">
-      <div class="container">
-
-        <!-- ====== Article Search ====== -->
-        <div
-          style="
-            width: 100%;
-            padding: 30px 20px;
-            text-align: center;
-          "
-        >
-          <div
-            style="
-              position: relative;
-              width: 80%;
-              max-width: 700px;
-              margin: 0 auto;
-            "
-          >
-
-            <input
-              id="articleSearch"
-              type="text"
-              placeholder="Search articles..."
-              aria-label="Search articles"
-              style="
-                width: 100%;
-                height: 55px;
-                padding: 0 55px 0 20px;
-                font-size: 18px;
-                border: 2px solid #ddd;
-                border-radius: 8px;
-                box-sizing: border-box;
-              "
-            />
-
-            <button
-              id="articleSearchButton"
-              type="button"
-              aria-label="Search"
-              style="
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                border: 0;
-                background: transparent;
-                font-size: 20px;
-                cursor: pointer;
-              "
-            >
-              <i class="lni lni-search-alt"></i>
-            </button>
-
-          </div>
-        </div>
-        <!-- ====== End Article Search ====== -->
-
-
-        <div class="row">
-
-          <!-- Article 1 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-01.jpg"
-                    alt="Technology article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Discover Useful Technology and Digital Ideas
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  Explore useful technology topics, digital ideas and simple
-                  information that can make everyday life easier.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 2 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-02.jpg"
-                    alt="Guides and tips article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Simple Guides and Tips Worth Knowing
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  Helpful guides and practical tips explained in a simple and
-                  easy-to-understand way.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 3 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-03.jpg"
-                    alt="Ideas article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Interesting Ideas to Discover and Explore
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  Discover new ideas, interesting subjects and topics that can
-                  inspire curiosity and learning.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 4 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-02.jpg"
-                    alt="Learning article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Learn Something New Every Day
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  Small pieces of useful knowledge can help you learn,
-                  understand and discover something new every day.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 5 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-03.jpg"
-                    alt="Entertainment article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Entertainment, Ideas and Interesting Topics
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  A collection of interesting subjects, entertainment ideas and
-                  topics worth exploring.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 6 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-01.jpg"
-                    alt="Useful information article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Useful Information for Everyday Life
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  Find useful information and simple explanations about topics
-                  that matter in everyday life.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 7 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-01.jpg"
-                    alt="Digital ideas article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Explore the Digital World
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  Discover digital tools, technology ideas and useful concepts
-                  in a simple way.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 8 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-02.jpg"
-                    alt="Tips article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Practical Tips and Helpful Ideas
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  Practical ideas and easy tips designed to help you discover
-                  better ways of doing things.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Article 9 -->
-          <div class="col-lg-4 col-md-6 article-card">
-            <div class="ud-single-blog">
-
-              <div class="ud-blog-image">
-                <a href="blog-details.html">
-                  <img
-                    src="assets/images/blog/blog-03.jpg"
-                    alt="Discover article"
-                  />
-                </a>
-              </div>
-
-              <div class="ud-blog-content">
-                <span class="ud-blog-date">KaliMoh</span>
-
-                <h3 class="ud-blog-title">
-                  <a href="blog-details.html">
-                    Discover, Learn and Explore with KaliMoh
-                  </a>
-                </h3>
-
-                <p class="ud-blog-desc">
-                  KaliMoh brings together useful information, ideas and
-                  interesting topics in one simple place.
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- ====== Blog End ====== -->
-
-
-    <!-- ====== Footer Start ====== -->
-    <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
-
-      <div class="shape shape-1">
-        <img src="assets/images/footer/shape-1.svg" alt="shape" />
-      </div>
-
-      <div class="shape shape-2">
-        <img src="assets/images/footer/shape-2.svg" alt="shape" />
-      </div>
-
-      <div class="shape shape-3">
-        <img src="assets/images/footer/shape-3.svg" alt="shape" />
-      </div>
-
-      <div class="ud-footer-widgets">
-        <div class="container">
-          <div class="row">
-
-            <!-- Brand -->
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="ud-widget">
-
-                <a href="index.html" class="ud-footer-logo">
-                  <span
-                    style="
-                      font-size: 28px;
-                      font-weight: 700;
-                      color: #fff;
-                    "
-                  >
-                    KaliMoh
-                  </span>
-                </a>
-
-                <p class="ud-widget-desc">
-                  Discover useful information, learn new things and explore
-                  interesting ideas with KaliMoh.
-                </p>
-
-                <ul class="ud-widget-socials">
-                  <li>
-                    <a href="javascript:void(0)" aria-label="Facebook">
-                      <i class="lni lni-facebook-filled"></i>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)" aria-label="Twitter">
-                      <i class="lni lni-twitter-filled"></i>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)" aria-label="Instagram">
-                      <i class="lni lni-instagram-filled"></i>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)" aria-label="LinkedIn">
-                      <i class="lni lni-linkedin-original"></i>
-                    </a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-
-
-            <!-- Explore -->
-            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">Explore</h5>
-
-                <ul class="ud-widget-links">
-                  <li>
-                    <a href="index.html">Home</a>
-                  </li>
-
-                  <li>
-                    <a href="index.html#features">Features</a>
-                  </li>
-
-                  <li>
-                    <a href="about.html">About</a>
-                  </li>
-
-                  <li>
-                    <a href="blog.html">Articles</a>
-                  </li>
-
-                  <li>
-                    <a href="software.html">Software</a>
-                  </li>
-
-                  <li>
-                    <a href="pricing.html">Categories</a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-
-
-            <!-- Categories -->
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">Categories</h5>
-
-                <ul class="ud-widget-links">
-                  <li>
-                    <a href="pricing.html">Technology</a>
-                  </li>
-
-                  <li>
-                    <a href="pricing.html">Guides &amp; Tips</a>
-                  </li>
-
-                  <li>
-                    <a href="pricing.html">Ideas</a>
-                  </li>
-
-                  <li>
-                    <a href="pricing.html">Entertainment</a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-
-
-            <!-- KaliMoh -->
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">KaliMoh</h5>
-
-                <ul class="ud-widget-links">
-                  <li>
-                    <a href="about.html">About KaliMoh</a>
-                  </li>
-
-                  <li>
-                    <a href="index.html#faq">FAQ</a>
-                  </li>
-
-                  <li>
-                    <a href="index.html#contact">Contact</a>
-                  </li>
-
-                  <li>
-                    <a href="login.html">Login</a>
-                  </li>
-
-                  <li>
-                    <a href="signup.html">Sign Up</a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-
-
-            <!-- Discover -->
-            <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">Discover</h5>
-
-                <p class="ud-widget-desc">
-                  Discover • Learn • Explore
-                </p>
-
-                <p class="ud-widget-desc">
-                  New articles and useful topics will be added over time.
-                </p>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Footer Bottom -->
-      <div class="ud-footer-bottom">
-        <div class="container">
-
-          <div class="row">
-
-            <div class="col-md-8">
-              <ul class="ud-footer-bottom-left">
+              <p class="ud-widget-desc">
+                Discover useful information, learn new things and explore
+                interesting ideas with KaliMoh.
+              </p>
+
+              <ul class="ud-widget-socials">
 
                 <li>
-                  <a href="javascript:void(0)">
-                    Privacy Policy
+                  <a href="javascript:void(0)" aria-label="Facebook">
+                    <i class="lni lni-facebook-filled"></i>
                   </a>
                 </li>
 
                 <li>
-                  <a href="index.html#contact">
-                    Support
+                  <a href="javascript:void(0)" aria-label="Twitter">
+                    <i class="lni lni-twitter-filled"></i>
                   </a>
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)">
-                    Terms of Service
+                  <a href="javascript:void(0)" aria-label="Instagram">
+                    <i class="lni lni-instagram-filled"></i>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="javascript:void(0)" aria-label="LinkedIn">
+                    <i class="lni lni-linkedin-original"></i>
                   </a>
                 </li>
 
               </ul>
+
             </div>
 
-            <div class="col-md-4">
-              <p class="ud-footer-bottom-right">
-                © 2026 KaliMoh. All rights reserved.
+          </div>
+
+
+          <!-- Explore -->
+          <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+
+            <div class="ud-widget">
+
+              <h5 class="ud-widget-title">Explore</h5>
+
+              <ul class="ud-widget-links">
+
+                <li>
+                  <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                  <a href="index.html#features">Features</a>
+                </li>
+
+                <li>
+                  <a href="about.html">About</a>
+                </li>
+
+                <li>
+                  <a href="blog.html">Articles</a>
+                </li>
+
+                <li>
+                  <a href="software.html">Software</a>
+                </li>
+
+                <li>
+                  <a href="pricing.html">Categories</a>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+
+          <!-- Categories -->
+          <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+
+            <div class="ud-widget">
+
+              <h5 class="ud-widget-title">Categories</h5>
+
+              <ul class="ud-widget-links">
+
+                <li>
+                  <a href="pricing.html">Technology</a>
+                </li>
+
+                <li>
+                  <a href="pricing.html">Guides &amp; Tips</a>
+                </li>
+
+                <li>
+                  <a href="pricing.html">Ideas</a>
+                </li>
+
+                <li>
+                  <a href="pricing.html">Entertainment</a>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+
+          <!-- KaliMoh -->
+          <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+
+            <div class="ud-widget">
+
+              <h5 class="ud-widget-title">KaliMoh</h5>
+
+              <ul class="ud-widget-links">
+
+                <li>
+                  <a href="about.html">About KaliMoh</a>
+                </li>
+
+                <li>
+                  <a href="index.html#faq">FAQ</a>
+                </li>
+
+                <li>
+                  <a href="index.html#contact">Contact</a>
+                </li>
+
+                <li>
+                  <a href="login.html">Login</a>
+                </li>
+
+                <li>
+                  <a href="signup.html">Sign Up</a>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+
+          <!-- Discover -->
+          <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
+
+            <div class="ud-widget">
+
+              <h5 class="ud-widget-title">Discover</h5>
+
+              <p class="ud-widget-desc">
+                Discover • Learn • Explore
               </p>
+
+              <p class="ud-widget-desc">
+                New articles and useful topics will be added over time.
+              </p>
+
             </div>
 
           </div>
 
         </div>
+
       </div>
 
-    </footer>
-    <!-- ====== Footer End ====== -->
+    </div>
 
 
-    <!-- ====== Back To Top Start ====== -->
-    <a
-      href="javascript:void(0)"
-      class="back-to-top"
-      aria-label="Back to top"
-    >
-      <i class="lni lni-chevron-up"></i>
-    </a>
-    <!-- ====== Back To Top End ====== -->
+    <!-- Footer Bottom -->
+    <div class="ud-footer-bottom">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-8">
+
+            <ul class="ud-footer-bottom-left">
+
+              <li>
+                <a href="javascript:void(0)">
+                  Privacy Policy
+                </a>
+              </li>
+
+              <li>
+                <a href="index.html#contact">
+                  Support
+                </a>
+              </li>
+
+              <li>
+                <a href="javascript:void(0)">
+                  Terms of Service
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <div class="col-md-4">
+
+            <p class="ud-footer-bottom-right">
+              © 2026 KaliMoh. All rights reserved.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+  <!-- ====== Footer End ====== -->
 
 
-    <!-- ====== All Javascript Files ====== -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/main.js"></script>
+  <!-- ====== Back To Top Start ====== -->
+  <a
+    href="javascript:void(0)"
+    class="back-to-top"
+    aria-label="Back to top"
+  >
+    <i class="lni lni-chevron-up"></i>
+  </a>
+  <!-- ====== Back To Top End ====== -->
 
 
-    <!-- ====== Article Search ====== -->
-    <script>
-      function searchArticles() {
-        const box = document.getElementById("articleSearch");
-        const cards = document.querySelectorAll(".article-card");
+  <!-- ====== Javascript Files ====== -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+  <script src="assets/js/main.js"></script>
 
-        if (!box) {
-          return;
+  <!-- ====== Supabase ====== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://ulxreyrjtavflppahqlp.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    let allArticles = [];
+
+
+    // ====== Load Articles ======
+    async function loadArticles() {
+
+      const container =
+        document.getElementById("articlesContainer");
+
+      try {
+
+        const { data, error } =
+          await supabaseClient
+            .from("articles")
+            .select("*")
+            .eq("is_published", true)
+            .order("created_at", {
+              ascending: false
+            });
+
+        if (error) {
+          throw error;
         }
 
-        const word = box.value.trim().toLowerCase();
+        allArticles = data || [];
 
-        cards.forEach(function (card) {
-          const content = card.textContent.toLowerCase();
+        renderArticles(allArticles);
 
-          if (word === "" || content.includes(word)) {
-            card.style.display = "";
-          } else {
-            card.style.display = "none";
-          }
-        });
+      } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+          <div class="col-12 text-center">
+            <p>Unable to load articles.</p>
+          </div>
+        `;
+
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
+    }
 
-        const box = document.getElementById("articleSearch");
-        const button = document.getElementById("articleSearchButton");
 
-        if (!box) {
-          return;
-        }
+    // ====== Render Articles ======
+    function renderArticles(articles) {
 
-        box.addEventListener("input", searchArticles);
+      const container =
+        document.getElementById("articlesContainer");
 
-        box.addEventListener("keydown", function (event) {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            searchArticles();
-          }
-        });
+      if (!articles.length) {
 
-        if (button) {
-          button.addEventListener("click", searchArticles);
-        }
+        container.innerHTML = `
+          <div class="col-12 text-center">
+            <p>No articles available yet.</p>
+          </div>
+        `;
 
-        const params = new URLSearchParams(
-          window.location.search
-        );
+        return;
+      }
 
-        const searchFromHome = params.get("search");
 
-        if (searchFromHome) {
-          box.value = searchFromHome;
-          searchArticles();
-        }
+      container.innerHTML = "";
+
+
+      articles.forEach(function (article) {
+
+        const image =
+          article.image_url ||
+          "assets/images/blog/blog-01.jpg";
+
+        const category =
+          article.category ||
+          "KaliMoh";
+
+        const description =
+          article.description ||
+          "Discover useful information with KaliMoh.";
+
+
+        const card = document.createElement("div");
+
+        card.className =
+          "col-lg-4 col-md-6 article-card";
+
+
+        card.innerHTML = `
+
+          <div class="ud-single-blog">
+
+            <div class="ud-blog-image">
+
+              <a href="blog-details.html?id=${article.id}">
+
+                <img
+                  src="${image}"
+                  alt="${article.title}"
+                />
+
+              </a>
+
+            </div>
+
+
+            <div class="ud-blog-content">
+
+              <span class="ud-blog-date">
+                ${category}
+              </span>
+
+
+              <h3 class="ud-blog-title">
+
+                <a href="blog-details.html?id=${article.id}">
+                  ${article.title}
+                </a>
+
+              </h3>
+
+
+              <p class="ud-blog-desc">
+                ${description}
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(card);
 
       });
-    </script>
 
-  </body>
+    }
+
+
+    // ====== Search Articles ======
+    function searchArticles() {
+
+      const box =
+        document.getElementById("articleSearch");
+
+      if (!box) {
+        return;
+      }
+
+
+      const word =
+        box.value.trim().toLowerCase();
+
+
+      const filtered =
+        allArticles.filter(function (article) {
+
+          return (
+
+            (article.title || "")
+              .toLowerCase()
+              .includes(word)
+
+            ||
+
+            (article.description || "")
+              .toLowerCase()
+              .includes(word)
+
+            ||
+
+            (article.content || "")
+              .toLowerCase()
+              .includes(word)
+
+            ||
+
+            (article.category || "")
+              .toLowerCase()
+              .includes(word)
+
+          );
+
+        });
+
+
+      renderArticles(filtered);
+
+    }
+
+
+    // ====== Start ======
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        const box =
+          document.getElementById("articleSearch");
+
+        const button =
+          document.getElementById(
+            "articleSearchButton"
+          );
+
+
+        if (box) {
+
+          box.addEventListener(
+            "input",
+            searchArticles
+          );
+
+
+          box.addEventListener(
+            "keydown",
+            function (event) {
+
+              if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                searchArticles();
+
+              }
+
+            }
+          );
+
+        }
+
+
+        if (button) {
+
+          button.addEventListener(
+            "click",
+            searchArticles
+          );
+
+        }
+
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+        const searchFromHome =
+          params.get("search");
+
+
+        if (searchFromHome && box) {
+
+          box.value =
+            searchFromHome;
+
+        }
+
+
+        loadArticles();
+
+      }
+    );
+
+  </script>
+
+</body>
 </html>
 ```
