@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,13 +41,24 @@
                 </span>
               </a>
 
-              <button class="navbar-toggler">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
                 <span class="toggler-icon"></span>
                 <span class="toggler-icon"></span>
                 <span class="toggler-icon"></span>
               </button>
 
-              <div class="navbar-collapse">
+              <div
+                class="collapse navbar-collapse"
+                id="navbarContent"
+              >
                 <ul id="nav" class="navbar-nav mx-auto">
 
                   <li class="nav-item">
@@ -67,6 +78,14 @@
                   </li>
 
                   <li class="nav-item">
+                    <a href="software.html">Software</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="pricing.html">Categories</a>
+                  </li>
+
+                  <li class="nav-item">
                     <a href="index.html#faq">FAQ</a>
                   </li>
 
@@ -75,12 +94,22 @@
                   </li>
 
                 </ul>
-              </div>
 
-              <div class="navbar-btn d-none d-sm-inline-block">
-                <a class="ud-main-btn ud-white-btn" href="index.html">
-                  Explore KaliMoh
-                </a>
+                <div class="navbar-btn d-flex align-items-center gap-2">
+                  <a
+                    class="ud-main-btn ud-white-btn"
+                    href="login.html"
+                  >
+                    Login
+                  </a>
+
+                  <a
+                    class="ud-main-btn ud-white-btn"
+                    href="signup.html"
+                  >
+                    Sign Up
+                  </a>
+                </div>
               </div>
 
             </nav>
@@ -114,21 +143,52 @@
       <div class="container">
 
         <!-- ====== Article Search ====== -->
-        <div style="width: 100%; padding: 30px 20px; text-align: center;">
-          <div style="position: relative; width: 80%; max-width: 700px; margin: 0 auto;">
+        <div
+          style="
+            width: 100%;
+            padding: 30px 20px;
+            text-align: center;
+          "
+        >
+          <div
+            style="
+              position: relative;
+              width: 80%;
+              max-width: 700px;
+              margin: 0 auto;
+            "
+          >
 
             <input
               id="articleSearch"
               type="text"
               placeholder="Search articles..."
-              style="width: 100%; height: 55px; padding: 0 55px 0 20px; font-size: 18px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box;"
+              aria-label="Search articles"
+              style="
+                width: 100%;
+                height: 55px;
+                padding: 0 55px 0 20px;
+                font-size: 18px;
+                border: 2px solid #ddd;
+                border-radius: 8px;
+                box-sizing: border-box;
+              "
             />
 
             <button
               id="articleSearchButton"
               type="button"
               aria-label="Search"
-              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; font-size: 20px; cursor: pointer;"
+              style="
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                border: 0;
+                background: transparent;
+                font-size: 20px;
+                cursor: pointer;
+              "
             >
               <i class="lni lni-search-alt"></i>
             </button>
@@ -143,9 +203,13 @@
           <!-- Article 1 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-01.jpg" alt="Technology article" />
+                  <img
+                    src="assets/images/blog/blog-01.jpg"
+                    alt="Technology article"
+                  />
                 </a>
               </div>
 
@@ -163,6 +227,7 @@
                   information that can make everyday life easier.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -170,9 +235,13 @@
           <!-- Article 2 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-02.jpg" alt="Guides and tips article" />
+                  <img
+                    src="assets/images/blog/blog-02.jpg"
+                    alt="Guides and tips article"
+                  />
                 </a>
               </div>
 
@@ -190,6 +259,7 @@
                   easy-to-understand way.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -197,9 +267,13 @@
           <!-- Article 3 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-03.jpg" alt="Ideas article" />
+                  <img
+                    src="assets/images/blog/blog-03.jpg"
+                    alt="Ideas article"
+                  />
                 </a>
               </div>
 
@@ -217,6 +291,7 @@
                   inspire curiosity and learning.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -224,9 +299,13 @@
           <!-- Article 4 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-02.jpg" alt="Learning article" />
+                  <img
+                    src="assets/images/blog/blog-02.jpg"
+                    alt="Learning article"
+                  />
                 </a>
               </div>
 
@@ -244,6 +323,7 @@
                   understand and discover something new every day.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -251,9 +331,13 @@
           <!-- Article 5 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-03.jpg" alt="Entertainment article" />
+                  <img
+                    src="assets/images/blog/blog-03.jpg"
+                    alt="Entertainment article"
+                  />
                 </a>
               </div>
 
@@ -271,6 +355,7 @@
                   topics worth exploring.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -278,9 +363,13 @@
           <!-- Article 6 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-01.jpg" alt="Useful information article" />
+                  <img
+                    src="assets/images/blog/blog-01.jpg"
+                    alt="Useful information article"
+                  />
                 </a>
               </div>
 
@@ -298,6 +387,7 @@
                   that matter in everyday life.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -305,9 +395,13 @@
           <!-- Article 7 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-01.jpg" alt="Digital ideas article" />
+                  <img
+                    src="assets/images/blog/blog-01.jpg"
+                    alt="Digital ideas article"
+                  />
                 </a>
               </div>
 
@@ -325,6 +419,7 @@
                   in a simple way.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -332,9 +427,13 @@
           <!-- Article 8 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-02.jpg" alt="Tips article" />
+                  <img
+                    src="assets/images/blog/blog-02.jpg"
+                    alt="Tips article"
+                  />
                 </a>
               </div>
 
@@ -352,6 +451,7 @@
                   better ways of doing things.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -359,9 +459,13 @@
           <!-- Article 9 -->
           <div class="col-lg-4 col-md-6 article-card">
             <div class="ud-single-blog">
+
               <div class="ud-blog-image">
                 <a href="blog-details.html">
-                  <img src="assets/images/blog/blog-03.jpg" alt="Discover article" />
+                  <img
+                    src="assets/images/blog/blog-03.jpg"
+                    alt="Discover article"
+                  />
                 </a>
               </div>
 
@@ -379,6 +483,7 @@
                   interesting topics in one simple place.
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -407,11 +512,18 @@
         <div class="container">
           <div class="row">
 
+            <!-- Brand -->
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="ud-widget">
 
                 <a href="index.html" class="ud-footer-logo">
-                  <span style="font-size: 28px; font-weight: 700; color: #fff;">
+                  <span
+                    style="
+                      font-size: 28px;
+                      font-weight: 700;
+                      color: #fff;
+                    "
+                  >
                     KaliMoh
                   </span>
                 </a>
@@ -423,25 +535,25 @@
 
                 <ul class="ud-widget-socials">
                   <li>
-                    <a href="javascript:void(0)">
+                    <a href="javascript:void(0)" aria-label="Facebook">
                       <i class="lni lni-facebook-filled"></i>
                     </a>
                   </li>
 
                   <li>
-                    <a href="javascript:void(0)">
+                    <a href="javascript:void(0)" aria-label="Twitter">
                       <i class="lni lni-twitter-filled"></i>
                     </a>
                   </li>
 
                   <li>
-                    <a href="javascript:void(0)">
+                    <a href="javascript:void(0)" aria-label="Instagram">
                       <i class="lni lni-instagram-filled"></i>
                     </a>
                   </li>
 
                   <li>
-                    <a href="javascript:void(0)">
+                    <a href="javascript:void(0)" aria-label="LinkedIn">
                       <i class="lni lni-linkedin-original"></i>
                     </a>
                   </li>
@@ -451,54 +563,103 @@
             </div>
 
 
+            <!-- Explore -->
             <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
               <div class="ud-widget">
 
                 <h5 class="ud-widget-title">Explore</h5>
 
                 <ul class="ud-widget-links">
-                  <li><a href="index.html">Home</a></li>
-                  <li><a href="index.html#features">Features</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="blog.html">Articles</a></li>
+                  <li>
+                    <a href="index.html">Home</a>
+                  </li>
+
+                  <li>
+                    <a href="index.html#features">Features</a>
+                  </li>
+
+                  <li>
+                    <a href="about.html">About</a>
+                  </li>
+
+                  <li>
+                    <a href="blog.html">Articles</a>
+                  </li>
+
+                  <li>
+                    <a href="software.html">Software</a>
+                  </li>
+
+                  <li>
+                    <a href="pricing.html">Categories</a>
+                  </li>
                 </ul>
 
               </div>
             </div>
 
 
+            <!-- Categories -->
             <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
               <div class="ud-widget">
 
                 <h5 class="ud-widget-title">Categories</h5>
 
                 <ul class="ud-widget-links">
-                  <li><a href="javascript:void(0)">Technology</a></li>
-                  <li><a href="javascript:void(0)">Guides &amp; Tips</a></li>
-                  <li><a href="javascript:void(0)">Ideas</a></li>
-                  <li><a href="javascript:void(0)">Entertainment</a></li>
+                  <li>
+                    <a href="pricing.html">Technology</a>
+                  </li>
+
+                  <li>
+                    <a href="pricing.html">Guides &amp; Tips</a>
+                  </li>
+
+                  <li>
+                    <a href="pricing.html">Ideas</a>
+                  </li>
+
+                  <li>
+                    <a href="pricing.html">Entertainment</a>
+                  </li>
                 </ul>
 
               </div>
             </div>
 
 
+            <!-- KaliMoh -->
             <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
               <div class="ud-widget">
 
                 <h5 class="ud-widget-title">KaliMoh</h5>
 
                 <ul class="ud-widget-links">
-                  <li><a href="about.html">About KaliMoh</a></li>
-                  <li><a href="index.html#faq">FAQ</a></li>
-                  <li><a href="index.html#contact">Contact</a></li>
-                  <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                  <li>
+                    <a href="about.html">About KaliMoh</a>
+                  </li>
+
+                  <li>
+                    <a href="index.html#faq">FAQ</a>
+                  </li>
+
+                  <li>
+                    <a href="index.html#contact">Contact</a>
+                  </li>
+
+                  <li>
+                    <a href="login.html">Login</a>
+                  </li>
+
+                  <li>
+                    <a href="signup.html">Sign Up</a>
+                  </li>
                 </ul>
 
               </div>
             </div>
 
 
+            <!-- Discover -->
             <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
               <div class="ud-widget">
 
@@ -520,6 +681,7 @@
       </div>
 
 
+      <!-- Footer Bottom -->
       <div class="ud-footer-bottom">
         <div class="container">
 
@@ -529,15 +691,21 @@
               <ul class="ud-footer-bottom-left">
 
                 <li>
-                  <a href="javascript:void(0)">Privacy Policy</a>
+                  <a href="javascript:void(0)">
+                    Privacy Policy
+                  </a>
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)">Support</a>
+                  <a href="index.html#contact">
+                    Support
+                  </a>
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)">Terms of Service</a>
+                  <a href="javascript:void(0)">
+                    Terms of Service
+                  </a>
                 </li>
 
               </ul>
@@ -559,7 +727,11 @@
 
 
     <!-- ====== Back To Top Start ====== -->
-    <a href="javascript:void(0)" class="back-to-top">
+    <a
+      href="javascript:void(0)"
+      class="back-to-top"
+      aria-label="Back to top"
+    >
       <i class="lni lni-chevron-up"></i>
     </a>
     <!-- ====== Back To Top End ====== -->
@@ -577,7 +749,9 @@
         const box = document.getElementById("articleSearch");
         const cards = document.querySelectorAll(".article-card");
 
-        if (!box) return;
+        if (!box) {
+          return;
+        }
 
         const word = box.value.trim().toLowerCase();
 
@@ -597,13 +771,15 @@
         const box = document.getElementById("articleSearch");
         const button = document.getElementById("articleSearchButton");
 
-        if (!box) return;
+        if (!box) {
+          return;
+        }
 
         box.addEventListener("input", searchArticles);
 
-        box.addEventListener("keydown", function (e) {
-          if (e.key === "Enter") {
-            e.preventDefault();
+        box.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
             searchArticles();
           }
         });
@@ -612,7 +788,10 @@
           button.addEventListener("click", searchArticles);
         }
 
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(
+          window.location.search
+        );
+
         const searchFromHome = params.get("search");
 
         if (searchFromHome) {
