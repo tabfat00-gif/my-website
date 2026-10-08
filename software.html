@@ -8,15 +8,7 @@
 
   <title>KaliMoh | Software</title>
 
-  <!-- Favicon -->
-
-  <link
-    rel="shortcut icon"
-    href="assets/images/favicon.svg"
-    type="image/svg"
-  />
-
-  <!-- CSS -->
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg" />
 
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/animate.css" />
@@ -102,735 +94,684 @@
 
 <body>
 
-  <!-- Header -->
-
-  <header class="ud-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
+<header class="ud-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
 
 ```
-      <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
 
-        <a class="navbar-brand" href="index.html">
-          <span
-            style="
-              font-size: 26px;
-              font-weight: 700;
-              color: #ffffff;
-            "
+      <a class="navbar-brand" href="index.html">
+        <span style="font-size:26px;font-weight:700;color:#ffffff;">
+          KaliMoh
+        </span>
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav mx-auto">
+
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="index.html#features">Features</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+          <li class="nav-item"><a href="blog.html">Articles</a></li>
+          <li class="nav-item"><a href="software.html">Software</a></li>
+          <li class="nav-item"><a href="pricing.html">Categories</a></li>
+          <li class="nav-item"><a href="index.html#faq">FAQ</a></li>
+          <li class="nav-item"><a href="contact.html">Contact</a></li>
+
+        </ul>
+
+        <div class="navbar-btn d-none d-sm-inline-block">
+
+          <a class="ud-main-btn ud-white-btn" href="login.html">
+            Login
+          </a>
+
+          <a
+            class="ud-main-btn ud-white-btn"
+            href="signup.html"
+            style="margin-left:8px;"
           >
-            KaliMoh
-          </span>
+            Sign Up
+          </a>
+
+        </div>
+
+      </div>
+
+    </nav>
+
+  </div>
+</div>
+```
+
+  </div>
+</header>
+
+<section class="ud-page-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+
+```
+    <div class="ud-banner-content">
+      <h1>Software</h1>
+
+      <p>
+        Useful operating systems and software for your needs.
+      </p>
+    </div>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section class="ud-blog-grids">
+  <div class="container">
+
+```
+<div class="software-search">
+  <input
+    type="search"
+    id="softwareSearch"
+    placeholder="🔎 Search software..."
+    autocomplete="off"
+  />
+</div>
+
+<div class="category-filters">
+
+  <button type="button" class="category-btn active" data-category="all">
+    All
+  </button>
+
+  <button type="button" class="category-btn" data-category="windows">
+    🪟 Windows
+  </button>
+
+  <button type="button" class="category-btn" data-category="linux">
+    🐧 Linux
+  </button>
+
+  <button type="button" class="category-btn" data-category="android">
+    📱 Android
+  </button>
+
+  <button type="button" class="category-btn" data-category="tools">
+    🛠️ Tools
+  </button>
+
+  <button type="button" class="category-btn" data-category="books">
+    📚 Books
+  </button>
+
+</div>
+
+<div class="row" id="software-container">
+
+  <!-- Static Windows 7 -->
+
+  <div
+    class="col-lg-6 col-md-6 software-card"
+    data-category="windows"
+    data-search="windows windows 7 windows 7 ultimate sp1 superlite x64"
+  >
+
+    <div class="ud-single-blog">
+
+      <div class="ud-blog-content">
+
+        <span class="ud-blog-date">
+          Windows
+        </span>
+
+        <h3 class="ud-blog-title">
+          Windows 7 Ultimate SP1 SuperLite x64
+        </h3>
+
+        <p class="ud-blog-desc">
+          Windows 7 Ultimate SP1 SuperLite x64.
+          File size: approximately 0.98 GB.
+        </p>
+
+        <a
+          href="https://archive.org/details/win-7-ult-sp-1-super-lite-x-64"
+          class="ud-main-btn"
+          onclick="handleDownload(event, this.href, null)"
+        >
+          📥 Download Free
         </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="toggler-icon"></span>
-          <span class="toggler-icon"></span>
-          <span class="toggler-icon"></span>
-        </button>
-
-        <div
-          class="collapse navbar-collapse"
-          id="navbarCollapse"
-        >
-
-          <ul class="navbar-nav mx-auto">
-
-            <li class="nav-item">
-              <a href="index.html">Home</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="index.html#features">Features</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="about.html">About</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="blog.html">Articles</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="software.html">Software</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="pricing.html">Categories</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="index.html#faq">FAQ</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="contact.html">Contact</a>
-            </li>
-
-          </ul>
-
-          <div class="navbar-btn d-none d-sm-inline-block">
-
-            <a
-              class="ud-main-btn ud-white-btn"
-              href="login.html"
-            >
-              Login
-            </a>
-
-            <a
-              class="ud-main-btn ud-white-btn"
-              href="signup.html"
-              style="margin-left: 8px;"
-            >
-              Sign Up
-            </a>
-
-          </div>
-
-        </div>
-
-      </nav>
-
-    </div>
-  </div>
-</div>
-```
-
-  </header>
-
-  <!-- Banner -->
-
-  <section class="ud-page-banner">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-
-```
-      <div class="ud-banner-content">
-        <h1>Software</h1>
-
-        <p>
-          Useful operating systems and software for your needs.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</div>
-```
-
-  </section>
-
-  <!-- Software -->
-
-  <section class="ud-blog-grids">
-    <div class="container">
-
-```
-  <!-- Search -->
-
-  <div class="software-search">
-    <input
-      type="search"
-      id="softwareSearch"
-      placeholder="🔎 Search software..."
-      autocomplete="off"
-    />
-  </div>
-
-  <!-- Category Filters -->
-
-  <div class="category-filters">
-
-    <button
-      type="button"
-      class="category-btn active"
-      data-category="all"
-    >
-      All
-    </button>
-
-    <button
-      type="button"
-      class="category-btn"
-      data-category="windows"
-    >
-      🪟 Windows
-    </button>
-
-    <button
-      type="button"
-      class="category-btn"
-      data-category="linux"
-    >
-      🐧 Linux
-    </button>
-
-    <button
-      type="button"
-      class="category-btn"
-      data-category="android"
-    >
-      📱 Android
-    </button>
-
-    <button
-      type="button"
-      class="category-btn"
-      data-category="tools"
-    >
-      🛠️ Tools
-    </button>
-
-    <button
-      type="button"
-      class="category-btn"
-      data-category="books"
-    >
-      📚 Books
-    </button>
-
-  </div>
-
-  <div class="row" id="software-container">
-
-    <!-- Windows 7 -->
-
-    <div
-      class="col-lg-6 col-md-6 software-card"
-      data-category="windows"
-      data-search="windows windows 7 windows 7 ultimate sp1 superlite x64"
-    >
-
-      <div class="ud-single-blog">
-
-        <div class="ud-blog-content">
-
-          <span class="ud-blog-date">
-            Windows
-          </span>
-
-          <h3 class="ud-blog-title">
-            Windows 7 Ultimate SP1 SuperLite x64
-          </h3>
-
-          <p class="ud-blog-desc">
-            Windows 7 Ultimate SP1 SuperLite x64.
-            File size: approximately 0.98 GB.
-          </p>
-
-          <a
-            href="https://archive.org/details/win-7-ult-sp-1-super-lite-x-64"
-            class="ud-main-btn"
-            onclick="handleDownload(event, this.href)"
-          >
-            📥 Download Free
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- Kali Linux -->
-
-    <div
-      class="col-lg-6 col-md-6 software-card"
-      data-category="linux"
-      data-search="linux kali kali linux"
-    >
-
-      <div class="ud-single-blog">
-
-        <div class="ud-blog-content">
-
-          <span class="ud-blog-date">
-            Linux
-          </span>
-
-          <h3 class="ud-blog-title">
-            Kali Linux
-          </h3>
-
-          <p class="ud-blog-desc">
-            Kali Linux tools and official downloads will be added here.
-          </p>
-
-          <a
-            href="https://www.kali.org/get-kali/"
-            class="ud-main-btn"
-            onclick="handleDownload(event, this.href)"
-          >
-            📥 Download Free
-          </a>
-
-        </div>
-
       </div>
 
     </div>
 
   </div>
 
-  <!-- Dynamic Software -->
+  <!-- Static Kali Linux -->
 
   <div
-    class="row"
-    id="software-list"
-  ></div>
-
-  <!-- No Results -->
-
-  <div
-    class="no-results"
-    id="noResults"
+    class="col-lg-6 col-md-6 software-card"
+    data-category="linux"
+    data-search="linux kali kali linux"
   >
-    No software found.
-  </div>
 
-</div>
-```
+    <div class="ud-single-blog">
 
-  </section>
+      <div class="ud-blog-content">
 
-  <!-- Footer -->
+        <span class="ud-blog-date">
+          Linux
+        </span>
 
-  <footer class="ud-footer">
-    <div class="container">
+        <h3 class="ud-blog-title">
+          Kali Linux
+        </h3>
 
-```
-  <div class="row">
-    <div class="col-lg-12">
-
-      <div class="ud-footer-bottom">
-
-        <p>
-          © 2026 KaliMoh. All rights reserved.
+        <p class="ud-blog-desc">
+          Kali Linux tools and official downloads will be added here.
         </p>
+
+        <a
+          href="https://www.kali.org/get-kali/"
+          class="ud-main-btn"
+          onclick="handleDownload(event, this.href, null)"
+        >
+          📥 Download Free
+        </a>
 
       </div>
 
     </div>
+
   </div>
 
 </div>
+
+<div class="row" id="software-list"></div>
+
+<div class="no-results" id="noResults">
+  No software found.
+</div>
 ```
 
-  </footer>
+  </div>
+</section>
 
-  <!-- Supabase -->
+<footer class="ud-footer">
+  <div class="container">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+```
+<div class="row">
+  <div class="col-lg-12">
 
-  <script>
+    <div class="ud-footer-bottom">
 
-    const SUPABASE_URL =
-      "https://ulxreyrjtavflppahqlp.supabase.co";
+      <p>
+        © 2026 KaliMoh. All rights reserved.
+      </p>
 
-    const SUPABASE_KEY =
-      "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+    </div>
 
-    const supabaseClient =
-      supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+  </div>
+</div>
+```
+
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://ulxreyrjtavflppahqlp.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
 
-    // ==========================================
-    // DOWNLOAD PROTECTION
-    // Login is required only for downloads
-    // ==========================================
+  // ==========================================
+  // DOWNLOAD PROTECTION + DOWNLOAD LOG
+  // ==========================================
 
-    async function handleDownload(event, downloadUrl) {
+  async function handleDownload(
+    event,
+    downloadUrl,
+    softwareId
+  ) {
 
-      event.preventDefault();
-
-      const {
-        data: { session }
-      } = await supabaseClient.auth.getSession();
+    event.preventDefault();
 
 
-      // User is logged in
-
-      if (session) {
-
-        window.location.href = downloadUrl;
-
-        return;
+    const {
+      data: {
+        session
       }
+    } =
+      await supabaseClient.auth.getSession();
 
 
-      // User is not logged in
+    // Login required
+
+    if (!session) {
 
       localStorage.setItem(
         "pendingDownload",
         downloadUrl
       );
 
-      window.location.href = "login.html";
+      window.location.href =
+        "login.html";
+
+      return;
     }
 
 
-    // ==========================================
-    // Resume pending download after login
-    // ==========================================
+    // Log download for Supabase software
 
-    async function resumePendingDownload() {
-
-      const pendingDownload =
-        localStorage.getItem(
-          "pendingDownload"
-        );
-
-
-      if (!pendingDownload) {
-        return;
-      }
-
+    if (softwareId) {
 
       const {
-        data: { session }
-      } = await supabaseClient.auth.getSession();
-
-
-      if (!session) {
-        return;
-      }
-
-
-      localStorage.removeItem(
-        "pendingDownload"
-      );
-
-
-      window.location.href =
-        pendingDownload;
-    }
-
-
-    // ==========================================
-    // Search + Category Filter
-    // ==========================================
-
-    let selectedCategory = "all";
-
-
-    function filterSoftware() {
-
-      const searchInput =
-        document.getElementById(
-          "softwareSearch"
-        );
-
-
-      const searchValue =
-        searchInput.value
-          .toLowerCase()
-          .trim();
-
-
-      const cards =
-        document.querySelectorAll(
-          ".software-card"
-        );
-
-
-      let visibleCount = 0;
-
-
-      cards.forEach((card) => {
-
-        const searchText =
-          (
-            card.dataset.search ||
-            card.innerText ||
-            ""
-          ).toLowerCase();
-
-
-        const cardCategory =
-          (
-            card.dataset.category ||
-            ""
-          ).toLowerCase();
-
-
-        const matchesSearch =
-          searchText.includes(
-            searchValue
-          );
-
-
-        const matchesCategory =
-          selectedCategory === "all" ||
-          cardCategory === selectedCategory;
-
-
-        const matches =
-          matchesSearch &&
-          matchesCategory;
-
-
-        card.style.display =
-          matches ? "" : "none";
-
-
-        if (matches) {
-          visibleCount++;
-        }
-
-      });
-
-
-      const noResults =
-        document.getElementById(
-          "noResults"
-        );
-
-
-      if (noResults) {
-
-        noResults.style.display =
-          visibleCount === 0
-            ? "block"
-            : "none";
-
-      }
-
-    }
-
-
-    // ==========================================
-    // Search while typing
-    // ==========================================
-
-    document
-      .getElementById("softwareSearch")
-      .addEventListener(
-        "input",
-        filterSoftware
-      );
-
-
-    // ==========================================
-    // Category Buttons
-    // ==========================================
-
-    document
-      .querySelectorAll(".category-btn")
-      .forEach((button) => {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            document
-              .querySelectorAll(".category-btn")
-              .forEach((btn) => {
-                btn.classList.remove("active");
-              });
-
-
-            this.classList.add("active");
-
-
-            selectedCategory =
-              this.dataset.category ||
-              "all";
-
-
-            filterSoftware();
-
-          }
-        );
-
-      });
-
-
-    // ==========================================
-    // Load software from Supabase
-    // ==========================================
-
-    async function loadSoftware() {
-
-      const { data, error } =
+        error
+      } =
         await supabaseClient
-          .from("software")
-          .select("*")
-          .order("created_at", {
-            ascending: false
+          .from("download_logs")
+          .insert({
+            software_id: softwareId,
+            user_id: session.user.id
           });
 
 
       if (error) {
 
         console.error(
-          "Error:",
+          "Download log error:",
           error
         );
 
-        return;
       }
-
-
-      const list =
-        document.getElementById(
-          "software-list"
-        );
-
-
-      if (!list) {
-        return;
-      }
-
-
-      list.innerHTML = "";
-
-
-      data.forEach((software) => {
-
-        const card =
-          document.createElement("div");
-
-
-        card.className =
-          "col-xl-4 col-lg-4 col-md-6 software-card";
-
-
-        const category =
-          (
-            software.category ||
-            "Software"
-          ).toLowerCase().trim();
-
-
-        card.dataset.category =
-          category;
-
-
-        card.dataset.search = `
-          ${software.title || ""}
-          ${software.description || ""}
-          ${software.category || ""}
-        `.toLowerCase();
-
-
-        const isPremium =
-          software.is_premium === true;
-
-
-        card.innerHTML = `
-
-          <div class="ud-single-blog">
-
-            ${
-              software.image_url
-                ? `
-                  <div class="ud-blog-image">
-
-                    <img
-                      src="${software.image_url}"
-                      alt="${software.title || ""}"
-                      style="
-                        width:100%;
-                        height:220px;
-                        object-fit:cover;
-                      "
-                    >
-
-                  </div>
-                `
-                : ""
-            }
-
-
-            <div class="ud-blog-content">
-
-              <span class="ud-blog-category">
-                ${software.category || "Software"}
-              </span>
-
-
-              <h3 class="ud-blog-title">
-                ${software.title || ""}
-              </h3>
-
-
-              <p class="ud-blog-desc">
-                ${software.description || ""}
-              </p>
-
-
-              ${
-                isPremium
-                  ? `
-                    <div class="premium-badge">
-                      🔒 Premium
-                    </div>
-
-                    <p class="premium-message">
-                      This software is available
-                      to Premium subscribers.
-                    </p>
-                  `
-                  : `
-                    ${
-                      software.download_url
-                        ? `
-                          <a
-                            href="${software.download_url}"
-                            class="ud-main-btn"
-                            onclick="handleDownload(event, this.href)"
-                          >
-                            📥 Download Free
-                          </a>
-                        `
-                        : ""
-                    }
-                  `
-              }
-
-            </div>
-
-          </div>
-
-        `;
-
-
-        list.appendChild(card);
-
-      });
-
-
-      // Apply search + category filter
-      filterSoftware();
 
     }
 
 
-    // Load page
+    // Start download
 
-    loadSoftware();
+    window.location.href =
+      downloadUrl;
+
+  }
 
 
-    // Check if a download was waiting after login
+  // ==========================================
+  // Resume pending download after login
+  // ==========================================
 
-    resumePendingDownload();
+  async function resumePendingDownload() {
 
-  </script>
+    const pendingDownload =
+      localStorage.getItem(
+        "pendingDownload"
+      );
+
+
+    if (!pendingDownload) {
+      return;
+    }
+
+
+    const {
+      data: {
+        session
+      }
+    } =
+      await supabaseClient.auth.getSession();
+
+
+    if (!session) {
+      return;
+    }
+
+
+    localStorage.removeItem(
+      "pendingDownload"
+    );
+
+
+    window.location.href =
+      pendingDownload;
+
+  }
+
+
+  // ==========================================
+  // Search + Category Filter
+  // ==========================================
+
+  let selectedCategory = "all";
+
+
+  function filterSoftware() {
+
+    const searchInput =
+      document.getElementById(
+        "softwareSearch"
+      );
+
+
+    const searchValue =
+      searchInput.value
+        .toLowerCase()
+        .trim();
+
+
+    const cards =
+      document.querySelectorAll(
+        ".software-card"
+      );
+
+
+    let visibleCount = 0;
+
+
+    cards.forEach((card) => {
+
+      const searchText =
+        (
+          card.dataset.search ||
+          card.innerText ||
+          ""
+        ).toLowerCase();
+
+
+      const cardCategory =
+        (
+          card.dataset.category ||
+          ""
+        ).toLowerCase();
+
+
+      const matchesSearch =
+        searchText.includes(
+          searchValue
+        );
+
+
+      const matchesCategory =
+        selectedCategory === "all" ||
+        cardCategory === selectedCategory;
+
+
+      const matches =
+        matchesSearch &&
+        matchesCategory;
+
+
+      card.style.display =
+        matches ? "" : "none";
+
+
+      if (matches) {
+        visibleCount++;
+      }
+
+    });
+
+
+    const noResults =
+      document.getElementById(
+        "noResults"
+      );
+
+
+    if (noResults) {
+
+      noResults.style.display =
+        visibleCount === 0
+          ? "block"
+          : "none";
+
+    }
+
+  }
+
+
+  document
+    .getElementById("softwareSearch")
+    .addEventListener(
+      "input",
+      filterSoftware
+    );
+
+
+  document
+    .querySelectorAll(".category-btn")
+    .forEach((button) => {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          document
+            .querySelectorAll(".category-btn")
+            .forEach((btn) => {
+              btn.classList.remove("active");
+            });
+
+
+          this.classList.add("active");
+
+
+          selectedCategory =
+            this.dataset.category ||
+            "all";
+
+
+          filterSoftware();
+
+        }
+      );
+
+    });
+
+
+  // ==========================================
+  // Load software from Supabase
+  // ==========================================
+
+  async function loadSoftware() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("software")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
+
+
+    if (error) {
+
+      console.error(
+        "Error:",
+        error
+      );
+
+      return;
+    }
+
+
+    const list =
+      document.getElementById(
+        "software-list"
+      );
+
+
+    if (!list) {
+      return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    data.forEach((software) => {
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "col-xl-4 col-lg-4 col-md-6 software-card";
+
+
+      const category =
+        (
+          software.category ||
+          "Software"
+        ).toLowerCase().trim();
+
+
+      card.dataset.category =
+        category;
+
+
+      card.dataset.search = `
+        ${software.title || ""}
+        ${software.description || ""}
+        ${software.category || ""}
+      `.toLowerCase();
+
+
+      const isPremium =
+        software.is_premium === true;
+
+
+      card.innerHTML = `
+
+        <div class="ud-single-blog">
+
+          ${
+            software.image_url
+              ? `
+                <div class="ud-blog-image">
+
+                  <img
+                    src="${software.image_url}"
+                    alt="${software.title || ""}"
+                    style="
+                      width:100%;
+                      height:220px;
+                      object-fit:cover;
+                    "
+                  >
+
+                </div>
+              `
+              : ""
+          }
+
+
+          <div class="ud-blog-content">
+
+            <span class="ud-blog-category">
+              ${software.category || "Software"}
+            </span>
+
+
+            <h3 class="ud-blog-title">
+              ${software.title || ""}
+            </h3>
+
+
+            <p class="ud-blog-desc">
+              ${software.description || ""}
+            </p>
+
+
+            ${
+              isPremium
+                ? `
+                  <div class="premium-badge">
+                    🔒 Premium
+                  </div>
+
+                  <p class="premium-message">
+                    This software is available
+                    to Premium subscribers.
+                  </p>
+                `
+                : `
+                  ${
+                    software.download_url
+                      ? `
+                        <a
+                          href="${software.download_url}"
+                          class="ud-main-btn"
+                          onclick="handleDownload(
+                            event,
+                            this.href,
+                            '${software.id}'
+                          )"
+                        >
+                          📥 Download Free
+                        </a>
+                      `
+                      : ""
+                  }
+                `
+            }
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(card);
+
+    });
+
+
+    filterSoftware();
+
+  }
+
+
+  loadSoftware();
+
+  resumePendingDownload();
+
+</script>
 
 </body>
 </html>
