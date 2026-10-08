@@ -480,7 +480,12 @@
             await supabaseClient.auth.signUp({
 
               email: email,
-              password: password
+              password: password,
+
+              options: {
+                emailRedirectTo:
+                  "https://tabfat00-gif.github.io/my-website/login.html"
+              }
 
             });
 
