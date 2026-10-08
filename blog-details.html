@@ -181,6 +181,22 @@
 
               </div>
 
+              <!-- ====== Article Views ====== -->
+
+              <div class="mb-3">
+
+                <span
+                  id="articleViews"
+                  style="
+                    font-size: 15px;
+                    color: #777;
+                  "
+                >
+                  👁 0 Views
+                </span>
+
+              </div>
+
               <h2 id="articleHeading">
                 Article
               </h2>
@@ -572,6 +588,51 @@
 
         console.error(
           "Article view error:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* ====== Load Article View Count ====== */
+
+    async function loadArticleViews(articleId) {
+
+      const viewsElement =
+        document.getElementById(
+          "articleViews"
+        );
+
+      try {
+
+        const { data, error } =
+          await supabaseClient.rpc(
+            "get_article_view_count",
+            {
+              p_article_id: articleId
+            }
+          );
+
+        if (error) {
+          throw error;
+        }
+
+        const totalViews =
+          Number(data || 0);
+
+        viewsElement.textContent =
+          "👁 " +
+          totalViews +
+          (totalViews === 1
+            ? " View"
+            : " Views");
+
+      } catch (error) {
+
+        console.error(
+          "Article views error:",
           error
         );
 
@@ -1030,6 +1091,13 @@
         /* ====== Record View ====== */
 
         await recordArticleView(
+          data.id
+        );
+
+
+        /* ====== Load View Count ====== */
+
+        await loadArticleViews(
           data.id
         );
 
