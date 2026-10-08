@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,10 +8,10 @@
 
   <title>KaliMoh | Discover • Learn • Explore</title>
 
-  <meta
-    name="description"
-    content="KaliMoh is a place to discover useful information, helpful guides, technology, software, ideas and more."
-  />
+<meta
+ name="description"
+ content="KaliMoh is a place to discover useful information, helpful guides, technology, software, ideas and more."
+/>
 
   <link
     rel="shortcut icon"
@@ -36,6 +36,33 @@
 
     .navbar-brand {
       letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .kalimoh-logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      padding: 0 8px;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #3056d3;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .kalimoh-logo-name {
+      color: #ffffff;
+      font-size: 27px;
+      font-weight: 800;
+      line-height: 1;
     }
 
     .ud-menu-scroll,
@@ -160,10 +187,23 @@
 
     .ud-footer-logo {
       transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .ud-footer-logo:hover {
       opacity: 0.85;
+    }
+
+    .ud-footer-logo .kalimoh-logo-mark {
+      min-width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    .ud-footer-logo .kalimoh-logo-name {
+      font-size: 26px;
     }
 
     /* Mobile */
@@ -194,8 +234,19 @@
         width: 42px;
         height: 42px;
       }
+
+      .kalimoh-logo-mark {
+        min-width: 38px;
+        height: 38px;
+        font-size: 15px;
+      }
+
+      .kalimoh-logo-name {
+        font-size: 24px;
+      }
     }
   </style>
+
 </head>
 
 <body>
@@ -203,537 +254,545 @@
 <!-- =========================
      Header
 ========================= -->
+
 <header class="ud-header">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
 
-        <nav class="navbar navbar-expand-lg">
+```
+    <nav class="navbar navbar-expand-lg">
 
-          <a
-            class="navbar-brand"
-            href="index.html"
-            style="
-              font-size: 27px;
-              font-weight: 800;
-              color: #ffffff;
-            "
-          >
-            KaliMoh
-          </a>
+      <a
+        class="navbar-brand"
+        href="index.html"
+      >
+        <span class="kalimoh-logo-mark">KM</span>
+        <span class="kalimoh-logo-name">KaliMoh</span>
+      </a>
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-          </button>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+      </button>
+
+      <div
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent"
+      >
+
+        <ul id="nav" class="navbar-nav mx-auto">
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#home">
+              Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#features">
+              Features
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#about">
+              About
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="blog.html">
+              Articles
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="software.html">
+              Software
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pricing.html">
+              Categories
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#faq">
+              FAQ
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#contact">
+              Contact
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="navbar-btn d-flex align-items-center">
 
           <div
-            class="collapse navbar-collapse"
-            id="navbarSupportedContent"
+            id="guestButtons"
+            class="d-flex align-items-center"
           >
 
-            <ul id="nav" class="navbar-nav mx-auto">
+            <a
+              href="login.html"
+              class="ud-main-btn ud-white-btn"
+              style="margin-right: 10px;"
+            >
+              Login
+            </a>
 
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#home">
-                  Home
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#features">
-                  Features
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#about">
-                  About
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="blog.html">
-                  Articles
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="software.html">
-                  Software
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="pricing.html">
-                  Categories
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#faq">
-                  FAQ
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#contact">
-                  Contact
-                </a>
-              </li>
-
-            </ul>
-
-            <div class="navbar-btn d-flex align-items-center">
-
-              <div
-                id="guestButtons"
-                class="d-flex align-items-center"
-              >
-
-                <a
-                  href="login.html"
-                  class="ud-main-btn ud-white-btn"
-                  style="margin-right: 10px;"
-                >
-                  Login
-                </a>
-
-                <a
-                  href="signup.html"
-                  class="ud-main-btn"
-                >
-                  Sign Up
-                </a>
-
-              </div>
-
-              <div
-                id="userButtons"
-                class="d-flex align-items-center"
-                style="display: none !important;"
-              >
-
-                <a
-                  href="profile.html"
-                  class="ud-main-btn ud-white-btn"
-                  style="margin-right: 10px;"
-                >
-                  Profile
-                </a>
-
-                <button
-                  type="button"
-                  id="logoutBtn"
-                  class="ud-main-btn"
-                >
-                  Logout
-                </button>
-
-              </div>
-
-            </div>
+            <a
+              href="signup.html"
+              class="ud-main-btn"
+            >
+              Sign Up
+            </a>
 
           </div>
-        </nav>
+
+          <div
+            id="userButtons"
+            class="d-flex align-items-center"
+            style="display: none !important;"
+          >
+
+            <a
+              href="profile.html"
+              class="ud-main-btn ud-white-btn"
+              style="margin-right: 10px;"
+            >
+              Profile
+            </a>
+
+            <button
+              type="button"
+              id="logoutBtn"
+              class="ud-main-btn"
+            >
+              Logout
+            </button>
+
+          </div>
+
+        </div>
 
       </div>
-    </div>
+    </nav>
+
+  </div>
+</div>
+```
+
   </div>
 </header>
-
 
 <!-- =========================
      Hero
 ========================= -->
+
 <section class="ud-hero" id="home">
 
   <div class="container">
 
-    <div class="row">
-      <div class="col-lg-12">
+```
+<div class="row">
+  <div class="col-lg-12">
 
-        <div
-          class="ud-hero-content wow fadeInUp"
-          data-wow-delay=".2s"
-        >
+    <div
+      class="ud-hero-content wow fadeInUp"
+      data-wow-delay=".2s"
+    >
 
-          <h1 class="ud-hero-title">
-            Discover. Learn. Explore.
-          </h1>
+      <h1 class="ud-hero-title">
+        Discover. Learn. Explore.
+      </h1>
 
-          <p class="ud-hero-desc">
-            Welcome to KaliMoh — discover useful information,
-            technology, software, practical guides, interesting ideas
-            and much more.
-          </p>
+      <p class="ud-hero-desc">
+        Welcome to KaliMoh — discover useful information,
+        technology, software, practical guides, interesting ideas
+        and much more.
+      </p>
 
-          <ul class="ud-hero-buttons">
+      <ul class="ud-hero-buttons">
 
-            <li>
-              <a
-                href="pricing.html"
-                class="ud-main-btn ud-white-btn"
-              >
-                Explore Now
-              </a>
-            </li>
+        <li>
+          <a
+            href="pricing.html"
+            class="ud-main-btn ud-white-btn"
+          >
+            Explore Now
+          </a>
+        </li>
 
-            <li>
-              <a
-                href="#about"
-                class="ud-main-btn ud-link-btn"
-              >
-                Learn More
-                <i class="lni lni-arrow-right"></i>
-              </a>
-            </li>
+        <li>
+          <a
+            href="#about"
+            class="ud-main-btn ud-link-btn"
+          >
+            Learn More
+            <i class="lni lni-arrow-right"></i>
+          </a>
+        </li>
 
-          </ul>
+      </ul>
 
-        </div>
+    </div>
 
-        <div
-          class="ud-hero-brands-wrapper wow fadeInUp"
-          data-wow-delay=".3s"
-        >
-          <img
-            src="assets/images/hero/brand.svg"
-            alt="KaliMoh"
-          />
-        </div>
+    <div
+      class="ud-hero-brands-wrapper wow fadeInUp"
+      data-wow-delay=".3s"
+    >
+      <img
+        src="assets/images/hero/brand.svg"
+        alt="KaliMoh"
+      />
+    </div>
 
-        <div
-          class="ud-hero-image wow fadeInUp"
-          data-wow-delay=".25s"
-        >
+    <div
+      class="ud-hero-image wow fadeInUp"
+      data-wow-delay=".25s"
+    >
 
-          <img
-            src="assets/images/hero/hero-image.svg"
-            alt="KaliMoh"
-          />
+      <img
+        src="assets/images/hero/hero-image.svg"
+        alt="KaliMoh"
+      />
 
-          <img
-            src="assets/images/hero/dotted-shape.svg"
-            alt=""
-            class="shape shape-1"
-          />
+      <img
+        src="assets/images/hero/dotted-shape.svg"
+        alt=""
+        class="shape shape-1"
+      />
 
-          <img
-            src="assets/images/hero/dotted-shape.svg"
-            alt=""
-            class="shape shape-2"
-          />
+      <img
+        src="assets/images/hero/dotted-shape.svg"
+        alt=""
+        class="shape shape-2"
+      />
 
-        </div>
-
-      </div>
     </div>
 
   </div>
-</section>
+</div>
+```
 
+  </div>
+</section>
 
 <!-- =========================
      Search
 ========================= -->
+
 <section class="kalimoh-search-section">
 
   <div class="container">
 
-    <div class="text-center mb-3">
-      <span
-        style="
-          font-weight: 600;
-          color: #3056d3;
-        "
-      >
-        Search KaliMoh
-      </span>
-    </div>
+```
+<div class="text-center mb-3">
+  <span
+    style="
+      font-weight: 600;
+      color: #3056d3;
+    "
+  >
+    Search KaliMoh
+  </span>
+</div>
 
-    <div class="kalimoh-search-wrapper">
+<div class="kalimoh-search-wrapper">
 
-      <input
-        id="siteSearch"
-        class="kalimoh-search-box"
-        type="text"
-        placeholder="Search articles, guides, technology..."
-        autocomplete="off"
-      />
+  <input
+    id="siteSearch"
+    class="kalimoh-search-box"
+    type="text"
+    placeholder="Search articles, guides, technology..."
+    autocomplete="off"
+  />
 
-      <button
-        type="button"
-        id="searchButton"
-        class="kalimoh-search-button"
-        aria-label="Search"
-      >
-        <i class="lni lni-search-alt"></i>
-      </button>
+  <button
+    type="button"
+    id="searchButton"
+    class="kalimoh-search-button"
+    aria-label="Search"
+  >
+    <i class="lni lni-search-alt"></i>
+  </button>
 
-    </div>
+</div>
+```
 
   </div>
 
 </section>
-
 
 <!-- =========================
      Features
 ========================= -->
+
 <section id="features" class="ud-features">
 
   <div class="container">
 
-    <div class="row">
-      <div class="col-lg-12">
+```
+<div class="row">
+  <div class="col-lg-12">
 
-        <div class="ud-section-title">
+    <div class="ud-section-title">
 
-          <span>Why KaliMoh?</span>
+      <span>Why KaliMoh?</span>
 
-          <h2>
-            Everything Worth Discovering,
-            In One Place
-          </h2>
+      <h2>
+        Everything Worth Discovering,
+        In One Place
+      </h2>
 
-          <p>
-            Explore useful content, practical ideas,
-            technology and more through a simple experience.
-          </p>
+      <p>
+        Explore useful content, practical ideas,
+        technology and more through a simple experience.
+      </p>
 
-        </div>
-
-      </div>
     </div>
 
+  </div>
+</div>
 
-    <div class="row">
 
-      <div class="col-xl-3 col-lg-3 col-sm-6">
+<div class="row">
 
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".1s"
-        >
+  <div class="col-xl-3 col-lg-3 col-sm-6">
 
-          <div class="ud-feature-icon">
-            <i class="lni lni-book"></i>
-          </div>
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".1s"
+    >
 
-          <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Useful Information
-            </h3>
-
-            <p class="ud-feature-desc">
-              Discover information that helps you learn
-              and understand different topics.
-            </p>
-
-            <a
-              href="blog.html"
-              class="ud-feature-link"
-            >
-              Explore
-            </a>
-
-          </div>
-
-        </div>
-
+      <div class="ud-feature-icon">
+        <i class="lni lni-book"></i>
       </div>
 
+      <div class="ud-feature-content">
 
-      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <h3 class="ud-feature-title">
+          Useful Information
+        </h3>
 
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".15s"
+        <p class="ud-feature-desc">
+          Discover information that helps you learn
+          and understand different topics.
+        </p>
+
+        <a
+          href="blog.html"
+          class="ud-feature-link"
         >
-
-          <div class="ud-feature-icon">
-            <i class="lni lni-bulb"></i>
-          </div>
-
-          <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Ideas & Tips
-            </h3>
-
-            <p class="ud-feature-desc">
-              Find simple ideas, practical tips and
-              useful guides.
-            </p>
-
-            <a
-              href="blog.html"
-              class="ud-feature-link"
-            >
-              Explore
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="col-xl-3 col-lg-3 col-sm-6">
-
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
-          <div class="ud-feature-icon">
-            <i class="lni lni-code"></i>
-          </div>
-
-          <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Technology
-            </h3>
-
-            <p class="ud-feature-desc">
-              Explore software, computers, digital tools
-              and technology tips.
-            </p>
-
-            <a
-              href="software.html"
-              class="ud-feature-link"
-            >
-              Explore
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="col-xl-3 col-lg-3 col-sm-6">
-
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".25s"
-        >
-
-          <div class="ud-feature-icon">
-            <i class="lni lni-star"></i>
-          </div>
-
-          <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Discover More
-            </h3>
-
-            <p class="ud-feature-desc">
-              New subjects, interesting content and
-              fresh ideas are waiting for you.
-            </p>
-
-            <a
-              href="pricing.html"
-              class="ud-feature-link"
-            >
-              Explore
-            </a>
-
-          </div>
-
-        </div>
+          Explore
+        </a>
 
       </div>
 
     </div>
 
   </div>
-</section>
 
+
+  <div class="col-xl-3 col-lg-3 col-sm-6">
+
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".15s"
+    >
+
+      <div class="ud-feature-icon">
+        <i class="lni lni-bulb"></i>
+      </div>
+
+      <div class="ud-feature-content">
+
+        <h3 class="ud-feature-title">
+          Ideas & Tips
+        </h3>
+
+        <p class="ud-feature-desc">
+          Find simple ideas, practical tips and
+          useful guides.
+        </p>
+
+        <a
+          href="blog.html"
+          class="ud-feature-link"
+        >
+          Explore
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="col-xl-3 col-lg-3 col-sm-6">
+
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <div class="ud-feature-icon">
+        <i class="lni lni-code"></i>
+      </div>
+
+      <div class="ud-feature-content">
+
+        <h3 class="ud-feature-title">
+          Technology
+        </h3>
+
+        <p class="ud-feature-desc">
+          Explore software, computers, digital tools
+          and technology tips.
+        </p>
+
+        <a
+          href="software.html"
+          class="ud-feature-link"
+        >
+          Explore
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="col-xl-3 col-lg-3 col-sm-6">
+
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".25s"
+    >
+
+      <div class="ud-feature-icon">
+        <i class="lni lni-star"></i>
+      </div>
+
+      <div class="ud-feature-content">
+
+        <h3 class="ud-feature-title">
+          Discover More
+        </h3>
+
+        <p class="ud-feature-desc">
+          New subjects, interesting content and
+          fresh ideas are waiting for you.
+        </p>
+
+        <a
+          href="pricing.html"
+          class="ud-feature-link"
+        >
+          Explore
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
 
 <!-- =========================
      About
 ========================= -->
+
 <section id="about" class="ud-about">
 
   <div class="container">
 
-    <div
-      class="ud-about-wrapper wow fadeInUp"
-      data-wow-delay=".2s"
-    >
+```
+<div
+  class="ud-about-wrapper wow fadeInUp"
+  data-wow-delay=".2s"
+>
 
-      <div class="ud-about-content-wrapper">
+  <div class="ud-about-content-wrapper">
 
-        <div class="ud-about-content">
+    <div class="ud-about-content">
 
-          <span class="tag">
-            About KaliMoh
-          </span>
+      <span class="tag">
+        About KaliMoh
+      </span>
 
-          <h2>
-            A Place for Curiosity and Discovery.
-          </h2>
+      <h2>
+        A Place for Curiosity and Discovery.
+      </h2>
 
-          <p>
-            KaliMoh brings useful information,
-            interesting ideas, practical guides and
-            technology together in one place.
-          </p>
+      <p>
+        KaliMoh brings useful information,
+        interesting ideas, practical guides and
+        technology together in one place.
+      </p>
 
-          <p>
-            Explore articles, software, digital tools,
-            tips and new ideas — with a simple experience
-            designed to help you discover something useful.
-          </p>
+      <p>
+        Explore articles, software, digital tools,
+        tips and new ideas — with a simple experience
+        designed to help you discover something useful.
+      </p>
 
-          <a
-            href="pricing.html"
-            class="ud-main-btn"
-          >
-            Explore Categories
-          </a>
-
-        </div>
-
-      </div>
-
-      <div class="ud-about-image">
-
-        <img
-          src="assets/images/about/about-image.svg"
-          alt="About KaliMoh"
-        />
-
-      </div>
+      <a
+        href="pricing.html"
+        class="ud-main-btn"
+      >
+        Explore Categories
+      </a>
 
     </div>
 
   </div>
 
-</section>
+  <div class="ud-about-image">
 
+    <img
+      src="assets/images/about/about-image.svg"
+      alt="About KaliMoh"
+    />
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
 
 <!-- =========================
      Categories
 ========================= -->
+
 <section
   id="categories"
   class="ud-pricing"
@@ -741,183 +800,78 @@
 
   <div class="container">
 
-    <div class="row">
+```
+<div class="row">
 
-      <div class="col-lg-12">
+  <div class="col-lg-12">
 
-        <div
-          class="ud-section-title mx-auto text-center"
-        >
+    <div
+      class="ud-section-title mx-auto text-center"
+    >
 
-          <span>Explore</span>
+      <span>Explore</span>
 
-          <h2>
-            Explore Our Categories
-          </h2>
+      <h2>
+        Explore Our Categories
+      </h2>
 
-          <p>
-            Choose a topic and start discovering
-            useful content.
-          </p>
-
-        </div>
-
-      </div>
+      <p>
+        Choose a topic and start discovering
+        useful content.
+      </p>
 
     </div>
 
+  </div>
+
+</div>
+
+
+<div
+  class="row g-0 align-items-center justify-content-center"
+>
+
+  <div
+    class="col-lg-4 col-md-6 col-sm-10"
+  >
 
     <div
-      class="row g-0 align-items-center justify-content-center"
+      class="ud-single-pricing first-item wow fadeInUp"
+      data-wow-delay=".15s"
     >
 
-      <div
-        class="col-lg-4 col-md-6 col-sm-10"
-      >
+      <div class="ud-pricing-header">
 
-        <div
-          class="ud-single-pricing first-item wow fadeInUp"
-          data-wow-delay=".15s"
-        >
+        <h3>
+          TECHNOLOGY
+        </h3>
 
-          <div class="ud-pricing-header">
-
-            <h3>
-              TECHNOLOGY
-            </h3>
-
-            <h4>
-              Discover
-            </h4>
-
-          </div>
-
-          <div class="ud-pricing-body">
-
-            <ul>
-              <li>Computers</li>
-              <li>Internet</li>
-              <li>Digital Tools</li>
-              <li>Useful Apps</li>
-              <li>Technology Tips</li>
-            </ul>
-
-          </div>
-
-          <div class="ud-pricing-footer">
-
-            <a
-              href="software.html"
-              class="ud-main-btn ud-border-btn"
-            >
-              Discover More
-            </a>
-
-          </div>
-
-        </div>
+        <h4>
+          Discover
+        </h4>
 
       </div>
 
+      <div class="ud-pricing-body">
 
-      <div
-        class="col-lg-4 col-md-6 col-sm-10"
-      >
-
-        <div
-          class="ud-single-pricing active wow fadeInUp"
-          data-wow-delay=".1s"
-        >
-
-          <span class="ud-popular-tag">
-            POPULAR
-          </span>
-
-          <div class="ud-pricing-header">
-
-            <h3>
-              GUIDES & TIPS
-            </h3>
-
-            <h4>
-              Learn
-            </h4>
-
-          </div>
-
-          <div class="ud-pricing-body">
-
-            <ul>
-              <li>Simple Guides</li>
-              <li>How-To Articles</li>
-              <li>Useful Tips</li>
-              <li>Ideas</li>
-              <li>Everyday Solutions</li>
-            </ul>
-
-          </div>
-
-          <div class="ud-pricing-footer">
-
-            <a
-              href="blog.html"
-              class="ud-main-btn ud-white-btn"
-            >
-              Start Exploring
-            </a>
-
-          </div>
-
-        </div>
+        <ul>
+          <li>Computers</li>
+          <li>Internet</li>
+          <li>Digital Tools</li>
+          <li>Useful Apps</li>
+          <li>Technology Tips</li>
+        </ul>
 
       </div>
 
+      <div class="ud-pricing-footer">
 
-      <div
-        class="col-lg-4 col-md-6 col-sm-10"
-      >
-
-        <div
-          class="ud-single-pricing last-item wow fadeInUp"
-          data-wow-delay=".15s"
+        <a
+          href="software.html"
+          class="ud-main-btn ud-border-btn"
         >
-
-          <div class="ud-pricing-header">
-
-            <h3>
-              ENTERTAINMENT
-            </h3>
-
-            <h4>
-              Enjoy
-            </h4>
-
-          </div>
-
-          <div class="ud-pricing-body">
-
-            <ul>
-              <li>Interesting Content</li>
-              <li>Videos</li>
-              <li>Stories</li>
-              <li>New Discoveries</li>
-              <li>Fun Ideas</li>
-            </ul>
-
-          </div>
-
-          <div class="ud-pricing-footer">
-
-            <a
-              href="blog.html"
-              class="ud-main-btn ud-border-btn"
-            >
-              Discover More
-            </a>
-
-          </div>
-
-        </div>
+          Discover More
+        </a>
 
       </div>
 
@@ -925,12 +879,119 @@
 
   </div>
 
-</section>
 
+  <div
+    class="col-lg-4 col-md-6 col-sm-10"
+  >
+
+    <div
+      class="ud-single-pricing active wow fadeInUp"
+      data-wow-delay=".1s"
+    >
+
+      <span class="ud-popular-tag">
+        POPULAR
+      </span>
+
+      <div class="ud-pricing-header">
+
+        <h3>
+          GUIDES & TIPS
+        </h3>
+
+        <h4>
+          Learn
+        </h4>
+
+      </div>
+
+      <div class="ud-pricing-body">
+
+        <ul>
+          <li>Simple Guides</li>
+          <li>How-To Articles</li>
+          <li>Useful Tips</li>
+          <li>Ideas</li>
+          <li>Everyday Solutions</li>
+        </ul>
+
+      </div>
+
+      <div class="ud-pricing-footer">
+
+        <a
+          href="blog.html"
+          class="ud-main-btn ud-white-btn"
+        >
+          Start Exploring
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="col-lg-4 col-md-6 col-sm-10"
+  >
+
+    <div
+      class="ud-single-pricing last-item wow fadeInUp"
+      data-wow-delay=".15s"
+    >
+
+      <div class="ud-pricing-header">
+
+        <h3>
+          ENTERTAINMENT
+        </h3>
+
+        <h4>
+          Enjoy
+        </h4>
+
+      </div>
+
+      <div class="ud-pricing-body">
+
+        <ul>
+          <li>Interesting Content</li>
+          <li>Videos</li>
+          <li>Stories</li>
+          <li>New Discoveries</li>
+          <li>Fun Ideas</li>
+        </ul>
+
+      </div>
+
+      <div class="ud-pricing-footer">
+
+        <a
+          href="blog.html"
+          class="ud-main-btn ud-border-btn"
+        >
+          Discover More
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
 
 <!-- =========================
      FAQ
 ========================= -->
+
 <section id="faq" class="ud-faq">
 
   <div class="shape">
@@ -942,24 +1003,70 @@
 
   <div class="container">
 
-    <div class="row">
+```
+<div class="row">
 
-      <div class="col-lg-12">
+  <div class="col-lg-12">
 
-        <div
-          class="ud-section-title text-center mx-auto"
+    <div
+      class="ud-section-title text-center mx-auto"
+    >
+
+      <span>FAQ</span>
+
+      <h2>
+        Frequently Asked Questions
+      </h2>
+
+      <p>
+        Simple answers to common questions
+        about KaliMoh.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-lg-6">
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".1s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
         >
 
-          <span>FAQ</span>
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
 
-          <h2>
-            Frequently Asked Questions
-          </h2>
+          <span>
+            What is KaliMoh?
+          </span>
 
-          <p>
-            Simple answers to common questions
-            about KaliMoh.
-          </p>
+        </button>
+
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            KaliMoh is a website for discovering
+            useful information, guides, technology,
+            software and interesting ideas.
+          </div>
 
         </div>
 
@@ -968,253 +1075,79 @@
     </div>
 
 
-    <div class="row">
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".15s"
+    >
 
-      <div class="col-lg-6">
+      <div class="accordion">
 
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".1s"
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseTwo"
         >
 
-          <div class="accordion">
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
 
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-            >
+          <span>
+            What can I find on KaliMoh?
+          </span>
 
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
-              <span>
-                What is KaliMoh?
-              </span>
-
-            </button>
-
-            <div
-              id="collapseOne"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                KaliMoh is a website for discovering
-                useful information, guides, technology,
-                software and interesting ideas.
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
+        </button>
 
         <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".15s"
+          id="collapseTwo"
+          class="accordion-collapse collapse"
         >
 
-          <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
-              <span>
-                What can I find on KaliMoh?
-              </span>
-
-            </button>
-
-            <div
-              id="collapseTwo"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                You can find technology topics,
-                useful guides, tips, software,
-                ideas and other interesting content.
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
-          <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
-              <span>
-                Is KaliMoh free?
-              </span>
-
-            </button>
-
-            <div
-              id="collapseThree"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                Yes. Browsing and discovering content
-                on KaliMoh is free. Some downloads may
-                require an account.
-              </div>
-
-            </div>
-
+          <div class="ud-faq-body">
+            You can find technology topics,
+            useful guides, tips, software,
+            ideas and other interesting content.
           </div>
 
         </div>
 
       </div>
 
+    </div>
 
-      <div class="col-lg-6">
 
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".1s"
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseThree"
         >
 
-          <div class="accordion">
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
 
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
-            >
+          <span>
+            Is KaliMoh free?
+          </span>
 
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
-              <span>
-                Can I suggest a topic?
-              </span>
-
-            </button>
-
-            <div
-              id="collapseFour"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                Yes. Use the contact section to send
-                a topic suggestion or an idea.
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
+        </button>
 
         <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".15s"
+          id="collapseThree"
+          class="accordion-collapse collapse"
         >
 
-          <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFive"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
-              <span>
-                What topics will be added?
-              </span>
-
-            </button>
-
-            <div
-              id="collapseFive"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                KaliMoh can grow with technology,
-                guides, software, useful information,
-                entertainment and new subjects.
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
-          <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseSix"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
-              <span>
-                How can I contact KaliMoh?
-              </span>
-
-            </button>
-
-            <div
-              id="collapseSix"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                Use the contact section below to
-                send a message or suggest an idea.
-              </div>
-
-            </div>
-
+          <div class="ud-faq-body">
+            Yes. Browsing and discovering content
+            on KaliMoh is free. Some downloads may
+            require an account.
           </div>
 
         </div>
@@ -1225,161 +1158,206 @@
 
   </div>
 
-</section>
 
+  <div class="col-lg-6">
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".1s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFour"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            Can I suggest a topic?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseFour"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            Yes. Use the contact section to send
+            a topic suggestion or an idea.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".15s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFive"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            What topics will be added?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseFive"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            KaliMoh can grow with technology,
+            guides, software, useful information,
+            entertainment and new subjects.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseSix"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            How can I contact KaliMoh?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseSix"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            Use the contact section below to
+            send a message or suggest an idea.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
 
 <!-- =========================
      Contact
 ========================= -->
+
 <section id="contact" class="ud-contact">
 
   <div class="container">
 
-    <div class="row align-items-center">
+```
+<div class="row align-items-center">
 
-      <div class="col-xl-8 col-lg-7">
+  <div class="col-xl-8 col-lg-7">
 
-        <div class="ud-contact-content-wrapper">
+    <div class="ud-contact-content-wrapper">
 
-          <div class="ud-contact-title">
+      <div class="ud-contact-title">
 
-            <span>CONTACT</span>
+        <span>CONTACT</span>
 
-            <h2>
-              Have an idea?<br />
-              We'd love to hear from you!
-            </h2>
+        <h2>
+          Have an idea?<br />
+          We'd love to hear from you!
+        </h2>
 
+      </div>
+
+      <div class="ud-contact-info-wrapper">
+
+        <div class="ud-single-info">
+
+          <div class="ud-info-icon">
+            <i class="lni lni-bulb"></i>
           </div>
 
-          <div class="ud-contact-info-wrapper">
+          <div class="ud-info-meta">
 
-            <div class="ud-single-info">
+            <h5>
+              Suggest a Topic
+            </h5>
 
-              <div class="ud-info-icon">
-                <i class="lni lni-bulb"></i>
-              </div>
-
-              <div class="ud-info-meta">
-
-                <h5>
-                  Suggest a Topic
-                </h5>
-
-                <p>
-                  Have an interesting idea
-                  for KaliMoh?
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="ud-single-info">
-
-              <div class="ud-info-icon">
-                <i class="lni lni-envelope"></i>
-              </div>
-
-              <div class="ud-info-meta">
-
-                <h5>
-                  Send a Message
-                </h5>
-
-                <p>
-                  Send us your message
-                  or suggestion.
-                </p>
-
-              </div>
-
-            </div>
+            <p>
+              Have an interesting idea
+              for KaliMoh?
+            </p>
 
           </div>
 
         </div>
 
-      </div>
 
+        <div class="ud-single-info">
 
-      <div class="col-xl-4 col-lg-5">
+          <div class="ud-info-icon">
+            <i class="lni lni-envelope"></i>
+          </div>
 
-        <div
-          class="ud-contact-form-wrapper wow fadeInUp"
-          data-wow-delay=".2s"
-        >
+          <div class="ud-info-meta">
 
-          <h3 class="ud-contact-form-title">
-            Send a Message
-          </h3>
+            <h5>
+              Send a Message
+            </h5>
 
-          <form
-            class="ud-contact-form"
-            onsubmit="return false;"
-          >
+            <p>
+              Send us your message
+              or suggestion.
+            </p>
 
-            <div class="ud-form-group">
-
-              <label for="fullName">
-                Full Name*
-              </label>
-
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                placeholder="Your name"
-              />
-
-            </div>
-
-
-            <div class="ud-form-group">
-
-              <label for="contactEmail">
-                Email*
-              </label>
-
-              <input
-                type="email"
-                id="contactEmail"
-                name="email"
-                placeholder="Your email"
-              />
-
-            </div>
-
-
-            <div class="ud-form-group">
-
-              <label for="message">
-                Message*
-              </label>
-
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Write your message here..."
-              ></textarea>
-
-            </div>
-
-
-            <div class="ud-form-group mb-0">
-
-              <button
-                type="submit"
-                class="ud-main-btn"
-              >
-                Send Message
-              </button>
-
-            </div>
-
-          </form>
+          </div>
 
         </div>
 
@@ -1389,12 +1367,99 @@
 
   </div>
 
-</section>
 
+  <div class="col-xl-4 col-lg-5">
+
+    <div
+      class="ud-contact-form-wrapper wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <h3 class="ud-contact-form-title">
+        Send a Message
+      </h3>
+
+      <form
+        class="ud-contact-form"
+        onsubmit="return false;"
+      >
+
+        <div class="ud-form-group">
+
+          <label for="fullName">
+            Full Name*
+          </label>
+
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Your name"
+          />
+
+        </div>
+
+
+        <div class="ud-form-group">
+
+          <label for="contactEmail">
+            Email*
+          </label>
+
+          <input
+            type="email"
+            id="contactEmail"
+            name="email"
+            placeholder="Your email"
+          />
+
+        </div>
+
+
+        <div class="ud-form-group">
+
+          <label for="message">
+            Message*
+          </label>
+
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Write your message here..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="ud-form-group mb-0">
+
+          <button
+            type="submit"
+            class="ud-main-btn"
+          >
+            Send Message
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
 
 <!-- =========================
      Footer
 ========================= -->
+
 <footer
   class="ud-footer wow fadeInUp"
   data-wow-delay=".15s"
@@ -1421,167 +1486,159 @@
     />
   </div>
 
-
   <div class="ud-footer-widgets">
 
-    <div class="container">
+```
+<div class="container">
 
-      <div class="row">
+  <div class="row">
 
-        <div class="col-xl-4 col-lg-4 col-md-6">
+    <div class="col-xl-4 col-lg-4 col-md-6">
 
-          <div class="ud-widget">
+      <div class="ud-widget">
 
-            <a
-              href="index.html"
-              class="ud-footer-logo"
-              style="
-                font-size: 26px;
-                font-weight: 800;
-                color: #ffffff;
-              "
-            >
-              KaliMoh
+        <a
+          href="index.html"
+          class="ud-footer-logo"
+        >
+          <span class="kalimoh-logo-mark">KM</span>
+          <span class="kalimoh-logo-name">KaliMoh</span>
+        </a>
+
+        <p class="ud-widget-desc">
+          Discover useful information,
+          learn new things and explore
+          interesting ideas with KaliMoh.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="col-xl-2 col-lg-2 col-md-6 col-sm-6"
+    >
+
+      <div class="ud-widget">
+
+        <h5 class="ud-widget-title">
+          Navigation
+        </h5>
+
+        <ul class="ud-widget-links">
+
+          <li>
+            <a href="index.html#home">
+              Home
             </a>
+          </li>
 
-            <p class="ud-widget-desc">
-              Discover useful information,
-              learn new things and explore
-              interesting ideas with KaliMoh.
-            </p>
+          <li>
+            <a href="index.html#features">
+              Features
+            </a>
+          </li>
 
-          </div>
+          <li>
+            <a href="index.html#about">
+              About
+            </a>
+          </li>
 
-        </div>
+          <li>
+            <a href="pricing.html">
+              Categories
+            </a>
+          </li>
 
+        </ul>
 
-        <div
-          class="col-xl-2 col-lg-2 col-md-6 col-sm-6"
-        >
+      </div>
 
-          <div class="ud-widget">
-
-            <h5 class="ud-widget-title">
-              Navigation
-            </h5>
-
-            <ul class="ud-widget-links">
-
-              <li>
-                <a href="index.html#home">
-                  Home
-                </a>
-              </li>
-
-              <li>
-                <a href="index.html#features">
-                  Features
-                </a>
-              </li>
-
-              <li>
-                <a href="index.html#about">
-                  About
-                </a>
-              </li>
-
-              <li>
-                <a href="pricing.html">
-                  Categories
-                </a>
-              </li>
-
-            </ul>
-
-          </div>
-
-        </div>
+    </div>
 
 
-        <div
-          class="col-xl-3 col-lg-3 col-md-6 col-sm-6"
-        >
+    <div
+      class="col-xl-3 col-lg-3 col-md-6 col-sm-6"
+    >
 
-          <div class="ud-widget">
+      <div class="ud-widget">
 
-            <h5 class="ud-widget-title">
-              Explore
-            </h5>
+        <h5 class="ud-widget-title">
+          Explore
+        </h5>
 
-            <ul class="ud-widget-links">
+        <ul class="ud-widget-links">
 
-              <li>
-                <a href="blog.html">
-                  Articles
-                </a>
-              </li>
+          <li>
+            <a href="blog.html">
+              Articles
+            </a>
+          </li>
 
-              <li>
-                <a href="software.html">
-                  Software
-                </a>
-              </li>
+          <li>
+            <a href="software.html">
+              Software
+            </a>
+          </li>
 
-              <li>
-                <a href="index.html#faq">
-                  FAQ
-                </a>
-              </li>
+          <li>
+            <a href="index.html#faq">
+              FAQ
+            </a>
+          </li>
 
-              <li>
-                <a href="index.html#contact">
-                  Contact
-                </a>
-              </li>
+          <li>
+            <a href="index.html#contact">
+              Contact
+            </a>
+          </li>
 
-            </ul>
+        </ul>
 
-          </div>
+      </div>
 
-        </div>
+    </div>
 
 
-        <div
-          class="col-xl-3 col-lg-3 col-md-6"
-        >
+    <div
+      class="col-xl-3 col-lg-3 col-md-6"
+    >
 
-          <div class="ud-widget">
+      <div class="ud-widget">
 
-            <h5 class="ud-widget-title">
-              Account
-            </h5>
+        <h5 class="ud-widget-title">
+          Account
+        </h5>
 
-            <ul class="ud-widget-links">
+        <ul class="ud-widget-links">
 
-              <li>
-                <a href="login.html">
-                  Login
-                </a>
-              </li>
+          <li>
+            <a href="login.html">
+              Login
+            </a>
+          </li>
 
-              <li>
-                <a href="signup.html">
-                  Sign Up
-                </a>
-              </li>
+          <li>
+            <a href="signup.html">
+              Sign Up
+            </a>
+          </li>
 
-              <li>
-                <a href="profile.html">
-                  Profile
-                </a>
-              </li>
+          <li>
+            <a href="profile.html">
+              Profile
+            </a>
+          </li>
 
-              <li>
-                <a href="index.html#contact">
-                  Get in Touch
-                </a>
-              </li>
+          <li>
+            <a href="index.html#contact">
+              Get in Touch
+            </a>
+          </li>
 
-            </ul>
-
-          </div>
-
-        </div>
+        </ul>
 
       </div>
 
@@ -1589,89 +1646,97 @@
 
   </div>
 
+</div>
+```
+
+  </div>
 
   <div class="ud-footer-bottom">
 
-    <div class="container">
+```
+<div class="container">
 
-      <div class="row">
+  <div class="row">
 
-        <div class="col-md-8">
+    <div class="col-md-8">
 
-          <ul class="ud-footer-bottom-left">
+      <ul class="ud-footer-bottom-left">
 
-            <li>
-              <a href="index.html#about">
-                About
-              </a>
-            </li>
+        <li>
+          <a href="index.html#about">
+            About
+          </a>
+        </li>
 
-            <li>
-              <a href="index.html#faq">
-                FAQ
-              </a>
-            </li>
+        <li>
+          <a href="index.html#faq">
+            FAQ
+          </a>
+        </li>
 
-            <li>
-              <a href="index.html#contact">
-                Contact
-              </a>
-            </li>
+        <li>
+          <a href="index.html#contact">
+            Contact
+          </a>
+        </li>
 
-            <li>
-              <a href="blog.html">
-                Articles
-              </a>
-            </li>
+        <li>
+          <a href="blog.html">
+            Articles
+          </a>
+        </li>
 
-            <li>
-              <a href="software.html">
-                Software
-              </a>
-            </li>
+        <li>
+          <a href="software.html">
+            Software
+          </a>
+        </li>
 
-          </ul>
-
-        </div>
-
-
-        <div class="col-md-4">
-
-          <p class="ud-footer-bottom-right">
-            © 2026 KaliMoh. All rights reserved.
-          </p>
-
-        </div>
-
-      </div>
+      </ul>
 
     </div>
+
+
+    <div class="col-md-4">
+
+      <p class="ud-footer-bottom-right">
+        © 2026 KaliMoh. All rights reserved.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+```
 
   </div>
 
 </footer>
 
-
 <!-- =========================
      Back To Top
 ========================= -->
-<a
-  href="javascript:void(0)"
-  class="back-to-top"
->
-  <i class="lni lni-chevron-up"></i>
-</a>
 
+<a
+href="javascript:void(0)"
+class="back-to-top"
+
+>
+
+<i class="lni lni-chevron-up"></i> </a>
 
 <!-- =========================
      JavaScript
 ========================= -->
+
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+
 <script src="assets/js/wow.min.js"></script>
+
 <script src="assets/js/main.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script>
   /* Smooth scrolling */
@@ -1762,7 +1827,6 @@
   window.addEventListener("scroll", onScroll);
 </script>
 
-
 <script>
   /* Search */
 
@@ -1824,7 +1888,6 @@
     }
   );
 </script>
-
 
 <script>
   /* Supabase */
@@ -1914,4 +1977,3 @@
 
 </body>
 </html>
-```
