@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -189,7 +189,8 @@
     ========================= */
 
     input,
-    textarea {
+    textarea,
+    select {
       width: 100%;
       padding: 12px;
       margin: 8px 0 15px;
@@ -197,10 +198,12 @@
       border-radius: 8px;
       font-family: inherit;
       font-size: 14px;
+      background: white;
     }
 
     input:focus,
-    textarea:focus {
+    textarea:focus,
+    select:focus {
       outline: none;
       border-color: #2d7ff9;
     }
@@ -406,7 +409,6 @@
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -423,23 +425,22 @@
 
   <div class="sidebar-title">Dashboard</div>
 
-<a href="#dashboard" class="nav-link">🏠 Dashboard</a> <a href="#users" class="nav-link">👥 Users</a> <a href="#software" class="nav-link">💻 Software</a> <a href="#articles" class="nav-link">📝 Articles</a> <a href="#views" class="nav-link">👁️ Views</a>
+  <a href="#dashboard" class="nav-link">🏠 Dashboard</a>
+  <a href="#users" class="nav-link">👥 Users</a>
+  <a href="#software" class="nav-link">💻 Software</a>
+  <a href="#articles" class="nav-link">📝 Articles</a>
+  <a href="#views" class="nav-link">👁️ Views</a>
 
   <div class="sidebar-title">Website</div>
 
-<a href="index.html" class="nav-link">🌐 View Site</a>
+  <a href="index.html" class="nav-link">🌐 View Site</a>
 
-<button
-type="button"
-class="logout-side"
-id="logout-btn"
-
->
-
-```
-Logout
-```
-
+  <button
+    type="button"
+    class="logout-side"
+    id="logout-btn"
+  >
+    Logout
   </button>
 
 </aside>
@@ -452,301 +453,302 @@ Logout
 
   <div class="container">
 
-```
-<div class="top-bar">
+    <div class="top-bar">
 
-  <div>
-    <h1>KaliMoh Admin Panel</h1>
-    <div id="auth-status"></div>
-  </div>
-
-  <a href="index.html" class="home-btn">
-    View Site
-  </a>
-
-</div>
-
-<!-- =========================
-     DASHBOARD
-========================= -->
-
-<section id="dashboard">
-
-  <div class="stats-grid">
-
-    <div class="stat-card">
-      <div class="stat-label">
-        👥 Total Users
+      <div>
+        <h1>KaliMoh Admin Panel</h1>
+        <div id="auth-status"></div>
       </div>
 
-      <div
-        id="total-users"
-        class="stats-number"
-      >
-        Loading...
-      </div>
+      <a href="index.html" class="home-btn">
+        View Site
+      </a>
+
     </div>
 
-    <div class="stat-card">
-      <div class="stat-label">
-        💻 Software
+    <!-- =========================
+         DASHBOARD
+    ========================= -->
+
+    <section id="dashboard">
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-label">
+            👥 Total Users
+          </div>
+
+          <div
+            id="total-users"
+            class="stats-number"
+          >
+            Loading...
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">
+            💻 Software
+          </div>
+
+          <div
+            id="total-software"
+            class="stats-number"
+          >
+            Loading...
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">
+            📝 Articles
+          </div>
+
+          <div
+            id="total-articles"
+            class="stats-number"
+          >
+            Loading...
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">
+            👁️ Article Views
+          </div>
+
+          <div
+            id="total-article-views"
+            class="stats-number"
+          >
+            Loading...
+          </div>
+        </div>
+
       </div>
 
-      <div
-        id="total-software"
-        class="stats-number"
-      >
-        Loading...
+    </section>
+
+    <!-- =========================
+         SOFTWARE
+    ========================= -->
+
+    <section id="software">
+
+      <div class="box">
+
+        <h2 id="form-title">
+          Add Software
+        </h2>
+
+        <form id="software-form">
+
+          <input
+            type="text"
+            id="title"
+            placeholder="Software title"
+            required
+          >
+
+          <textarea
+            id="description"
+            placeholder="Description"
+          ></textarea>
+
+          <input
+            type="url"
+            id="download_url"
+            placeholder="Download URL"
+          >
+
+          <select id="category" required>
+            <option value="">Select Category</option>
+            <option value="Windows">🪟 Windows</option>
+            <option value="Linux">🐧 Linux</option>
+            <option value="Android">📱 Android</option>
+            <option value="Tools">🛠️ Tools</option>
+            <option value="Books">📚 Books</option>
+          </select>
+
+          <input
+            type="url"
+            id="image_url"
+            placeholder="Image URL"
+          >
+
+          <label class="premium-option">
+            <input
+              type="checkbox"
+              id="is_premium"
+            >
+            Premium Software 🔒
+          </label>
+
+          <button
+            type="submit"
+            class="save-btn"
+            id="save-btn"
+          >
+            Add Software
+          </button>
+
+          <button
+            type="button"
+            class="cancel-btn"
+            id="cancel-btn"
+            style="display: none;"
+          >
+            Cancel Edit
+          </button>
+
+        </form>
+
+        <div id="software-message"></div>
+
       </div>
-    </div>
 
-    <div class="stat-card">
-      <div class="stat-label">
-        📝 Articles
+      <div class="box">
+
+        <h2>Software List</h2>
+
+        <div id="software-list">
+          Loading...
+        </div>
+
       </div>
 
-      <div
-        id="total-articles"
-        class="stats-number"
-      >
-        Loading...
+    </section>
+
+    <!-- =========================
+         ARTICLES
+    ========================= -->
+
+    <section id="articles">
+
+      <div class="box">
+
+        <h2 id="article-form-title">
+          Add Article
+        </h2>
+
+        <form id="article-form">
+
+          <input
+            type="text"
+            id="article-title"
+            placeholder="Article title"
+            required
+          >
+
+          <textarea
+            id="article-description"
+            placeholder="Short description"
+          ></textarea>
+
+          <textarea
+            id="article-content"
+            placeholder="Article content"
+            required
+          ></textarea>
+
+          <input
+            type="text"
+            id="article-category"
+            placeholder="Category"
+          >
+
+          <input
+            type="url"
+            id="article-image"
+            placeholder="Image URL"
+          >
+
+          <label class="published-option">
+
+            <input
+              type="checkbox"
+              id="article-published"
+              checked
+            >
+
+            Published
+
+          </label>
+
+          <button
+            type="submit"
+            class="save-btn"
+            id="article-save-btn"
+          >
+            Add Article
+          </button>
+
+          <button
+            type="button"
+            class="cancel-btn"
+            id="article-cancel-btn"
+            style="display: none;"
+          >
+            Cancel Edit
+          </button>
+
+        </form>
+
+        <div id="article-message"></div>
+
       </div>
-    </div>
 
-    <div class="stat-card">
-      <div class="stat-label">
-        👁️ Article Views
+      <div class="box">
+
+        <h2>Articles List</h2>
+
+        <div id="articles-list">
+          Loading...
+        </div>
+
       </div>
 
-      <div
-        id="total-article-views"
-        class="stats-number"
-      >
-        Loading...
+    </section>
+
+    <!-- =========================
+         USERS
+    ========================= -->
+
+    <section id="users">
+
+      <div class="box">
+
+        <h2>👥 Users</h2>
+
+        <div id="users-list">
+          Loading...
+        </div>
+
       </div>
-    </div>
 
-  </div>
+    </section>
 
-</section>
+    <!-- =========================
+         VIEWS
+    ========================= -->
 
-<!-- =========================
-     SOFTWARE
-========================= -->
+    <section id="views">
 
-<section id="software">
+      <div class="box">
 
-  <div class="box">
+        <h2>👁️ Article Views</h2>
 
-    <h2 id="form-title">
-      Add Software
-    </h2>
-
-    <form id="software-form">
-
-      <input
-        type="text"
-        id="title"
-        placeholder="Software title"
-        required
-      >
-
-      <textarea
-        id="description"
-        placeholder="Description"
-      ></textarea>
-
-      <input
-        type="url"
-        id="download_url"
-        placeholder="Download URL"
-      >
-
-      <input
-        type="text"
-        id="category"
-        placeholder="Category"
-      >
-
-      <input
-        type="url"
-        id="image_url"
-        placeholder="Image URL"
-      >
-
-      <label class="premium-option">
-        <input
-          type="checkbox"
-          id="is_premium"
+        <div
+          id="views-total-display"
+          class="stats-number"
         >
-        Premium Software 🔒
-      </label>
+          Loading...
+        </div>
 
-      <button
-        type="submit"
-        class="save-btn"
-        id="save-btn"
-      >
-        Add Software
-      </button>
+      </div>
 
-      <button
-        type="button"
-        class="cancel-btn"
-        id="cancel-btn"
-        style="display: none;"
-      >
-        Cancel Edit
-      </button>
-
-    </form>
-
-    <div id="software-message"></div>
-
-  </div>
-
-  <div class="box">
-
-    <h2>Software List</h2>
-
-    <div id="software-list">
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     ARTICLES
-========================= -->
-
-<section id="articles">
-
-  <div class="box">
-
-    <h2 id="article-form-title">
-      Add Article
-    </h2>
-
-    <form id="article-form">
-
-      <input
-        type="text"
-        id="article-title"
-        placeholder="Article title"
-        required
-      >
-
-      <textarea
-        id="article-description"
-        placeholder="Short description"
-      ></textarea>
-
-      <textarea
-        id="article-content"
-        placeholder="Article content"
-        required
-      ></textarea>
-
-      <input
-        type="text"
-        id="article-category"
-        placeholder="Category"
-      >
-
-      <input
-        type="url"
-        id="article-image"
-        placeholder="Image URL"
-      >
-
-      <label class="published-option">
-
-        <input
-          type="checkbox"
-          id="article-published"
-          checked
-        >
-
-        Published
-
-      </label>
-
-      <button
-        type="submit"
-        class="save-btn"
-        id="article-save-btn"
-      >
-        Add Article
-      </button>
-
-      <button
-        type="button"
-        class="cancel-btn"
-        id="article-cancel-btn"
-        style="display: none;"
-      >
-        Cancel Edit
-      </button>
-
-    </form>
-
-    <div id="article-message"></div>
-
-  </div>
-
-  <div class="box">
-
-    <h2>Articles List</h2>
-
-    <div id="articles-list">
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     USERS
-========================= -->
-
-<section id="users">
-
-  <div class="box">
-
-    <h2>👥 Users</h2>
-
-    <div id="users-list">
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     VIEWS
-========================= -->
-
-<section id="views">
-
-  <div class="box">
-
-    <h2>👁️ Article Views</h2>
-
-    <div
-      id="views-total-display"
-      class="stats-number"
-    >
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-```
+    </section>
 
   </div>
 
@@ -2079,3 +2081,4 @@ Logout
 
 </body>
 </html>
+```
