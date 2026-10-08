@@ -1,789 +1,1360 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>KaliMoh | Discover • Learn • Explore</title>
 
-  <meta name="description"
-        content="KaliMoh is a place to discover useful information, helpful guides, technology, software, ideas and more.">
+<meta
+ name="description"
+ content="KaliMoh is a place to discover useful information, helpful guides, technology, software, ideas and more."
+/>
+
+  <link
+    rel="shortcut icon"
+    href="assets/images/favicon.svg"
+    type="image/svg"
+  />
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/lineicons.css" />
+  <link rel="stylesheet" href="assets/css/ud-styles.css" />
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* =========================
+       KaliMoh Interface Upgrade
+    ========================= */
+
+    .ud-header {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #1f2937;
-      background: #fff;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      width: min(1120px, 92%);
-      margin: auto;
-    }
-
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.96);
-      border-bottom: 1px solid #e5e7eb;
-      backdrop-filter: blur(10px);
-    }
-
-    .nav {
-      min-height: 72px;
+    .navbar-brand {
+      letter-spacing: -0.5px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 22px;
-      font-weight: 800;
-      color: #3056d3;
-      white-space: nowrap;
-    }
-
-    .logo-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #3056d3, #5b7cff);
-      color: white;
-      display: grid;
-      place-items: center;
-      font-weight: bold;
-      box-shadow: 0 8px 20px rgba(48,86,211,.25);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 600;
-      color: #4b5563;
-      transition: .2s;
-    }
-
-    .nav-links a:hover {
-      color: #3056d3;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 11px 18px;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .btn-primary {
-      background: #3056d3;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #2446b5;
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      border-color: #d1d5db;
-      color: #374151;
-      background: white;
-    }
-
-    .btn-outline:hover {
-      border-color: #3056d3;
-      color: #3056d3;
-    }
-
-    /* HERO */
-    .hero {
-      padding: 90px 0 70px;
-      background:
-        radial-gradient(circle at top right, rgba(48,86,211,.13), transparent 35%),
-        linear-gradient(180deg, #f8faff 0%, #fff 100%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 60px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 7px 13px;
-      background: #eef2ff;
-      color: #3056d3;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 6vw, 68px);
-      line-height: 1.05;
-      color: #111827;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: #3056d3;
-    }
-
-    .hero > .container > div > p,
-    .hero-text p {
-      color: #6b7280;
-      font-size: 18px;
-      max-width: 600px;
-      margin-bottom: 28px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* HERO VISUAL */
-    .hero-visual {
-      min-height: 390px;
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.22), transparent 25%),
-        linear-gradient(135deg, #111d48, #3056d3 55%, #7190ff);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 25px 60px rgba(48,86,211,.22);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-visual::before {
-      content: "";
-      position: absolute;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.2);
-      top: -100px;
-      right: -50px;
-    }
-
-    .hero-visual::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.15);
-      bottom: -100px;
-      left: -70px;
-    }
-
-    .visual-content {
-      width: 100%;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      padding: 30px;
-    }
-
-    .tech-screen {
-      width: 88%;
-      max-width: 430px;
-      height: 235px;
-      background: rgba(7,16,43,.82);
-      border: 1px solid rgba(255,255,255,.24);
-      border-radius: 18px;
-      padding: 15px;
-      box-shadow: 0 22px 50px rgba(0,0,0,.28);
-      backdrop-filter: blur(8px);
-      margin-bottom: 22px;
-    }
-
-    .screen-top {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 16px;
-    }
-
-    .screen-top span {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.65);
-    }
-
-    .screen-body {
-      padding: 8px;
-    }
-
-    .code-line {
-      height: 7px;
-      border-radius: 10px;
-      background: rgba(255,255,255,.25);
-      margin-bottom: 11px;
-    }
-
-    .code-line.long {
-      width: 88%;
-    }
-
-    .code-line.medium {
-      width: 68%;
-    }
-
-    .code-line.short {
-      width: 48%;
-    }
-
-    .screen-card {
-      margin-top: 20px;
-      padding: 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.1);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-align: left;
-    }
-
-    .mini-icon {
-      width: 43px;
-      height: 43px;
-      border-radius: 11px;
-      background: #3056d3;
-      display: grid;
-      place-items: center;
-      font-size: 20px;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-
-    .screen-card strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .screen-card small {
-      display: block;
-      color: rgba(255,255,255,.65);
-      font-size: 11px;
-      margin-top: 2px;
-    }
-
-    .visual-content h2 {
-      font-size: 28px;
-      margin-bottom: 5px;
-    }
-
-    .visual-content > p {
-      color: rgba(255,255,255,.75);
-      font-size: 14px;
-    }
-
-    /* SEARCH */
-    .search-section {
-      margin-top: -25px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .search-box {
-      background: white;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 15px 40px rgba(15,23,42,.08);
-      border-radius: 15px;
-      padding: 12px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .search-box input {
-      flex: 1;
-      border: none;
-      outline: none;
-      padding: 12px 14px;
-      font-size: 16px;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 85px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 45px;
-    }
-
-    .section-heading h2 {
-      font-size: 38px;
-      color: #111827;
-      margin-bottom: 10px;
-    }
-
-    .section-heading p {
-      color: #6b7280;
-      max-width: 650px;
-      margin: auto;
-    }
-
-    /* FEATURES */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 28px 22px;
-      background: white;
-      transition: .25s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(15,23,42,.08);
-    }
-
-    .card-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: #eef2ff;
-      color: #3056d3;
-      display: grid;
-      place-items: center;
-      font-size: 24px;
-      margin-bottom: 18px;
-    }
-
-    .card h3 {
-      margin-bottom: 8px;
-      color: #111827;
-    }
-
-    .card p {
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    /* CATEGORIES */
-    .categories {
-      background: #f8faff;
-    }
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .category {
-      padding: 35px 28px;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e5e7eb;
-      text-align: center;
-      transition: .2s;
-    }
-
-    .category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 18px 40px rgba(15,23,42,.08);
-    }
-
-    .category-icon {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
-
-    .category h3 {
-      margin-bottom: 8px;
-    }
-
-    .category p {
-      color: #6b7280;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
-      align-items: center;
-    }
-
-    .about-box {
-      min-height: 330px;
-      border-radius: 25px;
-      background: linear-gradient(135deg, #eef2ff, #dbeafe);
-      display: grid;
-      place-items: center;
-      font-size: 100px;
-    }
-
-    .about-text h2 {
-      font-size: 38px;
-      margin-bottom: 18px;
-    }
-
-    .about-text p {
-      color: #6b7280;
-      margin-bottom: 15px;
-    }
-
-    /* FAQ */
-    .faq {
-      background: #f8faff;
-    }
-
-    .faq-list {
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .faq-item {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      overflow: hidden;
-    }
-
-    .faq-question {
-      width: 100%;
-      border: none;
-      background: white;
-      text-align: left;
-      padding: 20px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #111827;
-    }
-
-    .faq-answer {
-      display: none;
-      padding: 0 20px 20px;
-      color: #6b7280;
-    }
-
-    .faq-item.active .faq-answer {
-      display: block;
-    }
-
-    /* CONTACT */
-    .contact-form {
-      max-width: 750px;
-      margin: auto;
-      display: grid;
-      gap: 15px;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid #d1d5db;
-      border-radius: 9px;
-      outline: none;
-      font-family: inherit;
-    }
-
-    .contact-form textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    /* FOOTER */
-    footer {
-      background: #111827;
-      color: white;
-      padding: 55px 0 25px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 35px;
-    }
-
-    footer .logo {
-      color: white;
-      margin-bottom: 15px;
-    }
-
-    footer p {
-      color: #9ca3af;
-      max-width: 450px;
-    }
-
-    footer h4 {
-      margin-bottom: 15px;
-    }
-
-    .footer-links {
-      list-style: none;
-      display: grid;
       gap: 9px;
     }
 
-    .footer-links a {
-      color: #9ca3af;
+    .kalimoh-logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      padding: 0 8px;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #3056d3;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     }
 
-    .copyright {
-      border-top: 1px solid #374151;
-      padding-top: 20px;
-      color: #9ca3af;
-      font-size: 13px;
-      text-align: center;
+    .kalimoh-logo-name {
+      color: #ffffff;
+      font-size: 27px;
+      font-weight: 800;
+      line-height: 1;
     }
 
-    /* TOP */
-    .top {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+    .ud-menu-scroll,
+    .navbar-nav .nav-item > a {
+      transition: 0.25s ease;
+    }
+
+    .navbar-nav .nav-item > a:hover {
+      transform: translateY(-1px);
+    }
+
+    .ud-hero-content {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .ud-hero-title {
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+
+    .ud-hero-desc {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Search */
+
+    .kalimoh-search-wrapper {
+      position: relative;
+      width: min(760px, 92%);
+      margin: 0 auto;
+    }
+
+    .kalimoh-search-box {
+      width: 100%;
+      height: 62px;
+      padding: 0 65px 0 24px;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      background: #ffffff;
+      color: #111827;
+      font-size: 17px;
+      outline: none;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+      transition: 0.25s ease;
+    }
+
+    .kalimoh-search-box:focus {
+      border-color: #3056d3;
+      box-shadow: 0 14px 40px rgba(48, 86, 211, 0.14);
+    }
+
+    .kalimoh-search-button {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 12px;
       background: #3056d3;
-      color: white;
-      display: grid;
-      place-items: center;
-      font-size: 20px;
-      z-index: 100;
+      color: #fff;
+      font-size: 19px;
+      cursor: pointer;
+      transition: 0.25s ease;
     }
 
-    /* MOBILE */
-    @media (max-width: 900px) {
+    .kalimoh-search-button:hover {
+      transform: scale(1.05);
+    }
 
-      .nav-links {
-        display: none;
+    .kalimoh-search-section {
+      padding: 35px 20px 15px;
+      background: #fff;
+    }
+
+    /* Feature cards */
+
+    .ud-single-feature {
+      height: 100%;
+      transition: 0.3s ease;
+    }
+
+    .ud-single-feature:hover {
+      transform: translateY(-7px);
+    }
+
+    .ud-feature-icon {
+      transition: 0.3s ease;
+    }
+
+    .ud-single-feature:hover .ud-feature-icon {
+      transform: scale(1.06);
+    }
+
+    /* Category cards */
+
+    .ud-single-pricing {
+      transition: 0.3s ease;
+    }
+
+    .ud-single-pricing:hover {
+      transform: translateY(-8px);
+    }
+
+    /* About */
+
+    .ud-about-wrapper {
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    /* Contact */
+
+    .ud-contact-form-wrapper {
+      border-radius: 18px;
+    }
+
+    /* Footer */
+
+    .ud-footer-logo {
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ud-footer-logo:hover {
+      opacity: 0.85;
+    }
+
+    .ud-footer-logo .kalimoh-logo-mark {
+      min-width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    .ud-footer-logo .kalimoh-logo-name {
+      font-size: 26px;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 991px) {
+      .navbar-btn {
+        margin-top: 15px;
+        justify-content: center;
       }
 
-      .hero-grid,
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .category-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
+      .navbar-nav {
+        padding-top: 15px;
+        padding-bottom: 10px;
       }
     }
 
-    @media (max-width: 600px) {
-
-      .nav-buttons .btn-outline {
-        display: none;
+    @media (max-width: 575px) {
+      .ud-hero-title {
+        letter-spacing: -0.5px;
       }
 
-      .features-grid {
-        grid-template-columns: 1fr;
+      .kalimoh-search-box {
+        height: 56px;
+        font-size: 16px;
       }
 
-      .search-box {
-        flex-direction: column;
+      .kalimoh-search-button {
+        width: 42px;
+        height: 42px;
       }
 
-      .search-box .btn {
-        width: 100%;
+      .kalimoh-logo-mark {
+        min-width: 38px;
+        height: 38px;
+        font-size: 15px;
       }
 
-      section {
-        padding: 65px 0;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-      }
-
-      .hero-visual {
-        min-height: 350px;
-      }
-
-      .tech-screen {
-        width: 94%;
+      .kalimoh-logo-name {
+        font-size: 24px;
       }
     }
   </style>
+
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container nav">
+<!-- =========================
+     Header
+========================= -->
 
-      <a href="index.html" class="logo">
-        <span class="logo-mark">K</span>
-        <span>KaliMoh</span>
+<header class="ud-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+
+```
+    <nav class="navbar navbar-expand-lg">
+
+      <a
+        class="navbar-brand"
+        href="index.html"
+      >
+        <span class="kalimoh-logo-mark">KM</span>
+        <span class="kalimoh-logo-name">KaliMoh</span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="blog.html">Articles</a></li>
-        <li><a href="software.html">Software</a></li>
-        <li><a href="#categories">Categories</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+      </button>
+
+      <div
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent"
+      >
+
+        <ul id="nav" class="navbar-nav mx-auto">
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#home">
+              Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#features">
+              Features
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#about">
+              About
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="blog.html">
+              Articles
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="software.html">
+              Software
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="pricing.html">
+              Categories
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#faq">
+              FAQ
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="ud-menu-scroll" href="#contact">
+              Contact
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="navbar-btn d-flex align-items-center">
+
+          <div
+            id="guestButtons"
+            class="d-flex align-items-center"
+          >
+
+            <a
+              href="login.html"
+              class="ud-main-btn ud-white-btn"
+              style="margin-right: 10px;"
+            >
+              Login
+            </a>
+
+            <a
+              href="signup.html"
+              class="ud-main-btn"
+            >
+              Sign Up
+            </a>
+
+          </div>
+
+          <div
+            id="userButtons"
+            class="d-flex align-items-center"
+            style="display: none !important;"
+          >
+
+            <a
+              href="profile.html"
+              class="ud-main-btn ud-white-btn"
+              style="margin-right: 10px;"
+            >
+              Profile
+            </a>
+
+            <button
+              type="button"
+              id="logoutBtn"
+              class="ud-main-btn"
+            >
+              Logout
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </nav>
+
+  </div>
+</div>
+```
+
+  </div>
+</header>
+
+<!-- =========================
+     Hero
+========================= -->
+
+<section class="ud-hero" id="home">
+
+  <div class="container">
+
+```
+<div class="row">
+  <div class="col-lg-12">
+
+    <div
+      class="ud-hero-content wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <h1 class="ud-hero-title">
+        Discover. Learn. Explore.
+      </h1>
+
+      <p class="ud-hero-desc">
+        Welcome to KaliMoh — discover useful information,
+        technology, software, practical guides, interesting ideas
+        and much more.
+      </p>
+
+      <ul class="ud-hero-buttons">
+
+        <li>
+          <a
+            href="pricing.html"
+            class="ud-main-btn ud-white-btn"
+          >
+            Explore Now
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="#about"
+            class="ud-main-btn ud-link-btn"
+          >
+            Learn More
+            <i class="lni lni-arrow-right"></i>
+          </a>
+        </li>
+
       </ul>
 
-      <div class="nav-buttons">
-        <a href="login.html" class="btn btn-outline">Login</a>
-        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+    </div>
+
+    <div
+      class="ud-hero-brands-wrapper wow fadeInUp"
+      data-wow-delay=".3s"
+    >
+      <img
+        src="assets/images/hero/brand.svg"
+        alt="KaliMoh"
+      />
+    </div>
+
+    <div
+      class="ud-hero-image wow fadeInUp"
+      data-wow-delay=".25s"
+    >
+
+      <img
+        src="assets/images/hero/hero-image.svg"
+        alt="KaliMoh"
+      />
+
+      <img
+        src="assets/images/hero/dotted-shape.svg"
+        alt=""
+        class="shape shape-1"
+      />
+
+      <img
+        src="assets/images/hero/dotted-shape.svg"
+        alt=""
+        class="shape shape-2"
+      />
+
+    </div>
+
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- =========================
+     Search
+========================= -->
+
+<section class="kalimoh-search-section">
+
+  <div class="container">
+
+```
+<div class="text-center mb-3">
+  <span
+    style="
+      font-weight: 600;
+      color: #3056d3;
+    "
+  >
+    Search KaliMoh
+  </span>
+</div>
+
+<div class="kalimoh-search-wrapper">
+
+  <input
+    id="siteSearch"
+    class="kalimoh-search-box"
+    type="text"
+    placeholder="Search articles, guides, technology..."
+    autocomplete="off"
+  />
+
+  <button
+    type="button"
+    id="searchButton"
+    class="kalimoh-search-button"
+    aria-label="Search"
+  >
+    <i class="lni lni-search-alt"></i>
+  </button>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     Features
+========================= -->
+
+<section id="features" class="ud-features">
+
+  <div class="container">
+
+```
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="ud-section-title">
+
+      <span>Why KaliMoh?</span>
+
+      <h2>
+        Everything Worth Discovering,
+        In One Place
+      </h2>
+
+      <p>
+        Explore useful content, practical ideas,
+        technology and more through a simple experience.
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div class="col-xl-3 col-lg-3 col-sm-6">
+
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".1s"
+    >
+
+      <div class="ud-feature-icon">
+        <i class="lni lni-book"></i>
+      </div>
+
+      <div class="ud-feature-content">
+
+        <h3 class="ud-feature-title">
+          Useful Information
+        </h3>
+
+        <p class="ud-feature-desc">
+          Discover information that helps you learn
+          and understand different topics.
+        </p>
+
+        <a
+          href="blog.html"
+          class="ud-feature-link"
+        >
+          Explore
+        </a>
+
       </div>
 
     </div>
-  </header>
+
+  </div>
 
 
-  <!-- HERO -->
-  <main id="home">
+  <div class="col-xl-3 col-lg-3 col-sm-6">
 
-    <section class="hero">
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".15s"
+    >
 
-      <div class="container hero-grid">
+      <div class="ud-feature-icon">
+        <i class="lni lni-bulb"></i>
+      </div>
 
-        <div class="hero-text">
+      <div class="ud-feature-content">
 
-          <span class="hero-badge">
-            Welcome to KaliMoh
+        <h3 class="ud-feature-title">
+          Ideas & Tips
+        </h3>
+
+        <p class="ud-feature-desc">
+          Find simple ideas, practical tips and
+          useful guides.
+        </p>
+
+        <a
+          href="blog.html"
+          class="ud-feature-link"
+        >
+          Explore
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="col-xl-3 col-lg-3 col-sm-6">
+
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <div class="ud-feature-icon">
+        <i class="lni lni-code"></i>
+      </div>
+
+      <div class="ud-feature-content">
+
+        <h3 class="ud-feature-title">
+          Technology
+        </h3>
+
+        <p class="ud-feature-desc">
+          Explore software, computers, digital tools
+          and technology tips.
+        </p>
+
+        <a
+          href="software.html"
+          class="ud-feature-link"
+        >
+          Explore
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="col-xl-3 col-lg-3 col-sm-6">
+
+    <div
+      class="ud-single-feature wow fadeInUp"
+      data-wow-delay=".25s"
+    >
+
+      <div class="ud-feature-icon">
+        <i class="lni lni-star"></i>
+      </div>
+
+      <div class="ud-feature-content">
+
+        <h3 class="ud-feature-title">
+          Discover More
+        </h3>
+
+        <p class="ud-feature-desc">
+          New subjects, interesting content and
+          fresh ideas are waiting for you.
+        </p>
+
+        <a
+          href="pricing.html"
+          class="ud-feature-link"
+        >
+          Explore
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- =========================
+     About
+========================= -->
+
+<section id="about" class="ud-about">
+
+  <div class="container">
+
+```
+<div
+  class="ud-about-wrapper wow fadeInUp"
+  data-wow-delay=".2s"
+>
+
+  <div class="ud-about-content-wrapper">
+
+    <div class="ud-about-content">
+
+      <span class="tag">
+        About KaliMoh
+      </span>
+
+      <h2>
+        A Place for Curiosity and Discovery.
+      </h2>
+
+      <p>
+        KaliMoh brings useful information,
+        interesting ideas, practical guides and
+        technology together in one place.
+      </p>
+
+      <p>
+        Explore articles, software, digital tools,
+        tips and new ideas — with a simple experience
+        designed to help you discover something useful.
+      </p>
+
+      <a
+        href="pricing.html"
+        class="ud-main-btn"
+      >
+        Explore Categories
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="ud-about-image">
+
+    <img
+      src="assets/images/about/about-image.svg"
+      alt="About KaliMoh"
+    />
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     Categories
+========================= -->
+
+<section
+  id="categories"
+  class="ud-pricing"
+>
+
+  <div class="container">
+
+```
+<div class="row">
+
+  <div class="col-lg-12">
+
+    <div
+      class="ud-section-title mx-auto text-center"
+    >
+
+      <span>Explore</span>
+
+      <h2>
+        Explore Our Categories
+      </h2>
+
+      <p>
+        Choose a topic and start discovering
+        useful content.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="row g-0 align-items-center justify-content-center"
+>
+
+  <div
+    class="col-lg-4 col-md-6 col-sm-10"
+  >
+
+    <div
+      class="ud-single-pricing first-item wow fadeInUp"
+      data-wow-delay=".15s"
+    >
+
+      <div class="ud-pricing-header">
+
+        <h3>
+          TECHNOLOGY
+        </h3>
+
+        <h4>
+          Discover
+        </h4>
+
+      </div>
+
+      <div class="ud-pricing-body">
+
+        <ul>
+          <li>Computers</li>
+          <li>Internet</li>
+          <li>Digital Tools</li>
+          <li>Useful Apps</li>
+          <li>Technology Tips</li>
+        </ul>
+
+      </div>
+
+      <div class="ud-pricing-footer">
+
+        <a
+          href="software.html"
+          class="ud-main-btn ud-border-btn"
+        >
+          Discover More
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="col-lg-4 col-md-6 col-sm-10"
+  >
+
+    <div
+      class="ud-single-pricing active wow fadeInUp"
+      data-wow-delay=".1s"
+    >
+
+      <span class="ud-popular-tag">
+        POPULAR
+      </span>
+
+      <div class="ud-pricing-header">
+
+        <h3>
+          GUIDES & TIPS
+        </h3>
+
+        <h4>
+          Learn
+        </h4>
+
+      </div>
+
+      <div class="ud-pricing-body">
+
+        <ul>
+          <li>Simple Guides</li>
+          <li>How-To Articles</li>
+          <li>Useful Tips</li>
+          <li>Ideas</li>
+          <li>Everyday Solutions</li>
+        </ul>
+
+      </div>
+
+      <div class="ud-pricing-footer">
+
+        <a
+          href="blog.html"
+          class="ud-main-btn ud-white-btn"
+        >
+          Start Exploring
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="col-lg-4 col-md-6 col-sm-10"
+  >
+
+    <div
+      class="ud-single-pricing last-item wow fadeInUp"
+      data-wow-delay=".15s"
+    >
+
+      <div class="ud-pricing-header">
+
+        <h3>
+          ENTERTAINMENT
+        </h3>
+
+        <h4>
+          Enjoy
+        </h4>
+
+      </div>
+
+      <div class="ud-pricing-body">
+
+        <ul>
+          <li>Interesting Content</li>
+          <li>Videos</li>
+          <li>Stories</li>
+          <li>New Discoveries</li>
+          <li>Fun Ideas</li>
+        </ul>
+
+      </div>
+
+      <div class="ud-pricing-footer">
+
+        <a
+          href="blog.html"
+          class="ud-main-btn ud-border-btn"
+        >
+          Discover More
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     FAQ
+========================= -->
+
+<section id="faq" class="ud-faq">
+
+  <div class="shape">
+    <img
+      src="assets/images/faq/shape.svg"
+      alt=""
+    />
+  </div>
+
+  <div class="container">
+
+```
+<div class="row">
+
+  <div class="col-lg-12">
+
+    <div
+      class="ud-section-title text-center mx-auto"
+    >
+
+      <span>FAQ</span>
+
+      <h2>
+        Frequently Asked Questions
+      </h2>
+
+      <p>
+        Simple answers to common questions
+        about KaliMoh.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-lg-6">
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".1s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
           </span>
 
-          <h1>
-            Discover.<br>
-            <span>Learn. Explore.</span>
-          </h1>
+          <span>
+            What is KaliMoh?
+          </span>
 
-          <p>
-            Discover useful information, helpful guides, technology,
-            software, ideas and more — all in one place.
-          </p>
+        </button>
 
-          <div class="hero-buttons">
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+        >
 
-            <a href="#categories" class="btn btn-primary">
-              Explore Now
-            </a>
+          <div class="ud-faq-body">
+            KaliMoh is a website for discovering
+            useful information, guides, technology,
+            software and interesting ideas.
+          </div>
 
-            <a href="#about" class="btn btn-outline">
-              Learn More
-            </a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".15s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseTwo"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            What can I find on KaliMoh?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            You can find technology topics,
+            useful guides, tips, software,
+            ideas and other interesting content.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseThree"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            Is KaliMoh free?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            Yes. Browsing and discovering content
+            on KaliMoh is free. Some downloads may
+            require an account.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="col-lg-6">
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".1s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFour"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            Can I suggest a topic?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseFour"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            Yes. Use the contact section to send
+            a topic suggestion or an idea.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".15s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFive"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            What topics will be added?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseFive"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            KaliMoh can grow with technology,
+            guides, software, useful information,
+            entertainment and new subjects.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="ud-single-faq wow fadeInUp"
+      data-wow-delay=".2s"
+    >
+
+      <div class="accordion">
+
+        <button
+          class="ud-faq-btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseSix"
+        >
+
+          <span class="icon flex-shrink-0">
+            <i class="lni lni-chevron-down"></i>
+          </span>
+
+          <span>
+            How can I contact KaliMoh?
+          </span>
+
+        </button>
+
+        <div
+          id="collapseSix"
+          class="accordion-collapse collapse"
+        >
+
+          <div class="ud-faq-body">
+            Use the contact section below to
+            send a message or suggest an idea.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     Contact
+========================= -->
+
+<section id="contact" class="ud-contact">
+
+  <div class="container">
+
+```
+<div class="row align-items-center">
+
+  <div class="col-xl-8 col-lg-7">
+
+    <div class="ud-contact-content-wrapper">
+
+      <div class="ud-contact-title">
+
+        <span>CONTACT</span>
+
+        <h2>
+          Have an idea?<br />
+          We'd love to hear from you!
+        </h2>
+
+      </div>
+
+      <div class="ud-contact-info-wrapper">
+
+        <div class="ud-single-info">
+
+          <div class="ud-info-icon">
+            <i class="lni lni-bulb"></i>
+          </div>
+
+          <div class="ud-info-meta">
+
+            <h5>
+              Suggest a Topic
+            </h5>
+
+            <p>
+              Have an interesting idea
+              for KaliMoh?
+            </p>
 
           </div>
 
         </div>
 
 
-        <!-- KALIMOH HERO DESIGN -->
+        <div class="ud-single-info">
 
-        <div class="hero-visual">
+          <div class="ud-info-icon">
+            <i class="lni lni-envelope"></i>
+          </div>
 
-          <div class="visual-content">
+          <div class="ud-info-meta">
 
-            <div class="tech-screen">
-
-              <div class="screen-top">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-
-              <div class="screen-body">
-
-                <div class="code-line long"></div>
-                <div class="code-line medium"></div>
-                <div class="code-line short"></div>
-
-                <div class="screen-card">
-
-                  <div class="mini-icon">
-                    K
-                  </div>
-
-                  <div>
-                    <strong>KaliMoh</strong>
-
-                    <small>
-                      Discover • Learn • Explore
-                    </small>
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-            <h2>KaliMoh</h2>
+            <h5>
+              Send a Message
+            </h5>
 
             <p>
-              Discover • Learn • Explore
+              Send us your message
+              or suggestion.
             </p>
 
           </div>
@@ -792,576 +1363,617 @@
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
 
 
-    <!-- SEARCH -->
+  <div class="col-xl-4 col-lg-5">
 
-    <div class="container search-section">
+    <div
+      class="ud-contact-form-wrapper wow fadeInUp"
+      data-wow-delay=".2s"
+    >
 
-      <form class="search-box" id="searchForm">
+      <h3 class="ud-contact-form-title">
+        Send a Message
+      </h3>
 
-        <input
-          type="search"
-          id="siteSearch"
-          placeholder="Search articles, guides, software..."
-          autocomplete="off"
-        >
+      <form
+        class="ud-contact-form"
+        onsubmit="return false;"
+      >
 
-        <button type="submit" class="btn btn-primary">
-          Search
-        </button>
+        <div class="ud-form-group">
+
+          <label for="fullName">
+            Full Name*
+          </label>
+
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Your name"
+          />
+
+        </div>
+
+
+        <div class="ud-form-group">
+
+          <label for="contactEmail">
+            Email*
+          </label>
+
+          <input
+            type="email"
+            id="contactEmail"
+            name="email"
+            placeholder="Your email"
+          />
+
+        </div>
+
+
+        <div class="ud-form-group">
+
+          <label for="message">
+            Message*
+          </label>
+
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Write your message here..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="ud-form-group mb-0">
+
+          <button
+            type="submit"
+            class="ud-main-btn"
+          >
+            Send Message
+          </button>
+
+        </div>
 
       </form>
 
     </div>
 
+  </div>
 
-    <!-- FEATURES -->
+</div>
+```
 
-    <section id="features">
+  </div>
 
-      <div class="container">
+</section>
 
-        <div class="section-heading">
+<!-- =========================
+     Footer
+========================= -->
 
-          <h2>
-            What You Can Discover
-          </h2>
+<footer
+  class="ud-footer wow fadeInUp"
+  data-wow-delay=".15s"
+>
 
-          <p>
-            Explore different types of useful content made to help
-            you learn and discover something new.
-          </p>
+  <div class="shape shape-1">
+    <img
+      src="assets/images/footer/shape-1.svg"
+      alt=""
+    />
+  </div>
 
-        </div>
+  <div class="shape shape-2">
+    <img
+      src="assets/images/footer/shape-2.svg"
+      alt=""
+    />
+  </div>
 
+  <div class="shape shape-3">
+    <img
+      src="assets/images/footer/shape-3.svg"
+      alt=""
+    />
+  </div>
 
-        <div class="features-grid">
+  <div class="ud-footer-widgets">
 
-          <div class="card">
-            <div class="card-icon">📚</div>
+```
+<div class="container">
 
-            <h3>
-              Useful Information
-            </h3>
+  <div class="row">
 
-            <p>
-              Find simple and useful information about different topics.
-            </p>
-          </div>
+    <div class="col-xl-4 col-lg-4 col-md-6">
 
+      <div class="ud-widget">
 
-          <div class="card">
-            <div class="card-icon">💡</div>
+        <a
+          href="index.html"
+          class="ud-footer-logo"
+        >
+          <span class="kalimoh-logo-mark">KM</span>
+          <span class="kalimoh-logo-name">KaliMoh</span>
+        </a>
 
-            <h3>
-              Ideas & Tips
-            </h3>
+        <p class="ud-widget-desc">
+          Discover useful information,
+          learn new things and explore
+          interesting ideas with KaliMoh.
+        </p>
 
-            <p>
-              Discover ideas, tips and practical guides.
-            </p>
-          </div>
-
-
-          <div class="card">
-            <div class="card-icon">💻</div>
-
-            <h3>
-              Technology
-            </h3>
-
-            <p>
-              Learn about technology, software and digital tools.
-            </p>
-          </div>
-
-
-          <div class="card">
-            <div class="card-icon">🌎</div>
-
-            <h3>
-              Discover More
-            </h3>
-
-            <p>
-              Explore new topics and discover interesting content.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CATEGORIES -->
-
-    <section id="categories" class="categories">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <h2>
-            Categories
-          </h2>
-
-          <p>
-            Choose a category and start exploring.
-          </p>
-
-        </div>
-
-
-        <div class="category-grid">
-
-          <div class="category">
-
-            <div class="category-icon">
-              💻
-            </div>
-
-            <h3>
-              Technology
-            </h3>
-
-            <p>
-              Technology, computers, internet and digital tools.
-            </p>
-
-            <a
-              href="blog.html?category=technology"
-              class="btn btn-primary">
-              Explore
-            </a>
-
-          </div>
-
-
-          <div class="category">
-
-            <div class="category-icon">
-              🛠️
-            </div>
-
-            <h3>
-              Guides & Tips
-            </h3>
-
-            <p>
-              Practical guides, tutorials and useful tips.
-            </p>
-
-            <a
-              href="blog.html?category=guides"
-              class="btn btn-primary">
-              Explore
-            </a>
-
-          </div>
-
-
-          <div class="category">
-
-            <div class="category-icon">
-              🎮
-            </div>
-
-            <h3>
-              Entertainment
-            </h3>
-
-            <p>
-              Interesting topics, entertainment and discoveries.
-            </p>
-
-            <a
-              href="blog.html?category=entertainment"
-              class="btn btn-primary">
-              Explore
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ABOUT -->
-
-    <section id="about">
-
-      <div class="container about-grid">
-
-        <div class="about-box">
-          🌐
-        </div>
-
-
-        <div class="about-text">
-
-          <h2>
-            About KaliMoh
-          </h2>
-
-          <p>
-            KaliMoh is a simple platform created to bring useful
-            information, guides, technology and interesting ideas
-            together in one place.
-          </p>
-
-          <p>
-            Our goal is to make discovering information easier,
-            cleaner and more enjoyable.
-          </p>
-
-          <a href="blog.html" class="btn btn-primary">
-            Read Articles
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- FAQ -->
-
-    <section id="faq" class="faq">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <h2>
-            Frequently Asked Questions
-          </h2>
-
-          <p>
-            Here are some common questions about KaliMoh.
-          </p>
-
-        </div>
-
-
-        <div class="faq-list">
-
-          <div class="faq-item">
-
-            <button class="faq-question">
-              What is KaliMoh?
-            </button>
-
-            <div class="faq-answer">
-              KaliMoh is a platform for discovering useful
-              information, guides, technology, software and ideas.
-            </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button class="faq-question">
-              Is KaliMoh free?
-            </button>
-
-            <div class="faq-answer">
-              Yes. The platform is designed to provide accessible
-              content and useful resources.
-            </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button class="faq-question">
-              What can I find here?
-            </button>
-
-            <div class="faq-answer">
-              You can find articles, guides, technology information,
-              software and other interesting topics.
-            </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button class="faq-question">
-              Can I create an account?
-            </button>
-
-            <div class="faq-answer">
-              Yes. Use the Sign Up button to create an account.
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CONTACT -->
-
-    <section id="contact">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <h2>
-            Contact Us
-          </h2>
-
-          <p>
-            Have a question or suggestion? Send us a message.
-          </p>
-
-        </div>
-
-
-        <form class="contact-form" id="contactForm">
-
-          <input
-            type="text"
-            placeholder="Your name"
-            required
-          >
-
-          <input
-            type="email"
-            placeholder="Your email"
-            required
-          >
-
-          <textarea
-            placeholder="Your message"
-            required
-          ></textarea>
-
-          <button
-            type="submit"
-            class="btn btn-primary">
-            Send Message
-          </button>
-
-        </form>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div class="container">
-
-      <div class="footer-grid">
-
-        <div>
-
-          <a href="index.html" class="logo">
-
-            <span class="logo-mark">
-              K
-            </span>
-
-            <span>
-              KaliMoh
-            </span>
-
-          </a>
-
-          <p>
-            Discover useful information, learn new things
-            and explore the digital world.
-          </p>
-
-        </div>
-
-
-        <div>
-
-          <h4>
-            Quick Links
-          </h4>
-
-          <ul class="footer-links">
-
-            <li>
-              <a href="#home">
-                Home
-              </a>
-            </li>
-
-            <li>
-              <a href="#features">
-                Features
-              </a>
-            </li>
-
-            <li>
-              <a href="#about">
-                About
-              </a>
-            </li>
-
-            <li>
-              <a href="blog.html">
-                Articles
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-
-
-        <div>
-
-          <h4>
-            Explore
-          </h4>
-
-          <ul class="footer-links">
-
-            <li>
-              <a href="software.html">
-                Software
-              </a>
-            </li>
-
-            <li>
-              <a href="#categories">
-                Categories
-              </a>
-            </li>
-
-            <li>
-              <a href="#faq">
-                FAQ
-              </a>
-            </li>
-
-            <li>
-              <a href="#contact">
-                Contact
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <div class="copyright">
-        © 2026 KaliMoh. All rights reserved.
       </div>
 
     </div>
 
-  </footer>
+
+    <div
+      class="col-xl-2 col-lg-2 col-md-6 col-sm-6"
+    >
+
+      <div class="ud-widget">
+
+        <h5 class="ud-widget-title">
+          Navigation
+        </h5>
+
+        <ul class="ud-widget-links">
+
+          <li>
+            <a href="index.html#home">
+              Home
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html#features">
+              Features
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html#about">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="pricing.html">
+              Categories
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
 
 
-  <!-- BACK TO TOP -->
+    <div
+      class="col-xl-3 col-lg-3 col-md-6 col-sm-6"
+    >
 
-  <a
-    href="#home"
-    class="top"
-    aria-label="Back to top">
-    ↑
-  </a>
+      <div class="ud-widget">
+
+        <h5 class="ud-widget-title">
+          Explore
+        </h5>
+
+        <ul class="ud-widget-links">
+
+          <li>
+            <a href="blog.html">
+              Articles
+            </a>
+          </li>
+
+          <li>
+            <a href="software.html">
+              Software
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html#faq">
+              FAQ
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html#contact">
+              Contact
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
 
 
-  <script>
+    <div
+      class="col-xl-3 col-lg-3 col-md-6"
+    >
 
-    /* SEARCH */
+      <div class="ud-widget">
 
-    document
-      .getElementById("searchForm")
-      .addEventListener("submit", function(e) {
+        <h5 class="ud-widget-title">
+          Account
+        </h5>
 
-        e.preventDefault();
+        <ul class="ud-widget-links">
 
-        const search = document
-          .getElementById("siteSearch")
-          .value
-          .trim();
+          <li>
+            <a href="login.html">
+              Login
+            </a>
+          </li>
 
-        if (search !== "") {
+          <li>
+            <a href="signup.html">
+              Sign Up
+            </a>
+          </li>
 
-          window.location.href =
-            "blog.html?search=" +
-            encodeURIComponent(search);
+          <li>
+            <a href="profile.html">
+              Profile
+            </a>
+          </li>
 
-        }
+          <li>
+            <a href="index.html#contact">
+              Get in Touch
+            </a>
+          </li>
 
-      });
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <div class="ud-footer-bottom">
+
+```
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-8">
+
+      <ul class="ud-footer-bottom-left">
+
+        <li>
+          <a href="index.html#about">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#faq">
+            FAQ
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#contact">
+            Contact
+          </a>
+        </li>
+
+        <li>
+          <a href="blog.html">
+            Articles
+          </a>
+        </li>
+
+        <li>
+          <a href="software.html">
+            Software
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
 
 
-    /* FAQ */
+    <div class="col-md-4">
 
-    document
-      .querySelectorAll(".faq-question")
-      .forEach(function(button) {
+      <p class="ud-footer-bottom-right">
+        © 2026 KaliMoh. All rights reserved.
+      </p>
 
-        button.addEventListener("click", function() {
+    </div>
 
-          const item = this.parentElement;
+  </div>
 
-          document
-            .querySelectorAll(".faq-item")
-            .forEach(function(other) {
+</div>
+```
 
-              if (other !== item) {
-                other.classList.remove("active");
-              }
+  </div>
 
-            });
+</footer>
 
-          item.classList.toggle("active");
+<!-- =========================
+     Back To Top
+========================= -->
 
+<a
+href="javascript:void(0)"
+class="back-to-top"
+
+>
+
+<i class="lni lni-chevron-up"></i> </a>
+
+<!-- =========================
+     JavaScript
+========================= -->
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/wow.min.js"></script>
+
+<script src="assets/js/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  /* Smooth scrolling */
+
+  const pageLink =
+    document.querySelectorAll(".ud-menu-scroll");
+
+  pageLink.forEach((elem) => {
+
+    elem.addEventListener("click", (e) => {
+
+      const href =
+        elem.getAttribute("href");
+
+      if (!href || !href.startsWith("#")) {
+        return;
+      }
+
+      e.preventDefault();
+
+      const target =
+        document.querySelector(href);
+
+      if (target) {
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
         });
 
-      });
+      }
+
+    });
+
+  });
 
 
-    /* CONTACT */
+  /* Active navigation */
 
-    document
-      .getElementById("contactForm")
-      .addEventListener("submit", function(e) {
+  function onScroll() {
 
-        e.preventDefault();
+    const sections =
+      document.querySelectorAll(".ud-menu-scroll");
 
-        alert(
-          "Thank you! Your message has been received."
+    const scrollPos =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop;
+
+    sections.forEach((currLink) => {
+
+      const val =
+        currLink.getAttribute("href");
+
+      if (!val || !val.startsWith("#")) {
+        return;
+      }
+
+      const refElement =
+        document.querySelector(val);
+
+      if (!refElement) {
+        return;
+      }
+
+      const scrollTopMinus =
+        scrollPos + 120;
+
+      if (
+        refElement.offsetTop <= scrollTopMinus &&
+        refElement.offsetTop +
+          refElement.offsetHeight >
+          scrollTopMinus
+      ) {
+
+        sections.forEach((link) =>
+          link.classList.remove("active")
         );
 
-        this.reset();
+        currLink.classList.add("active");
 
-      });
+      }
 
-  </script>
+    });
+
+  }
+
+  window.addEventListener("scroll", onScroll);
+</script>
+
+<script>
+  /* Search */
+
+  function performSearch() {
+
+    const searchBox =
+      document.getElementById("siteSearch");
+
+    if (!searchBox) return;
+
+    const search =
+      searchBox.value.trim();
+
+    if (search !== "") {
+
+      window.location.href =
+        "blog.html?search=" +
+        encodeURIComponent(search);
+
+    }
+
+  }
+
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      const searchBox =
+        document.getElementById("siteSearch");
+
+      const searchButton =
+        document.getElementById("searchButton");
+
+      if (searchBox) {
+
+        searchBox.addEventListener(
+          "keydown",
+          function (e) {
+
+            if (e.key === "Enter") {
+              performSearch();
+            }
+
+          }
+        );
+
+      }
+
+      if (searchButton) {
+
+        searchButton.addEventListener(
+          "click",
+          performSearch
+        );
+
+      }
+
+    }
+  );
+</script>
+
+<script>
+  /* Supabase */
+
+  const SUPABASE_URL =
+    "https://ulxreyrjtavflppahqlp.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  async function updateNavbar() {
+
+    const {
+      data: { session }
+    } =
+      await supabaseClient.auth.getSession();
+
+    const guestButtons =
+      document.getElementById(
+        "guestButtons"
+      );
+
+    const userButtons =
+      document.getElementById(
+        "userButtons"
+      );
+
+    if (!guestButtons || !userButtons) {
+      return;
+    }
+
+
+    if (session) {
+
+      guestButtons.style.display =
+        "none";
+
+      userButtons.style.setProperty(
+        "display",
+        "flex",
+        "important"
+      );
+
+    } else {
+
+      guestButtons.style.display =
+        "flex";
+
+      userButtons.style.setProperty(
+        "display",
+        "none",
+        "important"
+      );
+
+    }
+
+  }
+
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    updateNavbar
+  );
+
+
+  document
+    .getElementById("logoutBtn")
+    ?.addEventListener(
+      "click",
+      async function () {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.href =
+          "index.html";
+
+      }
+    );
+</script>
 
 </body>
 </html>
