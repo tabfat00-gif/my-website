@@ -1,59 +1,132 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KaliMoh Admin Login</title>
+
+  <title>KaliMoh | Admin Login</title>
+
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
       background: #f5f5f5;
       font-family: Arial, sans-serif;
     }
 
     .login-box {
-      width: 360px;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.1);
+      width: 100%;
+      max-width: 380px;
+      background: #fff;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .10);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #111;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 28px;
+      font-size: 14px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 25px;
+      margin: 0 0 25px;
+      font-size: 22px;
+      color: #222;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
     }
 
     input {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      box-sizing: border-box;
+      padding: 13px;
+      margin-bottom: 17px;
       border: 1px solid #ddd;
-      border-radius: 6px;
+      border-radius: 7px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #111;
     }
 
     button {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       border: 0;
-      border-radius: 6px;
+      border-radius: 7px;
       background: #111;
-      color: white;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
+      transition: opacity .2s;
+    }
+
+    button:hover {
+      opacity: .85;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
     }
 
     #message {
       margin-top: 15px;
       text-align: center;
-      color: red;
+      color: #d00;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 22px;
+      text-align: center;
+      color: #555;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: #111;
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        padding: 25px 20px;
+      }
     }
   </style>
 </head>
@@ -61,31 +134,49 @@
 <body>
 
   <div class="login-box">
-    <h1>KaliMoh Admin</h1>
+
+    <div class="logo">KaliMoh</div>
+
+    <div class="subtitle">
+      Discover • Learn • Explore
+    </div>
+
+    <h1>Admin Login</h1>
 
     <form id="login-form">
+
+      <label for="email">Email</label>
 
       <input
         type="email"
         id="email"
-        placeholder="Email"
+        placeholder="Enter your email"
+        autocomplete="email"
         required
       >
+
+      <label for="password">Password</label>
 
       <input
         type="password"
         id="password"
-        placeholder="Password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
         required
       >
 
-      <button type="submit">
+      <button type="submit" id="login-button">
         Login
       </button>
 
     </form>
 
     <div id="message"></div>
+
+    <a href="index.html" class="back-link">
+      ← Back to KaliMoh
+    </a>
+
   </div>
 
 <script>
@@ -102,45 +193,63 @@ const supabaseClient =
     SUPABASE_KEY
   );
 
+const form =
+  document.getElementById("login-form");
 
-document
-  .getElementById("login-form")
-  .addEventListener("submit", async (event) => {
+const emailInput =
+  document.getElementById("email");
 
-    event.preventDefault();
+const passwordInput =
+  document.getElementById("password");
 
-    const email =
-      document.getElementById("email").value.trim();
+const loginButton =
+  document.getElementById("login-button");
 
-    const password =
-      document.getElementById("password").value;
-
-    const message =
-      document.getElementById("message");
-
-
-    const { error } =
-      await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
+const message =
+  document.getElementById("message");
 
 
-    if (error) {
+form.addEventListener("submit", async (event) => {
 
-      message.textContent =
-        error.message;
+  event.preventDefault();
 
-      return;
-    }
+  message.textContent = "";
+  loginButton.disabled = true;
+  loginButton.textContent = "Logging in...";
+
+  const email =
+    emailInput.value.trim();
+
+  const password =
+    passwordInput.value;
 
 
-    window.location.href =
-      "admin.html";
+  const { error } =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
 
-  });
+
+  if (error) {
+
+    message.textContent =
+      error.message;
+
+    loginButton.disabled = false;
+    loginButton.textContent = "Login";
+
+    return;
+  }
+
+
+  window.location.href =
+    "admin.html";
+
+});
 
 </script>
 
 </body>
 </html>
+```
