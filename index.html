@@ -1742,15 +1742,17 @@ textarea:focus-visible {
   onScroll();
 
   /* Search */
-  function performSearch() {
-    const searchBox = document.getElementById("siteSearch");
-    if (!searchBox) return;
+ function performSearch() {
+  const searchBox = document.getElementById("siteSearch");
+  if (!searchBox) return;
 
-    const search = searchBox.value.trim();
-    if (search) {
-      window.location.href = "blog.html?search=" + encodeURIComponent(search);
-    }
+  const search = searchBox.value.trim();
+
+  if (search) {
+    window.location.href =
+      "search.html?search=" + encodeURIComponent(search);
   }
+}
 
   document.getElementById("searchButton")?.addEventListener("click", performSearch);
 
