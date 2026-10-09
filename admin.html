@@ -399,11 +399,56 @@
         padding: 18px;
       }
     }
-  </style>
+
+/* Dark mode */
+body {
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.theme-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 11px 15px;
+  cursor: pointer;
+}
+
+body.dark-mode {
+  background: #0b1120;
+  color: #e5e7eb;
+}
+
+body.dark-mode .main,
+body.dark-mode .container {
+  color: #e5e7eb;
+}
+
+body.dark-mode .box,
+body.dark-mode .stat-card,
+body.dark-mode .software-item,
+body.dark-mode .article-item,
+body.dark-mode .user-item,
+body.dark-mode .download-item {
+  background: #172033;
+  color: #e5e7eb;
+  border-color: #334155;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-color: #475569;
+}
+
+</style>
 
 </head>
 
 <body>
+
 
 <aside class="sidebar">
 
@@ -426,9 +471,9 @@ id="logout-btn"
 
 >
 
-```
+
 Logout
-```
+
 
   </button>
 
@@ -445,12 +490,17 @@ Logout
     <h1>KaliMoh Admin Panel</h1>
     <div id="auth-status"></div>
   </div>
-
   <a href="index.html" class="home-btn">
     View Site
   </a>
 
+  <button type="button" class="theme-btn" id="theme-toggle">
+    🌙 الوضع الليلي
+  </button>
+
 </div>
+
+
 
 <section id="dashboard">
 
@@ -745,7 +795,6 @@ Logout
     </div>
   </div>
 </section>
-```
 
 
   </div>
@@ -2373,7 +2422,30 @@ Logout
     await loadDownloadHistory();
     await loadMessages();
   }
+const themeToggle = document.getElementById("theme-toggle");
 
+function applyTheme(theme) {
+  document.body.classList.toggle("dark-mode", theme === "dark");
+
+  if (themeToggle) {
+    themeToggle.textContent =
+      theme === "dark" ? "☀️ الوضع النهاري" : "🌙 الوضع الليلي";
+  }
+}
+
+const savedTheme =
+  localStorage.getItem("kalimoh-admin-theme") || "light";
+
+applyTheme(savedTheme);
+
+themeToggle?.addEventListener("click", () => {
+  const nextTheme = document.body.classList.contains("dark-mode")
+    ? "light"
+    : "dark";
+
+  localStorage.setItem("kalimoh-admin-theme", nextTheme);
+  applyTheme(nextTheme);
+});
 
   checkAuth();
 
