@@ -752,12 +752,9 @@
           "articleSearch"
         );
 
-      const word =
-        box
-          ? box.value
-              .trim()
-              .toLowerCase()
-          : "";
+     const word = box
+  ? box.value.trim().toLocaleLowerCase()
+  : "";
 
 
       const filtered =
@@ -772,30 +769,18 @@
               currentCategory;
 
 
-            const matchesSearch =
-              !word ||
+          const searchableText = [
+  article.title,
+  article.description,
+  article.content,
+  article.category
+]
+  .filter(Boolean)
+  .join(" ")
+  .toLocaleLowerCase();
 
-              (article.title || "")
-                .toLowerCase()
-                .includes(word)
-
-              ||
-
-              (article.description || "")
-                .toLowerCase()
-                .includes(word)
-
-              ||
-
-              (article.content || "")
-                .toLowerCase()
-                .includes(word)
-
-              ||
-
-              (article.category || "")
-                .toLowerCase()
-                .includes(word);
+const matchesSearch =
+  !word || searchableText.includes(word);
 
 
             return (
