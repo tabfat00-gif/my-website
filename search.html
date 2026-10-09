@@ -200,26 +200,51 @@
         .trim();
     }
 
-    function makeResult(title, url, type, description) {
-      const card = document.createElement("article");
-      card.className = "result-card";
+   ```js
+function makeResult(title, url, type, description, imageUrl = "") {
+  const card = document.createElement("article");
+  card.className = "result-card";
+  card.style.display = "flex";
+  card.style.alignItems = "center";
+  card.style.gap = "16px";
 
-      const badge = document.createElement("span");
-      badge.className = "result-type";
-      badge.textContent = type;
+  const image = document.createElement("img");
+  image.src = imageUrl || "assets/images/favicon.svg";
+  image.alt = title;
+  image.loading = "lazy";
+  image.style.width = "85px";
+  image.style.height = "85px";
+  image.style.objectFit = "contain";
+  image.style.flexShrink = "0";
+  image.style.borderRadius = "8px";
 
-      const heading = document.createElement("h3");
-      const link = document.createElement("a");
-      link.href = url;
-      link.textContent = title;
-      heading.appendChild(link);
+  image.onerror = () => {
+    image.onerror = null;
+    image.src = "assets/images/favicon.svg";
+  };
 
-      const paragraph = document.createElement("p");
-      paragraph.textContent = description;
+  const content = document.createElement("div");
+  content.style.minWidth = "0";
 
-      card.append(badge, heading, paragraph);
-      resultsBox.appendChild(card);
-    }
+  const badge = document.createElement("span");
+  badge.className = "result-type";
+  badge.textContent = type;
+
+  const heading = document.createElement("h3");
+  const link = document.createElement("a");
+  link.href = url;
+  link.textContent = title;
+  heading.appendChild(link);
+
+  const paragraph = document.createElement("p");
+  paragraph.textContent = description;
+
+  content.append(badge, heading, paragraph);
+  card.append(image, content);
+  resultsBox.appendChild(card);
+}
+```
+
 
     async function getPageResult(page, query) {
       try {
@@ -313,7 +338,7 @@
 async function getSoftwareResults(query) {
   const { data, error } = await supabaseClient
     .from("software")
-    .select("id, title, description, category, download_url")
+    .select("id, title, description, category, download_url, image_url")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -331,15 +356,16 @@ async function getSoftwareResults(query) {
 
       return text.includes(query);
     })
-    .map(software => ({
-      title: software.title || "Software",
-      url: "software.html",
-      type: "Software",
-      description:
-        (software.category ? software.category + " — " : "") +
-        (software.description || "View this software on KaliMoh.")
-    }));
-
+  
+.map(software => ({
+  title: software.title || "Software",
+  url: "software.html",
+  type: "Software",
+  image_url: software.image_url || "",
+  description:
+    (software.category ? software.category + " — " : "") +
+    (software.description || "View this software on KaliMoh.")
+}));
   // Include the two software cards written directly in software.html.
   const staticSoftware = [
     {
@@ -414,15 +440,16 @@ async function getSoftwareResults(query) {
 
       statusBox.textContent =
         results.length + ' result(s) found for "' + originalTerm + '".';
-
-      results.forEach(result => {
-        makeResult(
-          result.title,
-          result.url,
-          result.type,
-          result.description
-        );
-      });
+results.forEach(result => {
+  makeResult(
+    result.title,
+    result.url,
+    result.type,
+    result.description,
+    result.image_url || ""
+  );
+});
+    
     }
 
     document.getElementById("searchForm").addEventListener(
