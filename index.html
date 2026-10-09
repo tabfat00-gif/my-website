@@ -1,40 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>KaliMoh | Discover • Learn • Explore</title>
+  <meta name="description" content="KaliMoh is a place to discover useful information, helpful guides, technology, software, ideas and more.">
+  <link rel="icon" href="data:,">
 
-  <meta
-    name="description"
-    content="KaliMoh is a place to discover useful information, helpful guides, technology, software, ideas and more."
-  />
-
-  <!-- No external favicon required -->
-  <link rel="icon" href="data:," />
-
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/animate.css" />
-  <link rel="stylesheet" href="assets/css/lineicons.css" />
-  <link rel="stylesheet" href="assets/css/ud-styles.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="assets/css/lineicons.css">
+  <link rel="stylesheet" href="assets/css/ud-styles.css">
 
   <style>
-    /* =========================
-       KaliMoh Interface Upgrade
-    ========================= */
+    :root {
+      --km-bg: #0b1120;
+      --km-surface: #111c30;
+      --km-card: #152238;
+      --km-blue: #3b82f6;
+      --km-blue-light: #60a5fa;
+      --km-text: #f1f5f9;
+      --km-muted: #a8b6ca;
+      --km-border: rgba(148,163,184,.18);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: var(--km-bg);
+      color: var(--km-text);
+    }
 
     .ud-header {
+      background: rgba(11,17,32,.94);
+      border-bottom: 1px solid var(--km-border);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
 
     .navbar-brand {
-      letter-spacing: -0.5px;
       display: flex;
       align-items: center;
       gap: 9px;
+      letter-spacing: -.5px;
     }
 
     .kalimoh-logo-mark {
@@ -45,29 +59,50 @@
       height: 42px;
       padding: 0 8px;
       border-radius: 10px;
-      background: #ffffff;
+      background: #fff;
       color: #3056d3;
       font-size: 17px;
       font-weight: 900;
       letter-spacing: -1px;
-      line-height: 1;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 18px rgba(0,0,0,.12);
     }
 
     .kalimoh-logo-name {
-      color: #ffffff;
+      color: #fff;
       font-size: 27px;
       font-weight: 800;
       line-height: 1;
     }
 
-    .ud-menu-scroll,
     .navbar-nav .nav-item > a {
-      transition: 0.25s ease;
+      color: #dbeafe;
+      transition: .25s ease;
     }
 
-    .navbar-nav .nav-item > a:hover {
+    .navbar-nav .nav-item > a:hover,
+    .navbar-nav .nav-item > a.active {
+      color: var(--km-blue-light);
       transform: translateY(-1px);
+    }
+
+    .navbar-toggler .toggler-icon {
+      background: var(--km-text);
+    }
+
+    .ud-hero,
+    .ud-features,
+    .ud-about,
+    .ud-pricing,
+    .ud-faq,
+    .ud-contact,
+    .kalimoh-search-section {
+      background: var(--km-bg);
+    }
+
+    .ud-hero-title {
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--km-text);
     }
 
     .ud-hero-content {
@@ -75,22 +110,40 @@
       margin: 0 auto;
     }
 
-    .ud-hero-title {
-      font-weight: 800;
-      letter-spacing: -1.5px;
-    }
-
     .ud-hero-desc {
       max-width: 720px;
       margin-left: auto;
       margin-right: auto;
+      color: var(--km-muted);
     }
 
-    /* Search */
+    .ud-section-title h2,
+    .ud-feature-title,
+    .ud-about-content h2,
+    .ud-pricing-header h3,
+    .ud-faq-btn,
+    .ud-contact-title h2,
+    .ud-contact-form-title {
+      color: var(--km-text);
+    }
+
+    .ud-section-title p,
+    .ud-feature-desc,
+    .ud-about-content p,
+    .ud-faq-body,
+    .ud-info-meta p {
+      color: var(--km-muted);
+    }
+
+    .kalimoh-search-section {
+      padding: 35px 20px 25px;
+      border-top: 1px solid var(--km-border);
+      border-bottom: 1px solid var(--km-border);
+    }
 
     .kalimoh-search-wrapper {
       position: relative;
-      width: min(760px, 92%);
+      width: min(760px,92%);
       margin: 0 auto;
     }
 
@@ -98,19 +151,25 @@
       width: 100%;
       height: 62px;
       padding: 0 65px 0 24px;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--km-border);
       border-radius: 16px;
-      background: #ffffff;
-      color: #111827;
+      background: var(--km-surface);
+      color: var(--km-text);
       font-size: 17px;
       outline: none;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
-      transition: 0.25s ease;
+      box-shadow: 0 12px 35px rgba(0,0,0,.12);
+      transition: .25s ease;
+    }
+
+    .kalimoh-search-box::placeholder,
+    .ud-contact-form-wrapper input::placeholder,
+    .ud-contact-form-wrapper textarea::placeholder {
+      color: #94a3b8;
     }
 
     .kalimoh-search-box:focus {
-      border-color: #3056d3;
-      box-shadow: 0 14px 40px rgba(48, 86, 211, 0.14);
+      border-color: var(--km-blue);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.15);
     }
 
     .kalimoh-search-button {
@@ -121,75 +180,176 @@
       height: 46px;
       border: 0;
       border-radius: 12px;
-      background: #3056d3;
+      background: var(--km-blue);
       color: #fff;
       font-size: 19px;
       cursor: pointer;
-      transition: 0.25s ease;
+      transition: .25s ease;
     }
 
     .kalimoh-search-button:hover {
-      transform: scale(1.05);
+      background: #2563eb;
+      transform: scale(1.04);
     }
 
-    .kalimoh-search-section {
-      padding: 35px 20px 15px;
-      background: #fff;
+    .ud-single-feature,
+    .ud-single-pricing,
+    .ud-contact-form-wrapper,
+    .ud-single-faq {
+      background: var(--km-card);
+      border: 1px solid var(--km-border);
+      border-radius: 16px;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
     }
-
-    /* Feature cards */
 
     .ud-single-feature {
       height: 100%;
-      transition: 0.3s ease;
     }
 
-    .ud-single-feature:hover {
-      transform: translateY(-7px);
+    .ud-single-feature:hover,
+    .ud-single-pricing:hover {
+      transform: translateY(-6px);
+      border-color: rgba(59,130,246,.65);
+      box-shadow: 0 18px 40px rgba(0,0,0,.22);
     }
 
-    .ud-feature-icon {
-      transition: 0.3s ease;
+    .ud-feature-icon,
+    .ud-info-icon {
+      color: var(--km-blue-light);
+      transition: .3s ease;
     }
 
     .ud-single-feature:hover .ud-feature-icon {
       transform: scale(1.06);
     }
 
-    /* Category cards */
-
-    .ud-single-pricing {
-      transition: 0.3s ease;
+    .ud-feature-link,
+    .ud-footer a:hover {
+      color: var(--km-blue-light);
     }
-
-    .ud-single-pricing:hover {
-      transform: translateY(-8px);
-    }
-
-    /* About */
 
     .ud-about-wrapper {
       overflow: hidden;
       border-radius: 18px;
     }
 
-    /* Contact */
+    .kalimoh-about-visual {
+      min-height: 330px;
+      border-radius: 18px;
+      background: linear-gradient(135deg,#3056d3,#1f3fa8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      color: #fff;
+    }
+
+    .kalimoh-about-icon {
+      width: 75px;
+      height: 75px;
+      border-radius: 20px;
+      background: #fff;
+      color: #3056d3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .kalimoh-about-visual h3 {
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .kalimoh-about-visual p {
+      color: rgba(255,255,255,.85);
+    }
+
+    .ud-single-pricing .ud-pricing-body li {
+      color: var(--km-muted);
+    }
+
+    .ud-single-pricing.active {
+      background: #172b49;
+      border-color: var(--km-blue);
+    }
+
+    .ud-faq-btn {
+      background: transparent;
+    }
+
+    .ud-faq-btn:hover {
+      color: var(--km-blue-light);
+    }
+
+    .kalimoh-faq-shape {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(48,86,211,.08);
+      right: -120px;
+      top: 40px;
+      pointer-events: none;
+    }
 
     .ud-contact-form-wrapper {
+      padding: 30px;
       border-radius: 18px;
     }
 
-    /* Footer */
+    .ud-contact-form-wrapper input,
+    .ud-contact-form-wrapper textarea {
+      background: var(--km-surface);
+      color: var(--km-text);
+      border: 1px solid var(--km-border);
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .ud-contact-form-wrapper input:focus,
+    .ud-contact-form-wrapper textarea:focus {
+      border-color: var(--km-blue);
+      outline: none;
+    }
+
+    .ud-contact-form-wrapper label {
+      color: var(--km-text);
+    }
+
+    .ud-main-btn,
+    .kalimoh-search-button {
+      background: var(--km-blue);
+    }
+
+    .ud-main-btn:hover {
+      background: #2563eb;
+    }
+
+    .ud-footer {
+      position: relative;
+      overflow: hidden;
+      background: #080d18;
+      border-top: 1px solid var(--km-border);
+    }
+
+    .ud-widget-desc,
+    .ud-footer-bottom-right {
+      color: var(--km-muted);
+    }
 
     .ud-footer-logo {
-      transition: 0.25s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: .25s ease;
     }
 
     .ud-footer-logo:hover {
-      opacity: 0.85;
+      opacity: .85;
     }
 
     .ud-footer-logo .kalimoh-logo-mark {
@@ -202,14 +362,37 @@
       font-size: 26px;
     }
 
-    /* =========================
-       Replacement visuals
-       For missing image files
-    ========================= */
+    .kalimoh-footer-shape {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+      pointer-events: none;
+    }
+
+    .footer-circle-one {
+      width: 220px;
+      height: 220px;
+      top: -100px;
+      left: -80px;
+    }
+
+    .footer-circle-two {
+      width: 160px;
+      height: 160px;
+      bottom: -70px;
+      right: 10%;
+    }
+
+    .footer-circle-three {
+      width: 90px;
+      height: 90px;
+      top: 35%;
+      right: 4%;
+    }
 
     .kalimoh-hero-visual {
       position: relative;
-      width: min(850px, 95%);
+      width: min(850px,95%);
       height: 360px;
       margin: 25px auto 0;
       display: flex;
@@ -218,7 +401,7 @@
     }
 
     .kalimoh-screen {
-      width: min(650px, 80%);
+      width: min(650px,80%);
       height: 285px;
       border-radius: 18px;
       background: #111827;
@@ -255,17 +438,9 @@
       margin-bottom: 16px;
     }
 
-    .kalimoh-line.one {
-      width: 85%;
-    }
-
-    .kalimoh-line.two {
-      width: 62%;
-    }
-
-    .kalimoh-line.three {
-      width: 42%;
-    }
+    .kalimoh-line.one { width: 85%; }
+    .kalimoh-line.two { width: 62%; }
+    .kalimoh-line.three { width: 42%; }
 
     .kalimoh-terminal {
       margin-top: 28px;
@@ -301,97 +476,19 @@
       margin-right: 6px;
     }
 
-    .kalimoh-floating.one {
-      left: 3%;
-      top: 15%;
+    .kalimoh-floating.one { left: 3%; top: 15%; }
+    .kalimoh-floating.two { right: 3%; top: 30%; }
+    .kalimoh-floating.three { left: 10%; bottom: 5%; }
+
+    #contactStatus {
+      overflow-wrap: anywhere;
+      font-size: 14px;
     }
 
-    .kalimoh-floating.two {
-      right: 3%;
-      top: 30%;
+    .ud-contact-form button:disabled {
+      opacity: .65;
+      cursor: wait;
     }
-
-    .kalimoh-floating.three {
-      left: 10%;
-      bottom: 5%;
-    }
-
-    .kalimoh-about-visual {
-      min-height: 330px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #3056d3, #1f3fa8);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px;
-      color: #fff;
-    }
-
-    .kalimoh-about-icon {
-      width: 75px;
-      height: 75px;
-      border-radius: 20px;
-      background: #fff;
-      color: #3056d3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-
-    .kalimoh-about-visual h3 {
-      color: #fff;
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .kalimoh-about-visual p {
-      color: rgba(255,255,255,.85);
-    }
-
-    .kalimoh-faq-shape {
-      position: absolute;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      border: 1px solid rgba(48,86,211,.08);
-      right: -120px;
-      top: 40px;
-      pointer-events: none;
-    }
-
-    .kalimoh-footer-shape {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.08);
-      pointer-events: none;
-    }
-
-    .footer-circle-one {
-      width: 220px;
-      height: 220px;
-      top: -100px;
-      left: -80px;
-    }
-
-    .footer-circle-two {
-      width: 160px;
-      height: 160px;
-      bottom: -70px;
-      right: 10%;
-    }
-
-    .footer-circle-three {
-      width: 90px;
-      height: 90px;
-      top: 35%;
-      right: 4%;
-    }
-
-    /* Mobile */
 
     @media (max-width: 991px) {
       .navbar-btn {
@@ -403,12 +500,22 @@
         padding-top: 15px;
         padding-bottom: 10px;
       }
+
+      .navbar-collapse {
+        background: var(--km-surface);
+        border: 1px solid var(--km-border);
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 12px;
+      }
+
+      .navbar-nav .nav-item > a {
+        color: var(--km-text);
+      }
     }
 
     @media (max-width: 575px) {
-      .ud-hero-title {
-        letter-spacing: -0.5px;
-      }
+      .ud-hero-title { letter-spacing: -.5px; }
 
       .kalimoh-search-box {
         height: 56px;
@@ -426,1768 +533,696 @@
         font-size: 15px;
       }
 
-      .kalimoh-logo-name {
-        font-size: 24px;
-      }
+      .kalimoh-logo-name { font-size: 24px; }
 
-      .kalimoh-hero-visual {
-        height: 310px;
-      }
+      .kalimoh-hero-visual { height: 310px; }
 
       .kalimoh-screen {
         width: 88%;
         height: 245px;
       }
 
-      .kalimoh-screen-body {
-        padding: 20px;
-      }
-.kalimoh-floating {
+      .kalimoh-screen-body { padding: 20px; }
+
+      .kalimoh-floating {
         padding: 8px 11px;
         font-size: 12px;
       }
+
+      .ud-contact-form-wrapper { padding: 22px; }
     }
-     
-/* KaliMoh - Dark Tech Theme */
-
-:root {
-  --km-bg: #0b1120;
-  --km-surface: #111c30;
-  --km-card: #152238;
-  --km-blue: #3b82f6;
-  --km-blue-light: #60a5fa;
-  --km-text: #f1f5f9;
-  --km-muted: #a8b6ca;
-  --km-border: rgba(148, 163, 184, 0.18);
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
-body {
-  background: var(--km-bg);
-  color: var(--km-text);
-}
-
-.ud-header {
-  background: rgba(11, 17, 32, 0.92);
-  border-bottom: 1px solid var(--km-border);
-}
-
-.navbar-nav .nav-item > a {
-  color: #dbeafe;
-}
-
-.navbar-nav .nav-item > a:hover,
-.navbar-nav .nav-item > a.active {
-  color: var(--km-blue-light);
-}
-
-.navbar-toggler .toggler-icon {
-  background: var(--km-text);
-}
-
-.ud-hero,
-.ud-features,
-.ud-about,
-.ud-pricing,
-.ud-faq,
-.ud-contact,
-.kalimoh-search-section {
-  background: var(--km-bg);
-}
-
-.ud-hero-title,
-.ud-section-title h2,
-.ud-feature-title,
-.ud-about-content h2,
-.ud-pricing-header h3,
-.ud-faq-btn,
-.ud-contact-title h2,
-.ud-contact-form-title {
-  color: var(--km-text);
-}
-
-.ud-hero-desc,
-.ud-section-title p,
-.ud-feature-desc,
-.ud-about-content p,
-.ud-faq-body,
-.ud-info-meta p {
-  color: var(--km-muted);
-}
-
-.ud-single-feature,
-.ud-single-pricing,
-.ud-contact-form-wrapper,
-.ud-single-faq {
-  background: var(--km-card);
-  border: 1px solid var(--km-border);
-  border-radius: 16px;
-  transition: transform 0.25s ease,
-              border-color 0.25s ease,
-              box-shadow 0.25s ease;
-}
-
-.ud-single-feature:hover,
-.ud-single-pricing:hover {
-  transform: translateY(-6px);
-  border-color: rgba(59, 130, 246, 0.65);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
-}
-
-.ud-feature-icon,
-.ud-info-icon {
-  color: var(--km-blue-light);
-}
-
-.ud-feature-link,
-.ud-footer a:hover {
-  color: var(--km-blue-light);
-}
-
-.kalimoh-search-section {
-  border-top: 1px solid var(--km-border);
-  border-bottom: 1px solid var(--km-border);
-}
-
-.kalimoh-search-box {
-  background: var(--km-surface);
-  color: var(--km-text);
-  border-color: var(--km-border);
-}
-
-.kalimoh-search-box::placeholder {
-  color: #94a3b8;
-}
-
-.kalimoh-search-box:focus {
-  border-color: var(--km-blue);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-}
-
-.kalimoh-search-button,
-.ud-main-btn {
-  background: var(--km-blue);
-}
-
-.kalimoh-search-button:hover,
-.ud-main-btn:hover {
-  background: #2563eb;
-}
-
-.ud-single-pricing .ud-pricing-body li {
-  color: var(--km-muted);
-}
-
-.ud-single-pricing.active {
-  background: #172b49;
-  border-color: var(--km-blue);
-}
-
-.ud-faq-btn {
-  background: transparent;
-}
-
-.ud-faq-btn:hover {
-  color: var(--km-blue-light);
-}
-
-.ud-contact-form-wrapper input,
-.ud-contact-form-wrapper textarea {
-  background: var(--km-surface);
-  color: var(--km-text);
-  border: 1px solid var(--km-border);
-}
-
-.ud-contact-form-wrapper input::placeholder,
-.ud-contact-form-wrapper textarea::placeholder {
-  color: #94a3b8;
-}
-
-.ud-contact-form-wrapper input:focus,
-.ud-contact-form-wrapper textarea:focus {
-  border-color: var(--km-blue);
-  outline: none;
-}
-
-.ud-footer {
-  background: #080d18;
-  border-top: 1px solid var(--km-border);
-}
-
-.ud-widget-desc,
-.ud-footer-bottom-right {
-  color: var(--km-muted);
-}
-
-@media (max-width: 991px) {
-  .navbar-collapse {
-    background: var(--km-surface);
-    border: 1px solid var(--km-border);
-    border-radius: 12px;
-    padding: 15px;
-    margin-top: 12px;
-  }
-
-  .navbar-nav .nav-item > a {
-    color: var(--km-text);
-  }
-} 
   </style>
 </head>
 
 <body>
 
-<!-- =========================
-     Header
-========================= -->
-
+<!-- Header -->
 <header class="ud-header">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-
         <nav class="navbar navbar-expand-lg">
-
           <a class="navbar-brand" href="index.html">
             <span class="kalimoh-logo-mark">KM</span>
             <span class="kalimoh-logo-name">KaliMoh</span>
           </a>
 
-          <button
-            class="navbar-toggler"
-            type="button"
+          <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+            aria-label="Toggle navigation">
             <span class="toggler-icon"></span>
             <span class="toggler-icon"></span>
             <span class="toggler-icon"></span>
           </button>
 
-          <div
-            class="collapse navbar-collapse"
-            id="navbarSupportedContent"
-          >
-
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul id="nav" class="navbar-nav mx-auto">
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#home">Home</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#features">Features</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#about">About</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="blog.html">Articles</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="software.html">Software</a>
-              </li>
-
-              <li class="nav-item">
-                <a href="pricing.html">Categories</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#faq">FAQ</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="ud-menu-scroll" href="#contact">Contact</a>
-              </li>
-
+              <li class="nav-item"><a class="ud-menu-scroll" href="#home">Home</a></li>
+              <li class="nav-item"><a class="ud-menu-scroll" href="#features">Features</a></li>
+              <li class="nav-item"><a class="ud-menu-scroll" href="#about">About</a></li>
+              <li class="nav-item"><a href="blog.html">Articles</a></li>
+              <li class="nav-item"><a href="software.html">Software</a></li>
+              <li class="nav-item"><a href="pricing.html">Categories</a></li>
+              <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
+              <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
             </ul>
 
             <div class="navbar-btn d-flex align-items-center">
-
               <div id="guestButtons" class="d-flex align-items-center">
-
-                <a
-                  href="login.html"
-                  class="ud-main-btn ud-white-btn"
-                  style="margin-right: 10px;"
-                >
-                  Login
-                </a>
-
-                <a
-                  href="signup.html"
-                  class="ud-main-btn"
-                >
-                  Sign Up
-                </a>
-
+                <a href="login.html" class="ud-main-btn ud-white-btn" style="margin-right:10px">Login</a>
+                <a href="signup.html" class="ud-main-btn">Sign Up</a>
               </div>
 
-              <div
-                id="userButtons"
-                class="d-flex align-items-center"
-                style="display: none !important;"
-              >
-
-                <a
-                  href="profile.html"
-                  class="ud-main-btn ud-white-btn"
-                  style="margin-right: 10px;"
-                >
-                  Profile
-                </a>
-
-                <button
-                  type="button"
-                  id="logoutBtn"
-                  class="ud-main-btn"
-                >
-                  Logout
-                </button>
-
+              <div id="userButtons" class="d-flex align-items-center" style="display:none!important">
+                <a href="profile.html" class="ud-main-btn ud-white-btn" style="margin-right:10px">Profile</a>
+                <button type="button" id="logoutBtn" class="ud-main-btn">Logout</button>
               </div>
-
             </div>
-
           </div>
         </nav>
-
       </div>
     </div>
   </div>
 </header>
 
-<!-- =========================
-     Hero
-========================= -->
-
+<!-- Hero -->
 <section class="ud-hero" id="home">
-
   <div class="container">
-
     <div class="row">
       <div class="col-lg-12">
-
-        <div
-          class="ud-hero-content wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
-          <h1 class="ud-hero-title">
-            Discover. Learn. Explore.
-          </h1>
-
+        <div class="ud-hero-content wow fadeInUp" data-wow-delay=".2s">
+          <h1 class="ud-hero-title">Discover. Learn. Explore.</h1>
           <p class="ud-hero-desc">
             Welcome to KaliMoh — discover useful information,
             technology, software, practical guides, interesting ideas
             and much more.
           </p>
-
           <ul class="ud-hero-buttons">
-
-            <li>
-              <a
-                href="pricing.html"
-                class="ud-main-btn ud-white-btn"
-              >
-                Explore Now
-              </a>
-            </li>
-
-            <li>
-              <a
-                href="#about"
-                class="ud-main-btn ud-link-btn"
-              >
-                Learn More
-                <i class="lni lni-arrow-right"></i>
-              </a>
-            </li>
-
+            <li><a href="pricing.html" class="ud-main-btn ud-white-btn">Explore Now</a></li>
+            <li><a href="#about" class="ud-main-btn ud-link-btn">Learn More <i class="lni lni-arrow-right"></i></a></li>
           </ul>
-
         </div>
 
-        <!-- Replacement for missing hero images -->
-
-        <div
-          class="ud-hero-brands-wrapper wow fadeInUp"
-          data-wow-delay=".3s"
-        >
+        <div class="ud-hero-brands-wrapper wow fadeInUp" data-wow-delay=".3s">
           <div class="kalimoh-logo-mark">KM</div>
         </div>
 
-        <div
-          class="ud-hero-image wow fadeInUp"
-          data-wow-delay=".25s"
-        >
-
+        <div class="ud-hero-image wow fadeInUp" data-wow-delay=".25s">
           <div class="kalimoh-hero-visual">
-
             <div class="kalimoh-screen">
-
-              <div class="kalimoh-screen-top">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-
+              <div class="kalimoh-screen-top"><span></span><span></span><span></span></div>
               <div class="kalimoh-screen-body">
-
                 <div class="kalimoh-line one"></div>
                 <div class="kalimoh-line two"></div>
                 <div class="kalimoh-line three"></div>
                 <div class="kalimoh-line one"></div>
-
                 <div class="kalimoh-terminal">
-                  <span>Discover</span>
-                  <span>Learn</span>
-                  <span>Explore</span>
+                  <span>Discover</span><span>Learn</span><span>Explore</span>
                 </div>
-
               </div>
-
             </div>
-
-            <div class="kalimoh-floating one">
-              <i class="lni lni-book"></i>
-              Articles
-            </div>
-
-            <div class="kalimoh-floating two">
-              <i class="lni lni-code"></i>
-              Technology
-            </div>
-
-            <div class="kalimoh-floating three">
-              <i class="lni lni-bulb"></i>
-              Ideas
-            </div>
-
+            <div class="kalimoh-floating one"><i class="lni lni-book"></i> Articles</div>
+            <div class="kalimoh-floating two"><i class="lni lni-code"></i> Technology</div>
+            <div class="kalimoh-floating three"><i class="lni lni-bulb"></i> Ideas</div>
           </div>
-
         </div>
-
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- =========================
-     Search
-========================= -->
-
+<!-- Search -->
 <section class="kalimoh-search-section">
-
   <div class="container">
-
     <div class="text-center mb-3">
-      <span style="font-weight: 600; color: #3056d3;">
-        Search KaliMoh
-      </span>
+      <span style="font-weight:600;color:#60a5fa">Search KaliMoh</span>
     </div>
-
     <div class="kalimoh-search-wrapper">
-
-      <input
-        id="siteSearch"
-        class="kalimoh-search-box"
-        type="text"
-        placeholder="Search articles, guides, technology..."
-        autocomplete="off"
-      />
-
-      <button
-        type="button"
-        id="searchButton"
-        class="kalimoh-search-button"
-        aria-label="Search"
-      >
+      <input id="siteSearch" class="kalimoh-search-box" type="text"
+        placeholder="Search articles, guides, technology..." autocomplete="off">
+      <button type="button" id="searchButton" class="kalimoh-search-button" aria-label="Search">
         <i class="lni lni-search-alt"></i>
       </button>
-
     </div>
-
   </div>
-
 </section>
 
-<!-- =========================
-     Features
-========================= -->
-
+<!-- Features -->
 <section id="features" class="ud-features">
-
   <div class="container">
-
     <div class="row">
       <div class="col-lg-12">
-
         <div class="ud-section-title">
-
           <span>Why KaliMoh?</span>
-
-          <h2>
-            Everything Worth Discovering,
-            In One Place
-          </h2>
-
-          <p>
-            Explore useful content, practical ideas,
-            technology and more through a simple experience.
-          </p>
-
+          <h2>Everything Worth Discovering, In One Place</h2>
+          <p>Explore useful content, practical ideas, technology and more through a simple experience.</p>
         </div>
-
       </div>
     </div>
 
     <div class="row">
-
       <div class="col-xl-3 col-lg-3 col-sm-6">
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".1s"
-        >
-
-          <div class="ud-feature-icon">
-            <i class="lni lni-book"></i>
-          </div>
-
+        <div class="ud-single-feature wow fadeInUp" data-wow-delay=".1s">
+          <div class="ud-feature-icon"><i class="lni lni-book"></i></div>
           <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Useful Information
-            </h3>
-
-            <p class="ud-feature-desc">
-              Discover information that helps you learn
-              and understand different topics.
-            </p>
-
-            <a href="blog.html" class="ud-feature-link">
-              Explore
-            </a>
-
+            <h3 class="ud-feature-title">Useful Information</h3>
+            <p class="ud-feature-desc">Discover information that helps you learn and understand different topics.</p>
+            <a href="blog.html" class="ud-feature-link">Explore</a>
           </div>
-
         </div>
       </div>
 
       <div class="col-xl-3 col-lg-3 col-sm-6">
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".15s"
-        >
-
-          <div class="ud-feature-icon">
-            <i class="lni lni-bulb"></i>
-          </div>
-
+        <div class="ud-single-feature wow fadeInUp" data-wow-delay=".15s">
+          <div class="ud-feature-icon"><i class="lni lni-bulb"></i></div>
           <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Ideas & Tips
-            </h3>
-
-            <p class="ud-feature-desc">
-              Find simple ideas, practical tips and
-              useful guides.
-            </p>
-
-            <a href="blog.html" class="ud-feature-link">
-              Explore
-            </a>
-
+            <h3 class="ud-feature-title">Ideas &amp; Tips</h3>
+            <p class="ud-feature-desc">Find simple ideas, practical tips and useful guides.</p>
+            <a href="blog.html" class="ud-feature-link">Explore</a>
           </div>
-
         </div>
       </div>
 
       <div class="col-xl-3 col-lg-3 col-sm-6">
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
-          <div class="ud-feature-icon">
-            <i class="lni lni-code"></i>
-          </div>
-
+        <div class="ud-single-feature wow fadeInUp" data-wow-delay=".2s">
+          <div class="ud-feature-icon"><i class="lni lni-code"></i></div>
           <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Technology
-            </h3>
-
-            <p class="ud-feature-desc">
-              Explore software, computers, digital tools
-              and technology tips.
-            </p>
-
-            <a href="software.html" class="ud-feature-link">
-              Explore
-            </a>
-
+            <h3 class="ud-feature-title">Technology</h3>
+            <p class="ud-feature-desc">Explore software, computers, digital tools and technology tips.</p>
+            <a href="software.html" class="ud-feature-link">Explore</a>
           </div>
-
         </div>
       </div>
 
       <div class="col-xl-3 col-lg-3 col-sm-6">
-        <div
-          class="ud-single-feature wow fadeInUp"
-          data-wow-delay=".25s"
-        >
-
-          <div class="ud-feature-icon">
-            <i class="lni lni-star"></i>
-          </div>
-
+        <div class="ud-single-feature wow fadeInUp" data-wow-delay=".25s">
+          <div class="ud-feature-icon"><i class="lni lni-star"></i></div>
           <div class="ud-feature-content">
-
-            <h3 class="ud-feature-title">
-              Discover More
-            </h3>
-
-            <p class="ud-feature-desc">
-              New subjects, interesting content and
-              fresh ideas are waiting for you.
-            </p>
-
-            <a href="pricing.html" class="ud-feature-link">
-              Explore
-            </a>
-
+            <h3 class="ud-feature-title">Discover More</h3>
+            <p class="ud-feature-desc">New subjects, interesting content and fresh ideas are waiting for you.</p>
+            <a href="pricing.html" class="ud-feature-link">Explore</a>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- =========================
-     About
-========================= -->
-
+<!-- About -->
 <section id="about" class="ud-about">
-
   <div class="container">
-
-    <div
-      class="ud-about-wrapper wow fadeInUp"
-      data-wow-delay=".2s"
-    >
-
+    <div class="ud-about-wrapper wow fadeInUp" data-wow-delay=".2s">
       <div class="ud-about-content-wrapper">
-
         <div class="ud-about-content">
-
-          <span class="tag">
-            About KaliMoh
-          </span>
-
-          <h2>
-            A Place for Curiosity and Discovery.
-          </h2>
-
-          <p>
-            KaliMoh brings useful information,
-            interesting ideas, practical guides and
-            technology together in one place.
-          </p>
-
-          <p>
-            Explore articles, software, digital tools,
-            tips and new ideas — with a simple experience
-            designed to help you discover something useful.
-          </p>
-
-          <a
-            href="pricing.html"
-            class="ud-main-btn"
-          >
-            Explore Categories
-          </a>
-
+          <span class="tag">About KaliMoh</span>
+          <h2>A Place for Curiosity and Discovery.</h2>
+          <p>KaliMoh brings useful information, interesting ideas, practical guides and technology together in one place.</p>
+          <p>Explore articles, software, digital tools, tips and new ideas — with a simple experience designed to help you discover something useful.</p>
+          <a href="pricing.html" class="ud-main-btn">Explore Categories</a>
         </div>
-
       </div>
-
       <div class="ud-about-image">
-
         <div class="kalimoh-about-visual">
-
-          <div class="kalimoh-about-icon">
-            <i class="lni lni-bulb"></i>
-          </div>
-
+          <div class="kalimoh-about-icon"><i class="lni lni-bulb"></i></div>
           <h3>KaliMoh</h3>
-
-          <p>
-            Discover • Learn • Explore
-          </p>
-
+          <p>Discover • Learn • Explore</p>
         </div>
-
       </div>
-
     </div>
-
   </div>
 </section>
 
-<!-- =========================
-     Categories
-========================= -->
-
+<!-- Categories -->
 <section id="categories" class="ud-pricing">
-
   <div class="container">
-
     <div class="row">
-
       <div class="col-lg-12">
-
         <div class="ud-section-title mx-auto text-center">
-
           <span>Explore</span>
-
-          <h2>
-            Explore Our Categories
-          </h2>
-
-          <p>
-            Choose a topic and start discovering
-            useful content.
-          </p>
-
+          <h2>Explore Our Categories</h2>
+          <p>Choose a topic and start discovering useful content.</p>
         </div>
-
       </div>
-
     </div>
 
     <div class="row g-0 align-items-center justify-content-center">
-
       <div class="col-lg-4 col-md-6 col-sm-10">
-
-        <div
-          class="ud-single-pricing first-item wow fadeInUp"
-          data-wow-delay=".15s"
-        >
-
-          <div class="ud-pricing-header">
-
-            <h3>TECHNOLOGY</h3>
-
-            <h4>Discover</h4>
-
-          </div>
-
+        <div class="ud-single-pricing first-item wow fadeInUp" data-wow-delay=".15s">
+          <div class="ud-pricing-header"><h3>TECHNOLOGY</h3><h4>Discover</h4></div>
           <div class="ud-pricing-body">
-
-            <ul>
-              <li>Computers</li>
-              <li>Internet</li>
-              <li>Digital Tools</li>
-              <li>Useful Apps</li>
-              <li>Technology Tips</li>
-            </ul>
-
+            <ul><li>Computers</li><li>Internet</li><li>Digital Tools</li><li>Useful Apps</li><li>Technology Tips</li></ul>
           </div>
-
-          <div class="ud-pricing-footer">
-
-            <a
-              href="software.html"
-              class="ud-main-btn ud-border-btn"
-            >
-              Discover More
-            </a>
-
-          </div>
-
+          <div class="ud-pricing-footer"><a href="software.html" class="ud-main-btn ud-border-btn">Discover More</a></div>
         </div>
-
       </div>
 
       <div class="col-lg-4 col-md-6 col-sm-10">
-
-        <div
-          class="ud-single-pricing active wow fadeInUp"
-          data-wow-delay=".1s"
-        >
-
-          <span class="ud-popular-tag">
-            POPULAR
-          </span>
-
-          <div class="ud-pricing-header">
-
-            <h3>GUIDES & TIPS</h3>
-
-            <h4>Learn</h4>
-
-          </div>
-
+        <div class="ud-single-pricing active wow fadeInUp" data-wow-delay=".1s">
+          <span class="ud-popular-tag">POPULAR</span>
+          <div class="ud-pricing-header"><h3>GUIDES &amp; TIPS</h3><h4>Learn</h4></div>
           <div class="ud-pricing-body">
-
-            <ul>
-              <li>Simple Guides</li>
-              <li>How-To Articles</li>
-              <li>Useful Tips</li>
-              <li>Ideas</li>
-              <li>Everyday Solutions</li>
-            </ul>
-
+            <ul><li>Simple Guides</li><li>How-To Articles</li><li>Useful Tips</li><li>Ideas</li><li>Everyday Solutions</li></ul>
           </div>
-
-          <div class="ud-pricing-footer">
-
-            <a
-              href="blog.html"
-              class="ud-main-btn ud-white-btn"
-            >
-              Start Exploring
-            </a>
-
-          </div>
-
+          <div class="ud-pricing-footer"><a href="blog.html" class="ud-main-btn ud-white-btn">Start Exploring</a></div>
         </div>
-
       </div>
 
       <div class="col-lg-4 col-md-6 col-sm-10">
-
-        <div
-          class="ud-single-pricing last-item wow fadeInUp"
-          data-wow-delay=".15s"
-        >
-
-          <div class="ud-pricing-header">
-
-            <h3>ENTERTAINMENT</h3>
-
-            <h4>Enjoy</h4>
-
-          </div>
-
+        <div class="ud-single-pricing last-item wow fadeInUp" data-wow-delay=".15s">
+          <div class="ud-pricing-header"><h3>ENTERTAINMENT</h3><h4>Enjoy</h4></div>
           <div class="ud-pricing-body">
-
-            <ul>
-              <li>Interesting Content</li>
-              <li>Videos</li>
-              <li>Stories</li>
-              <li>New Discoveries</li>
-              <li>Fun Ideas</li>
-            </ul>
-
+            <ul><li>Interesting Content</li><li>Videos</li><li>Stories</li><li>New Discoveries</li><li>Fun Ideas</li></ul>
           </div>
-
-          <div class="ud-pricing-footer">
-
-            <a
-              href="blog.html"
-              class="ud-main-btn ud-border-btn"
-            >
-              Discover More
-            </a>
-
-          </div>
-
+          <div class="ud-pricing-footer"><a href="blog.html" class="ud-main-btn ud-border-btn">Discover More</a></div>
         </div>
-
       </div>
-
     </div>
-
   </div>
 </section>
 
-<!-- =========================
-     FAQ
-========================= -->
-
+<!-- FAQ -->
 <section id="faq" class="ud-faq">
-
   <div class="kalimoh-faq-shape"></div>
-
   <div class="container">
-
     <div class="row">
-
       <div class="col-lg-12">
-
         <div class="ud-section-title text-center mx-auto">
-
           <span>FAQ</span>
-
-          <h2>
-            Frequently Asked Questions
-          </h2>
-
-          <p>
-            Simple answers to common questions
-            about KaliMoh.
-          </p>
-
+          <h2>Frequently Asked Questions</h2>
+          <p>Simple answers to common questions about KaliMoh.</p>
         </div>
-
       </div>
-
     </div>
 
     <div class="row">
-
       <div class="col-lg-6">
-
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".1s"
-        >
-
+        <div class="ud-single-faq wow fadeInUp" data-wow-delay=".1s">
           <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
+            <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+              <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
               <span>What is KaliMoh?</span>
-
             </button>
-
-            <div
-              id="collapseOne"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                KaliMoh is a website for discovering
-                useful information, guides, technology,
-                software and interesting ideas.
-              </div>
-
+            <div id="collapseOne" class="accordion-collapse collapse">
+              <div class="ud-faq-body">KaliMoh is a website for discovering useful information, guides, technology, software and interesting ideas.</div>
             </div>
-
           </div>
         </div>
 
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".15s"
-        >
-
+        <div class="ud-single-faq wow fadeInUp" data-wow-delay=".15s">
           <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
+            <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+              <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
               <span>What can I find on KaliMoh?</span>
-
             </button>
-
-            <div
-              id="collapseTwo"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                You can find technology topics,
-                useful guides, tips, software,
-                ideas and other interesting content.
-              </div>
-
+            <div id="collapseTwo" class="accordion-collapse collapse">
+              <div class="ud-faq-body">You can find technology topics, useful guides, tips, software, ideas and other interesting content.</div>
             </div>
-
           </div>
         </div>
 
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
+        <div class="ud-single-faq wow fadeInUp" data-wow-delay=".2s">
           <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
+            <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+              <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
               <span>Is KaliMoh free?</span>
-
             </button>
-
-            <div
-              id="collapseThree"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                Yes. Browsing and discovering content
-                on KaliMoh is free. Some downloads may
-                require an account.
-              </div>
-
+            <div id="collapseThree" class="accordion-collapse collapse">
+              <div class="ud-faq-body">Yes. Browsing and discovering content on KaliMoh is free. Some downloads may require an account.</div>
             </div>
-
           </div>
         </div>
-
       </div>
 
       <div class="col-lg-6">
-
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".1s"
-        >
-
+        <div class="ud-single-faq wow fadeInUp" data-wow-delay=".1s">
           <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
+            <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+              <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
               <span>Can I suggest a topic?</span>
-
             </button>
-
-            <div
-              id="collapseFour"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                Yes. Use the contact section to send
-                a topic suggestion or an idea.
-              </div>
-
+            <div id="collapseFour" class="accordion-collapse collapse">
+              <div class="ud-faq-body">Yes. Use the contact section to send a topic suggestion or an idea.</div>
             </div>
-
           </div>
         </div>
 
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".15s"
-        >
-
+        <div class="ud-single-faq wow fadeInUp" data-wow-delay=".15s">
           <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFive"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
+            <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+              <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
               <span>What topics will be added?</span>
-
             </button>
-
-            <div
-              id="collapseFive"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                KaliMoh can grow with technology,
-                guides, software, useful information,
-                entertainment and new subjects.
-              </div>
-
+            <div id="collapseFive" class="accordion-collapse collapse">
+              <div class="ud-faq-body">KaliMoh can grow with technology, guides, software, useful information, entertainment and new subjects.</div>
             </div>
-
           </div>
         </div>
 
-        <div
-          class="ud-single-faq wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
+        <div class="ud-single-faq wow fadeInUp" data-wow-delay=".2s">
           <div class="accordion">
-
-            <button
-              class="ud-faq-btn collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseSix"
-            >
-
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-
+            <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+              <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
               <span>How can I contact KaliMoh?</span>
-
             </button>
-
-            <div
-              id="collapseSix"
-              class="accordion-collapse collapse"
-            >
-
-              <div class="ud-faq-body">
-                Use the contact section below to
-                send a message or suggest an idea.
-              </div>
-
+            <div id="collapseSix" class="accordion-collapse collapse">
+              <div class="ud-faq-body">Use the contact section below to send a message or suggest an idea.</div>
             </div>
-
           </div>
         </div>
-
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- =========================
-     Contact
-========================= -->
-
+<!-- Contact -->
 <section id="contact" class="ud-contact">
-
   <div class="container">
-
     <div class="row align-items-center">
-
       <div class="col-xl-8 col-lg-7">
-
         <div class="ud-contact-content-wrapper">
-
           <div class="ud-contact-title">
-
             <span>CONTACT</span>
-
-            <h2>
-              Have an idea?<br />
-              We'd love to hear from you!
-            </h2>
-
+            <h2>Have an idea?<br>We'd love to hear from you!</h2>
           </div>
 
           <div class="ud-contact-info-wrapper">
-
             <div class="ud-single-info">
-
-              <div class="ud-info-icon">
-                <i class="lni lni-bulb"></i>
-              </div>
-
+              <div class="ud-info-icon"><i class="lni lni-bulb"></i></div>
               <div class="ud-info-meta">
-
                 <h5>Suggest a Topic</h5>
-
-                <p>
-                  Have an interesting idea
-                  for KaliMoh?
-                </p>
-
+                <p>Have an interesting idea for KaliMoh?</p>
               </div>
-
             </div>
 
             <div class="ud-single-info">
-
-              <div class="ud-info-icon">
-                <i class="lni lni-envelope"></i>
-              </div>
-
+              <div class="ud-info-icon"><i class="lni lni-envelope"></i></div>
               <div class="ud-info-meta">
-
                 <h5>Send a Message</h5>
-
-                <p>
-                  Send us your message
-                  or suggestion.
-                </p>
-
+                <p>Send us your message or suggestion.</p>
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
 
       <div class="col-xl-4 col-lg-5">
+        <div class="ud-contact-form-wrapper wow fadeInUp" data-wow-delay=".2s">
+          <h3 class="ud-contact-form-title">Send a Message</h3>
 
-        <div
-          class="ud-contact-form-wrapper wow fadeInUp"
-          data-wow-delay=".2s"
-        >
-
-          <h3 class="ud-contact-form-title">
-            Send a Message
-          </h3>
-
-          <form
-            class="ud-contact-form"
-            onsubmit="return false;"
-          >
-
+          <form class="ud-contact-form" id="contactForm">
             <div class="ud-form-group">
-
-              <label for="fullName">
-                Full Name*
-              </label>
-
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                placeholder="Your name"
-              />
-
+              <label for="fullName">Full Name*</label>
+              <input type="text" id="fullName" name="fullName"
+                placeholder="Your name" maxlength="100"
+                autocomplete="name" required>
             </div>
 
             <div class="ud-form-group">
-
-              <label for="contactEmail">
-                Email*
-              </label>
-
-              <input
-                type="email"
-                id="contactEmail"
-                name="email"
-                placeholder="Your email"
-              />
-
+              <label for="contactEmail">Email*</label>
+              <input type="email" id="contactEmail" name="email"
+                placeholder="Your email" maxlength="254"
+                autocomplete="email" required>
             </div>
 
             <div class="ud-form-group">
-
-              <label for="message">
-                Message*
-              </label>
-
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Write your message here..."
-              ></textarea>
-
+              <label for="message">Message*</label>
+              <textarea id="message" name="message" rows="4"
+                maxlength="5000" placeholder="Write your message here..."
+                required></textarea>
             </div>
 
             <div class="ud-form-group mb-0">
-
-              <button
-                type="submit"
-                class="ud-main-btn"
-              >
+              <button type="submit" id="contactSubmit" class="ud-main-btn">
                 Send Message
               </button>
-
             </div>
 
+            <p id="contactStatus" role="status" aria-live="polite"></p>
           </form>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
 </section>
 
-<!-- =========================
-     Footer
-========================= -->
-
-<footer
-  class="ud-footer wow fadeInUp"
-  data-wow-delay=".15s"
->
-
+<!-- Footer -->
+<footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
   <div class="kalimoh-footer-shape footer-circle-one"></div>
   <div class="kalimoh-footer-shape footer-circle-two"></div>
   <div class="kalimoh-footer-shape footer-circle-three"></div>
 
   <div class="ud-footer-widgets">
-
     <div class="container">
-
       <div class="row">
-
         <div class="col-xl-4 col-lg-4 col-md-6">
-
           <div class="ud-widget">
-
-            <a
-              href="index.html"
-              class="ud-footer-logo"
-            >
+            <a href="index.html" class="ud-footer-logo">
               <span class="kalimoh-logo-mark">KM</span>
               <span class="kalimoh-logo-name">KaliMoh</span>
             </a>
-
-            <p class="ud-widget-desc">
-              Discover useful information,
-              learn new things and explore
-              interesting ideas with KaliMoh.
-            </p>
-
+            <p class="ud-widget-desc">Discover useful information, learn new things and explore interesting ideas with KaliMoh.</p>
           </div>
-
         </div>
 
         <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-
           <div class="ud-widget">
-
-            <h5 class="ud-widget-title">
-              Navigation
-            </h5>
-
+            <h5 class="ud-widget-title">Navigation</h5>
             <ul class="ud-widget-links">
-
-              <li>
-                <a href="index.html#home">Home</a>
-              </li>
-
-              <li>
-                <a href="index.html#features">Features</a>
-              </li>
-
-              <li>
-                <a href="index.html#about">About</a>
-              </li>
-
-              <li>
-                <a href="pricing.html">Categories</a>
-              </li>
-
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="pricing.html">Categories</a></li>
             </ul>
-
           </div>
-
         </div>
 
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-
           <div class="ud-widget">
-
-            <h5 class="ud-widget-title">
-              Explore
-            </h5>
-
+            <h5 class="ud-widget-title">Explore</h5>
             <ul class="ud-widget-links">
-
-              <li>
-                <a href="blog.html">Articles</a>
-              </li>
-
-              <li>
-                <a href="software.html">Software</a>
-              </li>
-
-              <li>
-                <a href="index.html#faq">FAQ</a>
-              </li>
-
-              <li>
-                <a href="index.html#contact">Contact</a>
-              </li>
-
+              <li><a href="blog.html">Articles</a></li>
+              <li><a href="software.html">Software</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
             </ul>
-
           </div>
-
         </div>
 
         <div class="col-xl-3 col-lg-3 col-md-6">
-
           <div class="ud-widget">
-
-            <h5 class="ud-widget-title">
-              Account
-            </h5>
-
+            <h5 class="ud-widget-title">Account</h5>
             <ul class="ud-widget-links">
-
-              <li>
-                <a href="login.html">Login</a>
-              </li>
-
-              <li>
-                <a href="signup.html">Sign Up</a>
-              </li>
-
-              <li>
-                <a href="profile.html">Profile</a>
-              </li>
-
-              <li>
-                <a href="index.html#contact">Get in Touch</a>
-              </li>
-
+              <li><a href="login.html">Login</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="index.html#contact">Get in Touch</a></li>
             </ul>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <div class="ud-footer-bottom">
-
     <div class="container">
-
       <div class="row">
-
         <div class="col-md-8">
-
           <ul class="ud-footer-bottom-left">
-
-            <li>
-              <a href="index.html#about">About</a>
-            </li>
-
-            <li>
-              <a href="index.html#faq">FAQ</a>
-            </li>
-
-            <li>
-              <a href="index.html#contact">Contact</a>
-            </li>
-
-            <li>
-              <a href="blog.html">Articles</a>
-            </li>
-
-            <li>
-              <a href="software.html">Software</a>
-            </li>
-
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="blog.html">Articles</a></li>
+            <li><a href="software.html">Software</a></li>
           </ul>
-
         </div>
-
         <div class="col-md-4">
-
-          <p class="ud-footer-bottom-right">
-            © 2026 KaliMoh. All rights reserved.
-          </p>
-
+          <p class="ud-footer-bottom-right">© 2026 KaliMoh. All rights reserved.</p>
         </div>
-
       </div>
-
     </div>
-
   </div>
-
 </footer>
 
-<!-- =========================
-     Back To Top
-========================= -->
-
-<a
-  href="javascript:void(0)"
-  class="back-to-top"
->
+<a href="javascript:void(0)" class="back-to-top" aria-label="Back to top">
   <i class="lni lni-chevron-up"></i>
 </a>
-
-<!-- =========================
-     JavaScript
-========================= -->
 
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/main.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
   /* Smooth scrolling */
+  document.querySelectorAll(".ud-menu-scroll").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
 
-  const pageLink =
-    document.querySelectorAll(".ud-menu-scroll");
+      const target = document.querySelector(href);
+      if (!target) return;
 
-  pageLink.forEach((elem) => {
-
-    elem.addEventListener("click", (e) => {
-
-      const href =
-        elem.getAttribute("href");
-
-      if (!href || !href.startsWith("#")) {
-        return;
-      }
-
-      e.preventDefault();
-
-      const target =
-        document.querySelector(href);
-
-      if (target) {
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
-
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-
   });
 
-
   /* Active navigation */
-
   function onScroll() {
+    const links = document.querySelectorAll(".ud-menu-scroll");
+    const scrollPosition = window.pageYOffset + 120;
 
-    const sections =
-      document.querySelectorAll(".ud-menu-scroll");
+    links.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
 
-    const scrollPos =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop;
-
-    sections.forEach((currLink) => {
-
-      const val =
-        currLink.getAttribute("href");
-
-      if (!val || !val.startsWith("#")) {
-        return;
-      }
-
-      const refElement =
-        document.querySelector(val);
-
-      if (!refElement) {
-        return;
-      }
-
-      const scrollTopMinus =
-        scrollPos + 120;
+      const section = document.querySelector(href);
+      if (!section) return;
 
       if (
-        refElement.offsetTop <= scrollTopMinus &&
-        refElement.offsetTop +
-          refElement.offsetHeight >
-          scrollTopMinus
+        section.offsetTop <= scrollPosition &&
+        section.offsetTop + section.offsetHeight > scrollPosition
       ) {
-
-        sections.forEach((link) =>
-          link.classList.remove("active")
-        );
-
-        currLink.classList.add("active");
-
+        links.forEach((item) => item.classList.remove("active"));
+        link.classList.add("active");
       }
-
     });
-
   }
 
   window.addEventListener("scroll", onScroll);
-</script>
+  onScroll();
 
-<script>
   /* Search */
-
   function performSearch() {
-
-    const searchBox =
-      document.getElementById("siteSearch");
-
+    const searchBox = document.getElementById("siteSearch");
     if (!searchBox) return;
 
-    const search =
-      searchBox.value.trim();
-
-    if (search !== "") {
-
-      window.location.href =
-        "blog.html?search=" +
-        encodeURIComponent(search);
-
+    const search = searchBox.value.trim();
+    if (search) {
+      window.location.href = "blog.html?search=" + encodeURIComponent(search);
     }
-
   }
 
+  document.getElementById("searchButton")?.addEventListener("click", performSearch);
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-      const searchBox =
-        document.getElementById("siteSearch");
-
-      const searchButton =
-        document.getElementById("searchButton");
-
-      if (searchBox) {
-
-        searchBox.addEventListener(
-          "keydown",
-          function (e) {
-
-            if (e.key === "Enter") {
-              performSearch();
-            }
-
-          }
-        );
-
-      }
-
-      if (searchButton) {
-
-        searchButton.addEventListener(
-          "click",
-          performSearch
-        );
-
-      }
-
-    }
-  );
+  document.getElementById("siteSearch")?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") performSearch();
+  });
 </script>
 
 <script>
   /* Supabase */
+  const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-  const SUPABASE_URL =
-    "https://ulxreyrjtavflppahqlp.supabase.co";
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-  const SUPABASE_KEY =
-    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-
+  /* Update Login / Profile buttons */
   async function updateNavbar() {
+    const { data, error } = await supabaseClient.auth.getSession();
 
-    const {
-      data: { session }
-    } =
-      await supabaseClient.auth.getSession();
-
-    const guestButtons =
-      document.getElementById(
-        "guestButtons"
-      );
-
-    const userButtons =
-      document.getElementById(
-        "userButtons"
-      );
-
-    if (!guestButtons || !userButtons) {
+    if (error) {
+      console.error("Session error:", error);
       return;
     }
 
+    const guestButtons = document.getElementById("guestButtons");
+    const userButtons = document.getElementById("userButtons");
+    if (!guestButtons || !userButtons) return;
 
-    if (session) {
-
-      guestButtons.style.display =
-        "none";
-
-      userButtons.style.setProperty(
-        "display",
-        "flex",
-        "important"
-      );
-
+    if (data.session) {
+      guestButtons.style.display = "none";
+      userButtons.style.setProperty("display", "flex", "important");
     } else {
-
-      guestButtons.style.display =
-        "flex";
-
-      userButtons.style.setProperty(
-        "display",
-        "none",
-        "important"
-      );
-
+      guestButtons.style.display = "flex";
+      userButtons.style.setProperty("display", "none", "important");
     }
-
   }
 
+  updateNavbar();
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    updateNavbar
-  );
+  supabaseClient.auth.onAuthStateChange(() => {
+    updateNavbar();
+  });
 
+  /* Logout */
+  document.getElementById("logoutBtn")?.addEventListener("click", async () => {
+    const { error } = await supabaseClient.auth.signOut();
 
-  document
-    .getElementById("logoutBtn")
-    ?.addEventListener(
-      "click",
-      async function () {
+    if (error) {
+      console.error("Logout error:", error);
+      alert("Could not log out. Please try again.");
+      return;
+    }
 
-        await supabaseClient.auth.signOut();
+    window.location.href = "index.html";
+  });
 
-        window.location.href =
-          "index.html";
+  /* Contact form: insert message into Supabase */
+  const contactForm = document.getElementById("contactForm");
+  const contactStatus = document.getElementById("contactStatus");
+  const contactSubmit = document.getElementById("contactSubmit");
 
-      }
-    );
+  contactForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("contactEmail").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    contactStatus.textContent = "";
+    contactStatus.style.color = "#60a5fa";
+
+    if (!fullName || !email || !message) {
+      contactStatus.textContent = "Please fill in all fields.";
+      return;
+    }
+
+    if (fullName.length > 100 || email.length > 254 || message.length > 5000) {
+      contactStatus.textContent = "One or more fields are too long.";
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      contactStatus.textContent = "Please enter a valid email address.";
+      return;
+    }
+
+    contactSubmit.disabled = true;
+    contactSubmit.textContent = "Sending...";
+
+    try {
+      const { error } = await supabaseClient
+        .from("contact_messages")
+        .insert({
+          full_name: fullName,
+          email: email,
+          message: message
+        });
+
+      if (error) throw error;
+
+      contactStatus.style.color = "#22c55e";
+      contactStatus.textContent = "Your message was sent successfully!";
+      contactForm.reset();
+    } catch (error) {
+      console.error("Contact form error:", error);
+      contactStatus.style.color = "#f87171";
+      contactStatus.textContent =
+        "Message could not be sent. Please try again.";
+    } finally {
+      contactSubmit.disabled = false;
+      contactSubmit.textContent = "Send Message";
+    }
+  });
 </script>
 
 </body>
