@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -310,6 +310,71 @@
         }));
     }
 
+async function getSoftwareResults(query) {
+  const { data, error } = await supabaseClient
+    .from("software")
+    .select("id, title, description, category, download_url")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Software search error:", error);
+    return [];
+  }
+
+  const results = (data || [])
+    .filter(software => {
+      const text = normalize([
+        software.title,
+        software.description,
+        software.category
+      ].filter(Boolean).join(" "));
+
+      return text.includes(query);
+    })
+    .map(software => ({
+      title: software.title || "Software",
+      url: "software.html",
+      type: "Software",
+      description:
+        (software.category ? software.category + " — " : "") +
+        (software.description || "View this software on KaliMoh.")
+    }));
+
+  // Include the two software cards written directly in software.html.
+  const staticSoftware = [
+    {
+      title: "Windows 7 Ultimate SP1 SuperLite x64",
+      category: "Windows",
+      description: "Windows 7 Ultimate SP1 SuperLite x64. File size: approximately 0.98 GB."
+    },
+    {
+      title: "Kali Linux",
+      category: "Linux",
+      description: "Kali Linux tools and official downloads."
+    }
+  ];
+
+  staticSoftware.forEach(software => {
+    const text = normalize(
+      software.title + " " +
+      software.category + " " +
+      software.description
+    );
+
+    if (text.includes(query)) {
+      results.push({
+        title: software.title,
+        url: "software.html",
+        type: "Software",
+        description: software.description
+      });
+    }
+  });
+
+  return results;
+}
+
+
     async function performSearch(term) {
       const originalTerm = term.trim();
       const query = normalize(originalTerm);
@@ -323,9 +388,10 @@
 
       statusBox.textContent = "Searching KaliMoh...";
       const tasks = [
-        ...pages.map(page => getPageResult(page, query)),
-        getArticleResults(query)
-      ];
+  ...pages.map(page => getPageResult(page, query)),
+  getArticleResults(query),
+  getSoftwareResults(query)
+];
 
       const responses = await Promise.allSettled(tasks);
       const results = [];
