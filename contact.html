@@ -1,596 +1,405 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>KaliMoh | Contact</title>
+  <title>KaliMoh | Contact</title>
 
-    <meta
-      name="description"
-      content="Contact KaliMoh - Get in touch, share your ideas and suggest topics."
-    />
+  <meta
+    name="description"
+    content="Contact KaliMoh - Get in touch, share your ideas and suggest topics."
+  />
 
-    <!--====== Favicon Icon ======-->
-    <link
-      rel="shortcut icon"
-      href="assets/images/favicon.svg"
-      type="image/svg"
-    />
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/lineicons.css" />
+  <link rel="stylesheet" href="assets/css/ud-styles.css" />
 
-    <!-- ===== All CSS files ===== -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/lineicons.css" />
-    <link rel="stylesheet" href="assets/css/ud-styles.css" />
-  </head>
+  <style>
+    #contactStatus {
+      margin-bottom: 18px;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
 
-  <body>
+<body>
 
-    <!-- ====== Header Start ====== -->
-    <header class="ud-header">
+  <!-- Header -->
+  <header class="ud-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg">
+
+            <a class="navbar-brand" href="index.html">
+              <span style="font-size:28px;font-weight:700;color:#fff;">
+                KaliMoh
+              </span>
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul id="nav" class="navbar-nav mx-auto">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="index.html#features">Features</a></li>
+                <li class="nav-item"><a href="about.html">About</a></li>
+                <li class="nav-item"><a href="blog.html">Articles</a></li>
+                <li class="nav-item"><a href="software.html">Software</a></li>
+                <li class="nav-item"><a href="pricing.html">Categories</a></li>
+                <li class="nav-item"><a href="index.html#faq">FAQ</a></li>
+                <li class="nav-item"><a href="contact.html">Contact</a></li>
+              </ul>
+
+              <div class="navbar-btn d-flex align-items-center gap-2">
+                <a class="ud-main-btn ud-white-btn" href="login.html">Login</a>
+                <a class="ud-main-btn ud-white-btn" href="signup.html">Sign Up</a>
+              </div>
+            </div>
+
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>Contact KaliMoh</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="ud-contact">
+    <div class="container">
+      <div class="row align-items-center">
+
+        <div class="col-xl-8 col-lg-7">
+          <div class="ud-contact-content-wrapper">
+
+            <div class="ud-contact-title">
+              <span>GET IN TOUCH</span>
+              <h2>
+                Have an idea?<br />
+                We'd love to hear from you!
+              </h2>
+            </div>
+
+            <div class="ud-contact-info-wrapper">
+
+              <div class="ud-single-info">
+                <div class="ud-info-icon">
+                  <i class="lni lni-envelope"></i>
+                </div>
+                <div class="ud-info-meta">
+                  <h5>Contact KaliMoh</h5>
+                  <p>
+                    Have a suggestion, an interesting topic or an idea for
+                    KaliMoh? Feel free to get in touch with us.
+                  </p>
+                </div>
+              </div>
+
+              <div class="ud-single-info">
+                <div class="ud-info-icon">
+                  <i class="lni lni-comments"></i>
+                </div>
+                <div class="ud-info-meta">
+                  <h5>Share Your Ideas</h5>
+                  <p>
+                    Your feedback can help us improve KaliMoh and discover
+                    new topics to share.
+                  </p>
+                </div>
+              </div>
+
+              <div class="ud-single-info">
+                <div class="ud-info-icon">
+                  <i class="lni lni-bulb"></i>
+                </div>
+                <div class="ud-info-meta">
+                  <h5>Suggest a Topic</h5>
+                  <p>
+                    Let us know what you would like to learn or explore next.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-xl-4 col-lg-5">
+          <div class="ud-contact-form-wrapper wow fadeInUp" data-wow-delay=".2s">
+
+            <h3 class="ud-contact-form-title">Send us a Message</h3>
+
+            <form id="contactForm" class="ud-contact-form">
+
+              <p id="contactStatus" role="status" aria-live="polite"></p>
+
+              <div class="ud-form-group">
+                <label for="fullName">Full Name</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  placeholder="Your name"
+                  minlength="2"
+                  maxlength="100"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+
+              <div class="ud-form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="example@email.com"
+                  maxlength="254"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
+              <div class="ud-form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Write your message here..."
+                  minlength="10"
+                  maxlength="5000"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="ud-form-group mb-0">
+                <button type="submit" class="ud-main-btn">
+                  Send Message
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
+
+    <div class="shape shape-1">
+      <img src="assets/images/footer/shape-1.svg" alt="shape" />
+    </div>
+    <div class="shape shape-2">
+      <img src="assets/images/footer/shape-2.svg" alt="shape" />
+    </div>
+    <div class="shape shape-3">
+      <img src="assets/images/footer/shape-3.svg" alt="shape" />
+    </div>
+
+    <div class="ud-footer-widgets">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
 
-            <nav class="navbar navbar-expand-lg">
-
-              <a class="navbar-brand" href="index.html">
-                <span style="font-size: 28px; font-weight: 700; color: #fff;">
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <div class="ud-widget">
+              <a href="index.html" class="ud-footer-logo">
+                <span style="font-size:28px;font-weight:700;color:#fff;">
                   KaliMoh
                 </span>
               </a>
-
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-              </button>
-
-              <div class="collapse navbar-collapse" id="navbarCollapse">
-
-                <ul id="nav" class="navbar-nav mx-auto">
-
-                  <li class="nav-item">
-                    <a href="index.html">Home</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="index.html#features">Features</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="about.html">About</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="blog.html">Articles</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="software.html">Software</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="pricing.html">Categories</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="index.html#faq">FAQ</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="contact.html">Contact</a>
-                  </li>
-
-                </ul>
-
-                <div class="navbar-btn d-flex align-items-center gap-2">
-
-                  <a
-                    class="ud-main-btn ud-white-btn"
-                    href="login.html"
-                  >
-                    Login
-                  </a>
-
-                  <a
-                    class="ud-main-btn ud-white-btn"
-                    href="signup.html"
-                  >
-                    Sign Up
-                  </a>
-
-                </div>
-
-              </div>
-
-            </nav>
-
+              <p class="ud-widget-desc">
+                Discover useful information, ideas, technology, guides and
+                interesting topics with KaliMoh.
+              </p>
+            </div>
           </div>
+
+          <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+            <div class="ud-widget">
+              <h5 class="ud-widget-title">Explore</h5>
+              <ul class="ud-widget-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Articles</a></li>
+                <li><a href="software.html">Software</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+            <div class="ud-widget">
+              <h5 class="ud-widget-title">Categories</h5>
+              <ul class="ud-widget-links">
+                <li><a href="pricing.html">Technology</a></li>
+                <li><a href="pricing.html">Guides &amp; Tips</a></li>
+                <li><a href="pricing.html">Ideas</a></li>
+                <li><a href="pricing.html">Entertainment</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+            <div class="ud-widget">
+              <h5 class="ud-widget-title">KaliMoh</h5>
+              <ul class="ud-widget-links">
+                <li><a href="pricing.html">Explore Categories</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-lg-6 col-md-8 col-sm-10">
+            <div class="ud-widget">
+              <h5 class="ud-widget-title">Discover</h5>
+              <p class="ud-widget-desc">Discover • Learn • Explore</p>
+              <p class="ud-widget-desc">
+                Useful information, interesting ideas and topics worth
+                discovering.
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-    </header>
-    <!-- ====== Header End ====== -->
+    </div>
 
-
-    <!-- ====== Banner Start ====== -->
-    <section class="ud-page-banner">
+    <div class="ud-footer-bottom">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
 
-            <div class="ud-banner-content">
-              <h1>Contact KaliMoh</h1>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ====== Banner End ====== -->
-
-
-    <!-- ====== Contact Start ====== -->
-    <section id="contact" class="ud-contact">
-      <div class="container">
-
-        <div class="row align-items-center">
-
-          <div class="col-xl-8 col-lg-7">
-
-            <div class="ud-contact-content-wrapper">
-
-              <div class="ud-contact-title">
-
-                <span>GET IN TOUCH</span>
-
-                <h2>
-                  Have an idea?<br />
-                  We'd love to hear from you!
-                </h2>
-
-              </div>
-
-
-              <div class="ud-contact-info-wrapper">
-
-                <div class="ud-single-info">
-
-                  <div class="ud-info-icon">
-                    <i class="lni lni-envelope"></i>
-                  </div>
-
-                  <div class="ud-info-meta">
-
-                    <h5>Contact KaliMoh</h5>
-
-                    <p>
-                      Have a suggestion, an interesting topic or an idea for
-                      KaliMoh? Feel free to get in touch with us.
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-                <div class="ud-single-info">
-
-                  <div class="ud-info-icon">
-                    <i class="lni lni-comments"></i>
-                  </div>
-
-                  <div class="ud-info-meta">
-
-                    <h5>Share Your Ideas</h5>
-
-                    <p>
-                      Your feedback can help us improve KaliMoh and discover
-                      new topics to share.
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-                <div class="ud-single-info">
-
-                  <div class="ud-info-icon">
-                    <i class="lni lni-bulb"></i>
-                  </div>
-
-                  <div class="ud-info-meta">
-
-                    <h5>Suggest a Topic</h5>
-
-                    <p>
-                      Let us know what you would like to learn or explore next.
-                    </p>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
+          <div class="col-md-8">
+            <ul class="ud-footer-bottom-left">
+              <li><a href="javascript:void(0)">Privacy Policy</a></li>
+              <li><a href="contact.html">Support</a></li>
+              <li><a href="javascript:void(0)">Terms of Service</a></li>
+            </ul>
           </div>
 
-
-          <div class="col-xl-4 col-lg-5">
-
-            <div
-              class="ud-contact-form-wrapper wow fadeInUp"
-              data-wow-delay=".2s"
-            >
-
-              <h3 class="ud-contact-form-title">
-                Send us a Message
-              </h3>
-
-              <form
-                class="ud-contact-form"
-                onsubmit="return false;"
-              >
-
-                <div class="ud-form-group">
-
-                  <label for="fullName">
-                    Full Name
-                  </label>
-
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    placeholder="Your name"
-                  />
-
-                </div>
-
-
-                <div class="ud-form-group">
-
-                  <label for="email">
-                    Email
-                  </label>
-
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="example@email.com"
-                  />
-
-                </div>
-
-
-                <div class="ud-form-group">
-
-                  <label for="message">
-                    Message
-                  </label>
-
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="4"
-                    placeholder="Write your message here..."
-                  ></textarea>
-
-                </div>
-
-
-                <div class="ud-form-group mb-0">
-
-                  <button
-                    type="submit"
-                    class="ud-main-btn"
-                  >
-                    Send Message
-                  </button>
-
-                </div>
-
-              </form>
-
-            </div>
-
+          <div class="col-md-4">
+            <p class="ud-footer-bottom-right">
+              © 2026 KaliMoh. All rights reserved.
+            </p>
           </div>
 
         </div>
-
       </div>
-    </section>
-    <!-- ====== Contact End ====== -->
-
-
-    <!-- ====== Footer Start ====== -->
-    <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
-
-      <div class="shape shape-1">
-        <img src="assets/images/footer/shape-1.svg" alt="shape" />
-      </div>
-
-      <div class="shape shape-2">
-        <img src="assets/images/footer/shape-2.svg" alt="shape" />
-      </div>
-
-      <div class="shape shape-3">
-        <img src="assets/images/footer/shape-3.svg" alt="shape" />
-      </div>
-
-
-      <div class="ud-footer-widgets">
-
-        <div class="container">
-
-          <div class="row">
-
-            <div class="col-xl-4 col-lg-4 col-md-6">
-
-              <div class="ud-widget">
-
-                <a href="index.html" class="ud-footer-logo">
-
-                  <span style="font-size: 28px; font-weight: 700; color: #fff;">
-                    KaliMoh
-                  </span>
-
-                </a>
-
-                <p class="ud-widget-desc">
-                  Discover useful information, ideas, technology, guides and
-                  interesting topics with KaliMoh.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">
-                  Explore
-                </h5>
-
-                <ul class="ud-widget-links">
-
-                  <li>
-                    <a href="index.html">
-                      Home
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="index.html#features">
-                      Features
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="about.html">
-                      About
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="blog.html">
-                      Articles
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="software.html">
-                      Software
-                    </a>
-                  </li>
-
-                </ul>
-
-              </div>
-
-            </div>
-
-
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">
-                  Categories
-                </h5>
-
-                <ul class="ud-widget-links">
-
-                  <li>
-                    <a href="pricing.html">
-                      Technology
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="pricing.html">
-                      Guides & Tips
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="pricing.html">
-                      Ideas
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="pricing.html">
-                      Entertainment
-                    </a>
-                  </li>
-
-                </ul>
-
-              </div>
-
-            </div>
-
-
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">
-                  KaliMoh
-                </h5>
-
-                <ul class="ud-widget-links">
-
-                  <li>
-                    <a href="pricing.html">
-                      Explore Categories
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="index.html#faq">
-                      FAQ
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="contact.html">
-                      Contact
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="login.html">
-                      Login
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="signup.html">
-                      Sign Up
-                    </a>
-                  </li>
-
-                </ul>
-
-              </div>
-
-            </div>
-
-
-            <div class="col-xl-2 col-lg-6 col-md-8 col-sm-10">
-
-              <div class="ud-widget">
-
-                <h5 class="ud-widget-title">
-                  Discover
-                </h5>
-
-                <p class="ud-widget-desc">
-                  Discover • Learn • Explore
-                </p>
-
-                <p class="ud-widget-desc">
-                  Useful information, interesting ideas and topics worth
-                  discovering.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="ud-footer-bottom">
-
-        <div class="container">
-
-          <div class="row">
-
-            <div class="col-md-8">
-
-              <ul class="ud-footer-bottom-left">
-
-                <li>
-                  <a href="javascript:void(0)">
-                    Privacy Policy
-                  </a>
-                </li>
-
-                <li>
-                  <a href="contact.html">
-                    Support
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)">
-                    Terms of Service
-                  </a>
-                </li>
-
-              </ul>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-              <p class="ud-footer-bottom-right">
-                © 2026 KaliMoh. All rights reserved.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </footer>
-    <!-- ====== Footer End ====== -->
-
-
-    <!-- ====== Back To Top Start ====== -->
-    <a
-      href="javascript:void(0)"
-      class="back-to-top"
-    >
-      <i class="lni lni-chevron-up"></i>
-    </a>
-    <!-- ====== Back To Top End ====== -->
-
-
-    <!-- ====== All Javascript Files ====== -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
-  </body>
+    </div>
+
+  </footer>
+
+  <!-- Back To Top -->
+  <a href="javascript:void(0)" class="back-to-top" aria-label="Back to top">
+    <i class="lni lni-chevron-up"></i>
+  </a>
+
+  <!-- JavaScript -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Supabase Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    (() => {
+      const form = document.getElementById("contactForm");
+      const status = document.getElementById("contactStatus");
+      const button = form.querySelector('button[type="submit"]');
+
+      const supabaseClient = window.supabase.createClient(
+        "https://ulxreyrjtavflppahqlp.supabase.co",
+        "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE"
+      );
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        status.textContent = "";
+        status.style.color = "";
+
+        if (
+          name.length < 2 || name.length > 100 ||
+          email.length < 5 || email.length > 254 ||
+          message.length < 10 || message.length > 5000
+        ) {
+          status.textContent =
+            "Please check your details and message length.";
+          status.style.color = "#dc3545";
+          return;
+        }
+
+        button.disabled = true;
+        button.textContent = "Sending...";
+
+        try {
+          const { error } = await supabaseClient
+            .from("contact_messages")
+            .insert([{ name, email, message }]);
+
+          if (error) {
+            console.error("Supabase contact error:", error);
+            throw error;
+          }
+
+          status.textContent =
+            "Your message was sent successfully. Thank you!";
+          status.style.color = "#198754";
+          form.reset();
+
+        } catch (error) {
+          status.textContent =
+            "Sorry, your message could not be sent. Please try again.";
+          status.style.color = "#dc3545";
+        } finally {
+          button.disabled = false;
+          button.textContent = "Send Message";
+        }
+      });
+    })();
+  </script>
+
+</body>
 </html>
-```
