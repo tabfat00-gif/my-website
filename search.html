@@ -1,0 +1,393 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Search | KaliMoh</title>
+  <meta name="description" content="Search articles, software, guides and pages across KaliMoh.">
+
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/lineicons.css">
+  <link rel="stylesheet" href="assets/css/ud-styles.css">
+
+  <style>
+    .search-area {
+      min-height: 65vh;
+      padding: 65px 0;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      max-width: 760px;
+      margin: 25px auto 35px;
+    }
+
+    .search-box input {
+      flex: 1;
+      min-width: 0;
+      height: 54px;
+      padding: 0 18px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      border: 0;
+      border-radius: 8px;
+      padding: 0 22px;
+      background: #155eef;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .result-card {
+      padding: 22px;
+      margin-bottom: 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .result-card h3 {
+      font-size: 20px;
+      margin-bottom: 9px;
+    }
+
+    .result-card h3 a {
+      color: #155eef;
+      text-decoration: none;
+    }
+
+    .result-card p {
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .result-type {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 9px;
+      border-radius: 5px;
+      background: #eef4ff;
+      color: #155eef;
+      font-size: 12px;
+    }
+
+    #searchStatus {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 480px) {
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box button {
+        height: 48px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="ud-header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">
+          <span style="font-size:28px;font-weight:700;color:#fff">
+            KaliMoh
+          </span>
+        </a>
+
+        <button class="navbar-toggler" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarContent"
+          aria-controls="navbarContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="toggler-icon"></span>
+          <span class="toggler-icon"></span>
+          <span class="toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="about.html">About</a></li>
+            <li class="nav-item"><a href="blog.html">Articles</a></li>
+            <li class="nav-item"><a href="software.html">Software</a></li>
+            <li class="nav-item"><a href="pricing.html">Categories</a></li>
+            <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="ud-page-banner">
+    <div class="container">
+      <div class="ud-banner-content">
+        <h1>Search KaliMoh</h1>
+        <p>Find articles, software, guides and website pages.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="search-area">
+    <div class="container">
+
+      <form id="searchForm" class="search-box">
+        <input id="searchInput" type="search"
+          placeholder="Search the entire website..."
+          aria-label="Search the entire website">
+        <button type="submit">Search</button>
+      </form>
+
+      <p id="searchStatus" aria-live="polite">
+        Enter a word to search KaliMoh.
+      </p>
+
+      <div id="searchResults"></div>
+
+    </div>
+  </main>
+
+  <footer class="ud-footer">
+    <div class="container" style="padding:25px 0">
+      <p>© 2026 KaliMoh. All rights reserved.</p>
+      <a href="index.html">Home</a>
+      &nbsp; | &nbsp;
+      <a href="blog.html">Articles</a>
+      &nbsp; | &nbsp;
+      <a href="software.html">Software</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL =
+      "https://ulxreyrjtavflppahqlp.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+
+    const supabaseClient =
+      window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const input = document.getElementById("searchInput");
+    const resultsBox = document.getElementById("searchResults");
+    const statusBox = document.getElementById("searchStatus");
+
+    const pages = [
+      { file: "index.html", name: "Home" },
+      { file: "about.html", name: "About KaliMoh" },
+      { file: "software.html", name: "Software" },
+      { file: "pricing.html", name: "Categories" }
+    ];
+
+    function normalize(value) {
+      return String(value || "")
+        .toLocaleLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
+    function makeResult(title, url, type, description) {
+      const card = document.createElement("article");
+      card.className = "result-card";
+
+      const badge = document.createElement("span");
+      badge.className = "result-type";
+      badge.textContent = type;
+
+      const heading = document.createElement("h3");
+      const link = document.createElement("a");
+      link.href = url;
+      link.textContent = title;
+      heading.appendChild(link);
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent = description;
+
+      card.append(badge, heading, paragraph);
+      resultsBox.appendChild(card);
+    }
+
+    async function getPageResult(page, query) {
+      try {
+        const response = await fetch(page.file);
+
+        if (!response.ok) {
+          return null;
+        }
+
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html, "text/html");
+
+        doc.querySelectorAll(
+          "script, style, nav, header, footer, noscript"
+        ).forEach(element => element.remove());
+
+        const title =
+          doc.querySelector("h1")?.textContent?.trim() ||
+          doc.title ||
+          page.name;
+
+        const elements = [
+          ...doc.querySelectorAll(
+            "main h2, main h3, main p, main li, " +
+            "section h2, section h3, section p, section li"
+          )
+        ];
+
+        const text = elements
+          .map(element => element.textContent.trim())
+          .filter(Boolean)
+          .join(" ");
+
+        const searchable = normalize(title + " " + text);
+
+        if (!searchable.includes(query)) {
+          return null;
+        }
+
+        const index = searchable.indexOf(query);
+        const start = Math.max(0, index - 70);
+        const snippet = text
+          ? text.slice(start, start + 220)
+          : title;
+
+        return {
+          title,
+          url: page.file,
+          type: "Website page",
+          description: snippet
+        };
+      } catch (error) {
+        console.warn("Could not search page:", page.file, error);
+        return null;
+      }
+    }
+
+    async function getArticleResults(query) {
+      const { data, error } = await supabaseClient
+        .from("articles")
+        .select("id, title, description, content, category")
+        .eq("is_published", true)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Article search error:", error);
+        return [];
+      }
+
+      return (data || [])
+        .filter(article => {
+          const text = normalize([
+            article.title,
+            article.description,
+            article.content,
+            article.category
+          ].filter(Boolean).join(" "));
+
+          return text.includes(query);
+        })
+        .map(article => ({
+          title: article.title || "Untitled article",
+          url: "blog-details.html?id=" + encodeURIComponent(article.id),
+          type: "Article",
+          description: article.description ||
+            String(article.content || "").slice(0, 220) ||
+            "Open this article to read more."
+        }));
+    }
+
+    async function performSearch(term) {
+      const originalTerm = term.trim();
+      const query = normalize(originalTerm);
+
+      resultsBox.replaceChildren();
+
+      if (!query) {
+        statusBox.textContent = "Enter a word to search KaliMoh.";
+        return;
+      }
+
+      statusBox.textContent = "Searching KaliMoh...";
+      const tasks = [
+        ...pages.map(page => getPageResult(page, query)),
+        getArticleResults(query)
+      ];
+
+      const responses = await Promise.allSettled(tasks);
+      const results = [];
+
+      for (const response of responses) {
+        if (response.status !== "fulfilled") continue;
+
+        if (Array.isArray(response.value)) {
+          results.push(...response.value);
+        } else if (response.value) {
+          results.push(response.value);
+        }
+      }
+
+      if (!results.length) {
+        statusBox.textContent =
+          'No results found for "' + originalTerm + '".';
+        return;
+      }
+
+      statusBox.textContent =
+        results.length + ' result(s) found for "' + originalTerm + '".';
+
+      results.forEach(result => {
+        makeResult(
+          result.title,
+          result.url,
+          result.type,
+          result.description
+        );
+      });
+    }
+
+    document.getElementById("searchForm").addEventListener(
+      "submit",
+      event => {
+        event.preventDefault();
+
+        const term = input.value.trim();
+        const url = new URL(window.location.href);
+
+        if (term) {
+          url.searchParams.set("search", term);
+        } else {
+          url.searchParams.delete("search");
+        }
+
+        history.replaceState({}, "", url);
+        performSearch(term);
+      }
+    );
+
+    const params = new URLSearchParams(window.location.search);
+    const initialSearch = params.get("search") || "";
+
+    input.value = initialSearch;
+
+    if (initialSearch.trim()) {
+      performSearch(initialSearch);
+    }
+  </script>
+
+</body>
+</html>
+```
