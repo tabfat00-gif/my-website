@@ -414,7 +414,7 @@
   <div class="sidebar-title">Dashboard</div>
 
 <a href="#dashboard" class="nav-link">🏠 Dashboard</a> <a href="#users" class="nav-link">👥 Users</a> <a href="#software" class="nav-link">💻 Software</a> <a href="#articles" class="nav-link">📝 Articles</a> <a href="#views" class="nav-link">👁️ Views</a> <a href="#downloads" class="nav-link">📥 Downloads</a>
-
+<a href="#messages" class="nav-link">📩 Messages</a>
   <div class="sidebar-title">Website</div>
 
 <a href="index.html" class="nav-link">🌐 View Site</a>
@@ -727,7 +727,26 @@ Logout
   </div>
 
 </section>
+<section id="messages">
+  <div class="box">
+    <h2>📩 Contact Messages</h2>
+
+    <button
+      type="button"
+      class="edit-btn"
+      id="refresh-messages-btn"
+    >
+      🔄 Refresh Messages
+    </button>
+
+    <div id="messages-status"></div>
+    <div id="messages-list">
+      Loading...
+    </div>
+  </div>
+</section>
 ```
+
 
   </div>
 
@@ -1140,6 +1159,62 @@ Logout
 
   }
 
+  async function loadMessages() {
+    const list = document.getElementById("messages-list");
+    const status = document.getElementById("messages-status");
+
+    list.textContent = "Loading messages...";
+    status.textContent = "";
+
+    const { data, error } = await supabaseClient
+      .from("contact_messages")
+      .select("id, name, email, message, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Messages error:", error);
+      list.textContent = "Unable to load messages.";
+      status.textContent = error.message;
+      return;
+    }
+
+    list.replaceChildren();
+
+    if (!data || data.length === 0) {
+      list.textContent = "No messages yet.";
+      status.textContent = "";
+      return;
+    }
+
+    data.forEach((msg) => {
+      const card = document.createElement("div");
+      card.className = "box";
+
+      const name = document.createElement("h3");
+      name.textContent = msg.name || "Unknown";
+
+      const email = document.createElement("p");
+      email.textContent = "Email: " + (msg.email || "");
+
+      const message = document.createElement("p");
+      message.textContent = msg.message || "";
+      message.style.whiteSpace = "pre-wrap";
+
+      const date = document.createElement("small");
+      date.textContent = msg.created_at
+        ? new Date(msg.created_at).toLocaleString()
+        : "";
+
+      card.append(name, email, message, date);
+      list.appendChild(card);
+    });
+
+    status.textContent = data.length + " message(s)";
+  }
+
+  document
+    .getElementById("refresh-messages-btn")
+    .addEventListener("click", loadMessages);
 
   let editingId = null;
 
@@ -2296,7 +2371,7 @@ Logout
     await loadTotalArticleViews();
     await loadUsers();
     await loadDownloadHistory();
-
+    await loadMessages();
   }
 
 
