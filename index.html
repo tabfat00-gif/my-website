@@ -1201,13 +1201,13 @@
 
     try {
       const { error } = await supabaseClient
-        .from("contact_messages")
-        .insert({
-          full_name: fullName,
-          email: email,
-          message: message
-        });
-
+     
+.from("contact_messages")
+.insert({
+  name: fullName,
+  email: email,
+  message: message
+});
       if (error) throw error;
 
       contactStatus.style.color = "#22c55e";
