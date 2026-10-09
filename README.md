@@ -1,12 +1,12 @@
-# KaliMoh - Discover • Learn • Explore
+# Bexo - Discover • Learn • Explore
 
-KaliMoh is a general-purpose website created to share useful information, ideas, guides, technology, entertainment, and interesting topics.
+Bexo is a general-purpose website created to share useful information, ideas, guides, technology, entertainment, and interesting topics.
 
 The website is built using HTML, Bootstrap 5, CSS, and JavaScript, with a clean and responsive design.
 
-## 🌐 About KaliMoh
+## 🌐 About Bexo
 
-KaliMoh is a place for curiosity and discovery.
+Bexo is a place for curiosity and discovery.
 
 Our goal is to provide simple, useful, and interesting content covering different topics, including:
 
@@ -19,7 +19,7 @@ Our goal is to provide simple, useful, and interesting content covering differen
 
 ## 🚀 Website
 
-KaliMoh is published using GitHub Pages.
+Bexo is published using GitHub Pages.
 
 ## 🛠️ Built With
 
@@ -34,7 +34,7 @@ This project includes the original license and copyright notice required by the 
 
 See the `LICENCE` file for the complete license text.
 
-## 💙 KaliMoh
+## 💙 Bexo
 
 Discover • Learn • Explore
 
