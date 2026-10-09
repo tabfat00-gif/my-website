@@ -1083,6 +1083,66 @@ textarea:focus-visible {
   }
 }
 
+/* KaliMoh Navbar Polish — keep original layout */
+
+.navbar {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-brand {
+  transition: opacity 0.25s ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.9;
+}
+
+.kalimoh-logo-mark {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.navbar-brand:hover .kalimoh-logo-mark {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(48, 86, 211, 0.25);
+}
+
+.navbar-nav .nav-item > a {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.navbar-nav .nav-item > a:hover,
+.navbar-nav .nav-item > a.active {
+  color: var(--km-blue-light);
+}
+
+.navbar-nav .nav-item > a:focus-visible,
+.navbar-brand:focus-visible {
+  outline: 2px solid var(--km-blue-light);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.navbar-toggler {
+  border: 1px solid var(--km-border);
+  border-radius: 10px;
+  transition: background 0.25s ease;
+}
+
+.navbar-toggler:hover {
+  background: rgba(148, 163, 184, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-brand,
+  .kalimoh-logo-mark,
+  .navbar-nav .nav-item > a,
+  .navbar-toggler {
+    transition: none;
+  }
+}
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   html {
