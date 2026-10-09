@@ -1148,8 +1148,7 @@ textarea:focus-visible {
   html {
     scroll-behavior: auto;
   }
-
-  *,
+ *,
   *::before,
   *::after {
     animation-duration: .01ms !important;
@@ -1157,11 +1156,40 @@ textarea:focus-visible {
     transition-duration: .01ms !important;
   }
 }
-  </style>
+
+/* ترتيب أزرار الحساب عمودياً */
+.navbar-btn {
+  flex-direction: column;
+  align-items: stretch !important;
+  gap: 10px;
+}
+
+#guestButtons,
+#userButtons {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px;
+  width: 100%;
+}
+
+#guestButtons a,
+#userButtons a,
+#userButtons button {
+  width: 100%;
+  margin-right: 0 !important;
+  text-align: center;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .navbar-btn {
+    width: 100%;
+    margin-top: 12px;
+    }
+}
+</style>
 </head>
-
 <body>
-
 <!-- Header -->
 <header class="ud-header">
   <div class="container">
