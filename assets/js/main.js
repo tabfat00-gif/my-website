@@ -4,6 +4,7 @@
   // ======= Sticky
   window.onscroll = function () {
     const ud_header = document.querySelector(".ud-header");
+    if (!ud_header) return;
     const sticky = ud_header.offsetTop;
     const logo = document.querySelector(".navbar-brand img");
 
@@ -14,12 +15,13 @@
     }
 
     // === logo change
-    if (ud_header.classList.contains("sticky")) {
-      logo.src = "assets/images/logo/logo-2.svg";
-    } else {
-      logo.src = "assets/images/logo/logo.svg";
-    }
-
+  if (logo) {
+  if (ud_header.classList.contains("sticky")) {
+    logo.src = "assets/images/logo/logo-2.svg";
+  } else {
+    logo.src = "assets/images/logo/logo.svg";
+  }
+}
     // show or hide the back-top-top button
     const backToTop = document.querySelector(".back-to-top");
     if (
