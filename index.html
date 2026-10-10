@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -1954,67 +1953,118 @@ function bexoCreateCard(item, type) {
 
   return column;
 }
+```javascript
+function bexoCreateCard(item, type) {
+  const column = document.createElement("div");
+  column.className = "col-lg-4 col-md-6";
+
+  const card = document.createElement("div");
+  card.className = "bexo-content-card h-100";
+
+  const imageUrl = type === "software" ? item.image_url : item.image;
+
+  if (imageUrl) {
+    const image = document.createElement("img");
+    image.className = "bexo-content-image";
+    image.src = imageUrl;
+    image.alt = item.title || "";
+    image.loading = "lazy";
+    image.onerror = () => image.remove();
+    card.appendChild(image);
+  }
+
+  const body = document.createElement("div");
+  body.className = "bexo-content-body";
+
+  if (item.category) {
+    const category = document.createElement("div");
+    category.className = "bexo-content-category";
+    category.textContent = item.category;
+    body.appendChild(category);
+  }
+
+  const title = document.createElement("h4");
+  title.textContent = item.title || "Untitled";
+  body.appendChild(title);
+
+  const description = document.createElement("p");
+  description.textContent = item.description || "";
+  body.appendChild(description);
+
+  const link = document.createElement("a");
+  link.className = "bexo-content-link";
+  link.href = type === "software" ? "software.html" : "blog.html";
+  link.textContent = type === "software" ? "Explore Software" : "Read Articles";
+  body.appendChild(link);
+
+  card.appendChild(body);
+  column.appendChild(card);
+
+  return column;
+}
+
+async function loadHomepageSoftware() {
+  const list = document.getElementById("homepageSoftwareList");
+  if (!list) return;
+
+  const { data, error } = await supabaseClient
+    .from("software")
+    .select("title, description, category, image_url")
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  if (error) {
+    console.error("Software loading error:", error.message);
+    list.textContent = "Could not load software.";
+    return;
+  }
+
+  list.replaceChildren();
+
+  if (!data || data.length === 0) {
+    list.textContent = "No software available yet.";
+    return;
+  }
+
+  data.forEach(item => {
+    list.appendChild(bexoCreateCard(item, "software"));
+  });
+}
+
+async function loadHomepageArticles() {
+  const list = document.getElementById("homepageArticlesList");
+  if (!list) return;
+
+  const { data, error } = await supabaseClient
+    .from("articles")
+    .select("title, description, category, image, published")
+    .eq("published", true)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  if (error) {
+    console.error("Articles loading error:", error.message);
+    list.textContent = "Could not load articles.";
+    return;
+  }
+
+  list.replaceChildren();
+
+  if (!data || data.length === 0) {
+    list.textContent = "No published articles yet.";
+    return;
+  }
+
+  data.forEach(item => {
+    list.appendChild(bexoCreateCard(item, "article"));
+  });
+}
 
 async function loadHomepageContent() {
-  const softwareList = document.getElementById("homepageSoftwareList");
-  const articlesList = document.getElementById("homepageArticlesList");
-
-  try {
-    const [softwareResult, articlesResult] = await Promise.all([
-      supabaseClient
-        .from("software")
-        .select("title, description, category, image_url")
-        .order("created_at", { ascending: false })
-        .limit(3),
-
-      supabaseClient
-        .from("articles")
-        .select("title, description, category, image, published")
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-        .limit(3)
-    ]);
-
-    if (softwareResult.error) {
-      throw new Error("Software: " + softwareResult.error.message);
-    }
-
-    if (articlesResult.error) {
-      throw new Error("Articles: " + articlesResult.error.message);
-    }
-
-    softwareList.replaceChildren();
-    articlesList.replaceChildren();
-
-    const software = softwareResult.data || [];
-    const articles = articlesResult.data || [];
-
-    if (software.length === 0) {
-      softwareList.innerHTML =
-        '<div class="col-12 bexo-content-status">No software available yet.</div>';
-    } else {
-      software.forEach(item => {
-        softwareList.appendChild(bexoCreateCard(item, "software"));
-      });
-    }
-
-    if (articles.length === 0) {
-      articlesList.innerHTML =
-        '<div class="col-12 bexo-content-status">No published articles yet.</div>';
-    } else {
-      articles.forEach(item => {
-        articlesList.appendChild(bexoCreateCard(item, "article"));
-      });
-    }
-  } catch (error) {
-    console.error("Bexo homepage content error:", error);
-
-    softwareList.innerHTML =
-      '<div class="col-12 bexo-content-status">Could not load software. Please try again later.</div>';
-
-    articlesList.innerHTML =
-      '<div class="col-12 bexo-content-status">Could not load articles. Please try again later.</div>';
-  }
+  await Promise.allSettled([
+    loadHomepageSoftware(),
+    loadHomepageArticles()
+  ]);
 }
 
 loadHomepageContent();
