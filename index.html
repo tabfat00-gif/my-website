@@ -1909,15 +1909,23 @@ function bexoCreateCard(item, type) {
       const parsedUrl = new URL(imageUrl, window.location.href);
 
       if (["https:", "http:"].includes(parsedUrl.protocol)) {
-        const image = document.createElement("img");
-        image.className = "bexo-content-image";
-        image.src = parsedUrl.href;
-        image.alt = item.title || "";
-        image.loading = "lazy";
-        image.onerror = () => image.remove();
-        card.appendChild(image);
-      }
-    } catch (_) {
+       
+const image = document.createElement("img");
+image.className = "bexo-content-image";
+image.src = parsedUrl.href;
+image.alt = item.title || "";
+image.loading = "lazy";
+
+image.style.width = "100%";
+image.style.height = "150px";
+image.style.objectFit = "cover";
+image.style.borderRadius = "8px";
+
+image.onerror = () => image.remove();
+card.appendChild(image);
+}
+} catch (_) {
+
       // Keep the card visible if the image URL is invalid.
     }
   }
