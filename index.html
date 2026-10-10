@@ -1293,9 +1293,25 @@ textarea:focus-visible {
   object-fit: contain !important;
   margin: 10px auto !important;
 }
-  
-</style>
 
+.bexo-content-card img.bexo-content-image {
+  display: block !important;
+}
+
+.bexo-content-card img.bexo-content-image[src] {
+  object-fit: contain !important;
+}
+
+.bexo-content-card:has(img.bexo-content-image) {
+  overflow: hidden;
+}
+.bexo-software-card .bexo-content-image {
+  width: 70px !important;
+  height: 70px !important;
+  margin: 10px auto !important;
+  object-fit: contain !important;
+}
+  </style>
 </head>
 <body>
 <!-- Header -->
@@ -1912,7 +1928,7 @@ function bexoCreateCard(item, type) {
   column.className = "col-lg-4 col-md-6";
 
   const card = document.createElement("article");
-  card.className = "bexo-content-card";
+  card.className = "bexo-content-card " + (type === "software" ? "bexo-software-card" : "bexo-article-card");
   const imageUrl = item.image_url;
  
   if (typeof imageUrl === "string" && imageUrl.trim()) {
