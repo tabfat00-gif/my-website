@@ -1953,55 +1953,7 @@ function bexoCreateCard(item, type) {
 
   return column;
 }
-```javascript
-function bexoCreateCard(item, type) {
-  const column = document.createElement("div");
-  column.className = "col-lg-4 col-md-6";
 
-  const card = document.createElement("div");
-  card.className = "bexo-content-card h-100";
-
-  const imageUrl = type === "software" ? item.image_url : item.image;
-
-  if (imageUrl) {
-    const image = document.createElement("img");
-    image.className = "bexo-content-image";
-    image.src = imageUrl;
-    image.alt = item.title || "";
-    image.loading = "lazy";
-    image.onerror = () => image.remove();
-    card.appendChild(image);
-  }
-
-  const body = document.createElement("div");
-  body.className = "bexo-content-body";
-
-  if (item.category) {
-    const category = document.createElement("div");
-    category.className = "bexo-content-category";
-    category.textContent = item.category;
-    body.appendChild(category);
-  }
-
-  const title = document.createElement("h4");
-  title.textContent = item.title || "Untitled";
-  body.appendChild(title);
-
-  const description = document.createElement("p");
-  description.textContent = item.description || "";
-  body.appendChild(description);
-
-  const link = document.createElement("a");
-  link.className = "bexo-content-link";
-  link.href = type === "software" ? "software.html" : "blog.html";
-  link.textContent = type === "software" ? "Explore Software" : "Read Articles";
-  body.appendChild(link);
-
-  card.appendChild(body);
-  column.appendChild(card);
-
-  return column;
-}
 
 async function loadHomepageSoftware() {
   const list = document.getElementById("homepageSoftwareList");
