@@ -1284,7 +1284,16 @@ textarea:focus-visible {
     padding: 55px 0;
   }
 }
-    
+  
+.bexo-content-card .bexo-content-image {
+  width: 60px !important;
+  height: 60px !important;
+  max-width: 60px !important;
+  max-height: 60px !important;
+  object-fit: contain !important;
+  margin: 10px auto !important;
+}
+  
 </style>
 
 </head>
@@ -1912,20 +1921,24 @@ function bexoCreateCard(item, type) {
 
       if (["https:", "http:"].includes(parsedUrl.protocol)) {
        
+
 const image = document.createElement("img");
 image.className = "bexo-content-image";
 image.src = parsedUrl.href;
 image.alt = item.title || "";
 image.loading = "lazy";
-image.style.width = "100%";
-    
-image.style.width = "100%";
-image.style.height = type === "software" ? "100px" : "150px";
-image.style.objectFit = "cover";
+
+image.style.width = type === "software" ? "70px" : "100%";
+image.style.height = type === "software" ? "70px" : "150px";
+image.style.maxWidth = type === "software" ? "70px" : "100%";
+image.style.objectFit = type === "software" ? "contain" : "cover";
+image.style.display = "block";
+image.style.margin = type === "software" ? "10px auto" : "0";
 image.style.borderRadius = "8px";
 
 image.onerror = () => image.remove();
 card.appendChild(image);
+
 }
 } catch (_) {
 
