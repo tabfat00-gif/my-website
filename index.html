@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1199,6 +1201,88 @@ textarea:focus-visible {
   line-height: 1.3 !important;
   margin: 0 !important;
 }
+
+/* Homepage content from Supabase */
+.bexo-dynamic-section {
+  padding: 80px 0;
+  background: var(--km-bg);
+}
+
+.bexo-content-card {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--km-border);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #14223a, #0d1729);
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.bexo-content-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--km-blue-light);
+}
+
+.bexo-content-image {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  background: var(--km-surface);
+}
+
+.bexo-content-placeholder {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--km-blue-light);
+  font-size: 42px;
+  background: rgba(59,130,246,.1);
+}
+
+.bexo-content-body {
+  padding: 22px;
+}
+
+.bexo-content-body h3 {
+  color: var(--km-text);
+  font-size: 20px;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+
+.bexo-content-body p {
+  color: var(--km-muted);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.bexo-content-category {
+  color: var(--km-blue-light);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.bexo-content-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--km-blue-light);
+  font-weight: 700;
+}
+
+.bexo-content-status {
+  color: var(--km-muted);
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 575px) {
+  .bexo-dynamic-section {
+    padding: 55px 0;
+  }
+}
+    
 </style>
 
 </head>
@@ -1446,6 +1530,44 @@ textarea:focus-visible {
           <div class="ud-pricing-footer"><a href="blog.html" class="ud-main-btn ud-border-btn">Discover More</a></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Software -->
+<section id="homepage-software" class="bexo-dynamic-section">
+  <div class="container">
+    <div class="ud-section-title text-center">
+      <span>Discover</span>
+      <h2>Latest Software</h2>
+      <p>Explore software and useful digital tools.</p>
+    </div>
+
+    <div id="homepageSoftwareList" class="row g-4">
+      <div class="col-12 bexo-content-status">Loading software...</div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="software.html" class="ud-main-btn">View All Software</a>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Published Articles -->
+<section id="homepage-articles" class="bexo-dynamic-section">
+  <div class="container">
+    <div class="ud-section-title text-center">
+      <span>Read & Learn</span>
+      <h2>Latest Articles</h2>
+      <p>Discover the latest articles and helpful guides.</p>
+    </div>
+
+    <div id="homepageArticlesList" class="row g-4">
+      <div class="col-12 bexo-content-status">Loading articles...</div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="blog.html" class="ud-main-btn">View All Articles</a>
     </div>
   </div>
 </section>
@@ -1771,6 +1893,131 @@ textarea:focus-visible {
     SUPABASE_URL,
     SUPABASE_KEY
   );
+
+/* Homepage: load software and published articles */
+
+function bexoCreateCard(item, type) {
+  const column = document.createElement("div");
+  column.className = "col-lg-4 col-md-6";
+
+  const card = document.createElement("article");
+  card.className = "bexo-content-card";
+
+  const imageUrl = type === "software"
+    ? item.image_url
+    : item.image;
+
+  if (typeof imageUrl === "string" && imageUrl.trim()) {
+    try {
+      const parsedUrl = new URL(imageUrl, window.location.href);
+
+      if (["https:", "http:"].includes(parsedUrl.protocol)) {
+        const image = document.createElement("img");
+        image.className = "bexo-content-image";
+        image.src = parsedUrl.href;
+        image.alt = item.title || "";
+        image.loading = "lazy";
+        image.onerror = () => image.remove();
+        card.appendChild(image);
+      }
+    } catch (_) {
+      // Keep the card visible if the image URL is invalid.
+    }
+  }
+
+  const body = document.createElement("div");
+  body.className = "bexo-content-body";
+
+  const category = document.createElement("span");
+  category.className = "bexo-content-category";
+  category.textContent = item.category || (
+    type === "software" ? "Software" : "Article"
+  );
+
+  const title = document.createElement("h3");
+  title.textContent = item.title || "Untitled";
+
+  const description = document.createElement("p");
+  description.textContent =
+    item.description || "Discover more on Bexo.";
+
+  const link = document.createElement("a");
+  link.className = "bexo-content-link";
+  link.href = type === "software" ? "software.html" : "blog.html";
+  link.textContent = type === "software"
+    ? "Explore Software →"
+    : "Read Article →";
+
+  body.append(category, title, description, link);
+  card.appendChild(body);
+  column.appendChild(card);
+
+  return column;
+}
+
+async function loadHomepageContent() {
+  const softwareList = document.getElementById("homepageSoftwareList");
+  const articlesList = document.getElementById("homepageArticlesList");
+
+  try {
+    const [softwareResult, articlesResult] = await Promise.all([
+      supabaseClient
+        .from("software")
+        .select("title, description, category, image_url")
+        .order("created_at", { ascending: false })
+        .limit(3),
+
+      supabaseClient
+        .from("articles")
+        .select("title, description, category, image, published")
+        .eq("published", true)
+        .order("created_at", { ascending: false })
+        .limit(3)
+    ]);
+
+    if (softwareResult.error) {
+      throw new Error("Software: " + softwareResult.error.message);
+    }
+
+    if (articlesResult.error) {
+      throw new Error("Articles: " + articlesResult.error.message);
+    }
+
+    softwareList.replaceChildren();
+    articlesList.replaceChildren();
+
+    const software = softwareResult.data || [];
+    const articles = articlesResult.data || [];
+
+    if (software.length === 0) {
+      softwareList.innerHTML =
+        '<div class="col-12 bexo-content-status">No software available yet.</div>';
+    } else {
+      software.forEach(item => {
+        softwareList.appendChild(bexoCreateCard(item, "software"));
+      });
+    }
+
+    if (articles.length === 0) {
+      articlesList.innerHTML =
+        '<div class="col-12 bexo-content-status">No published articles yet.</div>';
+    } else {
+      articles.forEach(item => {
+        articlesList.appendChild(bexoCreateCard(item, "article"));
+      });
+    }
+  } catch (error) {
+    console.error("Bexo homepage content error:", error);
+
+    softwareList.innerHTML =
+      '<div class="col-12 bexo-content-status">Could not load software. Please try again later.</div>';
+
+    articlesList.innerHTML =
+      '<div class="col-12 bexo-content-status">Could not load articles. Please try again later.</div>';
+  }
+}
+
+loadHomepageContent();
 
   /* Update Login / Profile buttons */
   async function updateNavbar() {
