@@ -1915,9 +1915,10 @@ image.className = "bexo-content-image";
 image.src = parsedUrl.href;
 image.alt = item.title || "";
 image.loading = "lazy";
-
 image.style.width = "100%";
-image.style.height = "150px";
+    
+image.style.width = "100%";
+image.style.height = type === "software" ? "100px" : "150px";
 image.style.objectFit = "cover";
 image.style.borderRadius = "8px";
 
