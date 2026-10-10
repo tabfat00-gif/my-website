@@ -1991,8 +1991,8 @@ async function loadHomepageArticles() {
 
   const { data, error } = await supabaseClient
     .from("articles")
-    .select("title, description, category, published")
-    .eq("published", true)
+    .select("title, description, category, is_published")
+    .eq("is_published", true)
     .order("created_at", { ascending: false })
     .limit(3);
 
