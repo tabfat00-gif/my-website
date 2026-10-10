@@ -13,6 +13,7 @@
 <meta name="google-site-verification" content="Lal5HT1nrrZEsRgvo5fKS8tyIBIO5sSjGZ_imFhluSM" />
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="assets/css/animate.css">
   <link rel="stylesheet" href="assets/css/lineicons.css">
   <link rel="stylesheet" href="assets/css/ud-styles.css">
@@ -1987,12 +1988,14 @@ async function loadHomepageArticles() {
   const list = document.getElementById("homepageArticlesList");
   if (!list) return;
 
+
   const { data, error } = await supabaseClient
     .from("articles")
-    .select("title, description, category, image, published")
+    .select("title, description, category, published")
     .eq("published", true)
     .order("created_at", { ascending: false })
     .limit(3);
+
 
   if (error) {
     console.error("Articles loading error:", error.message);
