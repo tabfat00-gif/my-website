@@ -442,6 +442,54 @@ body.dark-mode select {
   color: #e5e7eb;
   border-color: #475569;
 }
+/* Organize all admin lists into responsive cards */
+#software-list,
+#articles-list,
+#users-list,
+#downloads-list,
+#messages-list {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 16px;
+align-items: start;
+}
+
+/* Software and books */
+#software-list .software-item,
+
+/* Articles */
+#articles-list .article-item,
+
+/* Users */
+#users-list .user-item,
+
+/* Download history */
+#downloads-list .download-item,
+
+/* Contact messages */
+#messages-list .box {
+min-width: 0;
+margin-bottom: 0;
+box-sizing: border-box;
+overflow-wrap: anywhere;
+}
+
+/* Article preview */
+.article-preview {
+white-space: pre-line;
+overflow-wrap: anywhere;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+#software-list,
+#articles-list,
+#users-list,
+#downloads-list,
+#messages-list {
+grid-template-columns: 1fr;
+}
+}
 
 </style>
 
