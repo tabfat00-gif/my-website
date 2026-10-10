@@ -1902,11 +1902,8 @@ function bexoCreateCard(item, type) {
 
   const card = document.createElement("article");
   card.className = "bexo-content-card";
-
-  const imageUrl = type === "software"
-    ? item.image_url
-    : item.image;
-
+  const imageUrl = item.image_url;
+ 
   if (typeof imageUrl === "string" && imageUrl.trim()) {
     try {
       const parsedUrl = new URL(imageUrl, window.location.href);
@@ -1989,12 +1986,12 @@ async function loadHomepageArticles() {
   if (!list) return;
 
 
-  const { data, error } = await supabaseClient
-    .from("articles")
-    .select("title, description, category, is_published")
-    .eq("is_published", true)
-    .order("created_at", { ascending: false })
-    .limit(3);
+ const { data, error } = await supabaseClient
+  .from("articles")
+  .select("title, description, category, is_published, image_url")
+  .eq("is_published", true)
+  .order("created_at", { ascending: false })
+  .limit(3);
 
 
   if (error) {
