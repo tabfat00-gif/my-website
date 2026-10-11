@@ -953,14 +953,14 @@ $("article-form")?.addEventListener("submit", async (event) => {
 
   const imageValue = $("article-image").value.trim() || null;
 
-  const payload = {
-    title: $("article-title").value.trim(),
-    description: $("article-description").value.trim(),
-    content: $("article-content").value.trim(),
-    category: $("article-category").value,
-    image_url: imageValue,
-    is_published: $("article-published").checked
-  };
+ const payload = {
+  title: $("article-title").value.trim(),
+  description: $("article-description").value.trim(),
+  content: $("article-content").value.trim(),
+  category: $("article-category").value,
+  image_url: imageValue,
+  is_published: $("article-published").checked
+};
 
   try {
     let result;
