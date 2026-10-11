@@ -315,6 +315,72 @@
         grid-template-columns: 1fr;
       }
     }
+
+/* تصغير بطاقات لوحة التحكم */
+.box {
+  padding: 14px !important;
+  border-radius: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.box h3 {
+  font-size: 16px !important;
+  margin-bottom: 8px !important;
+}
+
+.box p {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 6px !important;
+}
+
+/* تصغير الإطارات والمسافات */
+#software-list,
+#articles-list,
+#users-list,
+#downloads-list,
+#messages-list,
+#views-list {
+  gap: 10px !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+}
+
+/* تصغير الأزرار */
+.item-actions button,
+.box button {
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+  border-radius: 6px !important;
+}
+
+/* تصغير حقول الإدخال */
+input,
+select,
+textarea {
+  padding: 8px 10px !important;
+  font-size: 13px !important;
+}
+
+/* تصغير بطاقات الإحصائيات */
+.stat-card,
+.stat-box,
+.dashboard-card {
+  padding: 12px !important;
+  min-height: auto !important;
+}
+
+.stat-card h2,
+.stat-box h2,
+.dashboard-card h2 {
+  font-size: 22px !important;
+}
+
+.stat-card p,
+.stat-box p,
+.dashboard-card p {
+  font-size: 12px !important;
+}
+
   </style>
 </head>
 
