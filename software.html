@@ -96,24 +96,39 @@
   gap: 7px;
 }
 
-.navbar-btn .ud-main-btn {
-  padding: 6px 11px !important;
-  font-size: 12px !important;
-  line-height: 1.4 !important;
+
+/* Small account buttons */
+.navbar-btn .ud-main-btn,
+.navbar-btn button,
+.navbar-btn .profile-btn,
+.navbar-btn .logout-btn {
+  padding: 4px 8px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
   min-height: 0 !important;
-  border-radius: 6px;
-  margin-left: 0 !important;
+  height: auto !important;
+  border-radius: 4px !important;
+  margin: 0 !important;
 }
 
-/* Keep account photo and name neat */
+.navbar-btn {
+  gap: 5px !important;
+}
+
+/* Account photo and name */
 #user-profile {
   align-items: center;
   gap: 7px;
-  font-size: 13px;
+  font-size: 12px;
+}
+
+#user-avatar {
+  width: 30px !important;
+  height: 30px !important;
 }
 
 #user-name {
-  max-width: 110px;
+  max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
