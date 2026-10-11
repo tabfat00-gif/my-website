@@ -381,6 +381,52 @@ textarea {
   font-size: 12px !important;
 }
 
+/* إظهار قسم واحد فقط عند الضغط على القائمة الجانبية */
+const sectionMap = {
+  "Dashboard": "dashboard",
+  "Users": "users",
+  "Software": "software",
+  "Articles": "articles",
+  "Views": "views",
+  "Downloads": "downloads",
+  "Messages": "messages"
+};
+
+const sectionIds = Object.values(sectionMap);
+
+function showSection(sectionName) {
+  sectionIds.forEach((id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.style.display =
+        id === sectionName ? "" : "none";
+    }
+  });
+
+  document.querySelectorAll(".sidebar a").forEach((link) => {
+    const label = link.textContent.trim();
+    link.classList.toggle(
+      "active",
+      sectionMap[label] === sectionName
+    );
+  });
+}
+
+document.querySelectorAll(".sidebar a").forEach((link) => {
+  const label = link.textContent.trim();
+  const sectionName = sectionMap[label];
+
+  if (!sectionName) return;
+
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showSection(sectionName);
+  });
+});
+
+/* إظهار Dashboard عند فتح الصفحة */
+showSection("dashboard");
+
   </style>
 </head>
 
