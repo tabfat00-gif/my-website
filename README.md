@@ -28,13 +28,16 @@ Bexo is published using GitHub Pages.
 - Bootstrap 5
 - JavaScript
 
-## 📃 License
+## 📃 License and Copyright
 
-This project includes the original license and copyright notice required by the template's open-source license.
+© 2026 Bexo. All rights reserved for original Bexo content, branding, and materials, to the extent permitted by applicable law.
 
-See the `LICENCE` file for the complete license text.
+This website uses a third-party template and may include other components or assets subject to separate licenses. Those licenses continue to apply to their respective materials.
+
+Unless permitted by an applicable third-party license or applicable law, written permission is required to reproduce or redistribute Bexo's original materials.
+
+See the `LICENCE` file for the template's license terms.
 
 ## 💙 Bexo
 
 Discover • Learn • Explore
-
