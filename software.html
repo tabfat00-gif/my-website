@@ -779,6 +779,53 @@
 
   }
 
+async function loadUserProfile() {
+  const { data: { session }, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error) {
+    console.error("Session error:", error.message);
+    return;
+  }
+
+  const loginLink = document.getElementById("login-link");
+  const signupLink = document.getElementById("signup-link");
+  const profile = document.getElementById("user-profile");
+  const avatar = document.getElementById("user-avatar");
+  const name = document.getElementById("user-name");
+
+  if (!session) {
+    profile.style.display = "none";
+    loginLink.style.display = "";
+    signupLink.style.display = "";
+    return;
+  }
+
+  const user = session.user;
+  const metadata = user.user_metadata || {};
+
+  name.textContent =
+    metadata.full_name ||
+    metadata.name ||
+    user.email ||
+    "User";
+
+  avatar.src =
+    metadata.avatar_url ||
+    metadata.picture ||
+    "assets/images/favicon.svg";
+
+  profile.style.display = "flex";
+  loginLink.style.display = "none";
+  signupLink.style.display = "none";
+}
+
+loadUserProfile();
+
+supabaseClient.auth.onAuthStateChange(() => {
+  loadUserProfile();
+});
+
 
   loadSoftware();
 
