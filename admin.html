@@ -1,10 +1,10 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bexo Admin</title>
+  <title>KaliMoh Admin</title>
 
   <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -60,7 +60,8 @@
       transition: .2s;
     }
 
-    .nav-link:hover {
+    .nav-link:hover,
+    .nav-link.active {
       background: #1f2937;
       color: white;
     }
@@ -117,8 +118,8 @@
 
     .stat-card, .box {
       background: white;
-      padding: 22px;
-      border-radius: 14px;
+      padding: 14px;
+      border-radius: 10px;
       box-shadow: 0 3px 15px rgba(0,0,0,.06);
     }
 
@@ -131,21 +132,22 @@
     .stats-number { font-size: 30px; font-weight: bold; }
 
     .box {
-      padding: 25px;
-      margin-bottom: 25px;
+      margin-bottom: 10px;
       scroll-margin-top: 20px;
     }
 
-    .box h2 { margin-top: 0; margin-bottom: 20px; }
+    .box h2 { margin-top: 0; margin-bottom: 15px; }
+    .box h3 { font-size: 16px; margin-top: 0; margin-bottom: 8px; }
+    .box p { font-size: 13px; line-height: 1.5; margin-bottom: 6px; }
 
     input, textarea, select {
       width: 100%;
-      padding: 12px;
+      padding: 8px 10px;
       margin: 8px 0 15px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
       font-family: inherit;
-      font-size: 14px;
+      font-size: 13px;
       background: white;
     }
 
@@ -159,11 +161,12 @@
 
     button {
       border: 0;
-      padding: 10px 16px;
-      border-radius: 7px;
+      padding: 6px 10px;
+      border-radius: 6px;
       cursor: pointer;
       margin: 4px 6px 4px 0;
       font-family: inherit;
+      font-size: 12px;
     }
 
     button:disabled { opacity: .6; cursor: not-allowed; }
@@ -177,7 +180,7 @@
     .software-item, .article-item, .user-item,
     .download-item, .message-item {
       border: 1px solid #e5e7eb;
-      padding: 18px;
+      padding: 14px;
       border-radius: 10px;
       background: white;
       min-width: 0;
@@ -250,10 +253,10 @@
     .empty-message { color: #6b7280; padding: 10px 0; }
 
     #software-list, #articles-list, #users-list,
-    #downloads-list, #messages-list {
+    #downloads-list, #messages-list, #views-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
       align-items: start;
     }
 
@@ -306,127 +309,15 @@
       .logout-side { width: auto; margin-top: 5px; }
       .stats-grid { grid-template-columns: 1fr; }
       h1 { font-size: 25px; }
-      .box { padding: 18px; }
+      .box { padding: 14px; }
     }
 
     @media (max-width: 600px) {
       #software-list, #articles-list, #users-list,
-      #downloads-list, #messages-list {
+      #downloads-list, #messages-list, #views-list {
         grid-template-columns: 1fr;
       }
     }
-
-/* تصغير بطاقات لوحة التحكم */
-.box {
-  padding: 14px !important;
-  border-radius: 10px !important;
-  margin-bottom: 10px !important;
-}
-
-.box h3 {
-  font-size: 16px !important;
-  margin-bottom: 8px !important;
-}
-
-.box p {
-  font-size: 13px !important;
-  line-height: 1.5 !important;
-  margin-bottom: 6px !important;
-}
-
-/* تصغير الإطارات والمسافات */
-#software-list,
-#articles-list,
-#users-list,
-#downloads-list,
-#messages-list,
-#views-list {
-  gap: 10px !important;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
-}
-
-/* تصغير الأزرار */
-.item-actions button,
-.box button {
-  padding: 6px 10px !important;
-  font-size: 12px !important;
-  border-radius: 6px !important;
-}
-
-/* تصغير حقول الإدخال */
-input,
-select,
-textarea {
-  padding: 8px 10px !important;
-  font-size: 13px !important;
-}
-
-/* تصغير بطاقات الإحصائيات */
-.stat-card,
-.stat-box,
-.dashboard-card {
-  padding: 12px !important;
-  min-height: auto !important;
-}
-
-.stat-card h2,
-.stat-box h2,
-.dashboard-card h2 {
-  font-size: 22px !important;
-}
-
-.stat-card p,
-.stat-box p,
-.dashboard-card p {
-  font-size: 12px !important;
-}
-
-/* إظهار قسم واحد فقط عند الضغط على القائمة الجانبية */
-const sectionMap = {
-  "Dashboard": "dashboard",
-  "Users": "users",
-  "Software": "software",
-  "Articles": "articles",
-  "Views": "views",
-  "Downloads": "downloads",
-  "Messages": "messages"
-};
-
-const sectionIds = Object.values(sectionMap);
-
-function showSection(sectionName) {
-  sectionIds.forEach((id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.style.display =
-        id === sectionName ? "" : "none";
-    }
-  });
-
-  document.querySelectorAll(".sidebar a").forEach((link) => {
-    const label = link.textContent.trim();
-    link.classList.toggle(
-      "active",
-      sectionMap[label] === sectionName
-    );
-  });
-}
-
-document.querySelectorAll(".sidebar a").forEach((link) => {
-  const label = link.textContent.trim();
-  const sectionName = sectionMap[label];
-
-  if (!sectionName) return;
-
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    showSection(sectionName);
-  });
-});
-
-/* إظهار Dashboard عند فتح الصفحة */
-showSection("dashboard");
-
   </style>
 </head>
 
@@ -452,7 +343,7 @@ showSection("dashboard");
 <div class="container">
   <div class="top-bar">
     <div>
-      <h1>Bexo Admin Panel</h1>
+      <h1>KaliMoh Admin Panel</h1>
       <div id="auth-status"></div>
     </div>
     <a href="index.html" class="home-btn">View Site</a>
@@ -461,11 +352,26 @@ showSection("dashboard");
 
   <section id="dashboard">
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">👥 Total Users</div><div id="total-users" class="stats-number">Loading...</div></div>
-      <div class="stat-card"><div class="stat-label">💻 Software</div><div id="total-software" class="stats-number">Loading...</div></div>
-      <div class="stat-card"><div class="stat-label">📝 Articles</div><div id="total-articles" class="stats-number">Loading...</div></div>
-      <div class="stat-card"><div class="stat-label">👁️ Article Views</div><div id="total-article-views" class="stats-number">Loading...</div></div>
-      <div class="stat-card"><div class="stat-label">📥 Total Downloads</div><div id="total-downloads" class="stats-number">Loading...</div></div>
+      <div class="stat-card">
+        <div class="stat-label">👥 Total Users</div>
+        <div id="total-users" class="stats-number">Loading...</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">💻 Software</div>
+        <div id="total-software" class="stats-number">Loading...</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">📝 Articles</div>
+        <div id="total-articles" class="stats-number">Loading...</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">👁️ Article Views</div>
+        <div id="total-article-views" class="stats-number">Loading...</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">📥 Total Downloads</div>
+        <div id="total-downloads" class="stats-number">Loading...</div>
+      </div>
     </div>
   </section>
 
@@ -476,6 +382,7 @@ showSection("dashboard");
         <input type="text" id="title" placeholder="Software title" required>
         <textarea id="description" placeholder="Description"></textarea>
         <input type="url" id="download_url" placeholder="Download URL">
+
         <select id="category" required>
           <option value="">Select Category</option>
           <option value="Windows">🪟 Windows</option>
@@ -484,14 +391,22 @@ showSection("dashboard");
           <option value="Tools">🛠️ Tools</option>
           <option value="Books">📚 Books</option>
         </select>
+
         <input type="url" id="image_url" placeholder="Image URL">
-        <label class="premium-option"><input type="checkbox" id="is_premium"> Premium Software 🔒</label>
+        <label class="premium-option">
+          <input type="checkbox" id="is_premium"> Premium Software 🔒
+        </label>
+
         <button type="submit" class="save-btn" id="save-btn">Add Software</button>
         <button type="button" class="cancel-btn" id="cancel-btn" style="display:none">Cancel Edit</button>
       </form>
       <div id="software-message"></div>
     </div>
-    <div class="box"><h2>Software List</h2><div id="software-list">Loading...</div></div>
+
+    <div class="box">
+      <h2>Software List</h2>
+      <div id="software-list">Loading...</div>
+    </div>
   </section>
 
   <section id="articles">
@@ -503,17 +418,38 @@ showSection("dashboard");
         <textarea id="article-content" placeholder="Article content" required></textarea>
         <input type="text" id="article-category" placeholder="Category">
         <input type="url" id="article-image" placeholder="Image URL">
-        <label class="published-option"><input type="checkbox" id="article-published" checked> Published</label>
+
+        <label class="published-option">
+          <input type="checkbox" id="article-published" checked> Published
+        </label>
+
         <button type="submit" class="save-btn" id="article-save-btn">Add Article</button>
         <button type="button" class="cancel-btn" id="article-cancel-btn" style="display:none">Cancel Edit</button>
       </form>
       <div id="article-message"></div>
     </div>
-    <div class="box"><h2>Articles List</h2><div id="articles-list">Loading...</div></div>
+
+    <div class="box">
+      <h2>Articles List</h2>
+      <div id="articles-list">Loading...</div>
+    </div>
   </section>
 
-  <section id="users"><div class="box"><h2>👥 Users</h2><div id="users-list">Loading...</div></div></section>
-  <section id="views"><div class="box"><h2>👁️ Article Views</h2><div id="views-total-display" class="stats-number">Loading...</div></div></section>
+  <section id="users">
+    <div class="box">
+      <h2>👥 Users</h2>
+      <div id="users-list">Loading...</div>
+    </div>
+  </section>
+
+  <section id="views">
+    <div class="box">
+      <h2>👁️ Article Views</h2>
+      <div id="views-total-display" class="stats-number">Loading...</div>
+      <div id="views-list">Loading...</div>
+    </div>
+  </section>
+
   <section id="downloads">
     <div class="box">
       <h2>📥 Download History</h2>
@@ -521,6 +457,7 @@ showSection("dashboard");
       <div id="downloads-list">Loading...</div>
     </div>
   </section>
+
   <section id="messages">
     <div class="box">
       <h2>📩 Contact Messages</h2>
@@ -532,10 +469,6 @@ showSection("dashboard");
 </div>
 </main>
 
-</body>
-</html>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 "use strict";
 
@@ -660,6 +593,52 @@ if (themeToggle) {
     );
   });
 }
+
+/* التنقل: إظهار قسم واحد فقط */
+const adminSections = [
+  "dashboard",
+  "users",
+  "software",
+  "articles",
+  "views",
+  "downloads",
+  "messages"
+];
+
+function showAdminSection(sectionId) {
+  adminSections.forEach((id) => {
+    const section = $(id);
+    if (section) {
+      section.style.display = id === sectionId ? "block" : "none";
+    }
+  });
+
+  document.querySelectorAll(".sidebar .nav-link").forEach((link) => {
+    const target = link.getAttribute("href");
+    link.classList.toggle("active", target === "#" + sectionId);
+  });
+
+  history.replaceState(null, "", "#" + sectionId);
+}
+
+document.querySelectorAll(".sidebar .nav-link").forEach((link) => {
+  const target = link.getAttribute("href");
+  if (!target || !target.startsWith("#")) return;
+
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const sectionId = target.slice(1);
+
+    if (adminSections.includes(sectionId)) {
+      showAdminSection(sectionId);
+    }
+  });
+});
+
+const initialSection = location.hash.slice(1);
+showAdminSection(
+  adminSections.includes(initialSection) ? initialSection : "dashboard"
+);
 
 /* تحميل جميع بيانات لوحة التحكم */
 async function loadDashboard() {
@@ -1011,6 +990,7 @@ $("article-form")?.addEventListener("submit", async (event) => {
 
 $("article-cancel-btn")?.addEventListener("click", resetArticleForm);
 
+
 /* =========================
    ARTICLE VIEWS
 ========================= */
@@ -1018,6 +998,8 @@ $("article-cancel-btn")?.addEventListener("click", resetArticleForm);
 async function loadArticleViews() {
   const container = $("views-list");
   if (!container) return;
+
+  container.innerHTML = "<p>جاري تحميل المشاهدات...</p>";
 
   const { data: articles, error } = await db
     .from("articles")
@@ -1047,11 +1029,17 @@ async function loadArticleViews() {
 
     const card = document.createElement("div");
     card.className = "box";
+
     card.innerHTML = `
       <h3>${escapeHTML(article.title)}</h3>
       <p>عدد المشاهدات: ${count}</p>
     `;
+
     container.appendChild(card);
+  }
+
+  if (!articles?.length) {
+    container.innerHTML = "<p>لا توجد مقالات لعرض مشاهداتها.</p>";
   }
 
   if ($("total-article-views")) {
@@ -1346,7 +1334,6 @@ async function loadMessages() {
   if (!container) return;
 
   showMessage("messages-status", "جاري تحميل الرسائل...");
-
   container.innerHTML = "<p>جاري تحميل الرسائل...</p>";
 
   const { data, error } = await db
@@ -1440,7 +1427,7 @@ async function loadMessages() {
 
 $("refresh-messages-btn")?.addEventListener("click", loadMessages);
 
-/* تحديث بيانات لوحة التحكم عند الرجوع للصفحة */
+/* تحديث البيانات عند الرجوع إلى الصفحة */
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden && currentUser) {
     loadStats();
