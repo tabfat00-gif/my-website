@@ -581,7 +581,29 @@
             "Password reset email sent. Check your email.";
 
         }
-      );
+     );
+   
+const googleButton = document.querySelector(".ud-socials-connect .google");
+
+googleButton.addEventListener("click", async function (event) {
+  event.preventDefault();
+
+  loginMessage.style.color = "#333";
+  loginMessage.textContent = "Connecting to Google...";
+
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: "https://tabfat00-gif.github.io/my-website/software.html"
+    }
+  });
+
+  if (error) {
+    loginMessage.style.color = "#d32f2f";
+    loginMessage.textContent = error.message;
+  }
+});
+
     </script>
 
   </body>
