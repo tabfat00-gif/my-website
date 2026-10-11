@@ -892,7 +892,7 @@ async function loadArticles() {
       <h3>${escapeHTML(article.title)}</h3>
       <p>${escapeHTML(article.description || "")}</p>
       <p>التصنيف: ${escapeHTML(article.category || "غير محدد")}</p>
-      <p>${article.published ? "منشور" : "غير منشور"}</p>
+      <p>${article.is_published ? "منشور" : "غير منشور"}</p>
       <div class="item-actions">
         <button type="button" class="edit-btn">تعديل</button>
         <button type="button" class="delete-btn">حذف</button>
@@ -959,7 +959,7 @@ $("article-form")?.addEventListener("submit", async (event) => {
     content: $("article-content").value.trim(),
     category: $("article-category").value,
     image_url: imageValue,
-    published: $("article-published").checked
+    is_published: $("article-published").checked
   };
 
   try {
