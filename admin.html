@@ -1,34 +1,24 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Bexo Admin</title>
 
-  <link
-    rel="shortcut icon"
-    href="assets/images/favicon.svg"
-    type="image/svg"
-  >
-
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: Arial, sans-serif;
       background: #f4f6f8;
       margin: 0;
       color: #1f2937;
+      transition: background .25s, color .25s;
     }
 
     .sidebar {
@@ -51,9 +41,7 @@
       padding: 0 10px;
     }
 
-    .brand span {
-      color: #60a5fa;
-    }
+    .brand span { color: #60a5fa; }
 
     .sidebar-title {
       font-size: 12px;
@@ -69,7 +57,7 @@
       padding: 12px 14px;
       border-radius: 8px;
       margin-bottom: 5px;
-      transition: 0.2s;
+      transition: .2s;
     }
 
     .nav-link:hover {
@@ -108,23 +96,14 @@
       flex-wrap: wrap;
     }
 
-    h1 {
-      margin: 0 0 6px;
-      font-size: 30px;
-    }
-
-    #auth-status {
-      color: #6b7280;
-      font-size: 14px;
-    }
+    h1 { margin: 0 0 6px; font-size: 30px; }
+    #auth-status { color: #6b7280; font-size: 14px; }
 
     .home-btn {
       background: #111827;
       color: white;
-      border: 0;
       padding: 11px 17px;
       border-radius: 8px;
-      cursor: pointer;
       text-decoration: none;
       display: inline-block;
     }
@@ -136,11 +115,11 @@
       margin-bottom: 30px;
     }
 
-    .stat-card {
+    .stat-card, .box {
       background: white;
       padding: 22px;
       border-radius: 14px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 3px 15px rgba(0,0,0,.06);
     }
 
     .stat-label {
@@ -149,28 +128,17 @@
       margin-bottom: 8px;
     }
 
-    .stats-number {
-      font-size: 30px;
-      font-weight: bold;
-    }
+    .stats-number { font-size: 30px; font-weight: bold; }
 
     .box {
-      background: white;
       padding: 25px;
-      border-radius: 14px;
       margin-bottom: 25px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
       scroll-margin-top: 20px;
     }
 
-    .box h2 {
-      margin-top: 0;
-      margin-bottom: 20px;
-    }
+    .box h2 { margin-top: 0; margin-bottom: 20px; }
 
-    input,
-    textarea,
-    select {
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       margin: 8px 0 15px;
@@ -181,78 +149,51 @@
       background: white;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
+    input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: #2d7ff9;
     }
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    #article-content {
-      min-height: 220px;
-    }
+    textarea { min-height: 100px; resize: vertical; }
+    #article-content { min-height: 220px; }
 
     button {
       border: 0;
       padding: 10px 16px;
       border-radius: 7px;
       cursor: pointer;
-      margin-right: 6px;
+      margin: 4px 6px 4px 0;
       font-family: inherit;
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+    button:disabled { opacity: .6; cursor: not-allowed; }
 
-    .save-btn {
-      background: #111827;
-      color: white;
-    }
+    .save-btn { background: #111827; color: white; }
+    .cancel-btn { background: #e5e7eb; color: #111827; }
+    .edit-btn { background: #2d7ff9; color: white; }
+    .delete-btn { background: #dc3545; color: white; }
+    .theme-btn { background: #2563eb; color: white; padding: 11px 15px; }
 
-    .cancel-btn {
-      background: #e5e7eb;
-      color: #111827;
-    }
-
-    .edit-btn {
-      background: #2d7ff9;
-      color: white;
-    }
-
-    .delete-btn {
-      background: #dc3545;
-      color: white;
-    }
-
-    .software-item,
-    .article-item,
-    .user-item,
-    .download-item {
+    .software-item, .article-item, .user-item,
+    .download-item, .message-item {
       border: 1px solid #e5e7eb;
       padding: 18px;
       border-radius: 10px;
-      margin-bottom: 15px;
-      background: #fff;
+      background: white;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
-    .software-item h3,
-    .article-item h3,
-    .download-item h3 {
+    .software-item h3, .article-item h3,
+    .download-item h3, .message-item h3 {
       margin-top: 0;
       margin-bottom: 8px;
     }
 
-    .category {
+    .category, .download-meta {
       color: #6b7280;
       font-size: 14px;
-      margin-bottom: 8px;
+      line-height: 1.7;
     }
 
     .views {
@@ -262,16 +203,8 @@
       font-weight: bold;
     }
 
-    .download-meta {
-      color: #6b7280;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .premium-badge,
-    .free-badge,
-    .published-badge,
-    .draft-badge {
+    .premium-badge, .free-badge,
+    .published-badge, .draft-badge {
       display: inline-block;
       padding: 4px 8px;
       border-radius: 5px;
@@ -279,28 +212,11 @@
       margin-bottom: 10px;
     }
 
-    .premium-badge {
-      background: #111;
-      color: white;
-    }
+    .premium-badge { background: #111; color: white; }
+    .free-badge, .published-badge { background: #e8f5e9; color: #2e7d32; }
+    .draft-badge { background: #fff3cd; color: #856404; }
 
-    .free-badge {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
-
-    .published-badge {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
-
-    .draft-badge {
-      background: #fff3cd;
-      color: #856404;
-    }
-
-    .premium-option,
-    .published-option {
+    .premium-option, .published-option {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -308,17 +224,16 @@
       font-weight: bold;
     }
 
-    .premium-option input,
-    .published-option input {
+    .premium-option input, .published-option input {
       width: auto;
       margin: 0;
     }
 
-    #software-message,
-    #article-message {
+    #software-message, #article-message, #messages-status {
       margin-top: 10px;
       font-weight: bold;
       min-height: 20px;
+      overflow-wrap: anywhere;
     }
 
     .article-preview {
@@ -327,33 +242,53 @@
       max-height: 120px;
       overflow: hidden;
       margin-bottom: 12px;
+      overflow-wrap: anywhere;
     }
 
-    .user-item strong {
-      display: block;
-      margin-bottom: 6px;
+    .user-item strong { display: block; margin-bottom: 6px; }
+    .user-date { color: #666; font-size: 13px; }
+    .empty-message { color: #6b7280; padding: 10px 0; }
+
+    #software-list, #articles-list, #users-list,
+    #downloads-list, #messages-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      align-items: start;
     }
 
-    .user-date {
-      color: #666;
-      font-size: 13px;
+    body.dark-mode { background: #0b1120; color: #e5e7eb; }
+
+    body.dark-mode .box,
+    body.dark-mode .stat-card,
+    body.dark-mode .software-item,
+    body.dark-mode .article-item,
+    body.dark-mode .user-item,
+    body.dark-mode .download-item,
+    body.dark-mode .message-item {
+      background: #172033;
+      color: #e5e7eb;
+      border-color: #334155;
     }
 
-    .empty-message {
-      color: #6b7280;
-      padding: 10px 0;
+    body.dark-mode input,
+    body.dark-mode textarea,
+    body.dark-mode select {
+      background: #0f172a;
+      color: #e5e7eb;
+      border-color: #475569;
     }
+
+    body.dark-mode .article-preview,
+    body.dark-mode .views,
+    body.dark-mode .user-date { color: #cbd5e1; }
 
     @media (max-width: 1100px) {
-      .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 900px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 700px) {
@@ -364,2129 +299,1044 @@
         padding: 18px;
       }
 
-      .brand {
-        margin-bottom: 15px;
-      }
-
-      .main {
-        margin-left: 0;
-        padding: 18px;
-      }
-
-      .sidebar-title {
-        display: none;
-      }
-
-      .nav-link {
-        display: inline-block;
-        margin-right: 4px;
-      }
-
-      .logout-side {
-        width: auto;
-        margin-top: 5px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 25px;
-      }
-
-      .box {
-        padding: 18px;
-      }
+      .brand { margin-bottom: 15px; }
+      .main { margin-left: 0; padding: 18px; }
+      .sidebar-title { display: none; }
+      .nav-link { display: inline-block; margin-right: 4px; }
+      .logout-side { width: auto; margin-top: 5px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 25px; }
+      .box { padding: 18px; }
     }
 
-/* Dark mode */
-body {
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-.theme-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 9px;
-  padding: 11px 15px;
-  cursor: pointer;
-}
-
-body.dark-mode {
-  background: #0b1120;
-  color: #e5e7eb;
-}
-
-body.dark-mode .main,
-body.dark-mode .container {
-  color: #e5e7eb;
-}
-
-body.dark-mode .box,
-body.dark-mode .stat-card,
-body.dark-mode .software-item,
-body.dark-mode .article-item,
-body.dark-mode .user-item,
-body.dark-mode .download-item {
-  background: #172033;
-  color: #e5e7eb;
-  border-color: #334155;
-}
-
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode select {
-  background: #0f172a;
-  color: #e5e7eb;
-  border-color: #475569;
-}
-/* Organize all admin lists into responsive cards */
-#software-list,
-#articles-list,
-#users-list,
-#downloads-list,
-#messages-list {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-gap: 16px;
-align-items: start;
-}
-
-/* Software and books */
-#software-list .software-item,
-
-/* Articles */
-#articles-list .article-item,
-
-/* Users */
-#users-list .user-item,
-
-/* Download history */
-#downloads-list .download-item,
-
-/* Contact messages */
-#messages-list .box {
-min-width: 0;
-margin-bottom: 0;
-box-sizing: border-box;
-overflow-wrap: anywhere;
-}
-
-/* Article preview */
-.article-preview {
-white-space: pre-line;
-overflow-wrap: anywhere;
-}
-
-/* Mobile layout */
-@media (max-width: 600px) {
-#software-list,
-#articles-list,
-#users-list,
-#downloads-list,
-#messages-list {
-grid-template-columns: 1fr;
-}
-}
-
-</style>
-
+    @media (max-width: 600px) {
+      #software-list, #articles-list, #users-list,
+      #downloads-list, #messages-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-
 <aside class="sidebar">
-
-  <div class="brand">
-    Kali<span>Moh</span>
-  </div>
+  <div class="brand">Kali<span>Moh</span></div>
 
   <div class="sidebar-title">Dashboard</div>
+  <a href="#dashboard" class="nav-link">🏠 Dashboard</a>
+  <a href="#users" class="nav-link">👥 Users</a>
+  <a href="#software" class="nav-link">💻 Software</a>
+  <a href="#articles" class="nav-link">📝 Articles</a>
+  <a href="#views" class="nav-link">👁️ Views</a>
+  <a href="#downloads" class="nav-link">📥 Downloads</a>
+  <a href="#messages" class="nav-link">📩 Messages</a>
 
-<a href="#dashboard" class="nav-link">🏠 Dashboard</a> <a href="#users" class="nav-link">👥 Users</a> <a href="#software" class="nav-link">💻 Software</a> <a href="#articles" class="nav-link">📝 Articles</a> <a href="#views" class="nav-link">👁️ Views</a> <a href="#downloads" class="nav-link">📥 Downloads</a>
-<a href="#messages" class="nav-link">📩 Messages</a>
   <div class="sidebar-title">Website</div>
-
-<a href="index.html" class="nav-link">🌐 View Site</a>
-
-<button
-type="button"
-class="logout-side"
-id="logout-btn"
-
->
-
-
-Logout
-
-
-  </button>
-
+  <a href="index.html" class="nav-link">🌐 View Site</a>
+  <button type="button" class="logout-side" id="logout-btn">Logout</button>
 </aside>
 
 <main class="main">
-
-  <div class="container">
-
-```
-<div class="top-bar">
-
-  <div>
-    <h1>Bexo Admin Panel</h1>
-    <div id="auth-status"></div>
+<div class="container">
+  <div class="top-bar">
+    <div>
+      <h1>Bexo Admin Panel</h1>
+      <div id="auth-status"></div>
+    </div>
+    <a href="index.html" class="home-btn">View Site</a>
+    <button type="button" class="theme-btn" id="theme-toggle">🌙 الوضع الليلي</button>
   </div>
-  <a href="index.html" class="home-btn">
-    View Site
-  </a>
 
-  <button type="button" class="theme-btn" id="theme-toggle">
-    🌙 الوضع الليلي
-  </button>
+  <section id="dashboard">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">👥 Total Users</div><div id="total-users" class="stats-number">Loading...</div></div>
+      <div class="stat-card"><div class="stat-label">💻 Software</div><div id="total-software" class="stats-number">Loading...</div></div>
+      <div class="stat-card"><div class="stat-label">📝 Articles</div><div id="total-articles" class="stats-number">Loading...</div></div>
+      <div class="stat-card"><div class="stat-label">👁️ Article Views</div><div id="total-article-views" class="stats-number">Loading...</div></div>
+      <div class="stat-card"><div class="stat-label">📥 Total Downloads</div><div id="total-downloads" class="stats-number">Loading...</div></div>
+    </div>
+  </section>
 
+  <section id="software">
+    <div class="box">
+      <h2 id="form-title">Add Software</h2>
+      <form id="software-form">
+        <input type="text" id="title" placeholder="Software title" required>
+        <textarea id="description" placeholder="Description"></textarea>
+        <input type="url" id="download_url" placeholder="Download URL">
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option value="Windows">🪟 Windows</option>
+          <option value="Linux">🐧 Linux</option>
+          <option value="Android">📱 Android</option>
+          <option value="Tools">🛠️ Tools</option>
+          <option value="Books">📚 Books</option>
+        </select>
+        <input type="url" id="image_url" placeholder="Image URL">
+        <label class="premium-option"><input type="checkbox" id="is_premium"> Premium Software 🔒</label>
+        <button type="submit" class="save-btn" id="save-btn">Add Software</button>
+        <button type="button" class="cancel-btn" id="cancel-btn" style="display:none">Cancel Edit</button>
+      </form>
+      <div id="software-message"></div>
+    </div>
+    <div class="box"><h2>Software List</h2><div id="software-list">Loading...</div></div>
+  </section>
+
+  <section id="articles">
+    <div class="box">
+      <h2 id="article-form-title">Add Article</h2>
+      <form id="article-form">
+        <input type="text" id="article-title" placeholder="Article title" required>
+        <textarea id="article-description" placeholder="Short description"></textarea>
+        <textarea id="article-content" placeholder="Article content" required></textarea>
+        <input type="text" id="article-category" placeholder="Category">
+        <input type="url" id="article-image" placeholder="Image URL">
+        <label class="published-option"><input type="checkbox" id="article-published" checked> Published</label>
+        <button type="submit" class="save-btn" id="article-save-btn">Add Article</button>
+        <button type="button" class="cancel-btn" id="article-cancel-btn" style="display:none">Cancel Edit</button>
+      </form>
+      <div id="article-message"></div>
+    </div>
+    <div class="box"><h2>Articles List</h2><div id="articles-list">Loading...</div></div>
+  </section>
+
+  <section id="users"><div class="box"><h2>👥 Users</h2><div id="users-list">Loading...</div></div></section>
+  <section id="views"><div class="box"><h2>👁️ Article Views</h2><div id="views-total-display" class="stats-number">Loading...</div></div></section>
+  <section id="downloads">
+    <div class="box">
+      <h2>📥 Download History</h2>
+      <button type="button" class="edit-btn" id="refresh-downloads-btn">🔄 Refresh Downloads</button>
+      <div id="downloads-list">Loading...</div>
+    </div>
+  </section>
+  <section id="messages">
+    <div class="box">
+      <h2>📩 Contact Messages</h2>
+      <button type="button" class="edit-btn" id="refresh-messages-btn">🔄 Refresh Messages</button>
+      <div id="messages-status"></div>
+      <div id="messages-list">Loading...</div>
+    </div>
+  </section>
 </div>
-
-
-
-<section id="dashboard">
-
-  <div class="stats-grid">
-
-    <div class="stat-card">
-      <div class="stat-label">
-        👥 Total Users
-      </div>
-
-      <div id="total-users" class="stats-number">
-        Loading...
-      </div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-label">
-        💻 Software
-      </div>
-
-      <div id="total-software" class="stats-number">
-        Loading...
-      </div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-label">
-        📝 Articles
-      </div>
-
-      <div id="total-articles" class="stats-number">
-        Loading...
-      </div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-label">
-        👁️ Article Views
-      </div>
-
-      <div id="total-article-views" class="stats-number">
-        Loading...
-      </div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-label">
-        📥 Total Downloads
-      </div>
-
-      <div id="total-downloads" class="stats-number">
-        Loading...
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-<section id="software">
-
-  <div class="box">
-
-    <h2 id="form-title">
-      Add Software
-    </h2>
-
-    <form id="software-form">
-
-      <input
-        type="text"
-        id="title"
-        placeholder="Software title"
-        required
-      >
-
-      <textarea
-        id="description"
-        placeholder="Description"
-      ></textarea>
-
-      <input
-        type="url"
-        id="download_url"
-        placeholder="Download URL"
-      >
-
-      <select id="category" required>
-        <option value="">Select Category</option>
-        <option value="Windows">🪟 Windows</option>
-        <option value="Linux">🐧 Linux</option>
-        <option value="Android">📱 Android</option>
-        <option value="Tools">🛠️ Tools</option>
-        <option value="Books">📚 Books</option>
-      </select>
-
-      <input
-        type="url"
-        id="image_url"
-        placeholder="Image URL"
-      >
-
-      <label class="premium-option">
-        <input
-          type="checkbox"
-          id="is_premium"
-        >
-        Premium Software 🔒
-      </label>
-
-      <button
-        type="submit"
-        class="save-btn"
-        id="save-btn"
-      >
-        Add Software
-      </button>
-
-      <button
-        type="button"
-        class="cancel-btn"
-        id="cancel-btn"
-        style="display: none;"
-      >
-        Cancel Edit
-      </button>
-
-    </form>
-
-    <div id="software-message"></div>
-
-  </div>
-
-  <div class="box">
-
-    <h2>Software List</h2>
-
-    <div id="software-list">
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-
-<section id="articles">
-
-  <div class="box">
-
-    <h2 id="article-form-title">
-      Add Article
-    </h2>
-
-    <form id="article-form">
-
-      <input
-        type="text"
-        id="article-title"
-        placeholder="Article title"
-        required
-      >
-
-      <textarea
-        id="article-description"
-        placeholder="Short description"
-      ></textarea>
-
-      <textarea
-        id="article-content"
-        placeholder="Article content"
-        required
-      ></textarea>
-
-      <input
-        type="text"
-        id="article-category"
-        placeholder="Category"
-      >
-
-      <input
-        type="url"
-        id="article-image"
-        placeholder="Image URL"
-      >
-
-      <label class="published-option">
-
-        <input
-          type="checkbox"
-          id="article-published"
-          checked
-        >
-
-        Published
-
-      </label>
-
-      <button
-        type="submit"
-        class="save-btn"
-        id="article-save-btn"
-      >
-        Add Article
-      </button>
-
-      <button
-        type="button"
-        class="cancel-btn"
-        id="article-cancel-btn"
-        style="display: none;"
-      >
-        Cancel Edit
-      </button>
-
-    </form>
-
-    <div id="article-message"></div>
-
-  </div>
-
-  <div class="box">
-
-    <h2>Articles List</h2>
-
-    <div id="articles-list">
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-
-<section id="users">
-
-  <div class="box">
-
-    <h2>👥 Users</h2>
-
-    <div id="users-list">
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-
-<section id="views">
-
-  <div class="box">
-
-    <h2>👁️ Article Views</h2>
-
-    <div
-      id="views-total-display"
-      class="stats-number"
-    >
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-
-<section id="downloads">
-
-  <div class="box">
-
-    <h2>📥 Download History</h2>
-
-    <div id="downloads-list">
-      Loading...
-    </div>
-
-  </div>
-
-</section>
-<section id="messages">
-  <div class="box">
-    <h2>📩 Contact Messages</h2>
-
-    <button
-      type="button"
-      class="edit-btn"
-      id="refresh-messages-btn"
-    >
-      🔄 Refresh Messages
-    </button>
-
-    <div id="messages-status"></div>
-    <div id="messages-list">
-      Loading...
-    </div>
-  </div>
-</section>
-
-
-  </div>
-
 </main>
 
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+"use strict";
 
-  const SUPABASE_URL =
-    "https://ulxreyrjtavflppahqlp.supabase.co";
+/* إعداد Supabase */
+const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-  const SUPABASE_KEY =
-    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+let currentUser = null;
+let editingSoftwareId = null;
+let editingArticleId = null;
 
+/* أدوات مساعدة */
+const $ = (id) => document.getElementById(id);
 
-  const totalUsers =
-    document.getElementById("total-users");
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
 
-  const totalSoftware =
-    document.getElementById("total-software");
+function showMessage(id, message, isError = false) {
+  const element = $(id);
+  if (!element) return;
+  element.textContent = message;
+  element.style.color = isError ? "#ef4444" : "#22c55e";
+}
 
-  const totalArticles =
-    document.getElementById("total-articles");
+function formatDate(value) {
+  if (!value) return "غير محدد";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? escapeHTML(value)
+    : escapeHTML(date.toLocaleString("ar-DZ"));
+}
 
-  const totalArticleViews =
-    document.getElementById(
-      "total-article-views"
-    );
+function confirmDelete(message) {
+  return window.confirm(message);
+}
 
-  const totalDownloads =
-    document.getElementById(
-      "total-downloads"
-    );
+/* التحقق من صلاحيات الأدمن */
+async function checkAuth() {
+  const status = $("auth-status");
 
-  const viewsTotalDisplay =
-    document.getElementById(
-      "views-total-display"
-    );
+  try {
+    const { data: sessionData, error: sessionError } =
+      await db.auth.getSession();
 
-  const downloadsList =
-    document.getElementById(
-      "downloads-list"
-    );
+    if (sessionError) throw sessionError;
 
+    const session = sessionData.session;
 
-  async function loadDashboardStats() {
-
-    const usersResult =
-      await supabaseClient
-        .from("profiles")
-        .select("id", {
-          count: "exact",
-          head: true
-        });
-
-    if (usersResult.error) {
-      totalUsers.textContent = "0";
-    } else {
-      totalUsers.textContent =
-        usersResult.count || 0;
+    if (!session) {
+      window.location.href = "admin-login.html";
+      return;
     }
 
+    currentUser = session.user;
 
-    const softwareResult =
-      await supabaseClient
-        .from("software")
-        .select("id", {
-          count: "exact",
-          head: true
-        });
+    const { data: isAdmin, error: adminError } =
+      await db.rpc("is_admin");
 
-    if (softwareResult.error) {
-      totalSoftware.textContent = "0";
-    } else {
-      totalSoftware.textContent =
-        softwareResult.count || 0;
-    }
-
-
-    const articlesResult =
-      await supabaseClient
-        .from("articles")
-        .select("id", {
-          count: "exact",
-          head: true
-        });
-
-    if (articlesResult.error) {
-      totalArticles.textContent = "0";
-    } else {
-      totalArticles.textContent =
-        articlesResult.count || 0;
-    }
-
-
-    const downloadsResult =
-      await supabaseClient
-        .from("download_logs")
-        .select("id", {
-          count: "exact",
-          head: true
-        });
-
-    if (downloadsResult.error) {
-
-      console.error(
-        "Downloads count error:",
-        downloadsResult.error
-      );
-
-      totalDownloads.textContent =
-        "0";
-
-    } else {
-
-      totalDownloads.textContent =
-        downloadsResult.count || 0;
-
-    }
-
-  }
-
-
-  async function getArticleViewCount(
-    articleId
-  ) {
-
-    const {
-      data,
-      error
-    } = await supabaseClient.rpc(
-      "get_article_view_count",
-      {
-        p_article_id: articleId
+    if (adminError) {
+      console.error("Admin verification error:", adminError);
+      if (status) {
+        status.textContent =
+          "تعذر التحقق من صلاحيات الأدمن. تحقق من إعدادات Supabase.";
       }
-    );
-
-    if (error) {
-
-      console.error(
-        "View count error:",
-        error
-      );
-
-      return 0;
+      return;
     }
 
-    return Number(data || 0);
+    if (isAdmin !== true) {
+      await db.auth.signOut();
+      window.location.href = "admin-login.html";
+      return;
+    }
 
+    if (status) {
+      status.textContent = "تم تسجيل الدخول بصلاحيات الأدمن";
+    }
+
+    await loadDashboard();
+  } catch (error) {
+    console.error(error);
+    if (status) status.textContent = "حدث خطأ أثناء التحقق من الدخول.";
   }
+}
 
+/* تسجيل الخروج */
+$("logout-btn")?.addEventListener("click", async () => {
+  const { error } = await db.auth.signOut();
 
-async function loadTotalArticleViews() {
-  totalArticleViews.textContent = "Loading...";
-  viewsTotalDisplay.textContent = "Loading...";
-
-  const { data: articles, error: articlesError } =
-    await supabaseClient
-      .from("articles")
-      .select("id");
-
-  if (articlesError) {
-    console.error("Articles loading error:", articlesError);
-    totalArticleViews.textContent = "Unable to load";
-    viewsTotalDisplay.textContent = "Unable to load views.";
+  if (error) {
+    alert("تعذر تسجيل الخروج: " + error.message);
     return;
   }
 
-  let total = 0;
+  window.location.href = "admin-login.html";
+});
 
-  for (const article of (articles || [])) {
-    const { data, error } = await supabaseClient.rpc(
+/* الوضع الليلي */
+const themeToggle = $("theme-toggle");
+
+if (themeToggle) {
+  const savedTheme = localStorage.getItem("kalimoh-admin-theme");
+
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    localStorage.setItem(
+      "kalimoh-admin-theme",
+      document.body.classList.contains("dark-mode") ? "dark" : "light"
+    );
+  });
+}
+
+/* تحميل جميع بيانات لوحة التحكم */
+async function loadDashboard() {
+  await Promise.allSettled([
+    loadStats(),
+    loadSoftware(),
+    loadArticles(),
+    loadUsers(),
+    loadDownloadHistory(),
+    loadMessages(),
+    loadArticleViews()
+  ]);
+}
+
+/* إحصائيات لوحة التحكم */
+async function loadStats() {
+  const tables = [
+    ["profiles", "total-users"],
+    ["software", "total-software"],
+    ["articles", "total-articles"],
+    ["download_logs", "total-downloads"]
+  ];
+
+  for (const [table, elementId] of tables) {
+    const { count, error } = await db
+      .from(table)
+      .select("*", { count: "exact", head: true });
+
+    if (!error && $(elementId)) {
+      $(elementId).textContent = count ?? 0;
+    } else if (error) {
+      console.error("Stats error:", table, error);
+    }
+  }
+
+  const { data: articles, error } = await db
+    .from("articles")
+    .select("id");
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  let totalViews = 0;
+
+  for (const article of articles || []) {
+    const { data, error: viewError } = await db.rpc(
       "get_article_view_count",
       { p_article_id: article.id }
     );
 
-    if (error) {
-      console.error(
-        "View count error for article:",
-        article.id,
-        error
-      );
-      totalArticleViews.textContent = "Unable to load";
-      viewsTotalDisplay.textContent = "Unable to load views.";
-      return;
+    if (!viewError) {
+      const count = Number(data);
+      if (Number.isFinite(count)) totalViews += count;
     }
-
-    total += Number(data || 0);
   }
 
-  totalArticleViews.textContent = total;
-  viewsTotalDisplay.textContent =
-    "👁 " + total + (total === 1 ? " View" : " Views");
+  if ($("total-article-views")) {
+    $("total-article-views").textContent = totalViews;
+  }
+
+  if ($("views-total-display")) {
+    $("views-total-display").textContent = totalViews;
+  }
 }
-  async function loadDownloadHistory() {
 
-    downloadsList.textContent =
-      "Loading...";
+/* =========================
+   SOFTWARE
+========================= */
 
+function resetSoftwareForm() {
+  $("software-form")?.reset();
+  editingSoftwareId = null;
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("download_logs")
-        .select(
-          "id, software_id, user_id, created_at"
-        )
-        .order("created_at", {
-          ascending: false
-        });
+  if ($("form-title")) $("form-title").textContent = "إضافة برنامج";
+  if ($("save-btn")) $("save-btn").textContent = "حفظ البرنامج";
+  if ($("cancel-btn")) $("cancel-btn").style.display = "none";
+}
 
+async function loadSoftware() {
+  const container = $("software-list");
+  if (!container) return;
 
-    if (error) {
+  container.innerHTML = "<p>جاري تحميل البرامج...</p>";
 
-      console.error(
-        "Download history error:",
-        error
-      );
+  const { data, error } = await db
+    .from("software")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-      downloadsList.textContent =
-        "Error loading download history.";
+  if (error) {
+    console.error(error);
+    container.textContent = "تعذر تحميل البرامج: " + error.message;
+    return;
+  }
 
-      return;
-    }
+  container.innerHTML = "";
 
+  if (!data?.length) {
+    container.innerHTML = "<p>لا توجد برامج حاليا.</p>";
+    return;
+  }
 
-    downloadsList.innerHTML = "";
+  data.forEach((item) => {
+    const card = document.createElement("div");
+    card.className = "box software-item";
 
+    card.innerHTML = `
+      <h3>${escapeHTML(item.title)}</h3>
+      <p>${escapeHTML(item.description || "")}</p>
+      <p>التصنيف: ${escapeHTML(item.category || "غير محدد")}</p>
+      <p>${item.is_premium ? "برنامج مدفوع" : "برنامج مجاني"}</p>
+      <div class="item-actions">
+        <button type="button" class="edit-btn">تعديل</button>
+        <button type="button" class="delete-btn">حذف</button>
+      </div>
+    `;
 
-    if (!data || data.length === 0) {
+    card.querySelector(".edit-btn").addEventListener("click", () => {
+      editingSoftwareId = item.id;
 
-      downloadsList.innerHTML =
-        '<div class="empty-message">No downloads recorded yet.</div>';
+      $("title").value = item.title || "";
+      $("description").value = item.description || "";
+      $("download_url").value = item.download_url || "";
+      $("category").value = item.category || "";
+      $("image_url").value = item.image_url || "";
+      $("is_premium").checked = Boolean(item.is_premium);
 
-      return;
-    }
+      if ($("form-title")) $("form-title").textContent = "تعديل البرنامج";
+      if ($("save-btn")) $("save-btn").textContent = "حفظ التعديلات";
+      if ($("cancel-btn")) $("cancel-btn").style.display = "inline-block";
 
-
-    const softwareIds = [
-      ...new Set(
-        data
-          .map((log) => log.software_id)
-          .filter(Boolean)
-      )
-    ];
-
-
-    const userIds = [
-      ...new Set(
-        data
-          .map((log) => log.user_id)
-          .filter(Boolean)
-      )
-    ];
-
-
-    let softwareMap = {};
-    let userMap = {};
-
-
-    if (softwareIds.length > 0) {
-
-      const {
-        data: softwareData,
-        error: softwareError
-      } =
-        await supabaseClient
-          .from("software")
-          .select("id, title")
-          .in(
-            "id",
-            softwareIds
-          );
-
-
-      if (!softwareError && softwareData) {
-
-        softwareData.forEach((software) => {
-
-          softwareMap[
-            String(software.id)
-          ] =
-            software.title ||
-            "Unknown software";
-
-        });
-
-      }
-
-    }
-
-
-    if (userIds.length > 0) {
-
-      const {
-        data: usersData,
-        error: usersError
-      } =
-        await supabaseClient
-          .from("profiles")
-          .select("id, email")
-          .in(
-            "id",
-            userIds
-          );
-
-
-      if (!usersError && usersData) {
-
-        usersData.forEach((user) => {
-
-          userMap[
-            String(user.id)
-          ] =
-            user.email ||
-            "Unknown user";
-
-        });
-
-      }
-
-    }
-
-
-    data.forEach((log) => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "download-item";
-
-
-      const title =
-        document.createElement("h3");
-
-      title.textContent =
-        softwareMap[
-          String(log.software_id)
-        ] ||
-        "Unknown software";
-
-
-      const meta =
-        document.createElement("div");
-
-      meta.className =
-        "download-meta";
-
-
-      const userEmail =
-        userMap[
-          String(log.user_id)
-        ] ||
-        "Unknown user";
-
-
-      const downloadDate =
-        log.created_at
-          ? new Date(
-              log.created_at
-            ).toLocaleString()
-          : "Unknown date";
-
-
-      meta.innerHTML =
-        "👤 " +
-        escapeHtml(userEmail) +
-        "<br>" +
-        "🕒 " +
-        escapeHtml(downloadDate);
-
-
-      item.appendChild(title);
-      item.appendChild(meta);
-
-      downloadsList.appendChild(item);
-
+      $("software-form")?.scrollIntoView({ behavior: "smooth" });
     });
 
-  }
-
-
-  function escapeHtml(value) {
-
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-
-  }
-
-  async function loadMessages() {
-    const list = document.getElementById("messages-list");
-    const status = document.getElementById("messages-status");
-
-    list.textContent = "Loading messages...";
-    status.textContent = "";
-
-    const { data, error } = await supabaseClient
-      .from("contact_messages")
-      .select("id, name, email, message, created_at")
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Messages error:", error);
-      list.textContent = "Unable to load messages.";
-      status.textContent = error.message;
-      return;
-    }
-
-    list.replaceChildren();
-
-    if (!data || data.length === 0) {
-      list.textContent = "No messages yet.";
-      status.textContent = "";
-      return;
-    }
-
-    data.forEach((msg) => {
-      const card = document.createElement("div");
-      card.className = "box";
-
-      const name = document.createElement("h3");
-      name.textContent = msg.name || "Unknown";
-
-      const email = document.createElement("p");
-      email.textContent = "Email: " + (msg.email || "");
-
-      const message = document.createElement("p");
-      message.textContent = msg.message || "";
-      message.style.whiteSpace = "pre-wrap";
-
-      const date = document.createElement("small");
-      date.textContent = msg.created_at
-        ? new Date(msg.created_at).toLocaleString()
-        : "";
-
-      card.append(name, email, message, date);
-      list.appendChild(card);
-    });
-
-    status.textContent = data.length + " message(s)";
-  }
-
-  document
-    .getElementById("refresh-messages-btn")
-    .addEventListener("click", loadMessages);
-
-  let editingId = null;
-
-  const softwareForm =
-    document.getElementById(
-      "software-form"
-    );
-
-  const titleInput =
-    document.getElementById("title");
-
-  const descriptionInput =
-    document.getElementById(
-      "description"
-    );
-
-  const downloadInput =
-    document.getElementById(
-      "download_url"
-    );
-
-  const categoryInput =
-    document.getElementById(
-      "category"
-    );
-
-  const imageInput =
-    document.getElementById(
-      "image_url"
-    );
-
-  const premiumInput =
-    document.getElementById(
-      "is_premium"
-    );
-
-  const saveBtn =
-    document.getElementById(
-      "save-btn"
-    );
-
-  const cancelBtn =
-    document.getElementById(
-      "cancel-btn"
-    );
-
-  const formTitle =
-    document.getElementById(
-      "form-title"
-    );
-
-  const softwareList =
-    document.getElementById(
-      "software-list"
-    );
-
-  const softwareMessage =
-    document.getElementById(
-      "software-message"
-    );
-
-
-  function showSoftwareMessage(
-    text,
-    success = true
-  ) {
-
-    softwareMessage.textContent =
-      text;
-
-    softwareMessage.style.color =
-      success ? "green" : "red";
-  }
-
-
-  function clearSoftwareForm() {
-
-    softwareForm.reset();
-
-    editingId = null;
-
-    formTitle.textContent =
-      "Add Software";
-
-    saveBtn.textContent =
-      "Add Software";
-
-    cancelBtn.style.display =
-      "none";
-  }
-
-
-  async function loadSoftware() {
-
-    softwareList.textContent =
-      "Loading...";
-
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("software")
-      .select("*")
-      .order("created_at", {
-        ascending: false
-      });
-
-
-    if (error) {
-
-      console.error(error);
-
-      softwareList.textContent =
-        "Error loading software.";
-
-      return;
-    }
-
-
-    softwareList.innerHTML = "";
-
-
-    if (!data || data.length === 0) {
-
-      softwareList.textContent =
-        "No software added yet.";
-
-      return;
-    }
-
-
-    data.forEach((software) => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "software-item";
-
-
-      const title =
-        document.createElement("h3");
-
-      title.textContent =
-        software.title || "";
-
-
-      const category =
-        document.createElement("div");
-
-      category.className =
-        "category";
-
-      category.textContent =
-        software.category ||
-        "Software";
-
-
-      const description =
-        document.createElement("p");
-
-      description.textContent =
-        software.description || "";
-
-
-      const badge =
-        document.createElement("div");
-
-
-      if (software.is_premium) {
-
-        badge.className =
-          "premium-badge";
-
-        badge.textContent =
-          "🔒 Premium";
-
-      } else {
-
-        badge.className =
-          "free-badge";
-
-        badge.textContent =
-          "🟢 Free";
-      }
-
-
-      const editButton =
-        document.createElement("button");
-
-      editButton.type = "button";
-
-      editButton.textContent =
-        "Edit";
-
-      editButton.className =
-        "edit-btn";
-
-
-      editButton.onclick = () => {
-
-        editingId =
-          software.id;
-
-        titleInput.value =
-          software.title || "";
-
-        descriptionInput.value =
-          software.description || "";
-
-        downloadInput.value =
-          software.download_url || "";
-
-        categoryInput.value =
-          software.category || "";
-
-        imageInput.value =
-          software.image_url || "";
-
-        premiumInput.checked =
-          software.is_premium === true;
-
-
-        formTitle.textContent =
-          "Edit Software";
-
-        saveBtn.textContent =
-          "Update Software";
-
-        cancelBtn.style.display =
-          "inline-block";
-
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      };
-
-
-      const deleteButton =
-        document.createElement("button");
-
-      deleteButton.type = "button";
-
-      deleteButton.textContent =
-        "Delete";
-
-      deleteButton.className =
-        "delete-btn";
-
-
-      deleteButton.onclick =
-        async () => {
-
-          const confirmed =
-            confirm(
-              "Delete " +
-              (software.title ||
-                "this software") +
-              "?"
-            );
-
-
-          if (!confirmed) {
-            return;
-          }
-
-
-          deleteButton.disabled =
-            true;
-
-          deleteButton.textContent =
-            "Deleting...";
-
-
-          const {
-            error
-          } = await supabaseClient
-            .from("software")
-            .delete()
-            .eq(
-              "id",
-              software.id
-            );
-
-
-          if (error) {
-
-            console.error(error);
-
-            showSoftwareMessage(
-              error.message ||
-              "Delete failed.",
-              false
-            );
-
-            deleteButton.disabled =
-              false;
-
-            deleteButton.textContent =
-              "Delete";
-
-            return;
-          }
-
-
-          showSoftwareMessage(
-            "Software deleted."
-          );
-
-          await loadSoftware();
-          await loadDashboardStats();
-          await loadDownloadHistory();
-
-        };
-
-
-      item.appendChild(title);
-      item.appendChild(category);
-      item.appendChild(badge);
-      item.appendChild(description);
-      item.appendChild(editButton);
-      item.appendChild(deleteButton);
-
-      softwareList.appendChild(item);
-
-    });
-
-  }
-
-
-  softwareForm.addEventListener(
-    "submit",
-    async (event) => {
-
-      event.preventDefault();
-
-
-      const softwareData = {
-
-        title:
-          titleInput.value.trim(),
-
-        description:
-          descriptionInput.value.trim(),
-
-        download_url:
-          downloadInput.value.trim(),
-
-        category:
-          categoryInput.value.trim(),
-
-        image_url:
-          imageInput.value.trim(),
-
-        is_premium:
-          premiumInput.checked
-
-      };
-
-
-      saveBtn.disabled =
-        true;
-
-      saveBtn.textContent =
-        editingId === null
-          ? "Adding..."
-          : "Updating...";
-
-
-      let result;
-
-
-      if (editingId === null) {
-
-        result =
-          await supabaseClient
-            .from("software")
-            .insert([
-              softwareData
-            ]);
-
-      } else {
-
-        result =
-          await supabaseClient
-            .from("software")
-            .update(
-              softwareData
-            )
-            .eq(
-              "id",
-              editingId
-            );
-      }
-
-
-      if (result.error) {
-
-        console.error(
-          result.error
-        );
-
-        showSoftwareMessage(
-          result.error.message,
-          false
-        );
-
-        saveBtn.disabled =
-          false;
-
-        saveBtn.textContent =
-          editingId === null
-            ? "Add Software"
-            : "Update Software";
-
+    card.querySelector(".delete-btn").addEventListener("click", async () => {
+      if (!confirmDelete(`هل تريد حذف البرنامج "${item.title}"؟`)) return;
+
+      const { error: deleteError } = await db
+        .from("software")
+        .delete()
+        .eq("id", item.id);
+
+      if (deleteError) {
+        alert("تعذر حذف البرنامج: " + deleteError.message);
         return;
       }
-
-
-      showSoftwareMessage(
-        editingId === null
-          ? "Software added successfully."
-          : "Software updated successfully."
-      );
-
-
-      clearSoftwareForm();
 
       await loadSoftware();
-      await loadDashboardStats();
-
-      saveBtn.disabled =
-        false;
-
-    }
-  );
-
-
-  cancelBtn.addEventListener(
-    "click",
-    clearSoftwareForm
-  );
-
-
-  let editingArticleId = null;
-
-  const articleForm =
-    document.getElementById(
-      "article-form"
-    );
-
-  const articleTitleInput =
-    document.getElementById(
-      "article-title"
-    );
-
-  const articleDescriptionInput =
-    document.getElementById(
-      "article-description"
-    );
-
-  const articleContentInput =
-    document.getElementById(
-      "article-content"
-    );
-
-  const articleCategoryInput =
-    document.getElementById(
-      "article-category"
-    );
-
-  const articleImageInput =
-    document.getElementById(
-      "article-image"
-    );
-
-  const articlePublishedInput =
-    document.getElementById(
-      "article-published"
-    );
-
-  const articleSaveBtn =
-    document.getElementById(
-      "article-save-btn"
-    );
-
-  const articleCancelBtn =
-    document.getElementById(
-      "article-cancel-btn"
-    );
-
-  const articleFormTitle =
-    document.getElementById(
-      "article-form-title"
-    );
-
-  const articlesList =
-    document.getElementById(
-      "articles-list"
-    );
-
-  const articleMessage =
-    document.getElementById(
-      "article-message"
-    );
-
-
-  function showArticleMessage(
-    text,
-    success = true
-  ) {
-
-    articleMessage.textContent =
-      text;
-
-    articleMessage.style.color =
-      success ? "green" : "red";
-  }
-
-
-  function clearArticleForm() {
-
-    articleForm.reset();
-
-    articlePublishedInput.checked =
-      true;
-
-    editingArticleId = null;
-
-    articleFormTitle.textContent =
-      "Add Article";
-
-    articleSaveBtn.textContent =
-      "Add Article";
-
-    articleCancelBtn.style.display =
-      "none";
-  }
-
-
-  async function loadArticles() {
-
-    articlesList.textContent =
-      "Loading...";
-
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("articles")
-      .select("*")
-      .order("created_at", {
-        ascending: false
-      });
-
-
-    if (error) {
-
-      console.error(error);
-
-      articlesList.textContent =
-        "Error loading articles.";
-
-      return;
-    }
-
-
-    articlesList.innerHTML = "";
-
-
-    if (!data || data.length === 0) {
-
-      articlesList.textContent =
-        "No articles added yet.";
-
-      return;
-    }
-
-
-    data.forEach((article) => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "article-item";
-
-
-      const title =
-        document.createElement("h3");
-
-      title.textContent =
-        article.title || "";
-
-
-      const category =
-        document.createElement("div");
-
-      category.className =
-        "category";
-
-      category.textContent =
-        article.category ||
-        "Article";
-
-
-      const badge =
-        document.createElement("div");
-
-
-      if (article.is_published) {
-
-        badge.className =
-          "published-badge";
-
-        badge.textContent =
-          "🟢 Published";
-
-      } else {
-
-        badge.className =
-          "draft-badge";
-
-        badge.textContent =
-          "📝 Draft";
-      }
-
-
-      const description =
-        document.createElement("p");
-
-      description.textContent =
-        article.description || "";
-
-
-      const views =
-        document.createElement("div");
-
-      views.className =
-        "views";
-
-      views.textContent =
-        "👁 Loading views...";
-
-
-      const preview =
-        document.createElement("div");
-
-      preview.className =
-        "article-preview";
-
-      preview.textContent =
-        article.content || "";
-
-
-      const editButton =
-        document.createElement("button");
-
-      editButton.type =
-        "button";
-
-      editButton.textContent =
-        "Edit";
-
-      editButton.className =
-        "edit-btn";
-
-
-      editButton.onclick = () => {
-
-        editingArticleId =
-          article.id;
-
-
-        articleTitleInput.value =
-          article.title || "";
-
-        articleDescriptionInput.value =
-          article.description || "";
-
-        articleContentInput.value =
-          article.content || "";
-
-        articleCategoryInput.value =
-          article.category || "";
-
-        articleImageInput.value =
-          article.image_url || "";
-
-        articlePublishedInput.checked =
-          article.is_published === true;
-
-
-        articleFormTitle.textContent =
-          "Edit Article";
-
-        articleSaveBtn.textContent =
-          "Update Article";
-
-        articleCancelBtn.style.display =
-          "inline-block";
-
-
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth"
-        });
-
-      };
-
-
-      const deleteButton =
-        document.createElement("button");
-
-      deleteButton.type =
-        "button";
-
-      deleteButton.textContent =
-        "Delete";
-
-      deleteButton.className =
-        "delete-btn";
-
-
-      deleteButton.onclick =
-        async () => {
-
-          const confirmed =
-            confirm(
-              "Delete " +
-              (article.title ||
-                "this article") +
-              "?"
-            );
-
-
-          if (!confirmed) {
-            return;
-          }
-
-
-          deleteButton.disabled =
-            true;
-
-          deleteButton.textContent =
-            "Deleting...";
-
-
-          const {
-            error
-          } = await supabaseClient
-            .from("articles")
-            .delete()
-            .eq(
-              "id",
-              article.id
-            );
-
-
-          if (error) {
-
-            console.error(error);
-
-            showArticleMessage(
-              error.message ||
-              "Delete failed.",
-              false
-            );
-
-            deleteButton.disabled =
-              false;
-
-            deleteButton.textContent =
-              "Delete";
-
-            return;
-          }
-
-
-          showArticleMessage(
-            "Article deleted."
-          );
-
-          await loadArticles();
-          await loadTotalArticleViews();
-          await loadDashboardStats();
-
-        };
-
-
-      item.appendChild(title);
-      item.appendChild(category);
-      item.appendChild(badge);
-      item.appendChild(description);
-      item.appendChild(views);
-      item.appendChild(preview);
-      item.appendChild(editButton);
-      item.appendChild(deleteButton);
-
-
-      articlesList.appendChild(item);
-
-
-      getArticleViewCount(
-        article.id
-      ).then((totalViews) => {
-
-        views.textContent =
-          "👁 " +
-          totalViews +
-          (
-            totalViews === 1
-              ? " View"
-              : " Views"
-          );
-
-      });
-
+      await loadStats();
     });
 
-  }
+    container.appendChild(card);
+  });
+}
 
+$("software-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-  articleForm.addEventListener(
-    "submit",
-    async (event) => {
+  const saveButton = $("save-btn");
+  if (saveButton) saveButton.disabled = true;
 
-      event.preventDefault();
+  const payload = {
+    title: $("title").value.trim(),
+    description: $("description").value.trim(),
+    download_url: $("download_url").value.trim(),
+    category: $("category").value,
+    image_url: $("image_url").value.trim() || null,
+    is_premium: $("is_premium").checked
+  };
 
+  try {
+    let result;
 
-      const articleData = {
-
-        title:
-          articleTitleInput.value.trim(),
-
-        description:
-          articleDescriptionInput.value.trim(),
-
-        content:
-          articleContentInput.value.trim(),
-
-        category:
-          articleCategoryInput.value.trim(),
-
-        image_url:
-          articleImageInput.value.trim(),
-
-        is_published:
-          articlePublishedInput.checked
-
-      };
-
-
-      articleSaveBtn.disabled =
-        true;
-
-      articleSaveBtn.textContent =
-        editingArticleId === null
-          ? "Adding..."
-          : "Updating...";
-
-
-      let result;
-
-
-      if (editingArticleId === null) {
-
-        result =
-          await supabaseClient
-            .from("articles")
-            .insert([
-              articleData
-            ]);
-
-      } else {
-
-        result =
-          await supabaseClient
-            .from("articles")
-            .update(
-              articleData
-            )
-            .eq(
-              "id",
-              editingArticleId
-            );
-      }
-
-
-      if (result.error) {
-
-        console.error(
-          result.error
-        );
-
-        showArticleMessage(
-          result.error.message,
-          false
-        );
-
-        articleSaveBtn.disabled =
-          false;
-
-        articleSaveBtn.textContent =
-          editingArticleId === null
-            ? "Add Article"
-            : "Update Article";
-
-        return;
-      }
-
-
-      showArticleMessage(
-        editingArticleId === null
-          ? "Article added successfully."
-          : "Article updated successfully."
-      );
-
-
-      clearArticleForm();
-
-      await loadArticles();
-      await loadTotalArticleViews();
-      await loadDashboardStats();
-
-      articleSaveBtn.disabled =
-        false;
-
-    }
-  );
-
-
-  articleCancelBtn.addEventListener(
-    "click",
-    clearArticleForm
-  );
-
-
-  const usersList =
-    document.getElementById(
-      "users-list"
-    );
-
-
-  async function loadUsers() {
-
-    usersList.textContent =
-      "Loading...";
-
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("profiles")
-      .select(
-        "id, email, created_at"
-      )
-      .order("created_at", {
-        ascending: false
-      });
-
-
-    if (error) {
-
-      console.error(
-        "Users loading error:",
-        error
-      );
-
-      usersList.textContent =
-        "Error loading users.";
-
-      return;
+    if (editingSoftwareId) {
+      result = await db
+        .from("software")
+        .update(payload)
+        .eq("id", editingSoftwareId);
+    } else {
+      result = await db.from("software").insert(payload);
     }
 
+    if (result.error) throw result.error;
 
-    usersList.innerHTML = "";
-
-
-    if (!data || data.length === 0) {
-
-      usersList.textContent =
-        "No users found.";
-
-      return;
-    }
-
-
-    data.forEach((user) => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "user-item";
-
-
-      const email =
-        document.createElement("strong");
-
-      email.textContent =
-        user.email ||
-        "Unknown";
-
-
-      const date =
-        document.createElement("div");
-
-      date.className =
-        "user-date";
-
-      date.textContent =
-        "Registered: " +
-        new Date(
-          user.created_at
-        ).toLocaleString();
-
-
-      item.appendChild(email);
-      item.appendChild(date);
-
-      usersList.appendChild(item);
-
-    });
-
-  }
-
-
-  const authStatus =
-    document.getElementById(
-      "auth-status"
-    );
-
-  const logoutBtn =
-    document.getElementById(
-      "logout-btn"
-    );
-
-
-  logoutBtn.addEventListener(
-    "click",
-    async () => {
-
-      logoutBtn.disabled =
-        true;
-
-      logoutBtn.textContent =
-        "Logging out...";
-
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .auth.signOut();
-
-
-      if (error) {
-
-        console.error(error);
-
-        showArticleMessage(
-          error.message ||
-          "Logout failed.",
-          false
-        );
-
-        logoutBtn.disabled =
-          false;
-
-        logoutBtn.textContent =
-          "Logout";
-
-        return;
-      }
-
-
-      window.location.href =
-        "admin-login.html";
-    }
-  );
-
-
-  /* =========================
-     AUTH + ADMIN PROTECTION
-  ========================= */
-
-  async function checkAuth() {
-
-    const {
-      data: {
-        session
-      }
-    } =
-      await supabaseClient
-        .auth.getSession();
-
-
-    if (!session) {
-
-      window.location.href =
-        "admin-login.html";
-
-      return;
-    }
-
-
-    const {
-      data: isAdmin,
-      error
-    } =
-      await supabaseClient.rpc(
-        "is_admin"
-      );
-
-
-    if (error || !isAdmin) {
-
-      console.error(
-        "Admin verification failed:",
-        error
-      );
-
-      await supabaseClient.auth.signOut();
-
-      alert(
-        "Access denied. Admin account required."
-      );
-
-      window.location.href =
-        "admin-login.html";
-
-      return;
-    }
-
-
-    authStatus.textContent =
-      "Logged in as " +
-      (
-        session.user.email ||
-        "Administrator"
-      );
-
-
-    await loadDashboardStats();
+    showMessage("software-message", "تم حفظ البرنامج بنجاح.");
+    resetSoftwareForm();
     await loadSoftware();
-    await loadArticles();
-    await loadTotalArticleViews();
-    await loadUsers();
-    await loadDownloadHistory();
-    await loadMessages();
+    await loadStats();
+  } catch (error) {
+    console.error(error);
+    showMessage("software-message", "خطأ: " + error.message, true);
+  } finally {
+    if (saveButton) saveButton.disabled = false;
   }
-const themeToggle = document.getElementById("theme-toggle");
+});
 
-function applyTheme(theme) {
-  document.body.classList.toggle("dark-mode", theme === "dark");
+$("cancel-btn")?.addEventListener("click", resetSoftwareForm);
 
-  if (themeToggle) {
-    themeToggle.textContent =
-      theme === "dark" ? "☀️ الوضع النهاري" : "🌙 الوضع الليلي";
+/* =========================
+   ARTICLES
+========================= */
+
+function resetArticleForm() {
+  $("article-form")?.reset();
+  editingArticleId = null;
+
+  if ($("article-form-title")) {
+    $("article-form-title").textContent = "إضافة مقال";
+  }
+
+  if ($("article-save-btn")) {
+    $("article-save-btn").textContent = "حفظ المقال";
+  }
+
+  if ($("article-cancel-btn")) {
+    $("article-cancel-btn").style.display = "none";
   }
 }
 
-const savedTheme =
-  localStorage.getItem("kalimoh-admin-theme") || "light";
+async function loadArticles() {
+  const container = $("articles-list");
+  if (!container) return;
 
-applyTheme(savedTheme);
+  container.innerHTML = "<p>جاري تحميل المقالات...</p>";
 
-themeToggle?.addEventListener("click", () => {
-  const nextTheme = document.body.classList.contains("dark-mode")
-    ? "light"
-    : "dark";
+  const { data, error } = await db
+    .from("articles")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-  localStorage.setItem("kalimoh-admin-theme", nextTheme);
-  applyTheme(nextTheme);
+  if (error) {
+    console.error(error);
+    container.textContent = "تعذر تحميل المقالات: " + error.message;
+    return;
+  }
+
+  container.innerHTML = "";
+
+  if (!data?.length) {
+    container.innerHTML = "<p>لا توجد مقالات حاليا.</p>";
+    return;
+  }
+
+  data.forEach((article) => {
+    const card = document.createElement("div");
+    card.className = "box article-item";
+
+    card.innerHTML = `
+      <h3>${escapeHTML(article.title)}</h3>
+      <p>${escapeHTML(article.description || "")}</p>
+      <p>التصنيف: ${escapeHTML(article.category || "غير محدد")}</p>
+      <p>${article.published ? "منشور" : "غير منشور"}</p>
+      <div class="item-actions">
+        <button type="button" class="edit-btn">تعديل</button>
+        <button type="button" class="delete-btn">حذف</button>
+      </div>
+    `;
+
+    card.querySelector(".edit-btn").addEventListener("click", () => {
+      editingArticleId = article.id;
+
+      $("article-title").value = article.title || "";
+      $("article-description").value = article.description || "";
+      $("article-content").value = article.content || "";
+      $("article-category").value = article.category || "";
+      $("article-image").value = article.image_url || article.image || "";
+      $("article-published").checked = Boolean(article.published);
+
+      if ($("article-form-title")) {
+        $("article-form-title").textContent = "تعديل المقال";
+      }
+
+      if ($("article-save-btn")) {
+        $("article-save-btn").textContent = "حفظ التعديلات";
+      }
+
+      if ($("article-cancel-btn")) {
+        $("article-cancel-btn").style.display = "inline-block";
+      }
+
+      $("article-form")?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    card.querySelector(".delete-btn").addEventListener("click", async () => {
+      if (!confirmDelete(`هل تريد حذف المقال "${article.title}"؟`)) return;
+
+      const { error: deleteError } = await db
+        .from("articles")
+        .delete()
+        .eq("id", article.id);
+
+      if (deleteError) {
+        alert("تعذر حذف المقال: " + deleteError.message);
+        return;
+      }
+
+      await loadArticles();
+      await loadStats();
+    });
+
+    container.appendChild(card);
+  });
+}
+
+$("article-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const saveButton = $("article-save-btn");
+  if (saveButton) saveButton.disabled = true;
+
+  const imageValue = $("article-image").value.trim() || null;
+
+  const payload = {
+    title: $("article-title").value.trim(),
+    description: $("article-description").value.trim(),
+    content: $("article-content").value.trim(),
+    category: $("article-category").value,
+    image_url: imageValue,
+    published: $("article-published").checked
+  };
+
+  try {
+    let result;
+
+    if (editingArticleId) {
+      result = await db
+        .from("articles")
+        .update(payload)
+        .eq("id", editingArticleId);
+    } else {
+      result = await db.from("articles").insert(payload);
+    }
+
+    if (result.error) throw result.error;
+
+    showMessage("article-message", "تم حفظ المقال بنجاح.");
+    resetArticleForm();
+    await loadArticles();
+    await loadStats();
+  } catch (error) {
+    console.error(error);
+    showMessage("article-message", "خطأ: " + error.message, true);
+  } finally {
+    if (saveButton) saveButton.disabled = false;
+  }
 });
 
-  checkAuth();
+$("article-cancel-btn")?.addEventListener("click", resetArticleForm);
 
+/* =========================
+   ARTICLE VIEWS
+========================= */
+
+async function loadArticleViews() {
+  const container = $("views-list");
+  if (!container) return;
+
+  const { data: articles, error } = await db
+    .from("articles")
+    .select("id,title")
+    .order("title");
+
+  if (error) {
+    console.error(error);
+    container.textContent = "تعذر تحميل مشاهدات المقالات.";
+    return;
+  }
+
+  container.innerHTML = "";
+  let total = 0;
+
+  for (const article of articles || []) {
+    const { data, error: viewError } = await db.rpc(
+      "get_article_view_count",
+      { p_article_id: article.id }
+    );
+
+    const count = !viewError && Number.isFinite(Number(data))
+      ? Number(data)
+      : 0;
+
+    total += count;
+
+    const card = document.createElement("div");
+    card.className = "box";
+    card.innerHTML = `
+      <h3>${escapeHTML(article.title)}</h3>
+      <p>عدد المشاهدات: ${count}</p>
+    `;
+    container.appendChild(card);
+  }
+
+  if ($("total-article-views")) {
+    $("total-article-views").textContent = total;
+  }
+
+  if ($("views-total-display")) {
+    $("views-total-display").textContent = total;
+  }
+}
+
+/* =========================
+   USERS
+========================= */
+
+async function loadUsers() {
+  const container = $("users-list");
+  if (!container) return;
+
+  container.innerHTML = "<p>جاري تحميل المستخدمين...</p>";
+
+  const { data, error } = await db
+    .from("profiles")
+    .select("id,email,created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    container.textContent = "تعذر تحميل المستخدمين: " + error.message;
+    return;
+  }
+
+  container.innerHTML = "";
+
+  if (!data?.length) {
+    container.innerHTML = "<p>لا يوجد مستخدمون.</p>";
+    return;
+  }
+
+  data.forEach((user) => {
+    const card = document.createElement("div");
+    card.className = "box user-item";
+
+    card.innerHTML = `
+      <h3>${escapeHTML(user.email || "بلا بريد إلكتروني")}</h3>
+      <p class="user-id">ID: ${escapeHTML(user.id)}</p>
+      <p>تاريخ التسجيل: ${formatDate(user.created_at)}</p>
+      <div class="item-actions">
+        <button type="button" class="edit-btn">تعديل البريد في الملف</button>
+        <button type="button" class="delete-btn">حذف سجل الملف</button>
+      </div>
+    `;
+
+    card.querySelector(".edit-btn").addEventListener("click", async () => {
+      const newEmail = prompt(
+        "أدخل البريد الإلكتروني الجديد لجدول profiles:",
+        user.email || ""
+      );
+
+      if (newEmail === null) return;
+
+      const email = newEmail.trim();
+
+      if (!email || !email.includes("@")) {
+        alert("أدخل بريدًا إلكترونيًا صالحًا.");
+        return;
+      }
+
+      const { error: updateError } = await db
+        .from("profiles")
+        .update({ email })
+        .eq("id", user.id);
+
+      if (updateError) {
+        alert("تعذر تعديل البريد: " + updateError.message);
+        return;
+      }
+
+      alert(
+        "تم تعديل البريد في profiles فقط. هذا لا يغيّر بريد تسجيل الدخول في Supabase Auth."
+      );
+
+      await loadUsers();
+    });
+
+    card.querySelector(".delete-btn").addEventListener("click", async () => {
+      if (currentUser?.id === user.id) {
+        alert("لا يمكنك حذف سجل حسابك الحالي من هذه الصفحة.");
+        return;
+      }
+
+      if (!confirmDelete(
+        "هل تريد حذف سجل هذا المستخدم من جدول profiles؟\n" +
+        "تنبيه: هذا لا يحذف حسابه من Supabase Auth."
+      )) return;
+
+      const { error: deleteError } = await db
+        .from("profiles")
+        .delete()
+        .eq("id", user.id);
+
+      if (deleteError) {
+        alert("تعذر حذف سجل المستخدم: " + deleteError.message);
+        return;
+      }
+
+      await loadUsers();
+      await loadStats();
+    });
+
+    container.appendChild(card);
+  });
+}
+
+/* =========================
+   DOWNLOAD HISTORY
+========================= */
+
+async function loadDownloadHistory() {
+  const container = $("downloads-list");
+  if (!container) return;
+
+  container.innerHTML = "<p>جاري تحميل سجل التحميلات...</p>";
+
+  const { data: logs, error } = await db
+    .from("download_logs")
+    .select("id,software_id,user_id,created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    container.textContent = "تعذر تحميل سجل التحميلات: " + error.message;
+    return;
+  }
+
+  const softwareIds = [...new Set(
+    (logs || []).map((log) => log.software_id).filter(Boolean)
+  )];
+
+  const userIds = [...new Set(
+    (logs || []).map((log) => log.user_id).filter(Boolean)
+  )];
+
+  let softwareMap = {};
+  let userMap = {};
+
+  if (softwareIds.length) {
+    const { data: software, error: softwareError } = await db
+      .from("software")
+      .select("id,title")
+      .in("id", softwareIds);
+
+    if (softwareError) console.error(softwareError);
+
+    for (const item of software || []) {
+      softwareMap[item.id] = item.title;
+    }
+  }
+
+  if (userIds.length) {
+    const { data: users, error: usersError } = await db
+      .from("profiles")
+      .select("id,email")
+      .in("id", userIds);
+
+    if (usersError) console.error(usersError);
+
+    for (const user of users || []) {
+      userMap[user.id] = user.email;
+    }
+  }
+
+  container.innerHTML = "";
+
+  if (!logs?.length) {
+    container.innerHTML = "<p>لا توجد تحميلات مسجلة.</p>";
+    return;
+  }
+
+  logs.forEach((log) => {
+    const card = document.createElement("div");
+    card.className = "box download-item";
+
+    card.innerHTML = `
+      <h3>البرنامج: ${escapeHTML(softwareMap[log.software_id] || "غير معروف")}</h3>
+      <p>المستخدم: ${escapeHTML(userMap[log.user_id] || "غير معروف")}</p>
+      <p>التاريخ: ${formatDate(log.created_at)}</p>
+      <p class="record-id">رقم السجل: ${escapeHTML(log.id)}</p>
+      <div class="item-actions">
+        <button type="button" class="edit-btn">تعديل السجل</button>
+        <button type="button" class="delete-btn">حذف السجل</button>
+      </div>
+    `;
+
+    card.querySelector(".edit-btn").addEventListener("click", async () => {
+      const newSoftwareId = prompt(
+        "أدخل ID البرنامج الجديد، أو اتركه فارغًا دون تغيير:",
+        ""
+      );
+
+      if (newSoftwareId === null) return;
+
+      const newUserId = prompt(
+        "أدخل ID المستخدم الجديد، أو اتركه فارغًا دون تغيير:",
+        ""
+      );
+
+      if (newUserId === null) return;
+
+      const newDate = prompt(
+        "أدخل التاريخ الجديد بصيغة ISO، أو اتركه فارغًا دون تغيير:",
+        ""
+      );
+
+      if (newDate === null) return;
+
+      const updates = {};
+
+      if (newSoftwareId.trim()) {
+        updates.software_id = newSoftwareId.trim();
+      }
+
+      if (newUserId.trim()) {
+        updates.user_id = newUserId.trim();
+      }
+
+      if (newDate.trim()) {
+        const parsedDate = new Date(newDate.trim());
+
+        if (Number.isNaN(parsedDate.getTime())) {
+          alert("التاريخ غير صالح.");
+          return;
+        }
+
+        updates.created_at = parsedDate.toISOString();
+      }
+
+      if (!Object.keys(updates).length) {
+        alert("لم يتم إدخال أي تعديلات.");
+        return;
+      }
+
+      if (!confirmDelete(
+        "تعديل سجل التحميل سيغيّر السجل التاريخي. هل تريد المتابعة؟"
+      )) return;
+
+      const { error: updateError } = await db
+        .from("download_logs")
+        .update(updates)
+        .eq("id", log.id);
+
+      if (updateError) {
+        alert("تعذر تعديل السجل: " + updateError.message);
+        return;
+      }
+
+      await loadDownloadHistory();
+    });
+
+    card.querySelector(".delete-btn").addEventListener("click", async () => {
+      if (!confirmDelete("هل تريد حذف سجل التحميل هذا نهائيًا؟")) return;
+
+      const { error: deleteError } = await db
+        .from("download_logs")
+        .delete()
+        .eq("id", log.id);
+
+      if (deleteError) {
+        alert("تعذر حذف السجل: " + deleteError.message);
+        return;
+      }
+
+      await loadDownloadHistory();
+      await loadStats();
+    });
+
+    container.appendChild(card);
+  });
+}
+
+$("refresh-downloads-btn")?.addEventListener(
+  "click",
+  loadDownloadHistory
+);
+
+/* =========================
+   CONTACT MESSAGES
+========================= */
+
+async function loadMessages() {
+  const container = $("messages-list");
+  if (!container) return;
+
+  showMessage("messages-status", "جاري تحميل الرسائل...");
+
+  container.innerHTML = "<p>جاري تحميل الرسائل...</p>";
+
+  const { data, error } = await db
+    .from("contact_messages")
+    .select("id,name,email,message,created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    container.textContent = "تعذر تحميل الرسائل: " + error.message;
+    showMessage("messages-status", "فشل تحميل الرسائل.", true);
+    return;
+  }
+
+  container.innerHTML = "";
+
+  if (!data?.length) {
+    container.innerHTML = "<p>لا توجد رسائل حاليا.</p>";
+    showMessage("messages-status", "لا توجد رسائل.");
+    return;
+  }
+
+  data.forEach((message) => {
+    const card = document.createElement("div");
+    card.className = "box message-item";
+
+    card.innerHTML = `
+      <h3>${escapeHTML(message.name || "بدون اسم")}</h3>
+      <p>البريد: ${escapeHTML(message.email || "")}</p>
+      <p class="message-content">${escapeHTML(message.message || "")}</p>
+      <p>التاريخ: ${formatDate(message.created_at)}</p>
+      <div class="item-actions">
+        <button type="button" class="edit-btn">تعديل الرسالة</button>
+        <button type="button" class="delete-btn">حذف الرسالة</button>
+      </div>
+    `;
+
+    card.querySelector(".edit-btn").addEventListener("click", async () => {
+      const name = prompt("تعديل الاسم:", message.name || "");
+      if (name === null) return;
+
+      const email = prompt("تعديل البريد الإلكتروني:", message.email || "");
+      if (email === null) return;
+
+      const content = prompt("تعديل محتوى الرسالة:", message.message || "");
+      if (content === null) return;
+
+      if (!name.trim() || !email.trim() || !content.trim()) {
+        alert("الاسم والبريد ومحتوى الرسالة مطلوبون.");
+        return;
+      }
+
+      const { error: updateError } = await db
+        .from("contact_messages")
+        .update({
+          name: name.trim(),
+          email: email.trim(),
+          message: content.trim()
+        })
+        .eq("id", message.id);
+
+      if (updateError) {
+        alert("تعذر تعديل الرسالة: " + updateError.message);
+        return;
+      }
+
+      await loadMessages();
+    });
+
+    card.querySelector(".delete-btn").addEventListener("click", async () => {
+      if (!confirmDelete("هل تريد حذف هذه الرسالة نهائيًا؟")) return;
+
+      const { error: deleteError } = await db
+        .from("contact_messages")
+        .delete()
+        .eq("id", message.id);
+
+      if (deleteError) {
+        alert("تعذر حذف الرسالة: " + deleteError.message);
+        return;
+      }
+
+      await loadMessages();
+    });
+
+    container.appendChild(card);
+  });
+
+  showMessage("messages-status", `تم تحميل ${data.length} رسالة.`);
+}
+
+$("refresh-messages-btn")?.addEventListener("click", loadMessages);
+
+/* تحديث بيانات لوحة التحكم عند الرجوع للصفحة */
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && currentUser) {
+    loadStats();
+  }
+});
+
+/* بدء التشغيل */
+checkAuth();
 </script>
-
 </body>
 </html>
