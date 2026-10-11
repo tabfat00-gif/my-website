@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bexo | Website Services</title>
+  <meta name="description" content="Need a website? Contact Bexo about website creation, redesign, and improvements." />
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/lineicons.css" />
+  <link rel="stylesheet" href="assets/css/ud-styles.css" />
+  <style>
+    .services-area { padding: 70px 0; }
+    .service-card { height: 100%; padding: 28px; border: 1px solid #e7eaf0; border-radius: 14px; background: #fff; box-shadow: 0 8px 28px rgba(20, 30, 55, .05); }
+    .service-card .service-icon { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin-bottom: 18px; border-radius: 12px; background: #eef4ff; color: #155eef; font-size: 25px; }
+    .service-form-card { padding: 30px; border: 1px solid #e7eaf0; border-radius: 14px; background: #fff; box-shadow: 0 8px 28px rgba(20, 30, 55, .06); }
+    .service-form-card input, .service-form-card select, .service-form-card textarea { width: 100%; padding: 12px 14px; border: 1px solid #dfe3ea; border-radius: 8px; background: #fff; }
+    .service-form-card label { display: block; margin-bottom: 7px; font-weight: 600; }
+    .service-form-card .form-field { margin-bottom: 18px; }
+    #serviceStatus { overflow-wrap: anywhere; margin-bottom: 18px; }
+    .service-note { font-size: 14px; color: #667085; }
+    @media (max-width: 575px) { .service-form-card { padding: 22px; } .services-area { padding: 45px 0; } }
+  </style>
+</head>
+<body>
+  <header class="ud-header">
+    <div class="container">
+      <div class="row"><div class="col-lg-12">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html"><span style="font-size:28px;font-weight:700;color:#fff;">Bexo</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="toggler-icon"></span><span class="toggler-icon"></span><span class="toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item"><a href="index.html">Home</a></li>
+              <li class="nav-item"><a href="about.html">About</a></li>
+              <li class="nav-item"><a href="blog.html">Articles</a></li>
+              <li class="nav-item"><a href="software.html">Software</a></li>
+              <li class="nav-item"><a href="pricing.html">Categories</a></li>
+              <li class="nav-item"><a href="services.html">Website Services</a></li>
+              <li class="nav-item"><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-btn d-flex align-items-center gap-2">
+              <a class="ud-main-btn ud-white-btn" href="login.html">Login</a>
+              <a class="ud-main-btn ud-white-btn" href="signup.html">Sign Up</a>
+            </div>
+          </div>
+        </nav>
+      </div></div>
+    </div>
+  </header>
+
+  <section class="ud-page-banner">
+    <div class="container"><div class="row"><div class="col-lg-12">
+      <div class="ud-banner-content">
+        <h1>Website Services</h1>
+        <p>Have an idea for a website? Tell us what you need and send a project request to Bexo.</p>
+      </div>
+    </div></div></div>
+  </section>
+
+  <main>
+    <section class="services-area">
+      <div class="container">
+        <div class="row justify-content-center mb-4"><div class="col-lg-8 text-center">
+          <div class="ud-section-title mx-auto">
+            <span>How we can help</span>
+            <h2>Let's build your website</h2>
+            <p>Share your idea and the result you want. We’ll review your request and get back to you using the email you provide.</p>
+          </div>
+        </div></div>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4"><div class="service-card">
+            <div class="service-icon"><i class="lni lni-display"></i></div>
+            <h4>Website Creation</h4><p class="mb-0">A new website shaped around your project, audience, and goals.</p>
+          </div></div>
+          <div class="col-md-4"><div class="service-card">
+            <div class="service-icon"><i class="lni lni-pencil-alt"></i></div>
+            <h4>Website Redesign</h4><p class="mb-0">Refresh an existing website's layout, appearance, and usability.</p>
+          </div></div>
+          <div class="col-md-4"><div class="service-card">
+            <div class="service-icon"><i class="lni lni-cog"></i></div>
+            <h4>Fixes & Improvements</h4><p class="mb-0">Describe a website issue or feature you want to improve.</p>
+          </div></div>
+        </div>
+
+        <div class="row justify-content-center"><div class="col-lg-8 col-xl-7">
+          <div class="service-form-card">
+            <h3 class="mb-2">Request a Website Service</h3>
+            <p class="service-note mb-4">Your request will be sent to the Bexo admin dashboard under Messages.</p>
+            <form id="serviceForm">
+              <p id="serviceStatus" role="status" aria-live="polite"></p>
+              <div class="form-field">
+                <label for="clientName">Your name</label>
+                <input id="clientName" name="name" type="text" minlength="2" maxlength="100" autocomplete="name" required placeholder="Enter your name" />
+              </div>
+              <div class="form-field">
+                <label for="clientEmail">Email address</label>
+                <input id="clientEmail" name="email" type="email" maxlength="254" autocomplete="email" required placeholder="you@example.com" />
+              </div>
+              <div class="form-field">
+                <label for="serviceType">What do you need?</label>
+                <select id="serviceType" name="serviceType" required>
+                  <option value="">Choose a service</option>
+                  <option value="New website creation">New website creation</option>
+                  <option value="Website redesign">Website redesign</option>
+                  <option value="Website fixes or improvements">Website fixes or improvements</option>
+                  <option value="Other website service">Other</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="projectBudget">Estimated budget (optional)</label>
+                <select id="projectBudget" name="budget">
+                  <option value="Not specified">Prefer not to say</option>
+                  <option value="Under 10,000 DZD">Under 10,000 DZD</option>
+                  <option value="10,000–30,000 DZD">10,000–30,000 DZD</option>
+                  <option value="30,000–60,000 DZD">30,000–60,000 DZD</option>
+                  <option value="Over 60,000 DZD">Over 60,000 DZD</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="projectDetails">Tell us about your project</label>
+                <textarea id="projectDetails" name="details" rows="5" minlength="10" maxlength="4000" required placeholder="What should the website do? Include any important features or examples."></textarea>
+              </div>
+              <button id="serviceSubmit" type="submit" class="ud-main-btn w-100">Send Project Request</button>
+              <p class="service-note mt-3 mb-0">Please do not include passwords or other sensitive information.</p>
+            </form>
+          </div>
+        </div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ud-footer">
+    <div class="container" style="padding:25px 0">
+      <p>© 2026 Bexo. All rights reserved.</p>
+      <a href="index.html">Home</a> &nbsp; | &nbsp;
+      <a href="services.html">Website Services</a> &nbsp; | &nbsp;
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (() => {
+      const form = document.getElementById("serviceForm");
+      const status = document.getElementById("serviceStatus");
+      const button = document.getElementById("serviceSubmit");
+
+      const supabaseClient = window.supabase.createClient(
+        "https://ulxreyrjtavflppahqlp.supabase.co",
+        "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE"
+      );
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        status.textContent = "";
+        status.style.color = "";
+
+        const name = document.getElementById("clientName").value.trim();
+        const email = document.getElementById("clientEmail").value.trim();
+        const serviceType = document.getElementById("serviceType").value;
+        const budget = document.getElementById("projectBudget").value;
+        const details = document.getElementById("projectDetails").value.trim();
+
+        if (name.length < 2 || name.length > 100 || email.length < 5 || email.length > 254 || !serviceType || details.length < 10 || details.length > 4000) {
+          status.textContent = "Please check your details and project description.";
+          status.style.color = "#dc3545";
+          return;
+        }
+
+        const message = [
+          "WEBSITE SERVICE REQUEST",
+          "Service: " + serviceType,
+          "Estimated budget: " + budget,
+          "Project details:",
+          details
+        ].join("\n\n");
+
+        button.disabled = true;
+        button.textContent = "Sending request...";
+
+        try {
+          const { error } = await supabaseClient
+            .from("contact_messages")
+            .insert([{ name, email, message }]);
+
+          if (error) throw error;
+
+          status.textContent = "Your project request was sent successfully. Thank you!";
+          status.style.color = "#198754";
+          form.reset();
+        } catch (error) {
+          console.error("Website service request error:", error);
+          status.textContent = "We couldn't send your request. Please try again later.";
+          status.style.color = "#dc3545";
+        } finally {
+          button.disabled = false;
+          button.textContent = "Send Project Request";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
