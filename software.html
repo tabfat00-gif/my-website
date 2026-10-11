@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Bexo | Software</title>
-
-  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg" />
-
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/animate.css" />
   <link rel="stylesheet" href="assets/css/lineicons.css" />
@@ -89,795 +85,459 @@
       font-size: 16px;
     }
 
-/* Bexo compact header account buttons */
-.navbar-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
+    .software-status {
+      width: 100%;
+      padding: 15px;
+      text-align: center;
+      color: #666;
+    }
 
+    /* Bexo compact header account buttons */
+    .navbar-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px !important;
+    }
 
-/* Small account buttons */
-.navbar-btn .ud-main-btn,
-.navbar-btn button,
-.navbar-btn .profile-btn,
-.navbar-btn .logout-btn {
-  padding: 4px 8px !important;
-  font-size: 10px !important;
-  line-height: 1.2 !important;
-  min-height: 0 !important;
-  height: auto !important;
-  border-radius: 4px !important;
-  margin: 0 !important;
-}
+    .navbar-btn .ud-main-btn,
+    .navbar-btn button,
+    .navbar-btn .profile-btn,
+    .navbar-btn .logout-btn {
+      padding: 4px 8px !important;
+      font-size: 10px !important;
+      line-height: 1.2 !important;
+      min-height: 0 !important;
+      height: auto !important;
+      border-radius: 4px !important;
+      margin: 0 !important;
+    }
 
-.navbar-btn {
-  gap: 5px !important;
-}
+    #user-profile {
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+    }
 
-/* Account photo and name */
-#user-profile {
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-}
+    #user-avatar {
+      width: 30px !important;
+      height: 30px !important;
+    }
 
-#user-avatar {
-  width: 30px !important;
-  height: 30px !important;
-}
-
-#user-name {
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
+    #user-name {
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   </style>
-
 </head>
-
 <body>
-
-<header class="ud-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-
-```
-    <nav class="navbar navbar-expand-lg">
-
-      <a class="navbar-brand" href="index.html">
-        <span style="font-size:26px;font-weight:700;color:#ffffff;">
-          Bexo
-        </span>
-      </a>
-
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="toggler-icon"></span>
-        <span class="toggler-icon"></span>
-        <span class="toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-
-        <ul class="navbar-nav mx-auto">
-
-          <li class="nav-item"><a href="index.html">Home</a></li>
-          <li class="nav-item"><a href="index.html#features">Features</a></li>
-          <li class="nav-item"><a href="about.html">About</a></li>
-          <li class="nav-item"><a href="blog.html">Articles</a></li>
-          <li class="nav-item"><a href="software.html">Software</a></li>
-          <li class="nav-item"><a href="pricing.html">Categories</a></li>
-          <li class="nav-item"><a href="index.html#faq">FAQ</a></li>
-          <li class="nav-item"><a href="contact.html">Contact</a></li>
-
-        </ul>
-
-        
-<div class="navbar-btn d-none d-sm-inline-block"
-     style="display:flex; align-items:center; gap:10px;">
-
-  <a id="login-link"
-     class="ud-main-btn ud-white-btn"
-     href="login.html">
-    Login
-  </a>
-
-  <a id="signup-link"
-     class="ud-main-btn ud-white-btn"
-     href="signup.html">
-    Sign Up
-  </a>
-
-  <div id="user-profile"
-       style="display:none; align-items:center; gap:8px; color:#fff;">
-
-    <img id="user-avatar"
-         src="assets/images/favicon.svg"
-         alt="User avatar"
-         style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
-
-    <span id="user-name"></span>
-  </div>
-
-</div>
-
-      </div>
-
-    </nav>
-
-  </div>
-</div>
-
-
-  </div>
-</header>
-
-<section class="ud-page-banner">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-
-```
-    <div class="ud-banner-content">
-      <h1>Software</h1>
-
-      <p>
-        Useful operating systems and software for your needs.
-      </p>
-    </div>
-
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<section class="ud-blog-grids">
-  <div class="container">
-
-```
-<div class="software-search">
-  <input
-    type="search"
-    id="softwareSearch"
-    placeholder="🔎 Search software..."
-    autocomplete="off"
-  />
-</div>
-
-<div class="category-filters">
-
-  <button type="button" class="category-btn active" data-category="all">
-    All
-  </button>
-
-  <button type="button" class="category-btn" data-category="windows">
-    🪟 Windows
-  </button>
-
-  <button type="button" class="category-btn" data-category="linux">
-    🐧 Linux
-  </button>
-
-  <button type="button" class="category-btn" data-category="android">
-    📱 Android
-  </button>
-
-  <button type="button" class="category-btn" data-category="tools">
-    🛠️ Tools
-  </button>
-
-  <button type="button" class="category-btn" data-category="books">
-    📚 Books
-  </button>
-
-</div>
-
-<div class="row" id="software-container">
-
-  <!-- Static Windows 7 -->
-
-  <div
-    class="col-lg-6 col-md-6 software-card"
-    data-category="windows"
-    data-search="windows windows 7 windows 7 ultimate sp1 superlite x64"
-  >
-
-    <div class="ud-single-blog">
-
-      <div class="ud-blog-content">
-
-        <span class="ud-blog-date">
-          Windows
-        </span>
-
-        <h3 class="ud-blog-title">
-          Windows 7 Ultimate SP1 SuperLite x64
-        </h3>
-
-        <p class="ud-blog-desc">
-          Windows 7 Ultimate SP1 SuperLite x64.
-          File size: approximately 0.98 GB.
-        </p>
-
-        <a
-          href="https://archive.org/details/win-7-ult-sp-1-super-lite-x-64"
-          class="ud-main-btn"
-          onclick="handleDownload(event, this.href, null)"
-        >
-          📥 Download Free
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Static Kali Linux -->
-
-  <div
-    class="col-lg-6 col-md-6 software-card"
-    data-category="linux"
-    data-search="linux kali kali linux"
-  >
-
-    <div class="ud-single-blog">
-
-      <div class="ud-blog-content">
-
-        <span class="ud-blog-date">
-          Linux
-        </span>
-
-        <h3 class="ud-blog-title">
-          Kali Linux
-        </h3>
-
-        <p class="ud-blog-desc">
-          Kali Linux tools and official downloads will be added here.
-        </p>
-
-        <a
-          href="https://www.kali.org/get-kali/"
-          class="ud-main-btn"
-          onclick="handleDownload(event, this.href, null)"
-        >
-          📥 Download Free
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<div class="row" id="software-list"></div>
-
-<div class="no-results" id="noResults">
-  No software found.
-</div>
-```
-
-  </div>
-</section>
-
-<footer class="ud-footer">
-  <div class="container">
-
-```
-<div class="row">
-  <div class="col-lg-12">
-
-    <div class="ud-footer-bottom">
-
-      <p>
-        © 2026 Bexo. All rights reserved.
-      </p>
-
-    </div>
-
-  </div>
-</div>
-```
-
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-  const SUPABASE_URL =
-    "https://ulxreyrjtavflppahqlp.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
-
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-
-  // ==========================================
-  // DOWNLOAD PROTECTION + DOWNLOAD LOG
-  // ==========================================
-
-  async function handleDownload(
-    event,
-    downloadUrl,
-    softwareId
-  ) {
-
-    event.preventDefault();
-
-
-    const {
-      data: {
-        session
-      }
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    // Login required
-
-    if (!session) {
-
-      localStorage.setItem(
-        "pendingDownload",
-        downloadUrl
-      );
-
-      window.location.href =
-        "login.html";
-
-      return;
-    }
-
-
-    // Log download for Supabase software
-
-    if (softwareId) {
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("download_logs")
-          .insert({
-            software_id: softwareId,
-            user_id: session.user.id
-          });
-
-
-      if (error) {
-
-        console.error(
-          "Download log error:",
-          error
-        );
-
-      }
-
-    }
-
-
-    // Start download
-
-    window.location.href =
-      downloadUrl;
-
-  }
-
-
-  // ==========================================
-  // Resume pending download after login
-  // ==========================================
-
-  async function resumePendingDownload() {
-
-    const pendingDownload =
-      localStorage.getItem(
-        "pendingDownload"
-      );
-
-
-    if (!pendingDownload) {
-      return;
-    }
-
-
-    const {
-      data: {
-        session
-      }
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    if (!session) {
-      return;
-    }
-
-
-    localStorage.removeItem(
-      "pendingDownload"
-    );
-
-
-    window.location.href =
-      pendingDownload;
-
-  }
-
-
-  // ==========================================
-  // Search + Category Filter
-  // ==========================================
-
-  let selectedCategory = "all";
-
-
-  function filterSoftware() {
-
-    const searchInput =
-      document.getElementById(
-        "softwareSearch"
-      );
-
-
-    const searchValue =
-      searchInput.value
-        .toLowerCase()
-        .trim();
-
-
-    const cards =
-      document.querySelectorAll(
-        ".software-card"
-      );
-
-
-    let visibleCount = 0;
-
-
-    cards.forEach((card) => {
-
-      const searchText =
-        (
-          card.dataset.search ||
-          card.innerText ||
-          ""
-        ).toLowerCase();
-
-
-      const cardCategory =
-        (
-          card.dataset.category ||
-          ""
-        ).toLowerCase();
-
-
-      const matchesSearch =
-        searchText.includes(
-          searchValue
-        );
-
-
-      const matchesCategory =
-        selectedCategory === "all" ||
-        cardCategory === selectedCategory;
-
-
-      const matches =
-        matchesSearch &&
-        matchesCategory;
-
-
-      card.style.display =
-        matches ? "" : "none";
-
-
-      if (matches) {
-        visibleCount++;
-      }
-
-    });
-
-
-    const noResults =
-      document.getElementById(
-        "noResults"
-      );
-
-
-    if (noResults) {
-
-      noResults.style.display =
-        visibleCount === 0
-          ? "block"
-          : "none";
-
-    }
-
-  }
-
-
-  document
-    .getElementById("softwareSearch")
-    .addEventListener(
-      "input",
-      filterSoftware
-    );
-
-
-  document
-    .querySelectorAll(".category-btn")
-    .forEach((button) => {
-
-      button.addEventListener(
-        "click",
-        function () {
-
-          document
-            .querySelectorAll(".category-btn")
-            .forEach((btn) => {
-              btn.classList.remove("active");
-            });
-
-
-          this.classList.add("active");
-
-
-          selectedCategory =
-            this.dataset.category ||
-            "all";
-
-
-          filterSoftware();
-
-        }
-      );
-
-    });
-
-
-  // ==========================================
-  // Load software from Supabase
-  // ==========================================
-
-  async function loadSoftware() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("software")
-        .select("*")
-        .order("created_at", {
-          ascending: false
-        });
-
-
-    if (error) {
-
-      console.error(
-        "Error:",
-        error
-      );
-
-      return;
-    }
-
-
-    const list =
-      document.getElementById(
-        "software-list"
-      );
-
-
-    if (!list) {
-      return;
-    }
-
-
-    list.innerHTML = "";
-
-
-    data.forEach((software) => {
-
-      const card =
-        document.createElement("div");
-
-
-      card.className =
-        "col-xl-4 col-lg-4 col-md-6 software-card";
-
-
-      const category =
-        (
-          software.category ||
-          "Software"
-        ).toLowerCase().trim();
-
-
-      card.dataset.category =
-        category;
-
-
-      card.dataset.search = `
-        ${software.title || ""}
-        ${software.description || ""}
-        ${software.category || ""}
-      `.toLowerCase();
-
-
-      const isPremium =
-        software.is_premium === true;
-
-
-      card.innerHTML = `
-
-        <div class="ud-single-blog">
-
-          ${
-            software.image_url
-              ? `
-                <div class="ud-blog-image">
-
+  <header class="ud-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="index.html">
+              <span style="font-size:26px;font-weight:700;color:#ffffff;">Bexo</span>
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="index.html#features">Features</a></li>
+                <li class="nav-item"><a href="about.html">About</a></li>
+                <li class="nav-item"><a href="blog.html">Articles</a></li>
+                <li class="nav-item"><a href="software.html" aria-current="page">Software</a></li>
+                <li class="nav-item"><a href="pricing.html">Categories</a></li>
+                <li class="nav-item"><a href="index.html#faq">FAQ</a></li>
+                <li class="nav-item"><a href="contact.html">Contact</a></li>
+              </ul>
+
+              <div class="navbar-btn d-none d-sm-inline-block" style="align-items:center;gap:10px;">
+                <a id="login-link" class="ud-main-btn ud-white-btn" href="login.html">Login</a>
+                <a id="signup-link" class="ud-main-btn ud-white-btn" href="signup.html">Sign Up</a>
+                <div id="user-profile" style="display:none;align-items:center;gap:8px;color:#fff;">
                   <img
-                    src="${software.image_url}"
-                    alt="${software.title || ""}"
-                    style="
-                      width:100%;
-                      height:220px;
-                      object-fit:cover;
-                    "
-                  >
-
+                    id="user-avatar"
+                    src="assets/images/favicon.svg"
+                    alt="User avatar"
+                    style="width:36px;height:36px;border-radius:50%;object-fit:cover;"
+                  />
+                  <span id="user-name"></span>
                 </div>
-              `
-              : ""
-          }
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
 
-
-          <div class="ud-blog-content">
-
-            <span class="ud-blog-category">
-              ${software.category || "Software"}
-            </span>
-
-
-            <h3 class="ud-blog-title">
-              ${software.title || ""}
-            </h3>
-
-
-            <p class="ud-blog-desc">
-              ${software.description || ""}
-            </p>
-
-
-            ${
-              isPremium
-                ? `
-                  <div class="premium-badge">
-                    🔒 Premium
-                  </div>
-
-                  <p class="premium-message">
-                    This software is available
-                    to Premium subscribers.
-                  </p>
-                `
-                : `
-                  ${
-                    software.download_url
-                      ? `
-                        <a
-                          href="${software.download_url}"
-                          class="ud-main-btn"
-                          onclick="handleDownload(
-                            event,
-                            this.href,
-                            '${software.id}'
-                          )"
-                        >
-                          📥 Download Free
-                        </a>
-                      `
-                      : ""
-                  }
-                `
-            }
-
+  <section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>Software</h1>
+            <p>Useful operating systems and software for your needs.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section class="ud-blog-grids">
+    <div class="container">
+      <div class="software-search">
+        <input
+          type="search"
+          id="softwareSearch"
+          placeholder="🔎 Search software..."
+          autocomplete="off"
+          aria-label="Search software"
+        />
+      </div>
+
+      <div class="category-filters" aria-label="Filter by category">
+        <button type="button" class="category-btn active" data-category="all" aria-pressed="true">All</button>
+        <button type="button" class="category-btn" data-category="windows" aria-pressed="false">🪟 Windows</button>
+        <button type="button" class="category-btn" data-category="linux" aria-pressed="false">🐧 Linux</button>
+        <button type="button" class="category-btn" data-category="android" aria-pressed="false">📱 Android</button>
+        <button type="button" class="category-btn" data-category="tools" aria-pressed="false">🛠️ Tools</button>
+        <button type="button" class="category-btn" data-category="books" aria-pressed="false">📚 Books</button>
+      </div>
+
+      <div class="row" id="software-container">
+        <div
+          class="col-lg-6 col-md-6 software-card"
+          data-category="windows"
+          data-search="windows windows 7 windows 7 ultimate sp1 superlite x64"
+        >
+          <div class="ud-single-blog">
+            <div class="ud-blog-content">
+              <span class="ud-blog-date">Windows</span>
+              <h3 class="ud-blog-title">Windows 7 Ultimate SP1 SuperLite x64</h3>
+              <p class="ud-blog-desc">
+                Windows 7 Ultimate SP1 SuperLite x64. File size: approximately 0.98 GB.
+              </p>
+              <a
+                href="https://archive.org/details/win-7-ult-sp-1-super-lite-x-64"
+                class="ud-main-btn static-download"
+                rel="noopener noreferrer"
+              >📥 Download Free</a>
+            </div>
+          </div>
         </div>
 
-      `;
+        <div
+          class="col-lg-6 col-md-6 software-card"
+          data-category="linux"
+          data-search="linux kali kali linux"
+        >
+          <div class="ud-single-blog">
+            <div class="ud-blog-content">
+              <span class="ud-blog-date">Linux</span>
+              <h3 class="ud-blog-title">Kali Linux</h3>
+              <p class="ud-blog-desc">Kali Linux tools and official downloads will be added here.</p>
+              <a
+                href="https://www.kali.org/get-kali/"
+                class="ud-main-btn static-download"
+                rel="noopener noreferrer"
+              >📥 Download Free</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="row" id="software-list" aria-live="polite"></div>
+      <div class="no-results" id="noResults">No software found.</div>
+    </div>
+  </section>
 
-      list.appendChild(card);
+  <footer class="ud-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-footer-bottom">
+            <p>© 2026 Bexo. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    "use strict";
+
+    const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const FALLBACK_AVATAR = "assets/images/favicon.svg";
+
+    function safeHttpUrl(value, baseUrl = window.location.href) {
+      if (typeof value !== "string" || !value.trim()) return null;
+      try {
+        const parsed = new URL(value.trim(), baseUrl);
+        if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return null;
+        return parsed.href;
+      } catch (_error) {
+        return null;
+      }
+    }
+
+    // DOWNLOAD PROTECTION + DOWNLOAD LOG
+    async function handleDownload(event, downloadUrl, softwareId) {
+      if (event) event.preventDefault();
+
+      const safeUrl = safeHttpUrl(downloadUrl);
+      if (!safeUrl) {
+        window.alert("This download link is invalid.");
+        return;
+      }
+
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+        const session = data && data.session;
+
+        if (!session) {
+          localStorage.setItem("pendingDownload", safeUrl);
+          window.location.href = "login.html";
+          return;
+        }
+
+        // Save download history when the item belongs to the Supabase software table.
+        if (softwareId) {
+          const { error: logError } = await supabaseClient
+            .from("download_logs")
+            .insert({ software_id: softwareId, user_id: session.user.id });
+
+          if (logError) {
+            // Do not block the download if logging fails; keep a diagnostic in the console.
+            console.error("Download log error:", logError.message);
+          }
+        }
+
+        window.location.assign(safeUrl);
+      } catch (error) {
+        console.error("Download/session error:", error);
+        window.alert("Could not verify your login. Please try again.");
+      }
+    }
+
+    // Resume a download requested before the user logged in.
+    async function resumePendingDownload() {
+      const pendingDownload = localStorage.getItem("pendingDownload");
+      if (!pendingDownload) return;
+
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+        if (!data || !data.session) return;
+
+        localStorage.removeItem("pendingDownload");
+        const safeUrl = safeHttpUrl(pendingDownload);
+        if (safeUrl) {
+          window.location.assign(safeUrl);
+        } else {
+          console.warn("Ignored an invalid pending download URL.");
+        }
+      } catch (error) {
+        console.error("Could not resume pending download:", error);
+      }
+    }
+
+    document.querySelectorAll(".static-download").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        handleDownload(event, link.href, null);
+      });
     });
 
+    // SEARCH + CATEGORY FILTER
+    let selectedCategory = "all";
 
-    filterSoftware();
+    function filterSoftware() {
+      const searchInput = document.getElementById("softwareSearch");
+      const searchValue = (searchInput ? searchInput.value : "").toLowerCase().trim();
+      const cards = document.querySelectorAll(".software-card");
+      let visibleCount = 0;
 
-  }
+      cards.forEach((card) => {
+        const searchText = (card.dataset.search || card.innerText || "").toLowerCase();
+        const cardCategory = (card.dataset.category || "").toLowerCase().trim();
+        const matchesSearch = searchText.includes(searchValue);
+        const matchesCategory = selectedCategory === "all" || cardCategory === selectedCategory;
+        const matches = matchesSearch && matchesCategory;
+        card.style.display = matches ? "" : "none";
+        if (matches) visibleCount += 1;
+      });
 
-async function loadUserProfile() {
-  const { data: { session }, error } =
-    await supabaseClient.auth.getSession();
+      const noResults = document.getElementById("noResults");
+      if (noResults) noResults.style.display = visibleCount === 0 ? "block" : "none";
+    }
 
-  if (error) {
-    console.error("Session error:", error.message);
-    return;
-  }
+    document.getElementById("softwareSearch").addEventListener("input", filterSoftware);
 
-  const loginLink = document.getElementById("login-link");
-  const signupLink = document.getElementById("signup-link");
-  const profile = document.getElementById("user-profile");
-  const avatar = document.getElementById("user-avatar");
-  const name = document.getElementById("user-name");
+    document.querySelectorAll(".category-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+          btn.classList.remove("active");
+          btn.setAttribute("aria-pressed", "false");
+        });
+        button.classList.add("active");
+        button.setAttribute("aria-pressed", "true");
+        selectedCategory = (button.dataset.category || "all").toLowerCase();
+        filterSoftware();
+      });
+    });
 
-  if (!session) {
-    profile.style.display = "none";
-    loginLink.style.display = "";
-    signupLink.style.display = "";
-    return;
-  }
+    function makeElement(tagName, className, text) {
+      const element = document.createElement(tagName);
+      if (className) element.className = className;
+      if (text !== undefined && text !== null) element.textContent = String(text);
+      return element;
+    }
 
-  const user = session.user;
-  const metadata = user.user_metadata || {};
+    // Create each database card with DOM methods; database text is never interpreted as HTML.
+    function createSoftwareCard(software) {
+      const card = makeElement("div", "col-xl-4 col-lg-4 col-md-6 software-card");
+      const categoryText = String(software.category || "Software");
+      const titleText = String(software.title || "");
+      const descriptionText = String(software.description || "");
+      const categoryKey = categoryText.toLowerCase().trim();
 
-  name.textContent =
-    metadata.full_name ||
-    metadata.name ||
-    user.email ||
-    "User";
+      card.dataset.category = categoryKey;
+      card.dataset.search = `${titleText} ${descriptionText} ${categoryText}`.toLowerCase();
 
-  avatar.src =
-    metadata.avatar_url ||
-    metadata.picture ||
-    "assets/images/favicon.svg";
+      const blog = makeElement("div", "ud-single-blog");
+      const imageUrl = safeHttpUrl(software.image_url);
+      if (imageUrl) {
+        const imageWrap = makeElement("div", "ud-blog-image");
+        const image = document.createElement("img");
+        image.src = imageUrl;
+        image.alt = titleText;
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.style.width = "100%";
+        image.style.height = "220px";
+        image.style.objectFit = "cover";
+        image.addEventListener("error", () => imageWrap.remove(), { once: true });
+        imageWrap.appendChild(image);
+        blog.appendChild(imageWrap);
+      }
 
-  profile.style.display = "flex";
-  loginLink.style.display = "none";
-  signupLink.style.display = "none";
-}
+      const content = makeElement("div", "ud-blog-content");
+      content.appendChild(makeElement("span", "ud-blog-category", categoryText));
+      content.appendChild(makeElement("h3", "ud-blog-title", titleText));
+      content.appendChild(makeElement("p", "ud-blog-desc", descriptionText));
 
-loadUserProfile();
+      if (software.is_premium === true) {
+        content.appendChild(makeElement("div", "premium-badge", "🔒 Premium"));
+        content.appendChild(makeElement("p", "premium-message", "This software is available to Premium subscribers."));
+      } else {
+        const downloadUrl = safeHttpUrl(software.download_url);
+        if (downloadUrl) {
+          const downloadLink = makeElement("a", "ud-main-btn", "📥 Download Free");
+          downloadLink.href = downloadUrl;
+          downloadLink.rel = "noopener noreferrer";
+          downloadLink.addEventListener("click", (event) => {
+            handleDownload(event, downloadLink.href, software.id || null);
+          });
+          content.appendChild(downloadLink);
+        }
+      }
 
-supabaseClient.auth.onAuthStateChange(() => {
-  loadUserProfile();
-});
+      blog.appendChild(content);
+      card.appendChild(blog);
+      return card;
+    }
 
+    // LOAD SOFTWARE FROM SUPABASE
+    async function loadSoftware() {
+      const list = document.getElementById("software-list");
+      if (!list) return;
+      list.replaceChildren(makeElement("p", "software-status", "Loading software…"));
 
-  loadSoftware();
+      try {
+        const { data, error } = await supabaseClient
+          .from("software")
+          .select("id, title, description, category, image_url, download_url, is_premium, created_at")
+          .order("created_at", { ascending: false });
 
-  resumePendingDownload();
+        if (error) throw error;
+        list.replaceChildren();
 
-</script>
+        if (!Array.isArray(data) || data.length === 0) {
+          list.appendChild(makeElement("p", "software-status", "No additional software available yet."));
+        } else {
+          data.forEach((software) => list.appendChild(createSoftwareCard(software)));
+        }
+        filterSoftware();
+      } catch (error) {
+        console.error("Software loading error:", error);
+        list.replaceChildren(makeElement("p", "software-status", "Could not load additional software. Please try again later."));
+        filterSoftware();
+      }
+    }
 
+    // LOGIN / PROFILE BUTTONS
+    async function loadUserProfile() {
+      const loginLink = document.getElementById("login-link");
+      const signupLink = document.getElementById("signup-link");
+      const profile = document.getElementById("user-profile");
+      const avatar = document.getElementById("user-avatar");
+      const name = document.getElementById("user-name");
+      if (!loginLink || !signupLink || !profile || !avatar || !name) return;
+
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+        const session = data && data.session;
+
+        if (!session) {
+          profile.style.display = "none";
+          loginLink.style.display = "";
+          signupLink.style.display = "";
+          return;
+        }
+
+        const user = session.user;
+        const metadata = user.user_metadata || {};
+        name.textContent = metadata.full_name || metadata.name || user.email || "User";
+        avatar.src = safeHttpUrl(metadata.avatar_url || metadata.picture) || FALLBACK_AVATAR;
+        profile.style.display = "flex";
+        loginLink.style.display = "none";
+        signupLink.style.display = "none";
+      } catch (error) {
+        console.error("Profile/session error:", error);
+      }
+    }
+
+    loadUserProfile();
+    supabaseClient.auth.onAuthStateChange(() => {
+      // Defer the session read until the auth callback has completed.
+      window.setTimeout(loadUserProfile, 0);
+    });
+
+    loadSoftware();
+    resumePendingDownload();
+  </script>
 </body>
 </html>
