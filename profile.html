@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -96,7 +95,8 @@
       font-weight: bold;
     }
 
-    .password-btn:disabled {
+    .password-btn:disabled,
+    .logout-btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
@@ -146,324 +146,199 @@
       }
     }
   </style>
-
 </head>
 
 <body>
+  <div class="container">
+    <div class="profile-box">
+      <h1>My Profile</h1>
 
-<div class="container">
+      <div class="info">
+        <span class="label">Email</span>
+        <span class="value" id="user-email">Loading...</span>
+      </div>
 
-  <div class="profile-box">
+      <div class="info">
+        <span class="label">Account Created</span>
+        <span class="value" id="account-created">Loading...</span>
+      </div>
 
-<h1>My Profile</h1>
+      <h2>Change Password</h2>
 
-<div class="info">
-  <span class="label">Email</span>
-  <span class="value" id="user-email">
-    Loading...
-  </span>
-</div>
+      <div class="password-box">
+        <input
+          type="password"
+          id="new-password"
+          placeholder="New password"
+          autocomplete="new-password"
+          aria-label="New password"
+        >
 
-<div class="info">
-  <span class="label">Account Created</span>
-  <span class="value" id="account-created">
-    Loading...
-  </span>
-</div>
+        <input
+          type="password"
+          id="confirm-password"
+          placeholder="Confirm new password"
+          autocomplete="new-password"
+          aria-label="Confirm new password"
+        >
 
-<h2>Change Password</h2>
+        <button
+          type="button"
+          class="password-btn"
+          id="change-password-btn"
+        >
+          Change Password
+        </button>
+      </div>
 
-<div class="password-box">
+      <a href="index.html" class="back-btn">Back to Site</a>
 
-  <input
-    type="password"
-    id="new-password"
-    placeholder="New password"
-    autocomplete="new-password"
-  >
+      <button type="button" class="logout-btn" id="logout-btn">
+        Logout
+      </button>
 
-  <input
-    type="password"
-    id="confirm-password"
-    placeholder="Confirm new password"
-    autocomplete="new-password"
-  >
-
-  <button
-    type="button"
-    class="password-btn"
-    id="change-password-btn"
-  >
-    Change Password
-  </button>
-
-</div>
-
-<a
-  href="index.html"
-  class="back-btn"
->
-  Back to Site
-</a>
-
-<button
-  type="button"
-  class="logout-btn"
-  id="logout-btn"
->
-  Logout
-</button>
-
-<div id="message"></div>
-
+      <div id="message" role="status" aria-live="polite"></div>
+    </div>
   </div>
 
-</div>
+  <script>
+    const SUPABASE_URL =
+      "https://ulxreyrjtavflppahqlp.supabase.co";
 
-<script>
+    const SUPABASE_KEY =
+      "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-  const SUPABASE_URL =
-    "https://ulxreyrjtavflppahqlp.supabase.co";
+    const userEmail = document.getElementById("user-email");
+    const accountCreated = document.getElementById("account-created");
+    const logoutBtn = document.getElementById("logout-btn");
+    const changePasswordBtn = document.getElementById("change-password-btn");
+    const newPassword = document.getElementById("new-password");
+    const confirmPassword = document.getElementById("confirm-password");
+    const message = document.getElementById("message");
 
-  const SUPABASE_KEY =
-    "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+    const supabaseClient = window.supabase
+      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+      : null;
 
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = type || "";
+    }
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    async function loadProfile() {
+      try {
+        if (!supabaseClient) {
+          throw new Error("The account service could not be loaded. Check your internet connection and reload the page.");
+        }
 
+        const { data, error } = await supabaseClient.auth.getSession();
 
-  const userEmail =
-    document.getElementById("user-email");
+        if (error) throw error;
 
-  const accountCreated =
-    document.getElementById("account-created");
+        const session = data?.session;
+        if (!session) {
+          window.location.href = "login.html";
+          return;
+        }
 
-  const logoutBtn =
-    document.getElementById("logout-btn");
+        const user = session.user;
+        userEmail.textContent = user.email || "Unknown";
 
-  const changePasswordBtn =
-    document.getElementById(
-      "change-password-btn"
-    );
-
-  const newPassword =
-    document.getElementById(
-      "new-password"
-    );
-
-  const confirmPassword =
-    document.getElementById(
-      "confirm-password"
-    );
-
-  const message =
-    document.getElementById("message");
-
-
-  async function loadProfile() {
-
-    const {
-      data: {
-        session
+        accountCreated.textContent = user.created_at
+          ? new Date(user.created_at).toLocaleDateString()
+          : "Unknown";
+      } catch (error) {
+        console.error("Could not load profile:", error);
+        userEmail.textContent = "Unavailable";
+        accountCreated.textContent = "Unavailable";
+        showMessage(
+          error?.message || "Could not load your profile. Please reload the page.",
+          "error"
+        );
       }
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    if (!session) {
-
-      window.location.href =
-        "login.html";
-
-      return;
     }
 
+    changePasswordBtn.addEventListener("click", async () => {
+      showMessage("", "");
 
-    const user =
-      session.user;
-
-
-    userEmail.textContent =
-      user.email || "Unknown";
-
-
-    if (user.created_at) {
-
-      accountCreated.textContent =
-        new Date(
-          user.created_at
-        ).toLocaleDateString();
-
-    } else {
-
-      accountCreated.textContent =
-        "Unknown";
-
-    }
-
-  }
-
-
-  changePasswordBtn.addEventListener(
-    "click",
-    async () => {
-
-      message.textContent = "";
-      message.className = "";
-
-
-      const password =
-        newPassword.value.trim();
-
-      const confirm =
-        confirmPassword.value.trim();
-
+      // Do not trim password values: spaces can be part of a user's password.
+      const password = newPassword.value;
+      const confirm = confirmPassword.value;
 
       if (!password || !confirm) {
-
-        message.textContent =
-          "Please enter and confirm your new password.";
-
-        message.className =
-          "error";
-
+        showMessage("Please enter and confirm your new password.", "error");
         return;
       }
-
 
       if (password.length < 6) {
-
-        message.textContent =
-          "Password must be at least 6 characters.";
-
-        message.className =
-          "error";
-
+        showMessage("Password must be at least 6 characters.", "error");
         return;
       }
-
 
       if (password !== confirm) {
-
-        message.textContent =
-          "Passwords do not match.";
-
-        message.className =
-          "error";
-
+        showMessage("Passwords do not match.", "error");
         return;
       }
 
+      if (!supabaseClient) {
+        showMessage("The account service could not be loaded. Check your internet connection and reload the page.", "error");
+        return;
+      }
 
-      changePasswordBtn.disabled =
-        true;
+      changePasswordBtn.disabled = true;
+      changePasswordBtn.textContent = "Updating...";
 
-      changePasswordBtn.textContent =
-        "Updating...";
-
-
-      const {
-        error
-      } =
-        await supabaseClient.auth.updateUser({
+      try {
+        const { error } = await supabaseClient.auth.updateUser({
           password: password
         });
 
+        if (error) throw error;
 
-      if (error) {
+        newPassword.value = "";
+        confirmPassword.value = "";
+        showMessage("Password changed successfully.", "success");
+      } catch (error) {
+        console.error("Password update failed:", error);
+        showMessage(
+          error?.message || "Password update failed. Please try again.",
+          "error"
+        );
+      } finally {
+        changePasswordBtn.disabled = false;
+        changePasswordBtn.textContent = "Change Password";
+      }
+    });
 
-        console.error(error);
+    logoutBtn.addEventListener("click", async () => {
+      showMessage("", "");
 
-        message.textContent =
-          error.message ||
-          "Password update failed.";
-
-        message.className =
-          "error";
-
-        changePasswordBtn.disabled =
-          false;
-
-        changePasswordBtn.textContent =
-          "Change Password";
-
+      if (!supabaseClient) {
+        showMessage("The account service could not be loaded. Check your internet connection and reload the page.", "error");
         return;
       }
 
+      logoutBtn.disabled = true;
+      logoutBtn.textContent = "Logging out...";
 
-      newPassword.value = "";
-      confirmPassword.value = "";
+      try {
+        const { error } = await supabaseClient.auth.signOut();
+        if (error) throw error;
 
+        window.location.href = "login.html";
+      } catch (error) {
+        console.error("Logout failed:", error);
+        showMessage(
+          error?.message || "Logout failed. Please try again.",
+          "error"
+        );
 
-      message.textContent =
-        "Password changed successfully.";
-
-      message.className =
-        "success";
-
-
-      changePasswordBtn.disabled =
-        false;
-
-      changePasswordBtn.textContent =
-        "Change Password";
-
-    }
-  );
-
-
-  logoutBtn.addEventListener(
-    "click",
-    async () => {
-
-      logoutBtn.disabled =
-        true;
-
-      logoutBtn.textContent =
-        "Logging out...";
-
-
-      const {
-        error
-      } =
-        await supabaseClient.auth.signOut();
-
-
-      if (error) {
-
-        console.error(error);
-
-        message.textContent =
-          error.message ||
-          "Logout failed.";
-
-        message.className =
-          "error";
-
-        logoutBtn.disabled =
-          false;
-
-        logoutBtn.textContent =
-          "Logout";
-
-        return;
+        logoutBtn.disabled = false;
+        logoutBtn.textContent = "Logout";
       }
+    });
 
-
-      window.location.href =
-        "login.html";
-
-    }
-  );
-
-
-  loadProfile();
-
-</script>
-
+    loadProfile();
+  </script>
 </body>
 </html>
