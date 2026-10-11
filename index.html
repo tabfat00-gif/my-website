@@ -1160,46 +1160,56 @@ textarea:focus-visible {
   }
 }
 
-/* ترتيب أزرار الحساب عمودياً */
+/* تصغير وترتيب أزرار الحساب */
 .navbar-btn {
-  flex-direction: column;
-  align-items: stretch !important;
-  gap: 10px;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 6px;
+  margin-left: 10px;
 }
 
 #guestButtons,
 #userButtons {
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 10px;
-  width: 100%;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 6px;
+  width: auto !important;
 }
 
 #guestButtons a,
 #userButtons a,
 #userButtons button {
-  width: 100%;
-  margin-right: 0 !important;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 6px 11px !important;
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  border-radius: 7px !important;
+  white-space: nowrap;
 }
+
+/* الهواتف والشاشات الصغيرة */
 @media (max-width: 991px) {
   .navbar-btn {
     width: 100%;
-    margin-top: 12px;
+    justify-content: flex-start;
+    margin: 12px 0 0;
   }
-}
 
-/* تصغير أزرار الحساب */
-#guestButtons a,
-#userButtons a,
-#userButtons button {
-  width: 120px !important;
-  min-width: 0 !important;
-  padding: 6px 10px !important;
-  font-size: 12px !important;
-  line-height: 1.3 !important;
-  margin: 0 !important;
+  #guestButtons,
+  #userButtons {
+    justify-content: flex-start;
+    width: auto !important;
+  }
 }
 
 /* Homepage content from Supabase */
