@@ -27,16 +27,17 @@ Bexo is published using GitHub Pages.
 - CSS3
 - Bootstrap 5
 - JavaScript
-
 ## 📃 License and Copyright
 
 © 2026 Bexo. All rights reserved for original Bexo content, branding, and materials, to the extent permitted by applicable law.
 
-This website uses a third-party template and may include other components or assets subject to separate licenses. Those licenses continue to apply to their respective materials.
+This project uses the UIdeck Play template, which is licensed under the MIT License. The original template remains subject to its MIT License terms.
 
-Unless permitted by an applicable third-party license or applicable law, written permission is required to reproduce or redistribute Bexo's original materials.
+Third-party components and assets may be subject to their own licenses.
 
-See the `LICENCE` file for the template's license terms.
+The MIT License for the original template does not automatically apply to original Bexo content, branding, or materials.
+
+See the `LICENCE` file for the original template's license terms.
 
 ## 💙 Bexo
 
