@@ -1,1109 +1,499 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Bexo | Articles</title>
-
-  <meta
-    name="description"
-    content="Bexo - Discover useful information, guides, technology, ideas and interesting topics."
-  />
-
-  <link
-    rel="shortcut icon"
-    href="assets/images/favicon.svg"
-    type="image/svg"
-  />
-
+  <meta name="description" content="Bexo - Discover useful information, guides, technology, ideas and interesting topics." />
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/animate.css" />
   <link rel="stylesheet" href="assets/css/lineicons.css" />
   <link rel="stylesheet" href="assets/css/ud-styles.css" />
 
   <style>
+    /* Compact Bexo article cards: keep photos/icons and frames small and consistent. */
     .article-categories {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
-      margin: 0 auto 25px;
+      gap: 8px;
+      margin: 0 auto 22px;
     }
 
     .category-btn {
-      border: 1px solid #ddd;
+      border: 1px solid #d7deea;
       background: #fff;
-      color: #333;
-      padding: 9px 16px;
-      border-radius: 6px;
+      color: #263247;
+      padding: 7px 12px;
+      border-radius: 7px;
       cursor: pointer;
-      transition: 0.2s;
+      font-size: 13px;
+      line-height: 1.3;
+      transition: background .2s, color .2s, border-color .2s;
     }
 
     .category-btn:hover,
     .category-btn.active {
-      background: #111;
+      background: #111827;
       color: #fff;
-      border-color: #111;
+      border-color: #111827;
+    }
+
+    .article-search-wrap {
+      position: relative;
+      width: min(100%, 620px);
+      margin: 0 auto;
+    }
+
+    #articleSearch {
+      display: block;
+      width: 100%;
+      height: 46px;
+      padding: 0 48px 0 14px;
+      border: 1px solid #d7deea;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 14px;
+      outline: none;
+    }
+
+    #articleSearch:focus { border-color: #477bff; box-shadow: 0 0 0 3px rgba(71,123,255,.12); }
+
+    #articleSearchButton {
+      position: absolute;
+      top: 50%;
+      right: 7px;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: #334155;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #articlesContainer { row-gap: 18px; }
+
+    .article-card {
+      min-width: 0;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .article-card .ud-single-blog {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      border-radius: 11px;
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(15,23,42,.06);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .article-card .ud-single-blog:hover {
+      transform: translateY(-3px);
+      border-color: #c6d7ff;
+      box-shadow: 0 9px 20px rgba(15,23,42,.1);
+    }
+
+    .article-card .ud-blog-image {
+      height: 118px;
+      max-height: 118px;
+      margin: 0;
+      padding: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f5f9;
+    }
+
+    .article-card .ud-blog-image a {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .article-card .ud-blog-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: 102px;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 5px;
+    }
+
+    .article-card .ud-blog-content {
+      padding: 13px 14px 15px;
+    }
+
+    .article-card .ud-blog-date {
+      display: inline-block;
+      margin: 0 0 7px;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: #edf4ff;
+      color: #3156b8;
+      font-size: 10px;
+      line-height: 1.35;
+      font-weight: 700;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .article-card .ud-blog-title {
+      margin: 0 0 7px;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .article-card .ud-blog-title a { color: #172033; }
+    .article-card .ud-blog-title a:hover { color: #3156d8; }
+
+    .article-card .ud-blog-desc {
+      margin: 0;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    @media (min-width: 1200px) {
+      .article-card { flex: 0 0 auto; }
+    }
+
+    @media (max-width: 575px) {
+      .article-search-section { padding-top: 16px; }
+      .article-card .ud-blog-image { height: 105px; max-height: 105px; }
+      .article-card .ud-blog-image img { max-height: 89px; }
+      .article-card .ud-blog-content { padding: 12px; }
+      .article-card .ud-blog-title { font-size: 15px; }
+      .category-btn { padding: 6px 10px; font-size: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .article-card .ud-single-blog,
+      .category-btn { transition: none; }
     }
   </style>
 </head>
-
 <body>
-
   <!-- Header -->
   <header class="ud-header">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-
-          <nav class="navbar navbar-expand-lg">
-
-            <a class="navbar-brand" href="index.html">
-              <span style="font-size: 28px; font-weight: 700; color: #fff;">
-                Bexo
-              </span>
-            </a>
-
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarContent"
-              aria-controls="navbarContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="toggler-icon"></span>
-              <span class="toggler-icon"></span>
-              <span class="toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarContent">
-
-              <ul id="nav" class="navbar-nav mx-auto">
-
-                <li class="nav-item">
-                  <a href="index.html">Home</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="index.html#features">Features</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="about.html">About</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="blog.html">Articles</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="software.html">Software</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="pricing.html">Categories</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="index.html#faq">FAQ</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="index.html#contact">Contact</a>
-                </li>
-
-              </ul>
-
-            </div>
-
-          </nav>
-
-        </div>
-      </div>
+      <div class="row"><div class="col-lg-12">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html"><span style="font-size:26px;font-weight:700;color:#fff;">Bexo</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="toggler-icon"></span><span class="toggler-icon"></span><span class="toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarContent">
+            <ul id="nav" class="navbar-nav mx-auto">
+              <li class="nav-item"><a href="index.html">Home</a></li>
+              <li class="nav-item"><a href="index.html#features">Features</a></li>
+              <li class="nav-item"><a href="about.html">About</a></li>
+              <li class="nav-item"><a href="blog.html">Articles</a></li>
+              <li class="nav-item"><a href="software.html">Software</a></li>
+              <li class="nav-item"><a href="pricing.html">Categories</a></li>
+              <li class="nav-item"><a href="index.html#faq">FAQ</a></li>
+              <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div></div>
     </div>
   </header>
 
-
   <!-- Banner -->
   <section class="ud-page-banner">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-
-          <div class="ud-banner-content">
-            <h1>Bexo Articles</h1>
-          </div>
-
-        </div>
-      </div>
-    </div>
+    <div class="container"><div class="row"><div class="col-lg-12">
+      <div class="ud-banner-content"><h1>Bexo Articles</h1></div>
+    </div></div></div>
   </section>
-
 
   <!-- Articles -->
   <section class="ud-blog-grids">
     <div class="container">
-
-      <!-- Search -->
-      <div
-        style="
-          width: 100%;
-          padding: 30px 20px 20px;
-          text-align: center;
-        "
-      >
-
-        <div
-          style="
-            position: relative;
-            width: 80%;
-            max-width: 700px;
-            margin: 0 auto;
-          "
-        >
-
-          <input
-            id="articleSearch"
-            type="text"
-            placeholder="Search articles..."
-            aria-label="Search articles"
-            style="
-              width: 100%;
-              height: 55px;
-              padding: 0 55px 0 20px;
-              font-size: 18px;
-              border: 2px solid #ddd;
-              border-radius: 8px;
-              box-sizing: border-box;
-            "
-          />
-
-          <button
-            id="articleSearchButton"
-            type="button"
-            aria-label="Search"
-            style="
-              position: absolute;
-              right: 10px;
-              top: 50%;
-              transform: translateY(-50%);
-              border: 0;
-              background: transparent;
-              font-size: 20px;
-              cursor: pointer;
-            "
-          >
-            <i class="lni lni-search-alt"></i>
-          </button>
-
+      <div class="article-search-section" style="width:100%;padding:22px 12px 17px;text-align:center;">
+        <div class="article-search-wrap">
+          <input id="articleSearch" type="search" placeholder="Search articles..." aria-label="Search articles" autocomplete="off" />
+          <button id="articleSearchButton" type="button" aria-label="Search"><i class="lni lni-search-alt"></i></button>
         </div>
-
       </div>
 
-
-      <!-- Dynamic Categories -->
-      <div
-        id="articleCategories"
-        class="article-categories"
-      >
-        <button
-          type="button"
-          class="category-btn active"
-          data-category="all"
-        >
-          All
-        </button>
+      <div id="articleCategories" class="article-categories">
+        <button type="button" class="category-btn active" data-category="all">All</button>
       </div>
 
-
-      <!-- Articles Container -->
       <div id="articlesContainer" class="row">
-
-        <div class="col-12 text-center" id="articlesLoading">
-          <p>Loading articles...</p>
-        </div>
-
+        <div class="col-12 text-center" id="articlesLoading"><p>Loading articles...</p></div>
       </div>
-
     </div>
   </section>
 
-
   <!-- Footer -->
   <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
-
-    <div class="shape shape-1">
-      <img src="assets/images/footer/shape-1.svg" alt="shape" />
-    </div>
-
-    <div class="shape shape-2">
-      <img src="assets/images/footer/shape-2.svg" alt="shape" />
-    </div>
-
-    <div class="shape shape-3">
-      <img src="assets/images/footer/shape-3.svg" alt="shape" />
-    </div>
-
-    <div class="ud-footer-widgets">
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-
-            <div class="ud-widget">
-
-              <a href="index.html" class="ud-footer-logo">
-                <span
-                  style="
-                    font-size: 28px;
-                    font-weight: 700;
-                    color: #fff;
-                  "
-                >
-                  Bexo
-                </span>
-              </a>
-
-              <p class="ud-widget-desc">
-                Discover useful information, learn new things and explore
-                interesting ideas with Bexo.
-              </p>
-
-              <ul class="ud-widget-socials">
-
-                <li>
-                  <a href="javascript:void(0)" aria-label="Facebook">
-                    <i class="lni lni-facebook-filled"></i>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)" aria-label="Twitter">
-                    <i class="lni lni-twitter-filled"></i>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)" aria-label="Instagram">
-                    <i class="lni lni-instagram-filled"></i>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)" aria-label="LinkedIn">
-                    <i class="lni lni-linkedin-original"></i>
-                  </a>
-                </li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
-
-          <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-
-            <div class="ud-widget">
-
-              <h5 class="ud-widget-title">Explore</h5>
-
-              <ul class="ud-widget-links">
-
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="blog.html">Articles</a></li>
-                <li><a href="software.html">Software</a></li>
-                <li><a href="pricing.html">Categories</a></li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
-
-          <!-- Dynamic category links -->
-          <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-
-            <div class="ud-widget">
-
-              <h5 class="ud-widget-title">Categories</h5>
-
-              <ul
-                id="footerCategories"
-                class="ud-widget-links"
-              >
-                <li>
-                  <a href="blog.html">
-                    All Articles
-                  </a>
-                </li>
-              </ul>
-
-            </div>
-
-          </div>
-
-
-          <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-
-            <div class="ud-widget">
-
-              <h5 class="ud-widget-title">Bexo</h5>
-
-              <ul class="ud-widget-links">
-
-                <li>
-                  <a href="about.html">About Bexo</a>
-                </li>
-
-                <li>
-                  <a href="index.html#faq">FAQ</a>
-                </li>
-
-                <li>
-                  <a href="index.html#contact">Contact</a>
-                </li>
-
-                <li>
-                  <a href="login.html">Login</a>
-                </li>
-
-                <li>
-                  <a href="signup.html">Sign Up</a>
-                </li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
-
-          <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
-
-            <div class="ud-widget">
-
-              <h5 class="ud-widget-title">Discover</h5>
-
-              <p class="ud-widget-desc">
-                Discover • Learn • Explore
-              </p>
-
-              <p class="ud-widget-desc">
-                New articles and useful topics will be added over time.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="ud-footer-bottom">
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-md-8">
-
-            <ul class="ud-footer-bottom-left">
-
-              <li>
-                <a href="javascript:void(0)">
-                  Privacy Policy
-                </a>
-              </li>
-
-              <li>
-                <a href="index.html#contact">
-                  Support
-                </a>
-              </li>
-
-              <li>
-                <a href="javascript:void(0)">
-                  Terms of Service
-                </a>
-              </li>
-
-            </ul>
-
-          </div>
-
-          <div class="col-md-4">
-
-            <p class="ud-footer-bottom-right">
-              © 2026 Bexo. All rights reserved.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
+    <div class="shape shape-1"><img src="assets/images/footer/shape-1.svg" alt="" /></div>
+    <div class="shape shape-2"><img src="assets/images/footer/shape-2.svg" alt="" /></div>
+    <div class="shape shape-3"><img src="assets/images/footer/shape-3.svg" alt="" /></div>
+    <div class="ud-footer-widgets"><div class="container"><div class="row">
+      <div class="col-xl-3 col-lg-4 col-md-6"><div class="ud-widget">
+        <a href="index.html" class="ud-footer-logo"><span style="font-size:26px;font-weight:700;color:#fff;">Bexo</span></a>
+        <p class="ud-widget-desc">Discover useful information, learn new things and explore interesting ideas with Bexo.</p>
+        <ul class="ud-widget-socials">
+          <li><a href="javascript:void(0)" aria-label="Facebook"><i class="lni lni-facebook-filled"></i></a></li>
+          <li><a href="javascript:void(0)" aria-label="Twitter"><i class="lni lni-twitter-filled"></i></a></li>
+          <li><a href="javascript:void(0)" aria-label="Instagram"><i class="lni lni-instagram-filled"></i></a></li>
+          <li><a href="javascript:void(0)" aria-label="LinkedIn"><i class="lni lni-linkedin-original"></i></a></li>
+        </ul>
+      </div></div>
+      <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6"><div class="ud-widget">
+        <h5 class="ud-widget-title">Explore</h5><ul class="ud-widget-links">
+          <li><a href="index.html">Home</a></li><li><a href="index.html#features">Features</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Articles</a></li><li><a href="software.html">Software</a></li><li><a href="pricing.html">Categories</a></li>
+        </ul>
+      </div></div>
+      <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6"><div class="ud-widget">
+        <h5 class="ud-widget-title">Categories</h5><ul id="footerCategories" class="ud-widget-links"><li><a href="blog.html">All Articles</a></li></ul>
+      </div></div>
+      <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6"><div class="ud-widget">
+        <h5 class="ud-widget-title">Bexo</h5><ul class="ud-widget-links">
+          <li><a href="about.html">About Bexo</a></li><li><a href="index.html#faq">FAQ</a></li><li><a href="index.html#contact">Contact</a></li><li><a href="login.html">Login</a></li><li><a href="signup.html">Sign Up</a></li>
+        </ul>
+      </div></div>
+      <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10"><div class="ud-widget">
+        <h5 class="ud-widget-title">Discover</h5><p class="ud-widget-desc">Discover • Learn • Explore</p><p class="ud-widget-desc">New articles and useful topics will be added over time.</p>
+      </div></div>
+    </div></div></div>
+    <div class="ud-footer-bottom"><div class="container"><div class="row">
+      <div class="col-md-8"><ul class="ud-footer-bottom-left">
+        <li><a href="javascript:void(0)">Privacy Policy</a></li><li><a href="index.html#contact">Support</a></li><li><a href="javascript:void(0)">Terms of Service</a></li>
+      </ul></div>
+      <div class="col-md-4"><p class="ud-footer-bottom-right">© 2026 Bexo. All rights reserved.</p></div>
+    </div></div></div>
   </footer>
 
-
-  <a
-    href="javascript:void(0)"
-    class="back-to-top"
-    aria-label="Back to top"
-  >
-    <i class="lni lni-chevron-up"></i>
-  </a>
-
+  <a href="javascript:void(0)" class="back-to-top" aria-label="Back to top"><i class="lni lni-chevron-up"></i></a>
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/wow.min.js"></script>
   <script src="assets/js/main.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script>
+    "use strict";
 
-    const SUPABASE_URL =
-      "https://ulxreyrjtavflppahqlp.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
-
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
-
+    const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let allArticles = [];
     let currentCategory = "all";
 
-
-    // =========================
-    // Load Articles
-    // =========================
+    function safeImageUrl(value) {
+      if (typeof value !== "string" || !value.trim()) return "assets/images/blog/blog-01.jpg";
+      try {
+        const parsed = new URL(value.trim(), window.location.href);
+        return ["https:", "http:"].includes(parsed.protocol) ? parsed.href : "assets/images/blog/blog-01.jpg";
+      } catch (_) {
+        return "assets/images/blog/blog-01.jpg";
+      }
+    }
 
     async function loadArticles() {
-
-      const container =
-        document.getElementById(
-          "articlesContainer"
-        );
-
+      const container = document.getElementById("articlesContainer");
       try {
-
-        const { data, error } =
-          await supabaseClient
-            .from("articles")
-            .select("*")
-            .eq("is_published", true)
-            .order("created_at", {
-              ascending: false
-            });
-
-
-        if (error) {
-          throw error;
-        }
-
-
+        const { data, error } = await supabaseClient
+          .from("articles")
+          .select("*")
+          .eq("is_published", true)
+          .order("created_at", { ascending: false });
+        if (error) throw error;
         allArticles = data || [];
-
-
-        buildCategories(
-          allArticles
-        );
-
-        renderArticles(
-          allArticles
-        );
-
-
+        buildCategories(allArticles);
+        applyFilters();
       } catch (error) {
-
-        console.error(error);
-
-        container.innerHTML = `
-          <div class="col-12 text-center">
-            <p>Unable to load articles.</p>
-          </div>
-        `;
-
+        console.error("Article loading error:", error);
+        container.replaceChildren();
+        const state = document.createElement("div");
+        state.className = "col-12 text-center";
+        const message = document.createElement("p");
+        message.textContent = "Unable to load articles. Please try again later.";
+        state.appendChild(message);
+        container.appendChild(state);
       }
-
     }
 
+    function buildCategories(articles) {
+      const categoriesContainer = document.getElementById("articleCategories");
+      const footerCategories = document.getElementById("footerCategories");
+      const categories = [...new Set(articles.map(article => (article.category || "").trim()).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b));
 
-    // =========================
-    // Build Dynamic Categories
-    // =========================
-
-    function buildCategories(
-      articles
-    ) {
-
-      const categoriesContainer =
-        document.getElementById(
-          "articleCategories"
-        );
-
-      const footerCategories =
-        document.getElementById(
-          "footerCategories"
-        );
-
-
-      const categories =
-        [
-          ...new Set(
-            articles
-              .map(
-                article =>
-                  (article.category || "")
-                    .trim()
-              )
-              .filter(Boolean)
-          )
-        ].sort(
-          (a, b) =>
-            a.localeCompare(b)
-        );
-
-
-      categoriesContainer.innerHTML = "";
-
-
-      // All button
-      const allButton =
-        document.createElement(
-          "button"
-        );
-
+      categoriesContainer.replaceChildren();
+      const allButton = document.createElement("button");
       allButton.type = "button";
-      allButton.className =
-        "category-btn active";
-      allButton.dataset.category =
-        "all";
-      allButton.textContent =
-        "All";
+      allButton.className = "category-btn active";
+      allButton.dataset.category = "all";
+      allButton.textContent = "All";
+      categoriesContainer.appendChild(allButton);
 
-      categoriesContainer.appendChild(
-        allButton
-      );
+      categories.forEach(category => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "category-btn";
+        button.dataset.category = category;
+        button.textContent = category;
+        categoriesContainer.appendChild(button);
+      });
 
+      footerCategories.replaceChildren();
+      const allLi = document.createElement("li");
+      const allLink = document.createElement("a");
+      allLink.href = "blog.html";
+      allLink.textContent = "All Articles";
+      allLi.appendChild(allLink);
+      footerCategories.appendChild(allLi);
 
-      // Dynamic category buttons
-      categories.forEach(
-        function (category) {
+      categories.forEach(category => {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "blog.html?category=" + encodeURIComponent(category);
+        link.textContent = category;
+        li.appendChild(link);
+        footerCategories.appendChild(li);
+      });
 
-          const button =
-            document.createElement(
-              "button"
-            );
-
-          button.type = "button";
-
-          button.className =
-            "category-btn";
-
-          button.dataset.category =
-            category;
-
-          button.textContent =
-            category;
-
-          categoriesContainer.appendChild(
-            button
-          );
-
-        }
-      );
-
-
-      // Footer
-      footerCategories.innerHTML = `
-        <li>
-          <a href="blog.html">
-            All Articles
-          </a>
-        </li>
-      `;
-
-
-      categories.forEach(
-        function (category) {
-
-          const li =
-            document.createElement(
-              "li"
-            );
-
-          const link =
-            document.createElement(
-              "a"
-            );
-
-          link.href =
-            "blog.html?category=" +
-            encodeURIComponent(
-              category
-            );
-
-          link.textContent =
-            category;
-
-          li.appendChild(link);
-
-          footerCategories.appendChild(
-            li
-          );
-
-        }
-      );
-
-
-      // Category click
-      categoriesContainer
-        .querySelectorAll(
-          ".category-btn"
-        )
-        .forEach(
-          function (button) {
-
-            button.addEventListener(
-              "click",
-              function () {
-
-                currentCategory =
-                  button.dataset.category;
-
-                categoriesContainer
-                  .querySelectorAll(
-                    ".category-btn"
-                  )
-                  .forEach(
-                    btn =>
-                      btn.classList.remove(
-                        "active"
-                      )
-                  );
-
-                button.classList.add(
-                  "active"
-                );
-
-
-                applyFilters();
-
-              }
-            );
-
-          }
-        );
-
+      categoriesContainer.querySelectorAll(".category-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          currentCategory = button.dataset.category || "all";
+          categoriesContainer.querySelectorAll(".category-btn").forEach(item => item.classList.toggle("active", item === button));
+          applyFilters();
+        });
+      });
     }
-
-
-    // =========================
-    // Apply Search + Category
-    // =========================
 
     function applyFilters() {
-
-      const box =
-        document.getElementById(
-          "articleSearch"
-        );
-
-     const word = box
-  ? box.value.trim().toLocaleLowerCase()
-  : "";
-
-
-      const filtered =
-        allArticles.filter(
-          function (article) {
-
-            const matchesCategory =
-              currentCategory === "all" ||
-              (
-                article.category || ""
-              ).trim() ===
-              currentCategory;
-
-
-          const searchableText = [
-  article.title,
-  article.description,
-  article.content,
-  article.category
-]
-  .filter(Boolean)
-  .join(" ")
-  .toLocaleLowerCase();
-
-const matchesSearch =
-  !word || searchableText.includes(word);
-
-
-            return (
-              matchesCategory &&
-              matchesSearch
-            );
-
-          }
-        );
-
-
-      renderArticles(
-        filtered
-      );
-
+      const box = document.getElementById("articleSearch");
+      const word = box ? box.value.trim().toLocaleLowerCase() : "";
+      const filtered = allArticles.filter(article => {
+        const category = (article.category || "").trim();
+        const matchesCategory = currentCategory === "all" || category === currentCategory;
+        const searchableText = [article.title, article.description, article.content, article.category]
+          .filter(Boolean).join(" ").toLocaleLowerCase();
+        return matchesCategory && (!word || searchableText.includes(word));
+      });
+      renderArticles(filtered);
     }
 
-
-    // =========================
-    // Render Articles
-    // =========================
-
-    function renderArticles(
-      articles
-    ) {
-
-      const container =
-        document.getElementById(
-          "articlesContainer"
-        );
-
-
+    function renderArticles(articles) {
+      const container = document.getElementById("articlesContainer");
+      container.replaceChildren();
       if (!articles.length) {
-
-        container.innerHTML = `
-          <div class="col-12 text-center">
-            <p>No articles available.</p>
-          </div>
-        `;
-
+        const state = document.createElement("div");
+        state.className = "col-12 text-center";
+        const message = document.createElement("p");
+        message.textContent = "No articles available.";
+        state.appendChild(message);
+        container.appendChild(state);
         return;
       }
 
+      articles.forEach(article => {
+        const card = document.createElement("div");
+        card.className = "col-lg-4 col-md-6 article-card";
 
-      container.innerHTML = "";
+        const blog = document.createElement("article");
+        blog.className = "ud-single-blog";
 
+        const imageBox = document.createElement("div");
+        imageBox.className = "ud-blog-image";
+        const imageLink = document.createElement("a");
+        imageLink.href = "blog-details.html?id=" + encodeURIComponent(article.id);
+        const img = document.createElement("img");
+        img.src = safeImageUrl(article.image_url || article.image);
+        img.alt = article.title || "Article";
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.onerror = () => { img.onerror = null; img.src = "assets/images/blog/blog-01.jpg"; };
+        imageLink.appendChild(img);
+        imageBox.appendChild(imageLink);
 
-      articles.forEach(
-        function (article) {
+        const content = document.createElement("div");
+        content.className = "ud-blog-content";
+        const category = document.createElement("span");
+        category.className = "ud-blog-date";
+        category.textContent = article.category || "Bexo";
 
-          const image =
-            article.image_url ||
-            "assets/images/blog/blog-01.jpg";
+        const heading = document.createElement("h3");
+        heading.className = "ud-blog-title";
+        const titleLink = document.createElement("a");
+        titleLink.href = "blog-details.html?id=" + encodeURIComponent(article.id);
+        titleLink.textContent = article.title || "Untitled article";
+        heading.appendChild(titleLink);
 
+        const description = document.createElement("p");
+        description.className = "ud-blog-desc";
+        description.textContent = article.description || "Discover useful information with Bexo.";
 
-          const category =
-            article.category ||
-            "Bexo";
-
-
-          const description =
-            article.description ||
-            "Discover useful information with Bexo.";
-
-
-          const card =
-            document.createElement(
-              "div"
-            );
-
-          card.className =
-            "col-lg-4 col-md-6 article-card";
-
-
-          const blog =
-            document.createElement(
-              "div"
-            );
-
-          blog.className =
-            "ud-single-blog";
-
-
-          const imageBox =
-            document.createElement(
-              "div"
-            );
-
-          imageBox.className =
-            "ud-blog-image";
-
-
-          const imageLink =
-            document.createElement(
-              "a"
-            );
-
-          imageLink.href =
-            "blog-details.html?id=" +
-            encodeURIComponent(
-              article.id
-            );
-
-
-          const img =
-            document.createElement(
-              "img"
-            );
-
-          img.src =
-            image;
-
-          img.alt =
-            article.title || "Article";
-
-
-          imageLink.appendChild(img);
-          imageBox.appendChild(imageLink);
-
-
-          const content =
-            document.createElement(
-              "div"
-            );
-
-          content.className =
-            "ud-blog-content";
-
-
-          const date =
-            document.createElement(
-              "span"
-            );
-
-          date.className =
-            "ud-blog-date";
-
-          date.textContent =
-            category;
-
-
-          const heading =
-            document.createElement(
-              "h3"
-            );
-
-          heading.className =
-            "ud-blog-title";
-
-
-          const titleLink =
-            document.createElement(
-              "a"
-            );
-
-          titleLink.href =
-            "blog-details.html?id=" +
-            encodeURIComponent(
-              article.id
-            );
-
-          titleLink.textContent =
-            article.title || "";
-
-
-          heading.appendChild(
-            titleLink
-          );
-
-
-          const desc =
-            document.createElement(
-              "p"
-            );
-
-          desc.className =
-            "ud-blog-desc";
-
-          desc.textContent =
-            description;
-
-
-          content.appendChild(date);
-          content.appendChild(heading);
-          content.appendChild(desc);
-
-
-          blog.appendChild(imageBox);
-          blog.appendChild(content);
-
-          card.appendChild(blog);
-
-          container.appendChild(card);
-
-        }
-      );
-
+        content.append(category, heading, description);
+        blog.append(imageBox, content);
+        card.appendChild(blog);
+        container.appendChild(card);
+      });
     }
 
+    function readInitialFilters() {
+      const params = new URLSearchParams(window.location.search);
+      const searchFromHome = params.get("search");
+      const categoryFromUrl = params.get("category");
+      const box = document.getElementById("articleSearch");
+      if (searchFromHome && box) box.value = searchFromHome;
 
-    // =========================
-    // Search
-    // =========================
-
-    function searchArticles() {
-      applyFilters();
+      return categoryFromUrl;
     }
 
-
-    // =========================
-    // Start
-    // =========================
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function () {
-
-        const box =
-          document.getElementById(
-            "articleSearch"
-          );
-
-        const button =
-          document.getElementById(
-            "articleSearchButton"
-          );
-
-
-        if (box) {
-
-          box.addEventListener(
-            "input",
-            searchArticles
-          );
-
-
-          box.addEventListener(
-            "keydown",
-            function (event) {
-
-              if (event.key === "Enter") {
-
-                event.preventDefault();
-
-                searchArticles();
-
-              }
-
-            }
-          );
-
-        }
-
-
-        if (button) {
-
-          button.addEventListener(
-            "click",
-            searchArticles
-          );
-
-        }
-
-
-        const params =
-          new URLSearchParams(
-            window.location.search
-          );
-
-
-        const searchFromHome =
-          params.get("search");
-
-
-        const categoryFromUrl =
-          params.get("category");
-
-
-        if (
-          searchFromHome &&
-          box
-        ) {
-
-          box.value =
-            searchFromHome;
-
-        }
-
-
-        loadArticles().then(
-          function () {
-
-            if (
-              categoryFromUrl
-            ) {
-
-              const buttons =
-                document.querySelectorAll(
-                  ".category-btn"
-                );
-
-
-              buttons.forEach(
-                function (button) {
-
-                  if (
-                    button.dataset.category ===
-                    categoryFromUrl
-                  ) {
-
-                    currentCategory =
-                      categoryFromUrl;
-
-                    buttons.forEach(
-                      btn =>
-                        btn.classList.remove(
-                          "active"
-                        )
-                    );
-
-                    button.classList.add(
-                      "active"
-                    );
-
-                    applyFilters();
-
-                  }
-
-                }
-              );
-
-            }
-
+    document.addEventListener("DOMContentLoaded", async () => {
+      const box = document.getElementById("articleSearch");
+      const button = document.getElementById("articleSearchButton");
+      if (box) {
+        box.addEventListener("input", applyFilters);
+        box.addEventListener("keydown", event => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            applyFilters();
           }
-        );
-
+        });
       }
-    );
+      if (button) button.addEventListener("click", applyFilters);
 
+      const categoryFromUrl = readInitialFilters();
+      await loadArticles();
+      if (categoryFromUrl) {
+        const target = [...document.querySelectorAll(".category-btn")]
+          .find(item => item.dataset.category === categoryFromUrl);
+        if (target) {
+          currentCategory = categoryFromUrl;
+          document.querySelectorAll(".category-btn").forEach(item => item.classList.toggle("active", item === target));
+          applyFilters();
+        }
+      }
+    });
   </script>
-
 </body>
 </html>
-
