@@ -78,19 +78,22 @@
       font-size: 14px;
       line-height: 1.6;
     }
-    #bexo-services-promo .bexo-promo-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 15px;
-      border-radius: 8px;
-      background: #155eef;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-    }
+   #bexo-services-promo .bexo-promo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 5px 10px;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 7px;
+  background: #155eef;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.4;
+}
     @keyframes bexoPromoIn {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
