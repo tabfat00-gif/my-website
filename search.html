@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,6 +90,10 @@
       .search-box button {
         height: 48px;
       }
+
+      .result-card {
+        padding: 16px;
+      }
     }
   </style>
 </head>
@@ -101,9 +104,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="index.html">
-          <span style="font-size:28px;font-weight:700;color:#fff">
-            Bexo
-          </span>
+          <span style="font-size:28px;font-weight:700;color:#fff">Bexo</span>
         </a>
 
         <button class="navbar-toggler" type="button"
@@ -122,7 +123,7 @@
             <li class="nav-item"><a href="blog.html">Articles</a></li>
             <li class="nav-item"><a href="software.html">Software</a></li>
             <li class="nav-item"><a href="pricing.html">Categories</a></li>
-            <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            <li class="nav-item"><a href="contact.html">Contact</a></li>
           </ul>
         </div>
       </nav>
@@ -140,7 +141,6 @@
 
   <main class="search-area">
     <div class="container">
-
       <form id="searchForm" class="search-box">
         <input id="searchInput" type="search"
           placeholder="Search the entire website..."
@@ -148,12 +148,8 @@
         <button type="submit">Search</button>
       </form>
 
-      <p id="searchStatus" aria-live="polite">
-        Enter a word to search Bexo.
-      </p>
-
+      <p id="searchStatus" aria-live="polite">Enter a word to search Bexo.</p>
       <div id="searchResults"></div>
-
     </div>
   </main>
 
@@ -165,6 +161,8 @@
       <a href="blog.html">Articles</a>
       &nbsp; | &nbsp;
       <a href="software.html">Software</a>
+      &nbsp; | &nbsp;
+      <a href="contact.html">Contact</a>
     </div>
   </footer>
 
@@ -172,24 +170,31 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
-    const SUPABASE_URL =
-      "https://ulxreyrjtavflppahqlp.supabase.co";
+    const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
 
-    const SUPABASE_KEY =
-      "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
-
-    const supabaseClient =
-      window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
     const input = document.getElementById("searchInput");
     const resultsBox = document.getElementById("searchResults");
     const statusBox = document.getElementById("searchStatus");
 
+    // Public/static pages are searched here. Article and software records
+    // are searched separately from Supabase below.
     const pages = [
       { file: "index.html", name: "Home" },
       { file: "about.html", name: "About Bexo" },
+      { file: "blog.html", name: "Articles" },
       { file: "software.html", name: "Software" },
-      { file: "pricing.html", name: "Categories" }
+      { file: "pricing.html", name: "Categories" },
+      { file: "contact.html", name: "Contact" },
+      { file: "services.html", name: "Website Services" },
+      { file: "login.html", name: "Login" },
+      { file: "signup.html", name: "Sign Up" },
+      { file: "404.html", name: "Page Not Found" }
     ];
 
     function normalize(value) {
@@ -197,62 +202,113 @@
         .toLocaleLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[\s\u00a0]+/g, " ")
         .trim();
     }
 
+    // Keep track of data sources that fail instead of silently treating
+    // a failed database request as an empty search result.
+    let searchIssues = [];
+    let activeSearchId = 0;
 
-function makeResult(title, url, type, description, imageUrl = "") {
-  const card = document.createElement("article");
-  card.className = "result-card";
-  card.style.display = "flex";
-  card.style.alignItems = "center";
-  card.style.gap = "16px";
+    function matchesQuery(text, query) {
+      const normalizedText = normalize(text);
+      const tokens = normalize(query).split(/\s+/).filter(Boolean);
+      return tokens.length > 0 && tokens.every(token => normalizedText.includes(token));
+    }
 
-  const image = document.createElement("img");
-  image.src = imageUrl || "assets/images/favicon.svg";
-  image.alt = title;
-  image.loading = "lazy";
-  image.style.width = "85px";
-  image.style.height = "85px";
-  image.style.objectFit = "contain";
-  image.style.flexShrink = "0";
-  image.style.borderRadius = "8px";
+    function makeResult(title, url, type, description, imageUrl = "") {
+      const card = document.createElement("article");
+      card.className = "result-card";
+      card.style.display = "flex";
+      card.style.alignItems = "center";
+      card.style.gap = "16px";
 
-  image.onerror = () => {
-    image.onerror = null;
-    image.src = "assets/images/favicon.svg";
-  };
+      const image = document.createElement("img");
+      image.src = imageUrl || "assets/images/favicon.svg";
+      image.alt = title;
+      image.loading = "lazy";
+      image.style.width = "85px";
+      image.style.height = "85px";
+      image.style.objectFit = "contain";
+      image.style.flexShrink = "0";
+      image.style.borderRadius = "8px";
 
-  const content = document.createElement("div");
-  content.style.minWidth = "0";
+      image.onerror = () => {
+        image.onerror = null;
+        image.src = "assets/images/favicon.svg";
+      };
 
-  const badge = document.createElement("span");
-  badge.className = "result-type";
-  badge.textContent = type;
+      const content = document.createElement("div");
+      content.style.minWidth = "0";
 
-  const heading = document.createElement("h3");
-  const link = document.createElement("a");
-  link.href = url;
-  link.textContent = title;
-  heading.appendChild(link);
+      const badge = document.createElement("span");
+      badge.className = "result-type";
+      badge.textContent = type;
 
-  const paragraph = document.createElement("p");
-  paragraph.textContent = description;
+      const heading = document.createElement("h3");
+      const link = document.createElement("a");
+      link.href = url;
+      link.textContent = title;
+      heading.appendChild(link);
 
-  content.append(badge, heading, paragraph);
-  card.append(image, content);
-  resultsBox.appendChild(card);
-}
+      const paragraph = document.createElement("p");
+      paragraph.textContent = description || "Open this result to learn more.";
 
+      content.append(badge, heading, paragraph);
+      card.append(image, content);
+      resultsBox.appendChild(card);
+    }
 
+    function originalIndexFromNormalized(text, normalizedIndex) {
+      // Translate a normalized match position back to the original text so
+      // accents (for example, é -> e) do not shift the displayed excerpt.
+      let normalizedLength = 0;
+      for (let index = 0; index < text.length;) {
+        const character = String.fromCodePoint(text.codePointAt(index));
+        const normalizedCharacter = character
+          .toLocaleLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+
+        if (normalizedLength + normalizedCharacter.length > normalizedIndex) {
+          return index;
+        }
+
+        normalizedLength += normalizedCharacter.length;
+        index += character.length;
+      }
+      return text.length;
+    }
+
+    function makeSnippet(text, query, fallbackTitle) {
+      const cleanText = String(text || "").trim();
+      if (!cleanText) return fallbackTitle || "Open this result to learn more.";
+
+      const normalizedText = normalize(cleanText);
+      const tokens = normalize(query).split(/\s+/).filter(Boolean);
+      let matchIndex = normalizedText.indexOf(query);
+      if (matchIndex < 0) {
+        matchIndex = tokens.map(token => normalizedText.indexOf(token))
+          .filter(index => index >= 0)
+          .sort((a, b) => a - b)[0] ?? -1;
+      }
+      if (matchIndex < 0) {
+        return fallbackTitle || cleanText.slice(0, 220);
+      }
+
+      const originalMatchIndex = originalIndexFromNormalized(cleanText, matchIndex);
+      const start = Math.max(0, originalMatchIndex - 70);
+      const end = Math.min(cleanText.length, start + 220);
+      const excerpt = cleanText.slice(start, end).trim();
+
+      return (start > 0 ? "…" : "") + excerpt + (end < cleanText.length ? "…" : "");
+    }
 
     async function getPageResult(page, query) {
       try {
         const response = await fetch(page.file);
-
-        if (!response.ok) {
-          return null;
-        }
+        if (!response.ok) return null;
 
         const html = await response.text();
         const doc = new DOMParser().parseFromString(html, "text/html");
@@ -278,23 +334,18 @@ function makeResult(title, url, type, description, imageUrl = "") {
           .filter(Boolean)
           .join(" ");
 
-        const searchable = normalize(title + " " + text);
+        // Include the configured page name and filename as search aliases.
+        const searchable = normalize(
+          page.name + " " + page.file + " " + title + " " + text
+        );
 
-        if (!searchable.includes(query)) {
-          return null;
-        }
-
-        const index = searchable.indexOf(query);
-        const start = Math.max(0, index - 70);
-        const snippet = text
-          ? text.slice(start, start + 220)
-          : title;
+        if (!matchesQuery(searchable, query)) return null;
 
         return {
           title,
           url: page.file,
           type: "Website page",
-          description: snippet
+          description: makeSnippet(text, query, "Open the " + page.name + " page on Bexo.")
         };
       } catch (error) {
         console.warn("Could not search page:", page.file, error);
@@ -311,6 +362,7 @@ function makeResult(title, url, type, description, imageUrl = "") {
 
       if (error) {
         console.error("Article search error:", error);
+        searchIssues.push("articles");
         return [];
       }
 
@@ -323,89 +375,168 @@ function makeResult(title, url, type, description, imageUrl = "") {
             article.category
           ].filter(Boolean).join(" "));
 
-          return text.includes(query);
+          return matchesQuery(text, query);
         })
-        .map(article => ({
-          title: article.title || "Untitled article",
-          url: "blog-details.html?id=" + encodeURIComponent(article.id),
-          type: "Article",
-          description: article.description ||
-            String(article.content || "").slice(0, 220) ||
-            "Open this article to read more."
+        .map(article => {
+          const searchableText = [
+            article.title,
+            article.description,
+            article.content,
+            article.category
+          ].filter(Boolean).join(" ");
+
+          return {
+            title: article.title || "Untitled article",
+            // Search results open the selected article's detail page.
+            url: "blog-details.html?id=" + encodeURIComponent(article.id),
+            type: "Article",
+            // Show context close to the matching term, even when it appears
+            // in the article body rather than its description.
+            description: makeSnippet(
+              searchableText,
+              query,
+              article.description || article.title || "Open this article to read more."
+            )
+          };
+        });
+    }
+
+    async function getStaticSoftwareImageMap(staticSoftware) {
+      const imageMap = {};
+
+      try {
+        const response = await fetch("software.html");
+        if (!response.ok) return imageMap;
+
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html, "text/html");
+
+        staticSoftware.forEach(software => {
+          const target = normalize(software.title);
+          const textElements = [
+            ...doc.querySelectorAll("h1, h2, h3, h4, h5, a, strong")
+          ];
+          const match = textElements.find(element =>
+            normalize(element.textContent).includes(target)
+          );
+
+          if (!match) return;
+
+          // Walk upward from the product title and find an image inside its
+          // nearest card/container. If none exists, the normal fallback icon
+          // is used by makeResult().
+          let node = match;
+          for (let depth = 0; node && depth < 7; depth += 1, node = node.parentElement) {
+            const image = node.querySelector("img[src]");
+            if (image) {
+              const src = image.getAttribute("src");
+              if (src) {
+                imageMap[software.title] = new URL(src, window.location.href).href;
+                break;
+              }
+            }
+          }
+        });
+      } catch (error) {
+        console.warn("Could not read static software images:", error);
+      }
+
+      return imageMap;
+    }
+
+    async function getSoftwareResults(query) {
+      const { data, error } = await supabaseClient
+        .from("software")
+        .select("id, title, description, category, download_url, image_url")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Software search error:", error);
+        searchIssues.push("software");
+        // Keep static software entries searchable even if Supabase fails.
+      }
+
+      const databaseResults = (data || [])
+        .filter(software => {
+          const text = normalize([
+            software.title,
+            software.description,
+            software.category
+          ].filter(Boolean).join(" "));
+
+          return matchesQuery(text, query);
+        })
+        .map(software => {
+          const searchableText = [
+            software.title,
+            software.category,
+            software.description
+          ].filter(Boolean).join(" ");
+
+          return {
+            title: software.title || "Software",
+            url: "software.html",
+            type: "Software",
+            image_url: software.image_url || "",
+            description: makeSnippet(
+              searchableText,
+              query,
+              (software.category ? software.category + " — " : "") +
+                (software.description || "View this software on Bexo.")
+            )
+          };
+        });
+
+      // These two software cards are also displayed directly in software.html.
+      const staticSoftware = [
+        {
+          title: "Windows 7 Ultimate SP1 SuperLite x64",
+          category: "Windows",
+          description: "Windows 7 Ultimate SP1 SuperLite x64. File size: approximately 0.98 GB."
+        },
+        {
+          title: "Kali Linux",
+          category: "Linux",
+          description: "Kali Linux tools and official downloads."
+        }
+      ];
+
+      const staticImageMap = await getStaticSoftwareImageMap(staticSoftware);
+      const staticResults = staticSoftware
+        .filter(software => matchesQuery(
+          software.title + " " + software.category + " " + software.description,
+          query
+        ))
+        .map(software => ({
+          title: software.title,
+          url: "software.html",
+          type: "Software",
+          image_url: staticImageMap[software.title] || "",
+          description: makeSnippet(
+            [software.title, software.category, software.description].join(" "),
+            query,
+            software.description
+          )
         }));
+
+      // Avoid duplicates if a static item is also present in the Supabase table.
+      const databaseTitles = new Set(
+        databaseResults.map(result => normalize(result.title))
+      );
+      const uniqueStaticResults = staticResults.filter(
+        result => !databaseTitles.has(normalize(result.title))
+      );
+
+      return [...databaseResults, ...uniqueStaticResults];
     }
-
-async function getSoftwareResults(query) {
-  const { data, error } = await supabaseClient
-    .from("software")
-    .select("id, title, description, category, download_url, image_url")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("Software search error:", error);
-    return [];
-  }
-
-  const results = (data || [])
-    .filter(software => {
-      const text = normalize([
-        software.title,
-        software.description,
-        software.category
-      ].filter(Boolean).join(" "));
-
-      return text.includes(query);
-    })
-  
-.map(software => ({
-  title: software.title || "Software",
-  url: "software.html",
-  type: "Software",
-  image_url: software.image_url || "",
-  description:
-    (software.category ? software.category + " — " : "") +
-    (software.description || "View this software on Bexo.")
-}));
-  // Include the two software cards written directly in software.html.
-  const staticSoftware = [
-    {
-      title: "Windows 7 Ultimate SP1 SuperLite x64",
-      category: "Windows",
-      description: "Windows 7 Ultimate SP1 SuperLite x64. File size: approximately 0.98 GB."
-    },
-    {
-      title: "Kali Linux",
-      category: "Linux",
-      description: "Kali Linux tools and official downloads."
-    }
-  ];
-
-  staticSoftware.forEach(software => {
-    const text = normalize(
-      software.title + " " +
-      software.category + " " +
-      software.description
-    );
-
-    if (text.includes(query)) {
-      results.push({
-        title: software.title,
-        url: "software.html",
-        type: "Software",
-        description: software.description
-      });
-    }
-  });
-
-  return results;
-}
-
 
     async function performSearch(term) {
+      const searchId = ++activeSearchId;
       const originalTerm = term.trim();
       const query = normalize(originalTerm);
 
       resultsBox.replaceChildren();
+      searchIssues = [];
 
       if (!query) {
         statusBox.textContent = "Enter a word to search Bexo.";
@@ -413,74 +544,89 @@ async function getSoftwareResults(query) {
       }
 
       statusBox.textContent = "Searching Bexo...";
-      const tasks = [
-  ...pages.map(page => getPageResult(page, query)),
-  getArticleResults(query),
-  getSoftwareResults(query)
-];
 
-      const responses = await Promise.allSettled(tasks);
-      const results = [];
+      try {
+        const tasks = [
+          ...pages.map(page => getPageResult(page, query)),
+          getArticleResults(query),
+          getSoftwareResults(query)
+        ];
 
-      for (const response of responses) {
-        if (response.status !== "fulfilled") continue;
+        const responses = await Promise.allSettled(tasks);
+        if (searchId !== activeSearchId) return;
 
-        if (Array.isArray(response.value)) {
-          results.push(...response.value);
-        } else if (response.value) {
-          results.push(response.value);
+        const results = [];
+        for (const response of responses) {
+          if (response.status !== "fulfilled") {
+            searchIssues.push("a search source");
+            console.error("Search task failed:", response.reason);
+            continue;
+          }
+
+          if (Array.isArray(response.value)) results.push(...response.value);
+          else if (response.value) results.push(response.value);
+        }
+
+        // Remove duplicate links/titles from overlapping sources.
+        const seen = new Set();
+        const uniqueResults = results.filter(result => {
+          const key = normalize(result.title) + "|" + String(result.url || "");
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+
+        if (!uniqueResults.length) {
+          statusBox.textContent = searchIssues.length
+            ? 'No results found for "' + originalTerm + '". Some data sources could not be searched; check the browser console and Supabase read permissions.'
+            : 'No results found for "' + originalTerm + '". Try a shorter or different keyword.';
+          return;
+        }
+
+        statusBox.textContent =
+          uniqueResults.length + ' result(s) found for "' + originalTerm + '".' +
+          (searchIssues.length ? " Some database sources could not be searched." : "");
+
+        uniqueResults.forEach(result => {
+          makeResult(
+            result.title,
+            result.url,
+            result.type,
+            result.description,
+            result.image_url || ""
+          );
+        });
+      } catch (error) {
+        console.error("Search failed:", error);
+        if (searchId === activeSearchId) {
+          statusBox.textContent = "Search could not complete. Check your connection and try again.";
         }
       }
-
-      if (!results.length) {
-        statusBox.textContent =
-          'No results found for "' + originalTerm + '".';
-        return;
-      }
-
-      statusBox.textContent =
-        results.length + ' result(s) found for "' + originalTerm + '".';
-results.forEach(result => {
-  makeResult(
-    result.title,
-    result.url,
-    result.type,
-    result.description,
-    result.image_url || ""
-  );
-});
-    
     }
 
-    document.getElementById("searchForm").addEventListener(
-      "submit",
-      event => {
-        event.preventDefault();
+    document.getElementById("searchForm").addEventListener("submit", event => {
+      event.preventDefault();
 
-        const term = input.value.trim();
-        const url = new URL(window.location.href);
+      const term = input.value.trim();
+      const url = new URL(window.location.href);
 
-        if (term) {
-          url.searchParams.set("search", term);
-        } else {
-          url.searchParams.delete("search");
-        }
-
-        history.replaceState({}, "", url);
-        performSearch(term);
+      if (term) {
+        url.searchParams.set("search", term);
+      } else {
+        url.searchParams.delete("search");
       }
-    );
+
+      history.replaceState({}, "", url);
+      performSearch(term);
+    });
 
     const params = new URLSearchParams(window.location.search);
     const initialSearch = params.get("search") || "";
 
     input.value = initialSearch;
-
-    if (initialSearch.trim()) {
-      performSearch(initialSearch);
-    }
+    if (initialSearch.trim()) performSearch(initialSearch);
   </script>
+
   <script src="assets/js/services-promo.js"></script>
 </body>
 </html>
-
