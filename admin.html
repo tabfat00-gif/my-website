@@ -283,6 +283,119 @@
     body.dark-mode .views,
     body.dark-mode .user-date { color: #cbd5e1; }
 
+    .message-preview {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
+      max-height: 6.5em;
+      cursor: pointer;
+      color: #4b5563;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .message-preview:hover { color: #155eef; }
+
+    .message-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(15, 23, 42, .72);
+    }
+
+    .message-modal.is-open { display: flex; }
+
+    .message-modal-dialog {
+      width: min(820px, 100%);
+      max-height: min(90vh, 900px);
+      overflow-y: auto;
+      padding: 24px;
+      border-radius: 14px;
+      background: #fff;
+      color: #1f2937;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .28);
+    }
+
+    .message-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 18px;
+    }
+
+    .message-modal-header h2 {
+      margin: 0;
+      font-size: 22px;
+      overflow-wrap: anywhere;
+    }
+
+    .message-modal-close {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      margin: 0;
+      border-radius: 8px;
+      background: #f3f4f6;
+      color: #111827;
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    .message-modal-meta {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 18px;
+      color: #6b7280;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .message-modal-body {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 1.8;
+      font-size: 16px;
+      padding: 18px;
+      border-radius: 10px;
+      background: #f8fafc;
+      min-height: 100px;
+    }
+
+    .message-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 18px;
+    }
+
+    body.dark-mode .message-modal-dialog {
+      background: #172033;
+      color: #e5e7eb;
+    }
+
+    body.dark-mode .message-modal-header { border-color: #334155; }
+    body.dark-mode .message-modal-meta { color: #cbd5e1; }
+    body.dark-mode .message-modal-close { background: #263348; color: #e5e7eb; }
+    body.dark-mode .message-modal-body { background: #0f172a; color: #e5e7eb; }
+
+    @media (max-width: 600px) {
+      .message-modal { padding: 10px; }
+      .message-modal-dialog { padding: 17px; max-height: 94vh; }
+      .message-modal-header h2 { font-size: 19px; }
+      .message-modal-body { padding: 14px; font-size: 15px; }
+    }
+
     @media (max-width: 1100px) {
       .stats-grid { grid-template-columns: repeat(3, 1fr); }
     }
@@ -420,6 +533,25 @@
 </div>
 </main>
 
+
+<!-- Full message viewer -->
+<div id="message-modal" class="message-modal" role="dialog" aria-modal="true" aria-labelledby="message-modal-title" aria-hidden="true">
+  <div class="message-modal-dialog" role="document">
+    <div class="message-modal-header">
+      <h2 id="message-modal-title">رسالة العميل</h2>
+      <button type="button" id="message-modal-close" class="message-modal-close" aria-label="إغلاق الرسالة">×</button>
+    </div>
+    <div class="message-modal-meta">
+      <div><strong>البريد الإلكتروني:</strong> <span id="message-modal-email"></span></div>
+      <div><strong>تاريخ الإرسال:</strong> <span id="message-modal-date"></span></div>
+    </div>
+    <div id="message-modal-body" class="message-modal-body"></div>
+    <div class="message-modal-footer">
+      <button type="button" id="message-modal-done" class="cancel-btn">إغلاق</button>
+    </div>
+  </div>
+</div>
+
 <script>
 "use strict";
 
@@ -452,6 +584,40 @@ function formatDate(value) {
 }
 
 function confirmDelete(message) { return window.confirm(message); }
+
+const messageModal = $("message-modal");
+let lastMessageTrigger = null;
+
+function openMessageModal(message, trigger = null) {
+  if (!messageModal) return;
+  $("message-modal-title").textContent = message.name || "رسالة بدون اسم";
+  $("message-modal-email").textContent = message.email || "غير متوفر";
+  $("message-modal-date").textContent = formatDate(message.created_at);
+  $("message-modal-body").textContent = message.message || "لا يوجد محتوى للرسالة.";
+  lastMessageTrigger = trigger;
+  messageModal.classList.add("is-open");
+  messageModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  $("message-modal-close")?.focus();
+}
+
+function closeMessageModal() {
+  if (!messageModal) return;
+  messageModal.classList.remove("is-open");
+  messageModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (lastMessageTrigger && document.contains(lastMessageTrigger)) lastMessageTrigger.focus();
+  lastMessageTrigger = null;
+}
+
+$("message-modal-close")?.addEventListener("click", closeMessageModal);
+$("message-modal-done")?.addEventListener("click", closeMessageModal);
+messageModal?.addEventListener("click", (event) => {
+  if (event.target === messageModal) closeMessageModal();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && messageModal?.classList.contains("is-open")) closeMessageModal();
+});
 
 async function checkAuth() {
   const status = $("auth-status");
@@ -755,37 +921,112 @@ async function loadDownloadHistory() {
 $("refresh-downloads-btn")?.addEventListener("click", loadDownloadHistory);
 
 async function loadMessages() {
-  const container = $("messages-list"); if (!container) return;
-  showMessage("messages-status", "جاري تحميل الرسائل..."); container.textContent = "جاري تحميل الرسائل...";
-  const { data, error } = await db.from("contact_messages").select("id,name,email,message,created_at").order("created_at", { ascending: false });
-  if (error) { console.error(error); container.textContent = "تعذر تحميل الرسائل: " + error.message; showMessage("messages-status", "فشل تحميل الرسائل.", true); return; }
+  const container = $("messages-list");
+  if (!container) return;
+
+  showMessage("messages-status", "جاري تحميل الرسائل...");
+  container.textContent = "جاري تحميل الرسائل...";
+
+  const { data, error } = await db
+    .from("contact_messages")
+    .select("id,name,email,message,created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    container.textContent = "تعذر تحميل الرسائل: " + error.message;
+    showMessage("messages-status", "فشل تحميل الرسائل.", true);
+    return;
+  }
+
   container.replaceChildren();
-  if (!data?.length) { container.textContent = "لا توجد رسائل حاليا."; showMessage("messages-status", "لا توجد رسائل."); return; }
+  if (!data?.length) {
+    container.textContent = "لا توجد رسائل حاليا.";
+    showMessage("messages-status", "لا توجد رسائل.");
+    return;
+  }
+
   data.forEach((message) => {
-    const card = document.createElement("div"); card.className = "message-item";
-    const name = document.createElement("h3"); name.textContent = message.name || "بدون اسم";
-    const email = document.createElement("p"); email.textContent = "البريد: " + (message.email || "");
-    const content = document.createElement("p"); content.className = "message-content"; content.textContent = message.message || ""; content.style.whiteSpace = "pre-wrap";
-    const date = document.createElement("p"); date.textContent = "التاريخ: " + formatDate(message.created_at);
-    const editButton = document.createElement("button"); editButton.type = "button"; editButton.className = "edit-btn"; editButton.textContent = "تعديل الرسالة";
+    const card = document.createElement("div");
+    card.className = "message-item";
+
+    const name = document.createElement("h3");
+    name.textContent = message.name || "بدون اسم";
+
+    const email = document.createElement("p");
+    email.textContent = "البريد: " + (message.email || "");
+
+    const content = document.createElement("p");
+    content.className = "message-preview";
+    content.textContent = message.message || "لا يوجد محتوى للرسالة.";
+    content.title = "اضغط لفتح الرسالة كاملة";
+    content.tabIndex = 0;
+    content.setAttribute("role", "button");
+    content.setAttribute("aria-label", "فتح الرسالة كاملة من " + (message.name || "بدون اسم"));
+    content.addEventListener("click", () => openMessageModal(message, content));
+    content.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openMessageModal(message, content);
+      }
+    });
+
+    const date = document.createElement("p");
+    date.textContent = "التاريخ: " + formatDate(message.created_at);
+
+    const openButton = document.createElement("button");
+    openButton.type = "button";
+    openButton.className = "edit-btn";
+    openButton.textContent = "فتح الرسالة كاملة";
+    openButton.addEventListener("click", () => openMessageModal(message, openButton));
+
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.className = "edit-btn";
+    editButton.textContent = "تعديل الرسالة";
     editButton.addEventListener("click", async () => {
-      const nameValue = prompt("تعديل الاسم:", message.name || ""); if (nameValue === null) return;
-      const emailValue = prompt("تعديل البريد الإلكتروني:", message.email || ""); if (emailValue === null) return;
-      const contentValue = prompt("تعديل محتوى الرسالة:", message.message || ""); if (contentValue === null) return;
-      if (!nameValue.trim() || !emailValue.trim() || !contentValue.trim()) { alert("الاسم والبريد ومحتوى الرسالة مطلوبون."); return; }
-      const { error: updateError } = await db.from("contact_messages").update({ name: nameValue.trim(), email: emailValue.trim(), message: contentValue.trim() }).eq("id", message.id);
-      if (updateError) { alert("تعذر تعديل الرسالة: " + updateError.message); return; }
+      const nameValue = prompt("تعديل الاسم:", message.name || "");
+      if (nameValue === null) return;
+      const emailValue = prompt("تعديل البريد الإلكتروني:", message.email || "");
+      if (emailValue === null) return;
+      const contentValue = prompt("تعديل محتوى الرسالة:", message.message || "");
+      if (contentValue === null) return;
+      if (!nameValue.trim() || !emailValue.trim() || !contentValue.trim()) {
+        alert("الاسم والبريد ومحتوى الرسالة مطلوبون.");
+        return;
+      }
+      const { error: updateError } = await db
+        .from("contact_messages")
+        .update({ name: nameValue.trim(), email: emailValue.trim(), message: contentValue.trim() })
+        .eq("id", message.id);
+      if (updateError) {
+        alert("تعذر تعديل الرسالة: " + updateError.message);
+        return;
+      }
       await loadMessages();
     });
-    const deleteButton = document.createElement("button"); deleteButton.type = "button"; deleteButton.className = "delete-btn"; deleteButton.textContent = "حذف الرسالة";
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "delete-btn";
+    deleteButton.textContent = "حذف الرسالة";
     deleteButton.addEventListener("click", async () => {
       if (!confirmDelete("هل تريد حذف هذه الرسالة نهائيًا؟")) return;
-      const { error: deleteError } = await db.from("contact_messages").delete().eq("id", message.id);
-      if (deleteError) { alert("تعذر حذف الرسالة: " + deleteError.message); return; }
+      const { error: deleteError } = await db
+        .from("contact_messages")
+        .delete()
+        .eq("id", message.id);
+      if (deleteError) {
+        alert("تعذر حذف الرسالة: " + deleteError.message);
+        return;
+      }
       await loadMessages();
     });
-    card.append(name, email, content, date, editButton, deleteButton); container.appendChild(card);
+
+    card.append(name, email, content, date, openButton, editButton, deleteButton);
+    container.appendChild(card);
   });
+
   showMessage("messages-status", `تم تحميل ${data.length} رسالة.`);
 }
 $("refresh-messages-btn")?.addEventListener("click", loadMessages);
