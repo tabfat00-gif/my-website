@@ -1239,7 +1239,7 @@ textarea:focus-visible {
     margin: 0 !important;
   }
 }
-```
+
 
 /* Compact homepage software and article cards */
 .bexo-dynamic-section {
@@ -1432,7 +1432,7 @@ textarea:focus-visible {
   }
 }
 
-```css
+
 /* Mobile navbar fix — Bexo */
 @media (max-width: 991px) {
   #navbarSupportedContent {
@@ -1492,6 +1492,50 @@ textarea:focus-visible {
 }
 
 
+/* Fix overlapping account buttons in mobile menu */
+@media (max-width: 991px) {
+  #navbarSupportedContent #nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  #navbarSupportedContent #nav .account-nav-item {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--km-border);
+  }
+
+  #navbarSupportedContent .navbar-btn {
+    display: block;
+    width: 100%;
+  }
+
+  #navbarSupportedContent #guestButtons,
+  #navbarSupportedContent #userButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+  }
+
+  #navbarSupportedContent #guestButtons a,
+  #navbarSupportedContent #userButtons a,
+  #navbarSupportedContent #userButtons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    margin: 0 !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1516,39 +1560,47 @@ textarea:focus-visible {
             <span class="toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-           <ul id="nav" class="navbar-nav mx-auto">
-  <li class="nav-item"><a class="ud-menu-scroll" href="#home">Home</a></li>
-  <li class="nav-item"><a class="ud-menu-scroll" href="#features">Features</a></li>
-  <li class="nav-item"><a class="ud-menu-scroll" href="#about">About</a></li>
-  <li class="nav-item"><a href="blog.html">Articles</a></li>
-  <li class="nav-item"><a href="software.html">Software</a></li>
+        
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-  <!-- Website Services -->
-  <li class="nav-item"><a href="services.html">Website Services</a></li>
+  <ul id="nav" class="navbar-nav mx-auto">
+    <li class="nav-item"><a class="ud-menu-scroll" href="#home">Home</a></li>
+    <li class="nav-item"><a class="ud-menu-scroll" href="#features">Features</a></li>
+    <li class="nav-item"><a class="ud-menu-scroll" href="#about">About</a></li>
+    <li class="nav-item"><a href="blog.html">Articles</a></li>
+    <li class="nav-item"><a href="software.html">Software</a></li>
+    <li class="nav-item"><a href="services.html">Website Services</a></li>
+    <li class="nav-item"><a href="pricing.html">Categories</a></li>
+    <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
+    <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
 
-  <li class="nav-item"><a href="pricing.html">Categories</a></li>
-  <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
-  <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
-</ul>
+    <!-- Account buttons inside the menu -->
+    <li class="nav-item account-nav-item">
+      <div class="navbar-btn">
 
-            <div class="navbar-btn d-flex align-items-center">
-              <div id="guestButtons" class="d-flex align-items-center">
-                <a href="login.html" class="ud-main-btn ud-white-btn" style="margin-right:10px">Login</a>
-                <a href="signup.html" class="ud-main-btn">Sign Up</a>
-              </div>
+        <div id="guestButtons" class="d-flex align-items-center">
+          <a href="login.html" class="ud-main-btn ud-white-btn">Login</a>
+          <a href="signup.html" class="ud-main-btn">Sign Up</a>
+        </div>
 
-              <div id="userButtons" class="d-flex align-items-center" style="display:none!important">
-                <a href="admin.html" id="adminButton" class="ud-main-btn ud-white-btn" style="display:none; margin-right:10px">🔐 Admin</a>
-                <a href="profile.html" class="ud-main-btn ud-white-btn" style="margin-right:10px">Profile</a>
-                <button type="button" id="logoutBtn" class="ud-main-btn">Logout</button>
-              </div>
-            </div>
-          </div>
-        </nav>
+        <div id="userButtons" class="d-flex align-items-center" style="display:none!important">
+          <a href="admin.html" id="adminButton"
+             class="ud-main-btn ud-white-btn"
+             style="display:none">🔐 Admin</a>
+
+          <a href="profile.html" class="ud-main-btn ud-white-btn">Profile</a>
+
+          <button type="button" id="logoutBtn" class="ud-main-btn">
+            Logout
+          </button>
+        </div>
+
       </div>
-    </div>
-  </div>
+    </li>
+  </ul>
+
+</div>
+  
 </header>
 
 <!-- Hero -->
