@@ -1492,50 +1492,70 @@ textarea:focus-visible {
 }
 
 
-/* Fix overlapping account buttons in mobile menu */
+/* Bexo mobile menu — links and account buttons side by side */
 @media (max-width: 991px) {
   #navbarSupportedContent #nav {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(95px, 0.7fr) !important;
+    column-gap: 10px !important;
+    align-items: start !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  #navbarSupportedContent #nav .account-nav-item {
-    display: block;
-    width: 100%;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--km-border);
+  #navbarSupportedContent #nav > .nav-item:not(.account-nav-item) {
+    grid-column: 1 !important;
+    width: 100% !important;
+  }
+
+  #navbarSupportedContent #nav > .account-nav-item {
+    grid-column: 2 !important;
+    grid-row: 1 / span 9 !important;
+    align-self: start !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
   }
 
   #navbarSupportedContent .navbar-btn {
-    display: block;
-    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
   }
 
   #navbarSupportedContent #guestButtons,
   #navbarSupportedContent #userButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    width: 100%;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 8px !important;
   }
 
   #navbarSupportedContent #guestButtons a,
   #navbarSupportedContent #userButtons a,
   #navbarSupportedContent #userButtons button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 42px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 40px !important;
     margin: 0 !important;
+    padding: 8px 4px !important;
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+    white-space: normal !important;
   }
 }
-
 </style>
 </head>
 <body>
@@ -1573,37 +1593,44 @@ textarea:focus-visible {
     <li class="nav-item"><a href="pricing.html">Categories</a></li>
     <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
     <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
+<!-- Account buttons inside the menu -->
+<li class="nav-item account-nav-item">
+  <div class="navbar-btn">
 
-    <!-- Account buttons inside the menu -->
-    <li class="nav-item account-nav-item">
-      <div class="navbar-btn">
+    <!-- Guest buttons -->
+    <div id="guestButtons" class="d-flex align-items-center">
+      <a href="login.html" class="ud-main-btn ud-white-btn">Login</a>
+      <a href="signup.html" class="ud-main-btn">Sign Up</a>
+    </div>
 
-        <div id="guestButtons" class="d-flex align-items-center">
-          <a href="login.html" class="ud-main-btn ud-white-btn">Login</a>
-          <a href="signup.html" class="ud-main-btn">Sign Up</a>
-        </div>
+    <!-- Logged-in user buttons -->
+    <div id="userButtons" class="d-flex align-items-center"
+         style="display: none !important;">
 
-        <div id="userButtons" class="d-flex align-items-center" style="display:none!important">
-          <a href="admin.html" id="adminButton"
-             class="ud-main-btn ud-white-btn"
-             style="display:none">🔐 Admin</a>
+      <a href="admin.html" id="adminButton"
+         class="ud-main-btn ud-white-btn"
+         style="display: none;">🔐 Admin</a>
 
-          <a href="profile.html" class="ud-main-btn ud-white-btn">Profile</a>
+      <a href="profile.html" class="ud-main-btn ud-white-btn">
+        Profile
+      </a>
 
-          <button type="button" id="logoutBtn" class="ud-main-btn">
-            Logout
-          </button>
-        </div>
+      <button type="button" id="logoutBtn" class="ud-main-btn">
+        Logout
+      </button>
 
-      </div>
-    </li>
+    </div>
+  </div>
+</li>
+    
   </ul>
-
-</div>
-  
+</div><!-- navbarSupportedContent -->
+</nav>
+      </div><!-- col-lg-12 -->
+    </div><!-- row -->
+  </div><!-- container -->
 </header>
-
-<!-- Hero -->
+          <!-- Hero -->
 <section class="ud-hero" id="home">
   <div class="container">
     <div class="row">
@@ -2294,46 +2321,54 @@ async function loadHomepageContent() {
 
 loadHomepageContent();
 
-  /* Update Login / Profile / Admin buttons */
-  async function updateNavbar() {
-    const guestButtons = document.getElementById("guestButtons");
-    const userButtons = document.getElementById("userButtons");
-    const adminButton = document.getElementById("adminButton");
-    if (!guestButtons || !userButtons) return;
+/* Update Login / Profile / Admin buttons */
+async function updateNavbar() {
+  const guestButtons = document.getElementById("guestButtons");
+  const userButtons = document.getElementById("userButtons");
+  const adminButton = document.getElementById("adminButton");
 
-    // Keep the Admin link hidden unless an authenticated account is verified as admin.
-    if (adminButton) adminButton.style.display = "none";
+  if (!guestButtons || !userButtons) return;
 
-    const { data, error } = await supabaseClient.auth.getSession();
-    if (error) {
-      console.error("Session error:", error);
-      guestButtons.style.display = "flex";
-      userButtons.style.setProperty("display", "none", "important");
-      return;
-    }
+  if (adminButton) {
+    adminButton.style.setProperty("display", "none", "important");
+  }
 
-    if (data.session) {
-      guestButtons.style.display = "none";
-      userButtons.style.setProperty("display", "flex", "important");
+  const { data, error } = await supabaseClient.auth.getSession();
 
-      const { data: isAdmin, error: adminError } = await supabaseClient.rpc("is_admin");
+  if (error) {
+    console.error("Session error:", error);
+    guestButtons.style.setProperty("display", "flex", "important");
+    userButtons.style.setProperty("display", "none", "important");
+    return;
+  }
+
+  if (data.session) {
+    guestButtons.style.setProperty("display", "none", "important");
+    userButtons.style.setProperty("display", "flex", "important");
+
+    try {
+      const { data: isAdmin, error: adminError } =
+        await supabaseClient.rpc("is_admin");
+
       if (adminError) {
         console.error("Admin check failed:", adminError);
       } else if (isAdmin === true && adminButton) {
-        adminButton.style.display = "inline-flex";
+        adminButton.style.setProperty("display", "inline-flex", "important");
       }
-    } else {
-      guestButtons.style.display = "flex";
-      userButtons.style.setProperty("display", "none", "important");
+    } catch (err) {
+      console.error("Admin verification error:", err);
     }
+  } else {
+    guestButtons.style.setProperty("display", "flex", "important");
+    userButtons.style.setProperty("display", "none", "important");
   }
+}
 
+updateNavbar();
+
+supabaseClient.auth.onAuthStateChange(() => {
   updateNavbar();
-
-  supabaseClient.auth.onAuthStateChange(() => {
-    updateNavbar();
-  });
-
+});
   /* Logout */
   document.getElementById("logoutBtn")?.addEventListener("click", async () => {
     const { error } = await supabaseClient.auth.signOut();
