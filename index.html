@@ -1394,12 +1394,17 @@ textarea:focus-visible {
   }
 }
 
-
-/* Mobile navbar fix: keep account actions inside the opened menu */
+```css
+/* Mobile navbar fix — Bexo */
 @media (max-width: 991px) {
   #navbarSupportedContent {
     flex-basis: 100%;
     width: 100%;
+    padding: 15px;
+    margin-top: 12px;
+    background: var(--km-surface);
+    border: 1px solid var(--km-border);
+    border-radius: 12px;
   }
 
   #navbarSupportedContent.collapse:not(.show) {
@@ -1415,35 +1420,39 @@ textarea:focus-visible {
     flex-direction: column !important;
     align-items: stretch !important;
     justify-content: flex-start !important;
-    gap: 8px !important;
     width: 100% !important;
+    gap: 8px !important;
     margin: 12px 0 0 !important;
     padding-top: 12px;
-    border-top: 1px solid var(--km-border, #ddd);
+    border-top: 1px solid var(--km-border);
   }
 
   #navbarSupportedContent #guestButtons,
   #navbarSupportedContent #userButtons {
+    display: flex;
     flex-direction: column !important;
     align-items: stretch !important;
-    gap: 8px !important;
     width: 100% !important;
+    gap: 8px !important;
   }
 
   #navbarSupportedContent #guestButtons a,
   #navbarSupportedContent #userButtons a,
   #navbarSupportedContent #userButtons button {
-    display: inline-flex;
+    display: flex !important;
     box-sizing: border-box;
     width: 100% !important;
     min-height: 42px !important;
+    align-items: center;
     justify-content: center;
     margin: 0 !important;
     padding: 10px 12px !important;
     font-size: 14px !important;
     border-radius: 8px !important;
+    white-space: nowrap;
   }
 }
+
 
 </style>
 </head>
