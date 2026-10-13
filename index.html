@@ -1159,21 +1159,22 @@ textarea:focus-visible {
     transition-duration: .01ms !important;
   }
 }
-
-/* Compact account buttons: Login, Sign Up, Profile, Logout */
+```css
+/* Bexo account buttons */
 .navbar-btn {
   display: flex;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 6px !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
 }
 
 #guestButtons,
 #userButtons {
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 6px !important;
-  width: auto !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  width: auto;
 }
 
 #guestButtons a,
@@ -1182,26 +1183,63 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: auto !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  height: auto !important;
-  padding: 4px 8px !important;
-  font-size: 11px !important;
-  line-height: 1.2 !important;
-  border-width: 1px !important;
-  border-radius: 5px !important;
-  margin: 0 !important;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  padding: 4px 8px;
+  font-size: 11px;
+  line-height: 1.2;
+  border-width: 1px;
+  border-radius: 5px;
+  margin: 0;
   white-space: nowrap;
 }
 
+/* Mobile hamburger menu */
 @media (max-width: 991px) {
-  .navbar-btn {
+  #navbarSupportedContent {
     width: 100%;
-    margin-top: 12px;
+    flex-basis: 100%;
+  }
+
+  #navbarSupportedContent .navbar-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    gap: 8px !important;
+    margin: 12px 0 0 !important;
+    padding-top: 12px;
+    border-top: 1px solid var(--km-border);
+  }
+
+  #navbarSupportedContent #guestButtons,
+  #navbarSupportedContent #userButtons {
+    display: flex;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  #navbarSupportedContent #guestButtons a,
+  #navbarSupportedContent #userButtons a,
+  #navbarSupportedContent #userButtons button {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 42px !important;
+    box-sizing: border-box;
+    align-items: center;
     justify-content: center;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
   }
 }
+```
 
 /* Compact homepage software and article cards */
 .bexo-dynamic-section {
