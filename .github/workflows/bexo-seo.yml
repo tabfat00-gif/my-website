@@ -1,0 +1,232 @@
+name: Bexo SEO Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  seo-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate local SEO metadata
+        run: |
+          python - <<'PY'
+          import os
+          import sys
+          from html.parser import HTMLParser
+
+          BASE = "https://tabfat00-gif.github.io/my-website/"
+
+          INDEXABLE = [
+              "index.html",
+              "about.html",
+              "pricing.html",
+              "services.html",
+              "blog.html",
+              "software.html",
+              "contact.html",
+              "privacy-policy.html",
+          ]
+
+          NOINDEX = [
+              "login.html",
+              "signup.html",
+              "profile.html",
+              "admin.html",
+              "admin-login.html",
+              "404.html",
+              "search.html",
+          ]
+
+          class SEOParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.title = False
+                  self.title_text = ""
+                  self.description = ""
+                  self.canonical = ""
+                  self.robots = ""
+                  self.h1_count = 0
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+
+                  if tag == "title":
+                      self.title = True
+
+                  if tag == "h1":
+                      self.h1_count += 1
+
+                  if tag == "meta":
+                      name = attrs.get("name", "").lower()
+                      if name == "description":
+                          self.description = attrs.get("content", "")
+                      elif name == "robots":
+                          self.robots = attrs.get("content", "").lower()
+
+                  if tag == "link" and attrs.get("rel", "").lower() == "canonical":
+                      self.canonical = attrs.get("href", "")
+
+              def handle_endtag(self, tag):
+                  if tag == "title":
+                      self.title = False
+
+              def handle_data(self, data):
+                  if self.title:
+                      self.title_text += data.strip()
+
+          def parse(path):
+              with open(path, encoding="utf-8", errors="replace") as handle:
+                  parser = SEOParser()
+                  parser.feed(handle.read())
+                  return parser
+
+          failures = []
+
+          print("Checking indexable pages...")
+          for page in INDEXABLE:
+              if not os.path.exists(page):
+                  failures.append(f"{page}: file not found")
+                  continue
+
+              parser = parse(page)
+              expected = BASE if page == "index.html" else BASE + page
+
+              if not parser.title_text:
+                  failures.append(f"{page}: missing <title>")
+              if not parser.description:
+                  failures.append(f"{page}: missing meta description")
+              if parser.h1_count == 0:
+                  failures.append(f"{page}: missing <h1>")
+              if parser.canonical != expected:
+                  failures.append(f"{page}: canonical should be {expected} (found: {parser.canonical or 'none'})")
+              if "noindex" in parser.robots:
+                  failures.append(f"{page}: unexpected noindex")
+
+              print(f"  {page}: title={'yes' if parser.title_text else 'NO'} description={'yes' if parser.description else 'NO'} h1={parser.h1_count} canonical={'ok' if parser.canonical == expected else 'BAD'}")
+
+          print("\nChecking noindex pages...")
+          for page in NOINDEX:
+              if not os.path.exists(page):
+                  failures.append(f"{page}: file not found")
+                  continue
+
+              parser = parse(page)
+              if "noindex" not in parser.robots:
+                  failures.append(f"{page}: missing noindex robots meta")
+
+              print(f"  {page}: robots={parser.robots or 'none'}")
+
+          print("\nSitemap check...")
+          if not os.path.exists("sitemap.xml"):
+              failures.append("sitemap.xml: file not found")
+              print("  sitemap.xml: MISSING")
+          else:
+              with open("sitemap.xml", encoding="utf-8", errors="replace") as handle:
+                  sitemap = handle.read()
+              missing_urls = [p for p in INDEXABLE if (BASE if p == "index.html" else BASE + p) not in sitemap]
+              if missing_urls:
+                  failures.append("sitemap.xml: missing URLs for " + ", ".join(missing_urls))
+              print(f"  sitemap.xml: {'ok' if not missing_urls else 'incomplete'}")
+
+          if failures:
+              print("\nSEO check failed:")
+              for failure in failures:
+                  print(f"  - {failure}")
+              sys.exit(1)
+
+          print("\nSEO check completed successfully.")
+          PY
+
+      - name: Check live website
+        if: github.event_name == 'schedule'
+        run: |
+          python - <<'PY'
+          import sys
+          import urllib.request
+          from html.parser import HTMLParser
+
+          url = "https://tabfat00-gif.github.io/my-website/"
+
+          class SEOParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.title = False
+                  self.title_text = ""
+                  self.description = ""
+                  self.h1_count = 0
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+
+                  if tag == "title":
+                      self.title = True
+
+                  if tag == "h1":
+                      self.h1_count += 1
+
+                  if tag == "meta" and attrs.get("name", "").lower() == "description":
+                      self.description = attrs.get("content", "")
+
+              def handle_endtag(self, tag):
+                  if tag == "title":
+                      self.title = False
+
+              def handle_data(self, data):
+                  if self.title:
+                      self.title_text += data.strip()
+
+          print("Checking Bexo website...")
+
+          try:
+              request = urllib.request.Request(
+                  url,
+                  headers={"User-Agent": "Bexo-SEO-Checker/1.0"}
+              )
+
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  html = response.read().decode("utf-8", errors="replace")
+                  print(f"Website status: {response.status}")
+
+              parser = SEOParser()
+              parser.feed(html)
+
+              print("Title:", parser.title_text or "MISSING")
+              print("Meta description:", parser.description or "MISSING")
+              print("H1 headings:", parser.h1_count)
+
+              failures = []
+
+              if not parser.title_text:
+                  failures.append("Page title is missing.")
+
+              if not parser.description:
+                  failures.append("Meta description is missing.")
+
+              if parser.h1_count == 0:
+                  failures.append("No H1 heading found.")
+
+              if failures:
+                  print("\nLive SEO check failed:")
+                  for failure in failures:
+                      print(f"  - {failure}")
+                  sys.exit(1)
+
+              print("\nLive SEO check completed successfully.")
+
+          except Exception as error:
+              print("ERROR:", error)
+              raise
+          PY
