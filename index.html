@@ -9,9 +9,27 @@
 
   <title>Bexo | Discover • Learn • Explore</title>
   <meta name="description" content="Bexo is a place to discover useful information, helpful guides, technology, software, ideas and more.">
+  <link rel="canonical" href="https://tabfat00-gif.github.io/my-website/">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bexo">
+  <meta property="og:title" content="Bexo | Discover • Learn • Explore">
+  <meta property="og:description" content="Bexo is a place to discover useful information, helpful guides, technology, software, ideas and more.">
+  <meta property="og:url" content="https://tabfat00-gif.github.io/my-website/">
+  <meta name="twitter:card" content="summary">
   
 <meta name="google-site-verification" content="Lal5HT1nrrZEsRgvo5fKS8tyIBIO5sSjGZ_imFhluSM" />
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Bexo",
+    "url": "https://tabfat00-gif.github.io/my-website/",
+    "description": "Bexo is a place to discover useful information, helpful guides, technology, software, ideas and more."
+  }
+  </script>
+
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
   <link rel="stylesheet" href="assets/css/animate.css">
@@ -1159,22 +1177,21 @@ textarea:focus-visible {
     transition-duration: .01ms !important;
   }
 }
-```css
-/* Bexo account buttons */
+
+/* Compact account buttons: Login, Sign Up, Profile, Logout */
 .navbar-btn {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 6px;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
 }
 
 #guestButtons,
 #userButtons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 6px;
-  width: auto;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: auto !important;
 }
 
 #guestButtons a,
@@ -1183,63 +1200,26 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: auto;
-  min-width: 0;
-  min-height: 0;
-  height: auto;
-  padding: 4px 8px;
-  font-size: 11px;
-  line-height: 1.2;
-  border-width: 1px;
-  border-radius: 5px;
-  margin: 0;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  border-width: 1px !important;
+  border-radius: 5px !important;
+  margin: 0 !important;
   white-space: nowrap;
 }
 
-/* Mobile hamburger menu */
 @media (max-width: 991px) {
-  #navbarSupportedContent {
+  .navbar-btn {
     width: 100%;
-    flex-basis: 100%;
-  }
-
-  #navbarSupportedContent .navbar-btn {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
-    width: 100% !important;
-    gap: 8px !important;
-    margin: 12px 0 0 !important;
-    padding-top: 12px;
-    border-top: 1px solid var(--km-border);
-  }
-
-  #navbarSupportedContent #guestButtons,
-  #navbarSupportedContent #userButtons {
-    display: flex;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    gap: 8px !important;
-  }
-
-  #navbarSupportedContent #guestButtons a,
-  #navbarSupportedContent #userButtons a,
-  #navbarSupportedContent #userButtons button {
-    display: flex !important;
-    width: 100% !important;
-    min-height: 42px !important;
-    box-sizing: border-box;
-    align-items: center;
+    margin-top: 12px;
     justify-content: center;
-    padding: 10px 12px !important;
-    font-size: 14px !important;
-    border-radius: 8px !important;
-    margin: 0 !important;
   }
 }
-
 
 /* Compact homepage software and article cards */
 .bexo-dynamic-section {
@@ -1433,16 +1413,11 @@ textarea:focus-visible {
 }
 
 
-/* Mobile navbar fix — Bexo */
+/* Mobile navbar fix: keep account actions inside the opened menu */
 @media (max-width: 991px) {
   #navbarSupportedContent {
     flex-basis: 100%;
     width: 100%;
-    padding: 15px;
-    margin-top: 12px;
-    background: var(--km-surface);
-    border: 1px solid var(--km-border);
-    border-radius: 12px;
   }
 
   #navbarSupportedContent.collapse:not(.show) {
@@ -1458,104 +1433,36 @@ textarea:focus-visible {
     flex-direction: column !important;
     align-items: stretch !important;
     justify-content: flex-start !important;
-    width: 100% !important;
     gap: 8px !important;
+    width: 100% !important;
     margin: 12px 0 0 !important;
     padding-top: 12px;
-    border-top: 1px solid var(--km-border);
+    border-top: 1px solid var(--km-border, #ddd);
   }
 
   #navbarSupportedContent #guestButtons,
   #navbarSupportedContent #userButtons {
-    display: flex;
     flex-direction: column !important;
     align-items: stretch !important;
-    width: 100% !important;
     gap: 8px !important;
+    width: 100% !important;
   }
 
   #navbarSupportedContent #guestButtons a,
   #navbarSupportedContent #userButtons a,
   #navbarSupportedContent #userButtons button {
-    display: flex !important;
+    display: inline-flex;
     box-sizing: border-box;
     width: 100% !important;
     min-height: 42px !important;
-    align-items: center;
     justify-content: center;
     margin: 0 !important;
     padding: 10px 12px !important;
     font-size: 14px !important;
     border-radius: 8px !important;
-    white-space: nowrap;
   }
 }
 
-
-/* Bexo mobile menu — links and account buttons side by side */
-@media (max-width: 991px) {
-  #navbarSupportedContent #nav {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(95px, 0.7fr) !important;
-    column-gap: 10px !important;
-    align-items: start !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  #navbarSupportedContent #nav > .nav-item:not(.account-nav-item) {
-    grid-column: 1 !important;
-    width: 100% !important;
-  }
-
-  #navbarSupportedContent #nav > .account-nav-item {
-    grid-column: 2 !important;
-    grid-row: 1 / span 9 !important;
-    align-self: start !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-  }
-
-  #navbarSupportedContent .navbar-btn {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    gap: 8px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-  }
-
-  #navbarSupportedContent #guestButtons,
-  #navbarSupportedContent #userButtons {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    gap: 8px !important;
-  }
-
-  #navbarSupportedContent #guestButtons a,
-  #navbarSupportedContent #userButtons a,
-  #navbarSupportedContent #userButtons button {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    min-height: 40px !important;
-    margin: 0 !important;
-    padding: 8px 4px !important;
-    font-size: 12px !important;
-    line-height: 1.3 !important;
-    text-align: center !important;
-    white-space: normal !important;
-  }
-}
 </style>
 </head>
 <body>
@@ -1580,57 +1487,42 @@ textarea:focus-visible {
             <span class="toggler-icon"></span>
           </button>
 
-        
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul id="nav" class="navbar-nav mx-auto">
+  <li class="nav-item"><a class="ud-menu-scroll" href="#home">Home</a></li>
+  <li class="nav-item"><a class="ud-menu-scroll" href="#features">Features</a></li>
+  <li class="nav-item"><a class="ud-menu-scroll" href="#about">About</a></li>
+  <li class="nav-item"><a href="blog.html">Articles</a></li>
+  <li class="nav-item"><a href="software.html">Software</a></li>
 
-  <ul id="nav" class="navbar-nav mx-auto">
-    <li class="nav-item"><a class="ud-menu-scroll" href="#home">Home</a></li>
-    <li class="nav-item"><a class="ud-menu-scroll" href="#features">Features</a></li>
-    <li class="nav-item"><a class="ud-menu-scroll" href="#about">About</a></li>
-    <li class="nav-item"><a href="blog.html">Articles</a></li>
-    <li class="nav-item"><a href="software.html">Software</a></li>
-    <li class="nav-item"><a href="services.html">Website Services</a></li>
-    <li class="nav-item"><a href="pricing.html">Categories</a></li>
-    <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
-    <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
-<!-- Account buttons inside the menu -->
-<li class="nav-item account-nav-item">
-  <div class="navbar-btn">
+  <!-- Website Services -->
+  <li class="nav-item"><a href="services.html">Website Services</a></li>
 
-    <!-- Guest buttons -->
-    <div id="guestButtons" class="d-flex align-items-center">
-      <a href="login.html" class="ud-main-btn ud-white-btn">Login</a>
-      <a href="signup.html" class="ud-main-btn">Sign Up</a>
-    </div>
+  <li class="nav-item"><a href="pricing.html">Categories</a></li>
+  <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
+  <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
+</ul>
 
-    <!-- Logged-in user buttons -->
-    <div id="userButtons" class="d-flex align-items-center"
-         style="display: none !important;">
+            <div class="navbar-btn d-flex align-items-center">
+              <div id="guestButtons" class="d-flex align-items-center">
+                <a href="login.html" class="ud-main-btn ud-white-btn" style="margin-right:10px">Login</a>
+                <a href="signup.html" class="ud-main-btn">Sign Up</a>
+              </div>
 
-      <a href="admin.html" id="adminButton"
-         class="ud-main-btn ud-white-btn"
-         style="display: none;">🔐 Admin</a>
-
-      <a href="profile.html" class="ud-main-btn ud-white-btn">
-        Profile
-      </a>
-
-      <button type="button" id="logoutBtn" class="ud-main-btn">
-        Logout
-      </button>
-
+              <div id="userButtons" class="d-flex align-items-center" style="display:none!important">
+                <a href="admin.html" id="adminButton" class="ud-main-btn ud-white-btn" style="display:none; margin-right:10px">🔐 Admin</a>
+                <a href="profile.html" class="ud-main-btn ud-white-btn" style="margin-right:10px">Profile</a>
+                <button type="button" id="logoutBtn" class="ud-main-btn">Logout</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
     </div>
   </div>
-</li>
-    
-  </ul>
-</div><!-- navbarSupportedContent -->
-</nav>
-      </div><!-- col-lg-12 -->
-    </div><!-- row -->
-  </div><!-- container -->
 </header>
-          <!-- Hero -->
+
+<!-- Hero -->
 <section class="ud-hero" id="home">
   <div class="container">
     <div class="row">
@@ -2321,54 +2213,46 @@ async function loadHomepageContent() {
 
 loadHomepageContent();
 
-/* Update Login / Profile / Admin buttons */
-async function updateNavbar() {
-  const guestButtons = document.getElementById("guestButtons");
-  const userButtons = document.getElementById("userButtons");
-  const adminButton = document.getElementById("adminButton");
+  /* Update Login / Profile / Admin buttons */
+  async function updateNavbar() {
+    const guestButtons = document.getElementById("guestButtons");
+    const userButtons = document.getElementById("userButtons");
+    const adminButton = document.getElementById("adminButton");
+    if (!guestButtons || !userButtons) return;
 
-  if (!guestButtons || !userButtons) return;
+    // Keep the Admin link hidden unless an authenticated account is verified as admin.
+    if (adminButton) adminButton.style.display = "none";
 
-  if (adminButton) {
-    adminButton.style.setProperty("display", "none", "important");
-  }
+    const { data, error } = await supabaseClient.auth.getSession();
+    if (error) {
+      console.error("Session error:", error);
+      guestButtons.style.display = "flex";
+      userButtons.style.setProperty("display", "none", "important");
+      return;
+    }
 
-  const { data, error } = await supabaseClient.auth.getSession();
+    if (data.session) {
+      guestButtons.style.display = "none";
+      userButtons.style.setProperty("display", "flex", "important");
 
-  if (error) {
-    console.error("Session error:", error);
-    guestButtons.style.setProperty("display", "flex", "important");
-    userButtons.style.setProperty("display", "none", "important");
-    return;
-  }
-
-  if (data.session) {
-    guestButtons.style.setProperty("display", "none", "important");
-    userButtons.style.setProperty("display", "flex", "important");
-
-    try {
-      const { data: isAdmin, error: adminError } =
-        await supabaseClient.rpc("is_admin");
-
+      const { data: isAdmin, error: adminError } = await supabaseClient.rpc("is_admin");
       if (adminError) {
         console.error("Admin check failed:", adminError);
       } else if (isAdmin === true && adminButton) {
-        adminButton.style.setProperty("display", "inline-flex", "important");
+        adminButton.style.display = "inline-flex";
       }
-    } catch (err) {
-      console.error("Admin verification error:", err);
+    } else {
+      guestButtons.style.display = "flex";
+      userButtons.style.setProperty("display", "none", "important");
     }
-  } else {
-    guestButtons.style.setProperty("display", "flex", "important");
-    userButtons.style.setProperty("display", "none", "important");
   }
-}
 
-updateNavbar();
-
-supabaseClient.auth.onAuthStateChange(() => {
   updateNavbar();
-});
+
+  supabaseClient.auth.onAuthStateChange(() => {
+    updateNavbar();
+  });
+
   /* Logout */
   document.getElementById("logoutBtn")?.addEventListener("click", async () => {
     const { error } = await supabaseClient.auth.signOut();
