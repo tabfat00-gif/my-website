@@ -1,0 +1,86 @@
+name: Bexo SEO Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  seo-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Bexo website
+        run: |
+          python - <<'PY'
+          import urllib.request
+          import re
+          from html.parser import HTMLParser
+
+          url = "https://tabfat00-gif.github.io/my-website/"
+
+          class SEOParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.title = False
+                  self.title_text = ""
+                  self.description = ""
+                  self.h1_count = 0
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+
+                  if tag == "title":
+                      self.title = True
+
+                  if tag == "h1":
+                      self.h1_count += 1
+
+                  if tag == "meta" and attrs.get("name", "").lower() == "description":
+                      self.description = attrs.get("content", "")
+
+              def handle_endtag(self, tag):
+                  if tag == "title":
+                      self.title = False
+
+              def handle_data(self, data):
+                  if self.title:
+                      self.title_text += data.strip()
+
+          print("Checking Bexo website...")
+
+          try:
+              request = urllib.request.Request(
+                  url,
+                  headers={"User-Agent": "Bexo-SEO-Checker/1.0"}
+              )
+
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  html = response.read().decode("utf-8", errors="replace")
+                  print(f"Website status: {response.status}")
+
+              parser = SEOParser()
+              parser.feed(html)
+
+              print("Title:", parser.title_text or "MISSING")
+              print("Meta description:", parser.description or "MISSING")
+              print("H1 headings:", parser.h1_count)
+
+              print("\nSEO check completed.")
+
+              if not parser.title_text:
+                  print("WARNING: Page title is missing.")
+
+              if not parser.description:
+                  print("WARNING: Meta description is missing.")
+
+              if parser.h1_count == 0:
+                  print("WARNING: No H1 heading found.")
+
+          except Exception as error:
+              print("ERROR:", error)
+              raise
+          PY
