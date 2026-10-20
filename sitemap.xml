@@ -1,6 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tabfat00-gif.github.io/my-website/</loc>
+  </url>
+  <url>
+    <loc>https://tabfat00-gif.github.io/my-website/about.html</loc>
+  </url>
+  <url>
+    <loc>https://tabfat00-gif.github.io/my-website/software.html</loc>
+  </url>
+  <url>
+    <loc>https://tabfat00-gif.github.io/my-website/blog.html</loc>
+  </url>
+  <url>
+    <loc>https://tabfat00-gif.github.io/my-website/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://tabfat00-gif.github.io/my-website/pricing.html</loc>
   </url>
 </urlset>
