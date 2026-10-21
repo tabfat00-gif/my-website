@@ -1,0 +1,16 @@
+# Jekyll configuration for the GitHub Pages site.
+#
+# The published site is a plain static HTML/CSS/JS bundle. This file exists to
+# keep non-website files — above all the Supabase Edge Function source under
+# supabase/ — out of the generated public output, while keeping them tracked in
+# Git.
+#
+# Note: Jekyll already skips files and directories whose name starts with an
+# underscore or a dot, so .github/ is ignored by default. It is listed anyway so
+# the intent is explicit and survives any future change of engine.
+exclude:
+  - supabase/
+  - .github/
+  - README.md
+  - LICENCE
+  - COPYRIGHT
