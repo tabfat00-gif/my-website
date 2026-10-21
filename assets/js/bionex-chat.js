@@ -27,7 +27,7 @@
     // if your deploy enforces JWT verification, paste the site's
     // publishable key here (it is a client-side value, already present
     // in the other pages of this site — not a secret).
-    anonKey: "",
+    anonKey: "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE",
 
     requestTimeoutMs: 30000,
     healthTimeoutMs: 15000,
