@@ -109,7 +109,7 @@
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 18px;
       margin-bottom: 30px;
     }
@@ -175,7 +175,7 @@
     .delete-btn { background: #dc3545; color: white; }
     .theme-btn { background: #2563eb; color: white; padding: 11px 15px; }
 
-    .software-item, .article-item, .user-item,
+    .software-item, .article-item, .video-item, .user-item,
     .download-item, .message-item {
       border: 1px solid #e5e7eb;
       padding: 14px;
@@ -185,7 +185,7 @@
       overflow-wrap: anywhere;
     }
 
-    .software-item h3, .article-item h3,
+    .software-item h3, .article-item h3, .video-item h3,
     .download-item h3, .message-item h3 {
       margin-top: 0;
       margin-bottom: 8px;
@@ -250,7 +250,7 @@
     .user-date { color: #666; font-size: 13px; }
     .empty-message { color: #6b7280; padding: 10px 0; }
 
-    #software-list, #articles-list, #users-list,
+    #software-list, #articles-list, #videos-list, #users-list,
     #downloads-list, #messages-list, #views-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -264,6 +264,7 @@
     body.dark-mode .stat-card,
     body.dark-mode .software-item,
     body.dark-mode .article-item,
+    body.dark-mode .video-item,
     body.dark-mode .user-item,
     body.dark-mode .download-item,
     body.dark-mode .message-item {
@@ -424,7 +425,7 @@
     }
 
     @media (max-width: 600px) {
-      #software-list, #articles-list, #users-list,
+      #software-list, #articles-list, #videos-list, #users-list,
       #downloads-list, #messages-list, #views-list {
         grid-template-columns: 1fr;
       }
@@ -441,6 +442,7 @@
   <a href="#users" class="nav-link">👥 Users</a>
   <a href="#software" class="nav-link">💻 Software</a>
   <a href="#articles" class="nav-link">📝 Articles</a>
+  <a href="#videos" class="nav-link">🎬 Videos</a>
   <a href="#views" class="nav-link">👁️ Views</a>
   <a href="#downloads" class="nav-link">📥 Downloads</a>
   <a href="#messages" class="nav-link">📩 Messages</a>
@@ -466,6 +468,7 @@
       <div class="stat-card"><div class="stat-label">👥 Total Users</div><div id="total-users" class="stats-number">Loading...</div></div>
       <div class="stat-card"><div class="stat-label">💻 Software</div><div id="total-software" class="stats-number">Loading...</div></div>
       <div class="stat-card"><div class="stat-label">📝 Articles</div><div id="total-articles" class="stats-number">Loading...</div></div>
+      <div class="stat-card"><div class="stat-label">🎬 Videos</div><div id="total-videos" class="stats-number">Loading...</div></div>
       <div class="stat-card"><div class="stat-label">👁️ Article Views</div><div id="total-article-views" class="stats-number">Loading...</div></div>
       <div class="stat-card"><div class="stat-label">📥 Total Downloads</div><div id="total-downloads" class="stats-number">Loading...</div></div>
     </div>
@@ -512,6 +515,31 @@
       <div id="article-message"></div>
     </div>
     <div class="box"><h2>Articles List</h2><div id="articles-list">Loading...</div></div>
+  </section>
+
+  <section id="videos">
+    <div class="box">
+      <h2 id="video-form-title">Add Video</h2>
+      <form id="video-form">
+        <input type="text" id="video-title" placeholder="Video title" required>
+        <textarea id="video-description" placeholder="Short description"></textarea>
+        <select id="video-type" required>
+          <option value="youtube">▶️ YouTube</option>
+          <option value="facebook">📘 Facebook</option>
+          <option value="private">🔒 Private file (MP4 / WebM)</option>
+          <option value="ai">🤖 AI generated</option>
+        </select>
+        <input type="url" id="video-url" placeholder="Video URL (YouTube / Facebook / direct file)" required>
+        <input type="url" id="video-thumbnail" placeholder="Thumbnail URL (optional)">
+        <input type="text" id="video-category" placeholder="Category (Tutorial, AI, Cybersecurity...)">
+        <input type="text" id="video-duration" placeholder="Duration (optional, e.g. 12:30)">
+        <label class="published-option"><input type="checkbox" id="video-published"> Published</label>
+        <button type="submit" class="save-btn" id="video-save-btn">Add Video</button>
+        <button type="button" class="cancel-btn" id="video-cancel-btn" style="display:none">Cancel Edit</button>
+      </form>
+      <div id="video-message"></div>
+    </div>
+    <div class="box"><h2>Videos List</h2><div id="videos-list">Loading...</div></div>
   </section>
 
   <section id="users"><div class="box"><h2>👥 Users</h2><div id="users-list">Loading...</div></div></section>
@@ -563,6 +591,7 @@ const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let currentUser = null;
 let editingSoftwareId = null;
 let editingArticleId = null;
+let editingVideoId = null;
 const $ = (id) => document.getElementById(id);
 
 function escapeHTML(value) {
@@ -666,7 +695,7 @@ if (themeToggle) {
   });
 }
 
-const adminSections = ["dashboard", "users", "software", "articles", "views", "downloads", "messages"];
+const adminSections = ["dashboard", "users", "software", "articles", "videos", "views", "downloads", "messages"];
 function showAdminSection(sectionId) {
   adminSections.forEach((id) => {
     const section = $(id);
@@ -691,11 +720,11 @@ const initialSection = location.hash.slice(1);
 showAdminSection(adminSections.includes(initialSection) ? initialSection : "dashboard");
 
 async function loadDashboard() {
-  await Promise.allSettled([loadStats(), loadSoftware(), loadArticles(), loadUsers(), loadDownloadHistory(), loadMessages(), loadArticleViews()]);
+  await Promise.allSettled([loadStats(), loadSoftware(), loadArticles(), loadVideos(), loadUsers(), loadDownloadHistory(), loadMessages(), loadArticleViews()]);
 }
 
 async function loadStats() {
-  const tables = [["profiles", "total-users"], ["software", "total-software"], ["articles", "total-articles"], ["download_logs", "total-downloads"]];
+  const tables = [["profiles", "total-users"], ["software", "total-software"], ["articles", "total-articles"], ["videos", "total-videos"], ["download_logs", "total-downloads"]];
   for (const [table, elementId] of tables) {
     const { count, error } = await db.from(table).select("*", { count: "exact", head: true });
     if (!error && $(elementId)) $(elementId).textContent = count ?? 0;
@@ -815,6 +844,84 @@ $("article-form")?.addEventListener("submit", async (event) => {
   finally { if (saveButton) saveButton.disabled = false; }
 });
 $("article-cancel-btn")?.addEventListener("click", resetArticleForm);
+
+/* ---------------------------------------------------------------- videos */
+
+function videoTypeLabel(type) {
+  const labels = { youtube: "YouTube", facebook: "Facebook", private: "ملف خاص", ai: "مولّد بالذكاء الاصطناعي" };
+  const key = String(type || "").trim().toLowerCase();
+  return labels[key] || type || "فيديو";
+}
+
+function resetVideoForm() {
+  $("video-form")?.reset(); editingVideoId = null;
+  if ($("video-form-title")) $("video-form-title").textContent = "Add Video";
+  if ($("video-save-btn")) $("video-save-btn").textContent = "Add Video";
+  if ($("video-cancel-btn")) $("video-cancel-btn").style.display = "none";
+}
+
+async function loadVideos() {
+  const container = $("videos-list"); if (!container) return;
+  container.textContent = "جاري تحميل الفيديوهات...";
+  const { data, error } = await db.from("videos").select("*").order("created_at", { ascending: false });
+  if (error) { console.error(error); container.textContent = "تعذر تحميل الفيديوهات: " + error.message; return; }
+  container.replaceChildren();
+  if (!data?.length) { container.textContent = "لا توجد فيديوهات حاليا."; return; }
+  data.forEach((item) => {
+    const card = document.createElement("div"); card.className = "video-item";
+    const title = document.createElement("h3"); title.textContent = item.title || "";
+    const description = document.createElement("p"); description.textContent = item.description || "";
+    const category = document.createElement("p"); category.textContent = "التصنيف: " + (item.category || "غير محدد");
+    const type = document.createElement("p"); type.textContent = "النوع: " + videoTypeLabel(item.video_type);
+    const url = document.createElement("p"); url.textContent = "الرابط: " + (item.video_url || "");
+    const state = document.createElement("span");
+    state.className = item.is_published ? "published-badge" : "draft-badge";
+    state.textContent = item.is_published ? "منشور" : "غير منشور";
+    const editButton = document.createElement("button"); editButton.type = "button"; editButton.className = "edit-btn"; editButton.textContent = "تعديل";
+    editButton.addEventListener("click", () => {
+      editingVideoId = item.id;
+      $("video-title").value = item.title || "";
+      $("video-description").value = item.description || "";
+      $("video-type").value = item.video_type || "youtube";
+      $("video-url").value = item.video_url || "";
+      $("video-thumbnail").value = item.thumbnail_url || "";
+      $("video-category").value = item.category || "";
+      $("video-duration").value = item.duration || "";
+      $("video-published").checked = Boolean(item.is_published);
+      $("video-form-title").textContent = "تعديل الفيديو"; $("video-save-btn").textContent = "حفظ التعديلات"; $("video-cancel-btn").style.display = "inline-block";
+      $("video-form").scrollIntoView({ behavior: "smooth" });
+    });
+    const deleteButton = document.createElement("button"); deleteButton.type = "button"; deleteButton.className = "delete-btn"; deleteButton.textContent = "حذف";
+    deleteButton.addEventListener("click", async () => {
+      if (!confirmDelete(`هل تريد حذف الفيديو "${item.title}"؟`)) return;
+      const { error: deleteError } = await db.from("videos").delete().eq("id", item.id);
+      if (deleteError) { alert("تعذر حذف الفيديو: " + deleteError.message); return; }
+      await loadVideos(); await loadStats();
+    });
+    card.append(title, description, category, type, url, state, editButton, deleteButton); container.appendChild(card);
+  });
+}
+
+$("video-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault(); const saveButton = $("video-save-btn"); if (saveButton) saveButton.disabled = true;
+  const payload = {
+    title: $("video-title").value.trim(),
+    description: $("video-description").value.trim(),
+    video_type: $("video-type").value,
+    video_url: $("video-url").value.trim(),
+    thumbnail_url: $("video-thumbnail").value.trim() || null,
+    category: $("video-category").value.trim() || null,
+    duration: $("video-duration").value.trim() || null,
+    is_published: $("video-published").checked,
+  };
+  try {
+    const result = editingVideoId ? await db.from("videos").update(payload).eq("id", editingVideoId) : await db.from("videos").insert(payload);
+    if (result.error) throw result.error;
+    showMessage("video-message", "تم حفظ الفيديو بنجاح."); resetVideoForm(); await loadVideos(); await loadStats();
+  } catch (error) { console.error(error); showMessage("video-message", "خطأ: " + error.message, true); }
+  finally { if (saveButton) saveButton.disabled = false; }
+});
+$("video-cancel-btn")?.addEventListener("click", resetVideoForm);
 
 async function loadArticleViews() {
   const container = $("views-list"); if (!container) return;

@@ -36,6 +36,7 @@ jobs:
               "services.html",
               "blog.html",
               "software.html",
+              "videos.html",
               "contact.html",
               "privacy-policy.html",
           ]

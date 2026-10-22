@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bexo | Videos</title>
+  <meta name="description" content="Watch Bexo video tutorials on software, cybersecurity and AI - practical step-by-step guides for your PC." />
+  <link rel="canonical" href="https://tabfat00-gif.github.io/my-website/videos.html" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Bexo" />
+  <meta property="og:title" content="Bexo | Videos" />
+  <meta property="og:description" content="Watch Bexo video tutorials on software, cybersecurity and AI - practical step-by-step guides for your PC." />
+  <meta property="og:url" content="https://tabfat00-gif.github.io/my-website/videos.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Bexo | Videos" />
+  <meta name="twitter:description" content="Watch Bexo video tutorials on software, cybersecurity and AI - practical step-by-step guides for your PC." />
+  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/lineicons.css" />
+  <link rel="stylesheet" href="assets/css/ud-styles.css" />
+
+  <style>
+    .video-search {
+      max-width: 650px;
+      margin: 0 auto 20px;
+    }
+
+    .video-search input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .video-search input:focus {
+      border-color: #111;
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .category-btn {
+      border: 1px solid #ddd;
+      background: #fff;
+      color: #333;
+      padding: 9px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .category-btn:hover {
+      background: #f5f5f5;
+    }
+
+    .category-btn.active {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      width: 100%;
+      padding: 30px 15px;
+      color: #666;
+      font-size: 16px;
+    }
+
+    .video-status {
+      width: 100%;
+      padding: 15px;
+      text-align: center;
+      color: #666;
+    }
+
+    .video-card {
+      margin-bottom: 18px;
+      height: 100%;
+    }
+
+    .video-card .ud-single-blog {
+      height: 100%;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0b1120;
+      overflow: hidden;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .video-frame img,
+    .video-frame iframe,
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      object-fit: cover;
+    }
+
+    .video-frame iframe,
+    .video-frame video {
+      object-fit: contain;
+      background: #000;
+    }
+
+    .video-thumb {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      background: rgba(0, 0, 0, .28);
+      cursor: pointer;
+      padding: 0;
+      transition: background .2s;
+    }
+
+    .video-play:hover {
+      background: rgba(0, 0, 0, .12);
+    }
+
+    .video-play span {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .92);
+      color: #111;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 4px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+    }
+
+    .video-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, .72);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 9px;
+      border-radius: 5px;
+      letter-spacing: .3px;
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, .78);
+      color: #fff;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 5px;
+    }
+
+    .video-card .ud-blog-content {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .video-card .ud-blog-title {
+      font-size: 17px;
+      line-height: 1.35;
+      margin: 6px 0 8px;
+    }
+
+    .video-card .ud-blog-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #666;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+
+    .video-card .ud-main-btn {
+      align-self: flex-start;
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+
+    .video-empty-thumb {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 46px;
+      color: #64748b;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+
+    @media (max-width: 767.98px) {
+      .video-card .ud-blog-title {
+        font-size: 15px;
+      }
+
+      .video-card .ud-blog-content {
+        padding: 12px 13px 14px;
+      }
+
+      .video-play span {
+        width: 52px;
+        height: 52px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="ud-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="index.html">
+              <span style="font-size:26px;font-weight:700;color:#ffffff;">Bexo</span>
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="index.html#features">Features</a></li>
+                <li class="nav-item"><a href="about.html">About</a></li>
+                <li class="nav-item"><a href="blog.html">Articles</a></li>
+                <li class="nav-item"><a href="software.html">Software</a></li>
+                <li class="nav-item"><a href="videos.html" aria-current="page">Videos</a></li>
+                <li class="nav-item"><a href="pricing.html">Categories</a></li>
+                <li class="nav-item"><a href="index.html#faq">FAQ</a></li>
+                <li class="nav-item"><a href="contact.html">Contact</a></li>
+              </ul>
+
+              <div class="navbar-btn d-none d-sm-inline-block" style="align-items:center;gap:10px;">
+                <a id="login-link" class="ud-main-btn ud-white-btn" href="login.html">Login</a>
+                <a id="signup-link" class="ud-main-btn ud-white-btn" href="signup.html">Sign Up</a>
+                <div id="user-profile" style="display:none;align-items:center;gap:8px;color:#fff;">
+                  <img
+                    id="user-avatar"
+                    src="assets/images/favicon.svg"
+                    alt="User avatar"
+                    style="width:36px;height:36px;border-radius:50%;object-fit:cover;"
+                  />
+                  <span id="user-name"></span>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="ud-page-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-banner-content">
+            <h1>Videos</h1>
+            <p>Step-by-step video tutorials on software, cybersecurity and AI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ud-blog-grids">
+    <div class="container">
+      <div class="video-search">
+        <input
+          type="search"
+          id="videoSearch"
+          placeholder="🔎 Search videos..."
+          autocomplete="off"
+          aria-label="Search videos"
+        />
+      </div>
+
+      <div class="category-filters" aria-label="Filter by category">
+        <button type="button" class="category-btn active" data-category="all" aria-pressed="true">All</button>
+        <button type="button" class="category-btn" data-category="tutorial" aria-pressed="false">🎬 Tutorials</button>
+        <button type="button" class="category-btn" data-category="cybersecurity" aria-pressed="false">🛡️ Cybersecurity</button>
+        <button type="button" class="category-btn" data-category="ai" aria-pressed="false">🤖 AI</button>
+        <button type="button" class="category-btn" data-category="software" aria-pressed="false">💻 Software</button>
+      </div>
+
+      <div class="row" id="video-list" aria-live="polite"></div>
+      <div class="no-results" id="noResults">No videos found.</div>
+    </div>
+  </section>
+
+  <footer class="ud-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ud-footer-bottom">
+            <p>© 2026 Bexo. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    "use strict";
+
+    const SUPABASE_URL = "https://ulxreyrjtavflppahqlp.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_L3HbgtTkYCPZmCnuEABRxw_t7qWHBAE";
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const FALLBACK_AVATAR = "assets/images/favicon.svg";
+
+    function safeHttpUrl(value, baseUrl = window.location.href) {
+      if (typeof value !== "string" || !value.trim()) return null;
+      try {
+        const parsed = new URL(value.trim(), baseUrl);
+        if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return null;
+        return parsed.href;
+      } catch (_error) {
+        return null;
+      }
+    }
+
+    function makeElement(tagName, className, text) {
+      const element = document.createElement(tagName);
+      if (className) element.className = className;
+      if (text !== undefined && text !== null) element.textContent = String(text);
+      return element;
+    }
+
+    /* ------------------------------------------------------------ video urls */
+
+    // Only a strict YouTube id may reach the embed URL, so the src can never
+    // carry anything but the video id itself.
+    function getYoutubeId(url) {
+      const safe = safeHttpUrl(url);
+      if (!safe) return null;
+      try {
+        const parsed = new URL(safe);
+        const host = parsed.hostname.replace(/^www\./, "");
+        let id = null;
+
+        if (host === "youtu.be") {
+          id = parsed.pathname.slice(1).split("/")[0];
+        } else if (host === "youtube.com" || host === "m.youtube.com" || host === "youtube-nocookie.com") {
+          if (parsed.pathname === "/watch") {
+            id = parsed.searchParams.get("v");
+          } else if (parsed.pathname.startsWith("/embed/")) {
+            id = parsed.pathname.slice("/embed/".length).split("/")[0];
+          } else if (parsed.pathname.startsWith("/shorts/")) {
+            id = parsed.pathname.slice("/shorts/".length).split("/")[0];
+          }
+        }
+
+        if (!id) return null;
+        return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+      } catch (_error) {
+        return null;
+      }
+    }
+
+    function getYoutubeThumbnail(url) {
+      const id = getYoutubeId(url);
+      return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+    }
+
+    function isFacebookUrl(url) {
+      const safe = safeHttpUrl(url);
+      if (!safe) return false;
+      try {
+        const host = new URL(safe).hostname.replace(/^www\./, "");
+        return host === "facebook.com" || host === "fb.watch" || host === "fb.com" || host === "m.facebook.com";
+      } catch (_error) {
+        return false;
+      }
+    }
+
+    const TYPE_LABELS = {
+      youtube: "▶️ YouTube",
+      facebook: "📘 Facebook",
+      private: "🔒 Private",
+      ai: "🤖 AI",
+    };
+
+    const TYPE_ICONS = {
+      youtube: "▶️",
+      facebook: "📘",
+      private: "🔒",
+      ai: "🤖",
+    };
+
+    function normalizeType(video) {
+      const type = String(video.video_type || "").trim().toLowerCase();
+      if (TYPE_LABELS[type]) return type;
+      const url = String(video.video_url || "");
+      if (getYoutubeId(url)) return "youtube";
+      if (isFacebookUrl(url)) return "facebook";
+      return "private";
+    }
+
+    /* ------------------------------------------------------------- rendering */
+
+    function buildThumbnail(video, type) {
+      const thumb = makeElement("div", "video-thumb");
+
+      const source =
+        safeHttpUrl(video.thumbnail_url) ||
+        (type === "youtube" ? getYoutubeThumbnail(video.video_url) : null);
+
+      if (source) {
+        const image = document.createElement("img");
+        image.src = source;
+        image.alt = String(video.title || "");
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.addEventListener("error", () => {
+          thumb.replaceChildren(makeElement("div", "video-empty-thumb", TYPE_ICONS[type] || "🎬"));
+        }, { once: true });
+        thumb.appendChild(image);
+      } else {
+        thumb.appendChild(makeElement("div", "video-empty-thumb", TYPE_ICONS[type] || "🎬"));
+      }
+
+      return thumb;
+    }
+
+    function playVideo(frame, video, type) {
+      const safe = safeHttpUrl(video.video_url);
+      if (!safe) {
+        window.alert("This video link is invalid.");
+        return;
+      }
+
+      frame.replaceChildren();
+
+      if (type === "youtube") {
+        const id = getYoutubeId(video.video_url);
+        if (!id) {
+          window.alert("This YouTube link is invalid.");
+          return;
+        }
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0`;
+        iframe.title = String(video.title || "Video");
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.appendChild(iframe);
+        return;
+      }
+
+      if (type === "private" || type === "ai") {
+        const player = document.createElement("video");
+        player.src = safe;
+        player.controls = true;
+        player.preload = "metadata";
+        player.playsInline = true;
+        frame.appendChild(player);
+        return;
+      }
+
+      // Facebook does not allow a plain iframe embed; open the original post.
+      window.open(safe, "_blank", "noopener,noreferrer");
+    }
+
+    function createVideoCard(video) {
+      const type = normalizeType(video);
+      const titleText = String(video.title || "");
+      const descriptionText = String(video.description || "");
+      const categoryText = String(video.category || "Videos");
+
+      const card = makeElement("div", "col-xl-4 col-lg-4 col-md-6 col-sm-12 video-card");
+      card.dataset.category = categoryText.toLowerCase().trim();
+      card.dataset.search = `${titleText} ${descriptionText} ${categoryText} ${type}`.toLowerCase();
+
+      const blog = makeElement("div", "ud-single-blog");
+
+      const frame = makeElement("div", "video-frame");
+      const thumb = buildThumbnail(video, type);
+      frame.appendChild(thumb);
+
+      const badge = makeElement("span", "video-badge", TYPE_LABELS[type] || "🎬");
+      thumb.appendChild(badge);
+
+      if (video.duration) {
+        frame.appendChild(makeElement("span", "video-duration", String(video.duration)));
+      }
+
+      const playButton = makeElement("button", "video-play");
+      playButton.type = "button";
+      playButton.setAttribute("aria-label", "Play video: " + titleText);
+      playButton.appendChild(makeElement("span", "", "▶"));
+      playButton.addEventListener("click", () => playVideo(frame, video, type));
+      frame.appendChild(playButton);
+
+      blog.appendChild(frame);
+
+      const content = makeElement("div", "ud-blog-content");
+      content.appendChild(makeElement("span", "ud-blog-category", categoryText));
+      content.appendChild(makeElement("h3", "ud-blog-title", titleText));
+      content.appendChild(makeElement("p", "ud-blog-desc", descriptionText));
+
+      const action = makeElement("a", "ud-main-btn", type === "facebook" ? "📘 Watch on Facebook" : "▶️ Watch video");
+      if (type === "facebook") {
+        const url = safeHttpUrl(video.video_url);
+        if (!url) {
+          action.remove();
+        } else {
+          action.href = url;
+          action.target = "_blank";
+          action.rel = "noopener noreferrer";
+          action.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.open(url, "_blank", "noopener,noreferrer");
+          });
+        }
+      } else {
+        action.href = "#";
+        action.addEventListener("click", (event) => {
+          event.preventDefault();
+          playVideo(frame, video, type);
+        });
+      }
+      content.appendChild(action);
+
+      blog.appendChild(content);
+      card.appendChild(blog);
+      return card;
+    }
+
+    /* -------------------------------------------------- search + categories */
+
+    let selectedCategory = "all";
+
+    function filterVideos() {
+      const searchInput = document.getElementById("videoSearch");
+      const searchValue = (searchInput ? searchInput.value : "").toLowerCase().trim();
+      const cards = document.querySelectorAll(".video-card");
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const searchText = (card.dataset.search || card.innerText || "").toLowerCase();
+        const cardCategory = (card.dataset.category || "").toLowerCase().trim();
+        const matchesSearch = searchText.includes(searchValue);
+        const matchesCategory = selectedCategory === "all" || cardCategory === selectedCategory;
+        const matches = matchesSearch && matchesCategory;
+        card.style.display = matches ? "" : "none";
+        if (matches) visibleCount += 1;
+      });
+
+      const noResults = document.getElementById("noResults");
+      if (noResults) noResults.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    document.getElementById("videoSearch")?.addEventListener("input", filterVideos);
+
+    document.querySelectorAll(".category-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+          btn.classList.remove("active");
+          btn.setAttribute("aria-pressed", "false");
+        });
+        button.classList.add("active");
+        button.setAttribute("aria-pressed", "true");
+        selectedCategory = (button.dataset.category || "all").toLowerCase();
+        filterVideos();
+      });
+    });
+
+    /* -------------------------------------------------------------- loading */
+
+    async function loadVideos() {
+      const list = document.getElementById("video-list");
+      if (!list) return;
+      list.replaceChildren(makeElement("p", "video-status", "Loading videos…"));
+
+      try {
+        const { data, error } = await supabaseClient
+          .from("videos")
+          .select("id, title, description, video_type, video_url, thumbnail_url, category, duration, created_at")
+          .eq("is_published", true)
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+        list.replaceChildren();
+
+        if (!Array.isArray(data) || data.length === 0) {
+          list.appendChild(makeElement("p", "video-status", "No videos available yet."));
+        } else {
+          data.forEach((video) => list.appendChild(createVideoCard(video)));
+        }
+        filterVideos();
+      } catch (error) {
+        console.error("Videos loading error:", error);
+        list.replaceChildren(makeElement("p", "video-status", "Could not load videos. Please try again later."));
+        filterVideos();
+      }
+    }
+
+    /* --------------------------------------------------------- login / user */
+
+    async function loadUserProfile() {
+      const loginLink = document.getElementById("login-link");
+      const signupLink = document.getElementById("signup-link");
+      const profile = document.getElementById("user-profile");
+      const avatar = document.getElementById("user-avatar");
+      const name = document.getElementById("user-name");
+      if (!loginLink || !signupLink || !profile || !avatar || !name) return;
+
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+        const session = data && data.session;
+
+        if (!session) {
+          profile.style.display = "none";
+          loginLink.style.display = "";
+          signupLink.style.display = "";
+          return;
+        }
+
+        const user = session.user;
+        const metadata = user.user_metadata || {};
+        name.textContent = metadata.full_name || metadata.name || user.email || "User";
+        avatar.src = safeHttpUrl(metadata.avatar_url || metadata.picture) || FALLBACK_AVATAR;
+        profile.style.display = "flex";
+        loginLink.style.display = "none";
+        signupLink.style.display = "none";
+      } catch (error) {
+        console.error("Profile/session error:", error);
+      }
+    }
+
+    loadUserProfile();
+    supabaseClient.auth.onAuthStateChange(() => {
+      window.setTimeout(loadUserProfile, 0);
+    });
+
+    loadVideos();
+  </script>
+  <script src="assets/js/services-promo.js"></script>
+  <script src="assets/js/bionex-chat.js" defer></script>
+</body>
+</html>
