@@ -441,11 +441,47 @@ p {
 
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .navbar-btn {
-    position: absolute;
-    top: 50%;
-    right: 50px;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    position: static;
+    top: auto;
+    right: auto;
+    -webkit-transform: none;
+    transform: none;
+    width: 100%;
+    margin: 12px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--km-border, rgba(0, 0, 0, 0.1));
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .navbar-btn > div,
+  .navbar-btn #guestButtons,
+  .navbar-btn #userButtons {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .navbar-btn a,
+  .navbar-btn button {
+    width: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    margin: 0;
   }
 }
 
